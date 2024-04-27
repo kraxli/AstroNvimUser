@@ -7,7 +7,7 @@ This AstroNvimUser configuration builds on the user configuraion of [Micah Halte
 ## Installation
 
 ```zsh
-git clone https://code.mehalter.com/AstroNvim_user ~/.config/nvim
+git clone https://github.com/kraxli/AstroNvimUser.git ~/.config/nvim
 ```
     
 Initialize AstroVim
