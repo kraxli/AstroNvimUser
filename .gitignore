@@ -1,0 +1,7 @@
+# Reference / how to: https://www.freecodecamp.org/news/gitignore-file-how-to-ignore-files-and-folders-in-git/
+
+# Files to ignore by git:
+
+# Folders to ignore by git:
+
+user/
