@@ -9,9 +9,15 @@ This AstroNvimUser configuration builds on the user configuraion of [Micah Halte
 ```zsh
 git clone https://github.com/kraxli/AstroNvimUser.git ~/.config/nvim
 ```
-    
+
 Initialize AstroVim
 
 ```zsh
 nvim  --headless -c 'quitall'
+```
+
+## Adding user settings
+
+```zsh
+git clone https://github.com/<git_user>/<your_local_nvim_repo.git>  ~/.config/nvim/lua/user
 ```

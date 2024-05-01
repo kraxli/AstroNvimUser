@@ -14,3 +14,8 @@ if not pcall(require, "lazy") then
 end
 
 require "lazy_setup"
+
+pcall(require, "user.settings")
+-- local dir_nvim_local =  os.getenv "XDG_CONFIG_HOME"
+-- vim.opt.rtp:append(dir_nvim_local)
+-- pcall(require, dir_nvim_local .. "/nvim-local.settings")
