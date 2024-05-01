@@ -6,10 +6,10 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-neotest/nvim-nio",
-      "mrcjkb/neotest-haskell",
-      "nvim-neotest/neotest-go",
+      -- "mrcjkb/neotest-haskell",
+      -- "nvim-neotest/neotest-go",
       "nvim-neotest/neotest-python",
-      "stevanmilic/neotest-scala",
+      -- "stevanmilic/neotest-scala",
       {
         "AstroNvim/astrocore",
         opts = {
@@ -33,10 +33,6 @@ return {
           },
         },
       },
-      -- "mrcjkb/neotest-haskell",
-      -- "nvim-neotest/neotest-go",
-      "nvim-neotest/neotest-python",
-      -- "stevanmilic/neotest-scala",
     },
     opts = function()
       return {
