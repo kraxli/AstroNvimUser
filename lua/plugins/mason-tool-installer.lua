@@ -20,7 +20,7 @@ return {
         "jsonls",
         "julials",
         "lua_ls",
-        "marksman",
+        "markdown_oxide",
         "neocmake",
         "ruff_lsp",
         -- "sqls",
@@ -49,6 +49,9 @@ return {
         -- "haskell-debug-adapter",
         "js-debug-adapter",
         "php-debug-adapter",
+
+        -- Other Tools
+        "tree-sitter-cli",
       },
     },
     config = function(_, opts)
