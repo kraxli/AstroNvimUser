@@ -87,7 +87,7 @@ local opts = {
   mappings = {
     n = {
       -- disable default bindings
-      ["q"] = false, 
+      ["q"] = false,
 
       ["<C-Q>"] = false,
       ["<C-S>"] = false,
