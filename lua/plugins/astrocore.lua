@@ -53,10 +53,11 @@ local opts = {
       {
         event = "FileType",
         desc = "Enable wrap and spell for text like documents",
-        pattern = { "gitcommit", "markdown", "text", "plaintex" },
+        pattern = { "gitcommit", "markdown", "text", "plaintex", "telekasten" },
         callback = function()
           vim.opt_local.wrap = true
           vim.opt_local.spell = true
+          vim.opt_local.spelllang = "de,en"
         end,
       },
     },

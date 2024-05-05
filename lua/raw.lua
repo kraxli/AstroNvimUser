@@ -5,3 +5,10 @@ vim.api.nvim_set_keymap("", "<F3>", [[<cmd>lua require('utils').sys_app_open()<C
 
 -- writer
 vim.api.nvim_set_keymap("n", "<c-s-v>", "<cmd>PasteImg<cr>", { noremap = false })
+
+vim.cmd [[
+  " map ]z ]Sz=
+  " map [z [Sz=
+  map ]z ]S<space>fs
+  map [z [S<space>fs
+]]

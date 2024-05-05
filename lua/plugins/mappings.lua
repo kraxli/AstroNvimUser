@@ -100,8 +100,11 @@ return {
             },
             ["f"] = {
               -- name = "Find / Search",
-              ["N"] = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
+              -- " Spelling
               ["s"] = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
+              ["z"] = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
+
+              ["N"] = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
               ["T"] = { "<cmd>Telescope termfinder find<CR>", "Terminals" },
               -- ["T"] = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
               ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
