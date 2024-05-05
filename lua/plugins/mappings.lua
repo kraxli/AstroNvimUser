@@ -29,7 +29,24 @@ return {
             desc = "Select item below",
           },
         },
+        i = {
+
+          -- vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = true })
+          -- vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
+
+          -- ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
+          -- ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
+          -- ["<C-right>"] = { "<C-i>", desc = "Move to next position" },
+          -- ["<C-left>"] = { "<C-o>", desc = "Move to previous position" },
+        },
         n = {
+          ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
+          ["<BS>"] = { "<C-o>", desc = "Move to previous position" },
+          -- vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = true }) -- backspace
+          ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
+          -- ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
+          -- ["<S-BS>"] = { "<C-i>", desc = "Move to previous position" },
+
           -- second key is the lefthand side of the map
           -- mappings seen under group name "Buffer"
           -- ["<Leader>vt"] = { "<cmd>tabnew<cr>", desc = "New tab" },
@@ -83,10 +100,11 @@ return {
             },
             ["f"] = {
               -- name = "Find / Search",
+              ["N"] = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
+              ["s"] = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
               ["T"] = { "<cmd>Telescope termfinder find<CR>", "Terminals" },
               -- ["T"] = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
               ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
-              ["s"] = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
               ["x"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" }, -- same as: <leader>f<CR>
             },
           },
