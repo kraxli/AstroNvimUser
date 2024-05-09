@@ -46,18 +46,19 @@ return {
   },
   {
     "opdavies/toggle-checkbox.nvim",
-    enabled = true,
+    enabled = false,
     dependencies = {
       "AstroNvim/astrocore",
       opts = {
         mappings = {
           n = {
             ["<Leader>tt"] = { "<Cmd>lua require('toggle-checkbox').toggle()<CR>", desc = "Toggle checkbox" },
+            ["<Leader>zt"] = { "<Cmd>lua require('toggle-checkbox').toggle()<CR>", desc = "Toggle checkbox" },
             ["<c-space>"] = { "<Cmd>lua require('toggle-checkbox').toggle()<CR>", desc = "Toggle checkbox" },
           },
           x = {
-            ["<Leader>tt"] = { "<Cmd>lua require('toggle-checkbox').toggle()<CR>", desc = "Toggle checkbox" },
-            ["<c-space>"] = { "<Cmd>lua require('toggle-checkbox').toggle()<CR>", desc = "Toggle checkbox" },
+            -- ["<Leader>tt"] = { "", desc = "Toggle checkbox" },
+            -- ["<c-space>"] = { "", desc = "Toggle checkbox" },
           },
         },
       },
