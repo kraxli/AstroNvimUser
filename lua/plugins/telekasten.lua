@@ -70,14 +70,27 @@ return {
             },
           },
           i = {
-            ["<c-l>"] = {
-              "<Cmd><ESC>:lua require('telekasten').insert_link({ i=true })<CR>",
+            -- ["<c-i>"] = false,
+            ["]]"] = {
+              "<cmd>Telekasten insert_link<CR>",
+              -- "<Cmd>lua require('telekasten').insert_link({ i=true })<CR>",
               desc = "Telekasten insert link",
             },
-            ["<c-t>"] = {
-              "<Cmd><cmd>lua require('telekasten').show_tags({i = true})<CR>",
-              desc = "Telekasten show tags",
-            },
+            -- ["<c>"] = {
+            --   ["<i>"] = {
+            --     -- "<Cmd>lua require('telekasten').insert_link({ i=true })<CR>",
+            --     "<cmd>Telekasten insert_link<CR>",
+            --     desc = "Telekasten insert link",
+            --   },
+            --   ["<l>"] = {
+            --     '<cmd>lua require("telekasten").follow_link()<CR>',
+            --     desc = "Follow link",
+            --   },
+            --   ["<t>"] = {
+            --     "<Cmd><cmd>lua require('telekasten').show_tags({i = true})<CR>",
+            --     desc = "Telekasten show tags",
+            --   },
+            -- },
           },
         },
       },
