@@ -33,24 +33,23 @@ return {
     ft = { "markdown" },
     setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
   },
+  --  [markdown markmap]
+  --  https://github.com/Zeioth/markmap.nvim
   {
-    --  [markdown markmap]
-    --  https://github.com/Zeioth/markmap.nvim
-    {
-      "Zeioth/markmap.nvim",
-      cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
-      ft = "markdown",
-      opts = {
-        hide_toolbar = "false",
-      },
+    "Zeioth/markmap.nvim",
+    cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
+    ft = "markdown",
+    opts = {
+      hide_toolbar = "false",
     },
-    {
-      "jay-babu/mason-null-ls.nvim",
-      optional = true,
-      opts = function(_, opts)
-        opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "markmap-cli" })
-      end,
-    },
+  },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    enabled = false,
+    optional = true,
+    opts = function(_, opts)
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "markmap-cli" })
+    end,
   },
   {
     "ellisonleao/glow.nvim",
