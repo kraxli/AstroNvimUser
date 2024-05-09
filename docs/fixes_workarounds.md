@@ -21,6 +21,12 @@ local health = require "health"
 # and it worked for me
 ```
 
+## dos / unix (^M)
+
+- vim: `set fileformat=dos/unix`
+- commandline: `dos2unix filename`
+- keys: `Ctrl+Q Ctrl+M` (or `Ctrl+V Ctrl+M`)
+
 ## iamcco/markdown-preview.nvim, 2023-05-31
 
 tslib not found:

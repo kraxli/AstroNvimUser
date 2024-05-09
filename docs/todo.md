@@ -1,6 +1,7 @@
 # To Do
 
 Regular read: https://dotfyle.com/this-week-in-neovim
+Treesitter config: https://alpha2phi.medium.com/neovim-101-tree-sitter-d8c5a714cb03
 
 - smoka7/hop.nvim
 - surround (sr, sd, ...)
@@ -93,20 +94,20 @@ https://alpha2phi.medium.com/neovim-tips-for-a-better-coding-experience-3d0f782f
 - https://github.com/LinArcX/telescope-command-palette.nvim or "mrjones2014/legendary.nvim",
 
 ```lua
-use {'RRethy/nvim-treesitter-textsubjects'}
+use { "RRethy/nvim-treesitter-textsubjects" }
 ```
 
 In your treesitter configuration,
 
 ```lua
-require'nvim-treesitter.configs'.setup {
-    textsubjects = {
-        enable = true,
-        keymaps = {
-            ['.'] = 'textsubjects-smart',
-            [';'] = 'textsubjects-container-outer',
-        }
+require("nvim-treesitter.configs").setup {
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
     },
+  },
 }
 ```
 
@@ -114,14 +115,11 @@ require'nvim-treesitter.configs'.setup {
 use {
   "AckslD/nvim-neoclip.lua",
   requires = {
-    {'kkharji/sqlite.lua', module = 'sqlite'},
+    { "kkharji/sqlite.lua", module = "sqlite" },
     -- you'll need at least one of these
     -- {'nvim-telescope/telescope.nvim'},
     -- {'ibhagwan/fzf-lua'},
   },
-  config = function()
-    require('neoclip').setup()
-  end,
+  config = function() require("neoclip").setup() end,
 }
-
 ```
