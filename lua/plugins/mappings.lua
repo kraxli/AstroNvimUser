@@ -40,6 +40,7 @@ return {
           -- ["<C-left>"] = { "<C-o>", desc = "Move to previous position" },
         },
         n = {
+
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
           ["<BS>"] = { "<C-o>", desc = "Move to previous position" },
           -- vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = true }) -- backspace
@@ -58,8 +59,10 @@ return {
           --   end,
           --   desc = "Pick to close",
           -- },
+
           -- quick save
-          -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+          ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
+
           ["<C-PageDown>"] = {
             function() require("astrocore.buffer").nav(vim.v.count1) end,
             desc = "Next buffer",
@@ -110,6 +113,10 @@ return {
               ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
               ["x"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" }, -- same as: <leader>f<CR>
             },
+            ["z"] = {
+              name = "Text / Zettel",
+              ["u"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },
+            },
           },
           -- -- AstroNvim way:
           -- ["<localleader>r"] = {
@@ -126,6 +133,8 @@ return {
         t = {
           -- setting a mapping to false will disable it
           -- ["<esc>"] = false,
+
+          ["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
         },
       },
     },

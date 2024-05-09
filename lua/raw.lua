@@ -11,4 +11,10 @@ vim.cmd [[
   " map [z [Sz=
   map ]z ]S<space>fs
   map [z [S<space>fs
+
+  imap jj <ESC>
+  imap jk <ESC>
+
+  vmap <c-c> y
+  xmap <c-c> y
 ]]
