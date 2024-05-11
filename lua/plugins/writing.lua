@@ -198,4 +198,5 @@ return {
       vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
     end,
   },
+  { "dhruvasagar/vim-table-mode", ft = { "text", "markdown", "org" } },
 }

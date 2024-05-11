@@ -89,6 +89,7 @@ local opts = {
     n = {
       -- disable default bindings
       ["q"] = false,
+      ["<leader>o"] = false,
 
       ["<C-Q>"] = false,
       ["<C-S>"] = false,
@@ -106,6 +107,24 @@ local opts = {
       ["<Leader>N"] = { "<Cmd>tabnew<CR>", desc = "New Tab" },
       ["<Leader><CR>"] = { '<Esc>/<++><CR>"_c4l', desc = "Next Template" },
       ["<Leader>."] = { "<Cmd>cd %:p:h<CR>", desc = "Set CWD" },
+      ["<leader>E"] = {
+        function()
+          if vim.bo.filetype == "neo-tree" then
+            vim.cmd.wincmd "p"
+          else
+            vim.cmd.Neotree "focus"
+          end
+        end,
+        desc = "Toggle Explorer Focus",
+      },
+      ["<Leader>tp"] = {
+        function()
+          local ipython = vim.fn.executable "ipython" == 1 and "ipython"
+            or vim.fn.executable "ipython3" == 1 and "ipython3"
+          if ipython then require("astrocore").toggle_term_cmd(ipython) end
+        end,
+        desc = "ToggleTerm ipython",
+      },
 
       ["<C-s>"] = { ":w!<CR>", desc = "Save" },
       -- recording

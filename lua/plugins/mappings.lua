@@ -113,6 +113,13 @@ return {
               ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
               ["x"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" }, -- same as: <leader>f<CR>
             },
+            ["o"] = {
+              name = "Orgmode",
+              ["b"] = { name = "Tangle" }, -- ??
+              ["i"] = { name = "Insert / change" },
+              ["l"] = { name = "Lsp" },
+              ["x"] = { name = "Clock effort" },
+            },
             ["z"] = {
               name = "Text / Zettel",
               ["u"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },

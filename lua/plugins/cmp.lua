@@ -21,6 +21,7 @@ return {
       { name = "calc", priority = 650 },
       { name = "path", priority = 500 },
       { name = "buffer", priority = 250, group_index = 2 },
+      { name = "orgmode", priority = 300 },
     }
 
     if not opts.sorting then opts.sorting = {} end
