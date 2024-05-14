@@ -18,6 +18,7 @@ return {
       opts = {
         commands = {
           PeekOpen = { function() require("peek").open() end, desc = "Open preview window" },
+          Pv = { function() require("peek").open() end, desc = "Open preview window" },
           PeekClose = { function() require("peek").close() end, desc = "Close preview window" },
         },
       },
