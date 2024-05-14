@@ -27,6 +27,18 @@ local health = require "health"
 - commandline: `dos2unix filename`
 - keys: `Ctrl+Q Ctrl+M` (or `Ctrl+V Ctrl+M`)
 
+## Codeium
+
+codeium server crashed. Try to add
+
+```zsh
+  export no_proxy=127.0.0.1
+```
+
+to your `.bashrc` / `.zshrc` file.
+
+And run only one nvim instance (with codeium active) 
+
 ## Peek.nvim (preview)
 
 Solution:

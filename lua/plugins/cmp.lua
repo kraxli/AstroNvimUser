@@ -22,6 +22,7 @@ return {
       { name = "path", priority = 500 },
       { name = "buffer", priority = 250, group_index = 2 },
       { name = "orgmode", priority = 300 },
+      { name = "codeium", group_index = 1, priority = 100 },
     }
 
     if not opts.sorting then opts.sorting = {} end
