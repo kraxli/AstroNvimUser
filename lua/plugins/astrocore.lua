@@ -38,6 +38,10 @@ local opts = {
       timeoutlen = 150, --- Time out on mappings
       ttimeoutlen = 10, --- Time out on key codes
     },
+    g = {
+      -- vim.g.autoformat,
+      autoformat = false,
+    },
   },
   autocmds = {
     auto_close = {
@@ -107,6 +111,7 @@ local opts = {
       ["<Leader>N"] = { "<Cmd>tabnew<CR>", desc = "New Tab" },
       ["<Leader><CR>"] = { '<Esc>/<++><CR>"_c4l', desc = "Next Template" },
       ["<Leader>."] = { "<Cmd>cd %:p:h<CR>", desc = "Set CWD" },
+      -- replace default map for "<leader>o" to use "<leader>o" for orgmode
       ["<leader>E"] = {
         function()
           if vim.bo.filetype == "neo-tree" then
