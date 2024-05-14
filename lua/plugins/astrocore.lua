@@ -76,6 +76,14 @@ local opts = {
         end,
       },
     },
+    -- auto_markdown = {
+    --   event = "FileType",
+    --   desc = "Markdown autocommands",
+    --   pattern = { "markdown", "text" },
+    --   callback = function()
+    --     -- vim.keymap.set("i", "<CR>", "<esc>o<cmd>AutolistNewBullet<cr>")
+    --   end,
+    -- },
   },
   diagnostics = { update_in_insert = false },
   filetypes = {
