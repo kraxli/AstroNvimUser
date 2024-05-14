@@ -27,6 +27,21 @@ local health = require "health"
 - commandline: `dos2unix filename`
 - keys: `Ctrl+Q Ctrl+M` (or `Ctrl+V Ctrl+M`)
 
+## Peek.nvim (preview)
+
+Solution:
+
+1. set <export> `DENO_TLS_CA_STORE=system` in "Environment Variables for your account" (MS Windows) or in `.zshrc / .bashrc` (Linux)
+2. remove old installation
+3. start nvim with Lazy to reinstall
+
+Additionally it may help to:
+
+```sh
+  cd C:\SRDEV\XDG_HOME\data\nvim-data\lazy\peek.nvim
+  deno task build:fast --allow-net --unsafely-ignore-certificate-errors --quiet
+```
+
 ## iamcco/markdown-preview.nvim, 2023-05-31
 
 tslib not found:
