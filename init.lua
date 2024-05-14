@@ -15,6 +15,7 @@ end
 
 require "lazy_setup"
 
+-- kraxli: own setup:
 pcall(require, "user.settings")
 -- local dir_nvim_local =  os.getenv "XDG_CONFIG_HOME"
 -- vim.opt.rtp:append(dir_nvim_local)
