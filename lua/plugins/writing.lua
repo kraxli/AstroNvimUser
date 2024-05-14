@@ -113,7 +113,6 @@ return {
 
       -- vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>")
       -- vim.keymap.set("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>")
-      vim.keymap.set("i", "<CR>", "<CR><cmd>AutolistNewBullet<cr>")
       -- vim.keymap.set("i", "<c-t>", "<c-t><cmd>AutolistRecalculate<cr>") -- an example of using <c-t> to indent
       vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>")
       vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>")
@@ -122,6 +121,7 @@ return {
       vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_autolist()<CR>")
       -- vim.keymap.set("v", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
       -- vim.keymap.set("v", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
+      vim.keymap.set("i", "<CR>", "<esc>o<cmd>AutolistNewBullet<cr>")
 
       -- cycle list types with dot-repeat
       vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true })
@@ -198,5 +198,9 @@ return {
       vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
     end,
   },
-  { "dhruvasagar/vim-table-mode", ft = { "text", "markdown", "org" } },
+  {
+    "dhruvasagar/vim-table-mode",
+    enabled = true,
+    -- ft = { "text", "markdown", "org" },
+  },
 }
