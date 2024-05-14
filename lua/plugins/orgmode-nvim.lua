@@ -16,6 +16,25 @@ return {
       --   ignore_install = { 'org' },
       -- })
     end,
+    dependencies = {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            ["<leader>o"] = false,
+            ["<leader>"] = {
+              ["o"] = {
+                name = "Orgmode",
+                ["b"] = { name = "Tangle" }, -- ??
+                ["i"] = { name = "Insert / change" },
+                ["l"] = { name = "Lsp" },
+                ["x"] = { name = "Clock effort" },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   {
     "akinsho/org-bullets.nvim",
