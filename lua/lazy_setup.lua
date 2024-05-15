@@ -28,6 +28,12 @@ require("lazy").setup({
   },
   defaults = { lazy = true },
   diff = { cmd = "terminal_git" },
+
+  checker = vim.fn.has('unix') == 1 and {enabled = true } or {enabled = false, concurrency = 1 },
+  wait = vim.fn.has('unix') == 1 and false or true,
+  -- concurrency = jit.os:find("Windows") and (vim.uv.available_parallelism() * 2) or nil,
+  concurrency = jit.os:find("Windows") and 1 or nil,
+
   install = { colorscheme = { "catppuccin", "astrodark", "habamax", "kanagawa" } },
   lockfile = vim.fn.stdpath "data" .. "/lazy-lock.json",
   performance = {
