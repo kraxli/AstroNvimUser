@@ -1,6 +1,6 @@
 return {
   "Exafunction/codeium.nvim",
-  -- enabled = false,
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",
@@ -14,7 +14,7 @@ return {
           mode = "symbol",
           maxwidth = 50,
           ellipsis_char = "...",
-          symbol_map = { Codeium = "" }, -- ""   / nf-weather-stars / \ue370
+          symbol_map = { Codeium = "" }, -- "" """ "🟆", / nf-weather-stars / \ue370
         },
       },
     }
