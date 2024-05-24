@@ -49,7 +49,11 @@ local opts = {
       desc = "Close terminal alike pop-ups",
       pattern = { "toggleterm", "qf", "help", "man", "lspinfo" },
       callback = function()
-        vim.keymap.set("n", "q", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
+        -- vim.keymap.set("n", "q", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
+        vim.keymap.set("n", "<c-q>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
+        vim.keymap.set("i", "<c-q>", "<esc><cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
+        vim.keymap.set("n", "<c-c>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
+        vim.keymap.set("i", "<c-c>", "<esc><cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
         -- autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> q :close!<CR>  " ,TelescopePrompt
       end,
     },
@@ -138,6 +142,17 @@ local opts = {
         end,
         desc = "ToggleTerm ipython",
       },
+      ["<Leader>tP"] = {
+        function()
+          local ipython = vim.fn.executable "ipython" == 1 and "ipython"
+            or vim.fn.executable "ipython3" == 1 and "ipython3"
+          if ipython then require("astrocore").toggle_term_cmd({cmd='ipython --pylab -i', direction='vertical'}) end
+          -- { "<Cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "ToggleTerm vertical split" }
+        end,
+        desc = "ToggleTerm ipython vsplit",
+      },
+	    -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
+	    -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
 
       ["<C-s>"] = { ":w!<CR>", desc = "Save" },
       -- recording
