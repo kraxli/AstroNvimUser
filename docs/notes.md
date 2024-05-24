@@ -96,3 +96,7 @@ You can use the following name to view Buftype settings, when Buftype=nofile, ca
 
   - ~/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim and run make
   - see:https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/47
+
+# Nerdfonts
+
+[find a symbol](https://www.nerdfonts.com/cheat-sheet)
