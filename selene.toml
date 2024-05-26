@@ -1,3 +1,4 @@
+# selene.toml may be the problem with ^M file ending in some vim-plugins / vim-files (?)
 std = "neovim"
 
 [rules]
