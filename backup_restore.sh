@@ -1,5 +1,6 @@
 #!/bin/env bash
 # chmod u+x backup.sh
+# ./backup_restore.sh
 
 suffix=-astro
 
