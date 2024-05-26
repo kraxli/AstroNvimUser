@@ -111,6 +111,7 @@ local opts = {
       ["<C-S>"] = false,
       ["q:"] = ":",
       ["c:"] = "q:",
+      ["X"] = ":x<CR>",
       -- better buffer navigation
       ["]b"] = false,
       ["[b"] = false,
