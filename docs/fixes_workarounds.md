@@ -76,3 +76,22 @@ pyenv uninstall 3.x.yy && pyenv install 3.x.yy
 ## Treesitter
 
 Disable `treesitter` by e.g. `TSBufDisable markdown`. To see a list of modules, see `TSModuleInfo`.
+
+### Tree-sitter on Windows
+
+#### Downloading problems / curl
+
+set-up `.curlrc` e.g. in `$XDG_CONFIG_HOME\.curlrc`
+
+File content of example `.curlrc`: https://gist.github.com/v1m/f1d4751883f19c916515
+
+```sh
+# .curlrc :
+--ssl-revoke-best-effort
+-k
+--insecure
+
+# additionally, in case PROXY settings are not set generally for my account, I can set it in .curlrc
+```
+
+in neovim run: `:checkhealth nvim-treesitte` and try `TSInstall markdown` or disable it e.g. by `TSBufDisable markdown`.
