@@ -153,6 +153,8 @@ local opts = {
         end,
         desc = "ToggleTerm ipython vsplit",
       },
+      ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
+
 	    -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
 	    -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
 
