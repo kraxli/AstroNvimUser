@@ -7,7 +7,10 @@
 
 ## ekickx/clipboard-image.nvim, 2023-05-31
 
+!SEE: kraxli/clipboard-image.nvim
+
 Health issue: https://github.com/ekickx/clipboard-image.nvim/issues/50
+
 
 ```zsh
 # modify the health.lua in clipboard-image plugin
