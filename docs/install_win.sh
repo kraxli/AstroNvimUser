@@ -13,6 +13,10 @@ choco install deno -fy
 choco install nodejs -fy
 choco install yarn -fy
 choco install deno --force -y  # peek.nvim interactive markdown file view in "browser"
+choco install mingw -fy  # (gcc / mingw, llvm, zig are required for treesitter)
+
+# choco install zig -fy  # may not work  (gcc / mingw, llvm, zig are required for treesitter)
+# choco install llvm -fy  # may not work  (gcc / mingw, llvm, zig are required for treesitter)
 
 # choco install npm -f -y
 npm install tslib                    # markdown-preview

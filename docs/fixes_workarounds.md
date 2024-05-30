@@ -5,6 +5,42 @@
 - https://github.com/akinsho/toggleterm.nvim/issues/243
 - https://github.com/akinsho/toggleterm.nvim/issues/425
 
+
+## Tree-sitter install errors on Windows
+
+install llvm, zig or mingw (gcc) by choco
+
+```sh
+  choco install mingw -fy  # (gcc / mingw, llvm, zig are required for treesitter)
+  # choco install llvm -fy
+  # choco install zig -fy
+```
+
+see also [The Comprehensive Guide to Using Neovim with LSP and Treesitter on Windows Without Admin Rights](https://devctrl.blog/posts/neovim-on-windows/#treesitter-configuration)
+
+### More to avoid Treesitter errors
+
+Disable `treesitter` by e.g. `TSBufDisable markdown`. To see a list of modules, see `TSModuleInfo`.
+
+### Tree-sitter on Windows
+
+#### Downloading problems / curl
+
+set-up `.curlrc` e.g. in `$XDG_CONFIG_HOME\.curlrc`
+
+File content of example `.curlrc`: https://gist.github.com/v1m/f1d4751883f19c916515
+
+```sh
+# .curlrc :
+--ssl-revoke-best-effort
+-k
+--insecure
+
+# additionally, in case PROXY settings are not set generally for my account, I can set it in .curlrc
+```
+
+in neovim run: `:checkhealth nvim-treesitte` and try `TSInstall markdown` or disable it e.g. by `TSBufDisable markdown`.
+
 ## ekickx/clipboard-image.nvim, 2023-05-31
 
 !SEE: kraxli/clipboard-image.nvim
