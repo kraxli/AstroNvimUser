@@ -17,7 +17,10 @@ install llvm, zig or mingw (gcc) by choco
 
 ## npm certifcicate error (Windows)
 
-$ npm config set strict-ssl false   [ --unsafe-perm true ]                                                    (or:  yarn config set strict-ssl false)
+```sh
+npm config set strict-ssl false [ --unsafe-perm true ]  
+# (or:  yarn config set strict-ssl false)
+```
 
 1. Set environment variable NODE_TLS_REJECT_UNAUTHORIZED:
 
