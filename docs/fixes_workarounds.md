@@ -1,5 +1,57 @@
 # Fixes and Workarounds
 
+
+## Guide to install neovim on Windows
+
+[The Comprehensive Guide to Using Neovim with LSP and Treesitter on Windows Without Admin Rights](https://devctrl.blog/posts/neovim-on-windows/#treesitter-configuration)
+
+## Tree-sitter install errors on Windows
+
+install llvm, zig or mingw (gcc) by choco
+
+```sh
+  choco install mingw -fy  # (gcc / mingw, llvm, zig are required for treesitter)
+  # choco install llvm -fy
+  # choco install zig -fy
+```
+
+## npm certifcicate error (Windows)
+
+$ npm config set strict-ssl false   [ --unsafe-perm true ]                                                    (or:  yarn config set strict-ssl false)
+
+1. Set environment variable NODE_TLS_REJECT_UNAUTHORIZED:
+
+for bash or ZSH:
+
+```sh
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+```
+
+
+for CMD Windows:
+
+```sh
+set NODE_TLS_REJECT_UNAUTHORIZED=0
+```
+
+for PowerShell Windows:
+
+```sh
+$env:NODE_TLS_REJECT_UNAUTHORIZED="0"
+```
+
+2. Install tree-sitter-cli
+ 
+```sh
+npm install tree-sitter-cli -f -y
+```
+
+3. Source:
+
+- https://stackoverflow.com/questions/36494336/npm-install-error-unable-to-get-local-issuer-certificate
+- https://bobbyhadz.com/blog/npm-err-unable-to-get-local-issuer-certificate
+
+
 ## ipython send to terminal wrong indent
 
 - https://github.com/akinsho/toggleterm.nvim/issues/243

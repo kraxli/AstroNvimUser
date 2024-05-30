@@ -22,6 +22,8 @@ choco install mingw -fy  # (gcc / mingw, llvm, zig are required for treesitter)
 npm install tslib                    # markdown-preview
 npm install -g @compodoc/live-server # markdown-preview
 npm install tree-sitter-cli
+npm install markmap-cli
+npm audit fix --force
 
 choco install oh-my-posh -f -y # similar to oh-my-zsh
 # instead of choco winget could be better
@@ -32,6 +34,7 @@ choco upgrade all -y
 # choco install zig -f -y
 
 # for https://github.com/jupyter-vim/jupyter-vim
+python -m pip install pynvim neovim
 pip install jupyter
 pip install ipdb
 
