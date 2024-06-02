@@ -14,7 +14,7 @@ return {
         separators = {
           -- left = { "", " " },
           -- right = { " ", "" },
-          left = { "", "" },
+          left = { " ", "" },
           right = { " ", "" },
         },
       },
