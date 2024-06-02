@@ -2,6 +2,7 @@ return {
   {
     "nvim-orgmode/orgmode",
     enabled = true,
+    branch = 'master',
     event = "VeryLazy",
     config = function()
       -- Setup orgmode
@@ -16,6 +17,10 @@ return {
       --   ensure_installed = 'all',
       --   ignore_install = { 'org' },
       -- })
+      -- NOTE: Windows fixes:
+      -- * https://github.com/nvim-orgmode/orgmode/issues/712
+      -- * https://github.com/nvim-orgmode/orgmode/issues?q=windows+
+      -- * if windows: vim.opt.shellslash = true
     end,
     dependencies = {
       "AstroNvim/astrocore",
