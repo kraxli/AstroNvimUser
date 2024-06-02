@@ -97,6 +97,10 @@ local opts = {
       yml = yaml_ft,
       yaml = yaml_ft,
     },
+    filename = {
+      ["docker-compose.yml"] = "yaml.docker-compose",
+      ["docker-compose.yaml"] = "yaml.docker-compose",
+    },
     pattern = {
       ["/tmp/neomutt.*"] = "markdown",
     },
@@ -169,7 +173,7 @@ local opts = {
     },
     -- insert mode
     i = {
-      ["<C-S>"] = false,
+      ["<C-S>"] = { function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
       ["<S-Tab>"] = { "<C-V><Tab>", desc = "Tab character" },
 
       -- saving
