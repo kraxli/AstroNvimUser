@@ -8,12 +8,13 @@ return {
     opts = {
       ensure_installed = {
         -- Language Servers
-        "ansible-language-server",
+        -- "ansible-language-server",
         "astro-language-server",
         "basedpyright",
         "clangd",
         "css-lsp",
-        "gopls",
+          -- "gopls",
+        "django",
           -- "haskell-language-server",
         "html-lsp",
         "intelephense",
@@ -21,7 +22,7 @@ return {
         "julia-lsp",
         "lua-language-server",
         "markdown-oxide",
-        "neocmakelsp",
+          -- "neocmakelsp",
         "regols",
         "ruff-lsp",
           -- "sqls",
@@ -33,7 +34,7 @@ return {
         "yaml-language-server",
 
         -- Linters
-        "ansible-lint",
+          -- "ansible-lint",
         "selene",
         "shellcheck",
         "sqlfluff",
@@ -45,15 +46,15 @@ return {
 
         -- Debuggers
         "bash-debug-adapter",
-        "cpptools",
+          -- "cpptools",
         "debugpy",
-        "delve",
+          -- "delve",
           -- "haskell-debug-adapter",
         "js-debug-adapter",
         "php-debug-adapter",
 
         -- Other Tools
-        "tree-sitter-cli",
+          -- "tree-sitter-cli",
       },
       integrations = {
         ["mason-lspconfig"] = false,
