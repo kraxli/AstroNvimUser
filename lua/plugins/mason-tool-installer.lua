@@ -8,27 +8,33 @@ return {
     opts = {
       ensure_installed = {
         -- Language Servers
-        "ansiblels",
-        "astro",
+        "ansible-language-server",
+        "astro-language-server",
         "basedpyright",
         "clangd",
         "cssls",
         -- "gopls",
         -- "hls",
         "html",
+        "css-lsp",
+        "dockerfile-language-server",
+        "gopls",
+        "haskell-language-server",
+        "html-lsp",
         "intelephense",
-        "jsonls",
-        "julials",
-        "lua_ls",
-        "markdown_oxide",
-        "neocmake",
-        "ruff_lsp",
+        "json-lsp",
+        "julia-lsp",
+        "lua-language-server",
+        "markdown-oxide",
+        "neocmakelsp",
+        "regols",
+        "ruff",
         -- "sqls",
-        "tailwindcss",
+        "tailwindcss-language-server",
         "taplo",
         "texlab",
         "vtsls",
-        "yamlls",
+        "yaml-language-server",
 
         -- Linters
         "ansible-lint",
@@ -52,6 +58,10 @@ return {
 
         -- Other Tools
         "tree-sitter-cli",
+      },
+      integrations = {
+        ["mason-lspconfig"] = false,
+        ["mason-nvim-dap"] = false,
       },
     },
     config = function(_, opts)
