@@ -1,5 +1,6 @@
 return {
   "Exafunction/codeium.vim",
+  enbled = false,
   event = "BufEnter",
   dependencies = {
     "AstroNvim/astrocore",
