@@ -14,7 +14,7 @@ return {
         "clangd",
         "css-lsp",
           -- "gopls",
-        "django",
+          -- "django",
           -- "haskell-language-server",
         "html-lsp",
         "intelephense",
