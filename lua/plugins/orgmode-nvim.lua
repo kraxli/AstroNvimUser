@@ -7,7 +7,7 @@ return {
     config = function()
       -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files = "C:\\Users\\s6s94k\\OneDrive - Swiss Reinsurance Company Ltd\\_wiki\\org\\*",
+        org_agenda_files = "C:\\Users\\s6s94k\\OneDrive - Swiss Reinsurance Company Ltd\\_wiki\\org\\**",
         org_default_notes_file = "C:\\Users\\s6s94k\\OneDrive - Swiss Reinsurance Company Ltd\\_wiki\\org\\reflog.org",
       }
 
