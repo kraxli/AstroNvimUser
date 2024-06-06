@@ -47,9 +47,9 @@ local opts = {
     auto_close = {
       event = "FileType",
       desc = "Close terminal alike pop-ups",
-      pattern = { "toggleterm", "qf", "help", "man", "lspinfo" },
+      pattern = { "toggleterm", "qf", "help", "man", "lspinfo", 'fugitiveblame' },
       callback = function()
-        -- vim.keymap.set("n", "q", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
+        vim.keymap.set("n", "q", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close" })
         vim.keymap.set("n", "<c-q>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
         vim.keymap.set("i", "<c-q>", "<esc><cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
         vim.keymap.set("n", "<c-c>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
