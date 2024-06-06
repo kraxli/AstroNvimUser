@@ -11,6 +11,9 @@ return {
   -- { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.markdown-and-latex.vimtex" },
-  -- { import = "astrocommunity.completion.codeium-vim" },
   { import = "astrocommunity.editing-support.auto-save-nvim" }, -- Pocco81/auto-save.nvim
+  { import = "astrocommunity.completion.copilot" },
+  { import = "astrocommunity.completion.copilot-lua" },
+  { import = "astrocommunity.completion.copilot-lua-cmp" },
+
 }
