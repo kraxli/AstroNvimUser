@@ -37,6 +37,7 @@ local opts = {
       number = true,
       timeoutlen = 150, --- Time out on mappings
       ttimeoutlen = 10, --- Time out on key codes
+      foldlevel = 99,
     },
     g = {
       -- vim.g.autoformat,
