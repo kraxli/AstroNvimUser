@@ -3,16 +3,22 @@
 -- https://github.com/nvim-neorg/neorg/issues/1342
 
 return {
-  {
-    "vhyrro/luarocks.nvim",
-    enabled = false,
-    priority = 1000,
-    config = true,
-  },
+  -- {
+  --   "vhyrro/luarocks.nvim",
+  --   enabled = false,
+  --   priority = 1000,
+  --   config = true,
+  -- },
   {
     "nvim-neorg/neorg",
     enabled = false,
-    dependencies = { "luarocks.nvim" },
+    dependencies = {
+      -- "luarocks.nvim"
+      "MunifTanjim/nui.nvim",
+      "nvim-neotest/nvim-nio",
+      "nvim-neorg/lua-utils.nvim",
+      "nvim-lua/plenary.nvim",
+    },
     version = "*",
     config = function()
       require("neorg").setup {
@@ -22,7 +28,7 @@ return {
           ["core.dirman"] = {
             config = {
               workspaces = {
-                notes = "~/notes",
+                notes = "~/Dropbox/PKD/notes",
               },
               default_workspace = "notes",
             },
