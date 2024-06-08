@@ -2,13 +2,27 @@ return {
   {
     "nvim-orgmode/orgmode",
     enabled = true,
-    branch = 'master',
+    branch = "master",
     event = "VeryLazy",
     config = function()
       -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files = "C:\\Users\\s6s94k\\OneDrive - Swiss Reinsurance Company Ltd\\_wiki\\org\\**",
-        org_default_notes_file = "C:\\Users\\s6s94k\\OneDrive - Swiss Reinsurance Company Ltd\\_wiki\\org\\reflog.org",
+        org_agenda_files = vim.g.dirPkd .. "/**/*",
+        org_default_notes_file = vim.g.dirPkd .. "/refile.org",
+        org_startup_folded = "showeverything", -- inherit, showeverything, content, overview
+        org_capture_templates = { t = { description = "Task", template = "* TODO %?\nSCHEDULED: %t" } },
+        mappings = {
+          -- see: https://github.com/nvim-orgmode/orgmode/blob/c9bf6d8e926c5d6ad7103ee8e7b1e38500b7bfc5/lua/orgmode/config/defaults.lua
+          global = {
+            org_agenda = { "<Leader>oa" },
+            org_capture = { "<Leader>oc" },
+          },
+          org = {
+            org_set_tags_command = "<Leader>o:",
+            org_todo = "<Leader>ot",
+            org_todo_prev = "<Leader>oT",
+          },
+        },
       }
 
       -- NOTE: If you are using nvim-treesitter with `ensure_installed = "all"` option
@@ -24,17 +38,44 @@ return {
     end,
     dependencies = {
       "AstroNvim/astrocore",
+      -- opts = function(_, opts)
+      --   opts.mappings = {
+      --     n = function()
+      --       local file_type = vim.bo.filetype
+      --       if file_type == "org" then
+      --         return {
+      --           ["<leader>"] = {
+      --             ["o"] = {
+      --               name = "Orgmode",
+      --               ["b"] = { desc = "Tangle" }, -- ??
+      --               ["i"] = { desc = "Insert / change" },
+      --               ["l"] = { desc = "Lsp" },
+      --               ["x"] = { desc = "Clock effort" },
+      --             },
+      --           },
+      --         }
+      --       else
+      --         return {
+      --           ["<leader>"] = {
+      --             ["o"] = {
+      --               name = "Orgmode",
+      --             },
+      --           },
+      --         }
+      --       end
+      --     end,
+      --   }
+      --   end
+      -- },
       opts = {
         mappings = {
           n = {
-            ["<leader>o"] = false,
             ["<leader>"] = {
               ["o"] = {
-                name = "Orgmode",
-                ["b"] = { name = "Tangle" }, -- ??
-                ["i"] = { name = "Insert / change" },
-                ["l"] = { name = "Lsp" },
-                ["x"] = { name = "Clock effort" },
+                ["b"] = { desc = "Tangle" }, -- ??
+                ["i"] = { desc = "Insert / change" },
+                ["l"] = { desc = "Lsp" },
+                ["x"] = { desc = "Clock effort" },
               },
             },
           },
@@ -44,11 +85,12 @@ return {
   },
   {
     "chipsenkbeil/org-roam.nvim",
-    tag = "0.1.0",
+    enabled = false,
+    -- tag = "0.1.0",
     dependencies = {
       {
         "nvim-orgmode/orgmode",
-        tag = "0.3.4",
+        -- tag = "0.3.4",
       },
     },
     config = function()
