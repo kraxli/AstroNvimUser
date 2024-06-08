@@ -48,7 +48,7 @@ local opts = {
     auto_close = {
       event = "FileType",
       desc = "Close terminal alike pop-ups",
-      pattern = { "toggleterm", "qf", "help", "man", "lspinfo", 'fugitiveblame' },
+      pattern = { "toggleterm", "qf", "help", "man", "lspinfo", "fugitiveblame" },
       callback = function()
         vim.keymap.set("n", "q", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close" })
         vim.keymap.set("n", "<c-q>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
@@ -78,6 +78,16 @@ local opts = {
         callback = function()
           local new_showtabline = #vim.t.bufs > 1 and 2 or 1
           if new_showtabline ~= vim.opt.showtabline:get() then vim.opt.showtabline = new_showtabline end
+        end,
+      },
+    },
+    auto_org_files = {
+      {
+        event = "FileType",
+        desc = "Orgmode settings",
+        pattern = "org",
+        callback = function()
+          -- vim.keymap.set("n", "i", "", { expr = true, noremap = true, desc = "Insert" })
         end,
       },
     },
@@ -111,6 +121,8 @@ local opts = {
       -- disable default bindings
       ["q"] = false,
       ["<leader>o"] = false,
+      ["<Leader>ot"] = false,
+      ["<Leader>oT"] = false,
 
       ["<C-Q>"] = false,
       ["<C-S>"] = false,
@@ -141,6 +153,7 @@ local opts = {
         end,
         desc = "Toggle Explorer Focus",
       },
+      ["<Leader>o"] = { desc = "Orgmode" },
       ["<Leader>tp"] = {
         function()
           local ipython = vim.fn.executable "ipython" == 1 and "ipython"
@@ -153,15 +166,17 @@ local opts = {
         function()
           local ipython = vim.fn.executable "ipython" == 1 and "ipython"
             or vim.fn.executable "ipython3" == 1 and "ipython3"
-          if ipython then require("astrocore").toggle_term_cmd({cmd='ipython --pylab -i', direction='vertical'}) end
+          if ipython then
+            require("astrocore").toggle_term_cmd { cmd = "ipython --pylab -i", direction = "vertical" }
+          end
           -- { "<Cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "ToggleTerm vertical split" }
         end,
         desc = "ToggleTerm ipython vsplit",
       },
       ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
 
-	    -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
-	    -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
+      -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
+      -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
 
       ["<C-s>"] = { ":w!<CR>", desc = "Save" },
       -- recording
