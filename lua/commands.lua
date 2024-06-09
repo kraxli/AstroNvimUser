@@ -1,5 +1,8 @@
 return {
   vim.cmd [[
+    command! E :Neotree position=current
+    command! Explorer :Neotree position=current
+
     command! HeaderLevelIncrease call HeaderIncrease()
     command! HeaderLevelDecrease call HeaderDecrease()
 
