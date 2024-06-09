@@ -29,10 +29,10 @@ return {
       opts = {
         mappings = {
           n = {
-            -- ["<C-space>"] = { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", "Toggle checkbox" },
-            ["<c>"] = {
-              ["<space>"] = { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", "Toggle checkbox" },
-            },
+            -- ["<c>"] = {
+            --   ["<space>"] = { "<cmd>lua require('telekasten').toggle_todo()<CR>", "Toggle checkbox" },
+            --                 -- { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", "Toggle checkbox" },
+            -- },
             ["<leader>"] = {
               z = {
                 ["#"] = { '<cmd>lua require("telekasten").show_tags({i = false})<CR>', "Show tags" },
@@ -60,7 +60,8 @@ return {
                 m = { '<cmd>lua require("telekasten").browse_media()<CR>', "Brows media" },
                 p = { '<cmd>lua require("telekasten").preview_img()<CR>', "Preview img" },
                 r = { '<cmd>lua require("telekasten").rename_note()<CR>', "Rename this note" },
-                t = { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", "Toggle todo" },
+                -- t = { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", "Toggle todo" },
+                t = { "<cmd>lua require('telekasten').toggle_todo()<CR>", "Toggle checkbox" },
                 T = { '<cmd>lua require("telekasten").goto_today()<CR>', "Goto today" },
                 W = { '<cmd>lua require("telekasten").goto_thisweek()<CR>', "Goto this week" },
                 y = { '<cmd>lua require("telekasten").yank_notelink()<CR>', "Yank note link" },
@@ -92,10 +93,21 @@ return {
             --   },
             -- },
           },
+          v = {
+            -- ["<C-space>"] = { "<cmd>lua require('telekasten').toggle_todo( { v=true} )<CR>", "Toggle checkbox" },
+            ["<leader>"] = {
+              ["zt"] = { "<cmd>lua require('telekasten').toggle_todo( { v=true } )<CR>", "Toggle checkbox" },
+            },
+          },
         },
       },
     },
   },
+  on_attach = function(bufnr)
+    local map = vim.keymap.set
+    local opts = { buffer = bufnr }
+    -- map({'v', 'x'}, "<C-space>", "<cmd>lua require('telekasten').toggle_todo( { v=true } )<CR>", opts)
+  end,
   ft = { "markdown", "vimwiki", "text", "telekasten" },
   keys = { "<leader>z" },
   cmd = { "Telekasten", "Tk" },

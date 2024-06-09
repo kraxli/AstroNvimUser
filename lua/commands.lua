@@ -1,5 +1,8 @@
 return {
   vim.cmd [[
+    command! E :Neotree position=current
+    command! Explorer :Neotree position=current
+
     command! HeaderLevelIncrease call HeaderIncrease()
     command! HeaderLevelDecrease call HeaderDecrease()
 
@@ -7,6 +10,8 @@ return {
     " save and quit
     " command! W :w!
     command! Q :q
+    command! Qa :qa
+
     cnoreabbrev <silent> W w 
     cnoreabbrev <silent> ww w!
     cnoreabbrev <silent> wwa wa!
@@ -15,5 +20,7 @@ return {
     cnoreabbrev <silent> qq q!
     cnoreabbrev <silent> qqa qa!
     cnoreabbrev <silent> ee e!
+
+    command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. '
   ]],
 }
