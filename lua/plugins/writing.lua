@@ -119,7 +119,7 @@ return {
       vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>")
       -- vim.keymap.set("n", "<C-space>", "<cmd>AutolistToggleCheckbox<cr>")
       vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_autolist()<CR>")
-      vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_autolist()<CR>")
+      -- vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_autolist()<CR>")
       -- vim.keymap.set("v", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
       -- vim.keymap.set("v", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
       vim.keymap.set("i", "<CR>", "<esc>o<cmd>AutolistNewBullet<cr>")
@@ -143,7 +143,7 @@ return {
   },
   {
     "dkarter/bullets.vim",
-    enabled = true,
+    -- enabled = false,
     -- version = "v1.11.0",
     ft = {
       "markdown",
@@ -195,8 +195,8 @@ return {
 
 				]]
 
-      vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
-      vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
+      -- vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
+      -- vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
     end,
   },
   {

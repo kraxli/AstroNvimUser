@@ -138,6 +138,10 @@ local opts = {
       -- better increment/decrement
       ["-"] = { "<C-x>", desc = "Descrement number" },
       ["+"] = { "<C-a>", desc = "Increment number" },
+
+      -- Telekasten:
+      ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo()<CR>", desc = "Toggle checkbox" },
+
       ["<Leader>n"] = { "<Cmd>enew<CR>", desc = "New File" },
       ["<Leader>N"] = { "<Cmd>tabnew<CR>", desc = "New Tab" },
       ["<Leader><CR>"] = { '<Esc>/<++><CR>"_c4l', desc = "Next Template" },
@@ -208,8 +212,13 @@ local opts = {
       ["<ESC>k"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
       ["<ESC>d"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
     },
+    v = {
+      -- Telekasten:
+      ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo({v=true})<CR>", desc = "Toggle checkbox" },
+    },
     x = {
       ["<C-S>"] = false,
+
       -- better increment/decrement
       ["+"] = { "g<C-a>", desc = "Increment number" },
       ["-"] = { "g<C-x>", desc = "Descrement number" },
