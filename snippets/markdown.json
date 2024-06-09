@@ -18,5 +18,10 @@
     "prefix": ["sh", "codeblock-sh"],
     "body": ["```sh", "$1", "```"],
     "description": "Insert fenced bash code block"
+  },
+  "Insert link": {
+    "prefix": ["linkk", "link2", "ll", "--"],
+    "body": ["[$2]($1) $3"],
+    "description": "Insert markdown link"
   }
 }
