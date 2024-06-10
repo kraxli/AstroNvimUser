@@ -7,8 +7,8 @@ return {
     config = function()
       -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files = vim.g.dirPkd .. "/**/*",
-        org_default_notes_file = vim.g.dirPkd .. "/refile.org",
+        org_agenda_files =  vim.fn.has('unix') and vim.g.dirPkd .. "/**/*" or vim.g.dirPkd .. '/org/**',
+        org_default_notes_file =  vim.g.dirPkd .. "/org/refile.org",
         org_startup_folded = "showeverything", -- inherit, showeverything, content, overview
         org_capture_templates = { t = { description = "Task", template = "* TODO %?\nSCHEDULED: %t" } },
         mappings = {
