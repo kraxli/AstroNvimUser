@@ -3,8 +3,8 @@ return {
     command! E :Neotree position=current
     command! Explorer :Neotree position=current
 
-    command! HeaderLevelIncrease call HeaderIncrease()
-    command! HeaderLevelDecrease call HeaderDecrease()
+    command! HeaderPromote call HeaderPromte()
+    command! HeaderDemote call HeaderDemote()
 
     command! KeyMaps :call utils#KeyMaps()
     " save and quit

@@ -97,6 +97,8 @@ local opts = {
     --   pattern = { "markdown", "text" },
     --   callback = function()
     --     -- vim.keymap.set("i", "<CR>", "<esc>o<cmd>AutolistNewBullet<cr>")
+    --     vim.keymap.set("n", "<leader>zh", "<cmd>call HeaderPromote()<CR>", { noremap = true, desc = "Heaser promote" })
+    --     vim.keymap.set({"n"}, "<leader>zH", "<cmd>call HeaderDemote()<CR>", { noremap = true, desc = "Heaser demote" })
     --   end,
     -- },
   },

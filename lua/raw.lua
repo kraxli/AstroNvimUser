@@ -22,7 +22,7 @@ vim.cmd [[
 
 vim.cmd([[
 
-function! HeaderIncrease(...)
+function! HeaderPromote(...)
     if a:0 == 0 | let lineNum = line('.') | else | let lineNum = a:1 | endif
 
     let header_depth_max = 6
@@ -44,7 +44,7 @@ function! HeaderIncrease(...)
 
   endfunction
 
-  function! HeaderDecrease(...)
+  function! HeaderDemote(...)
     if a:0 == 0 | let lineNum = line('.') | else | let lineNum = a:1 | endif
 
     let header_depth_max = 6
