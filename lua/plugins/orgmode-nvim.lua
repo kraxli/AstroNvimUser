@@ -101,6 +101,8 @@ return {
   },
   {
     "akinsho/org-bullets.nvim",
+    -- enabled=false,
+    ft = 'org',
     config = function()
       require("org-bullets").setup {
         concealcursor = false, -- If false then when the cursor is on a line underlying characters are visible
@@ -116,11 +118,12 @@ return {
           -- end,
           -- -- or false to disable the symbol. Works for all symbols
           -- headlines = false,
-          -- checkboxes = {
-          --   half = { "", "OrgTSCheckboxHalfChecked" },
-          --   done = { "✓", "OrgDone" },
-          --   todo = { "˟", "OrgTODO" },
-          -- },
+          checkboxes = {
+            half = { "", "OrgTSCheckboxHalfChecked" },
+            done = { "✓", "OrgDone" },
+            todo = { " ", "OrgTODO" },
+            -- todo = { "˟", "OrgTODO" },
+          },
         },
       }
     end,
