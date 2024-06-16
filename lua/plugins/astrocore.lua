@@ -1,3 +1,4 @@
+-- TODO: compare to https://code.mehalter.com/AstroNvim_user/~files/master/lua/plugins/astrocore.lua (BIG MERGE CONFLIGT)
 local function yaml_ft(path, bufnr)
   local buf_text = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
   if

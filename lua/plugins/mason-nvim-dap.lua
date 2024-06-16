@@ -10,12 +10,14 @@ return {
           port = "${port}",
           executable = { command = vim.fn.exepath "js-debug-adapter", args = { "${port}" } },
         }
+        require("dap.ext.vscode").type_to_filetypes["pwa-node"] =
+          { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 
         local pwa_node_attach = {
           type = "pwa-node",
           request = "launch",
           name = "js-debug: Attach to Process (pwa-node)",
-          proccessId = require("dap.utils").pick_process,
+          processId = require("dap.utils").pick_process,
           cwd = "${workspaceFolder}",
         }
         local function deno(cmd)
