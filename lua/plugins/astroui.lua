@@ -4,7 +4,6 @@ return {
   ---@type AstroUIOpts
   opts = {
     colorscheme = "catppuccin",
-    -- colorscheme = "astrodark",
     highlights = {
       init = function(colors_name)
         local get_hlgroup = require("astroui").get_hlgroup
