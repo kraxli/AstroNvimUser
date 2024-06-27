@@ -1,7 +1,10 @@
 return {
   vim.cmd [[
-    command! E :Neotree position=current
-    command! Explorer :Neotree position=current
+    command! N :Neotree position=current
+    command! Nexplorer :Neotree position=current
+    command! E :Oil
+    command! O :Oil
+    command! Explorer :Oil
 
     command! HeaderPromote call HeaderPromte()
     command! HeaderDemote call HeaderDemote()
