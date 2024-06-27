@@ -18,7 +18,6 @@ return {
         "html-lsp",
         "intelephense",
         "json-lsp",
-        "julia-lsp",
         "lua-language-server",
         "markdown-oxide",
         "neocmakelsp",

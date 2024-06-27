@@ -108,7 +108,10 @@ return {
           },
         },
       },
-      diagnostics = { update_in_insert = false },
+      diagnostics = {
+        update_in_insert = false,
+        virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
+      },
       filetypes = {
         extension = {
           mdx = "markdown.mdx",
@@ -227,14 +230,6 @@ return {
           -- better increment/decrement
           ["+"] = { "g<C-a>", desc = "Increment number" },
           ["-"] = { "g<C-x>", desc = "Descrement number" },
-          -- line text-objects
-          ["iL"] = { ":<C-u>normal! $v^<CR>", desc = "Inside line text object" },
-          ["aL"] = { ":<C-u>normal! $v0<CR>", desc = "Around line text object" },
-        },
-        o = {
-          -- line text-objects
-          ["iL"] = { ":<C-u>normal! $v^<CR>", desc = "Inside line text object" },
-          ["aL"] = { ":<C-u>normal! $v0<CR>", desc = "Around line text object" },
         },
         ia = vim.fn.has "nvim-0.10" == 1 and {
           mktmpl = { function() return "<++>" end, desc = "Insert <++>", expr = true },
@@ -246,7 +241,7 @@ return {
           Fdate = { function() return os.date "%H:%M:%S" end, desc = "H:M:S", expr = true },
         } or nil,
       },
-    }) --[[@as AstroCoreOpts]]
+    } --[[@as AstroCoreOpts]]) --[[@as AstroCoreOpts]]
 
     -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
     for lhs, rhs in pairs {
