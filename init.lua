@@ -21,6 +21,7 @@ pcall(require, "user.settings")
 -- vim.opt.rtp:append(dir_nvim_local)
 -- pcall(require, dir_nvim_local .. "/nvim-local.settings")
 pcall(require, "raw")
+pcall(require, "commands")
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   desc = "Close terminal alike pop-ups",

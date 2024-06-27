@@ -14,7 +14,7 @@ require("lazy").setup({
   { import = "community" },
   { import = "base" },
   { import = "plugins" },
-  { import = "commands" },
+  -- { import = "commands" },
 } --[[@as LazySpec]], {
   dev = {
     ---@param plugin LazyPlugin
