@@ -23,7 +23,9 @@ return {
         },
       },
     },
-    opts = {},
+    opts = {
+      theme = "light",
+    },
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -147,9 +149,10 @@ return {
     -- version = "v1.11.0",
     ft = {
       "markdown",
+      "org",
+      "plaintex",
       "text",
       "tex",
-      "plaintex",
     },
     -- init
     config = function()
@@ -191,8 +194,19 @@ return {
   				" \ ['nmap', 'zt', '<Plug>(bullets-toggle-checkbox)'],
   				" \
 
-			  noremap O k<Plug>(bullets-newline)
-
+  			imap      <C-CR>    <Plug>(bullets-newline)
+  			" inoremap  <C-cr>  <cr>
+			  noremap   O       k<Plug>(bullets-newline)
+  			nmap      o       <Plug>(bullets-newline)
+  			vmap      gN      <Plug>(bullets-renumber)
+  			nmap      gN      <Plug>(bullets-renumber)
+	      imap      <C-t>   <Plug>(bullets-demote)
+  			nmap      gD      <Plug>(bullets-demote)
+  			nmap      '> '    <Plug>(bullets-demote)
+  			vmap      '> '    <Plug>(bullets-demote)
+  			imap      <C-d>   <Plug>(bullets-promote)
+  			nmap      gP      <Plug>(bullets-promote)
+  			vmap      '< '    <Plug>(bullets-promote)
 				]]
 
       -- vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")

@@ -7,8 +7,8 @@ return {
     config = function()
       -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files = vim.g.dirPkd .. "/**/*",
-        org_default_notes_file = vim.g.dirPkd .. "/refile.org",
+        org_agenda_files =  vim.fn.has('unix') and vim.g.dirPkd .. "/**/*" or vim.g.dirPkd .. '/org/**',
+        org_default_notes_file =  vim.g.dirPkd .. "/org/refile.org",
         org_startup_folded = "showeverything", -- inherit, showeverything, content, overview
         org_capture_templates = { t = { description = "Task", template = "* TODO %?\nSCHEDULED: %t" } },
         mappings = {
@@ -101,6 +101,8 @@ return {
   },
   {
     "akinsho/org-bullets.nvim",
+    -- enabled=false,
+    ft = 'org',
     config = function()
       require("org-bullets").setup {
         concealcursor = false, -- If false then when the cursor is on a line underlying characters are visible
@@ -116,11 +118,12 @@ return {
           -- end,
           -- -- or false to disable the symbol. Works for all symbols
           -- headlines = false,
-          -- checkboxes = {
-          --   half = { "", "OrgTSCheckboxHalfChecked" },
-          --   done = { "✓", "OrgDone" },
-          --   todo = { "˟", "OrgTODO" },
-          -- },
+          checkboxes = {
+            half = { "", "OrgTSCheckboxHalfChecked" },
+            done = { "✓", "OrgDone" },
+            todo = { " ", "OrgTODO" },
+            -- todo = { "˟", "OrgTODO" },
+          },
         },
       }
     end,

@@ -8,20 +8,17 @@ return {
       opts = {
         mappings = {
           n = {
-            ["<Leader>gG"] = { function() require("neogit").open() end, desc = "Neogit" },
+            ["<Leader>gG"] = { function() vim.cmd.Neogit() end, desc = "Neogit" },
+            ["<Leader>gn"] = { function() vim.cmd.Neogit "commit" end, desc = "New Git commit" },
           },
         },
       },
     },
-    opts = function()
-      local get_icon = require("astroui").get_icon
-      local fold_signs = { get_icon "FoldClosed", get_icon "FoldOpened" }
-      return {
-        disable_builtin_notifications = true,
-        integrations = { telescope = true },
-        signs = { section = fold_signs, item = fold_signs },
-      }
-    end,
+    opts = {
+      disable_builtin_notifications = true,
+      integrations = { telescope = true },
+      signs = { section = { "", "" }, item = { "", "" } },
+    },
   },
   {
     "catppuccin",

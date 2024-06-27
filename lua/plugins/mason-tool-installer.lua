@@ -19,7 +19,6 @@ return {
         "html-lsp",
         "intelephense",
         "json-lsp",
-        "julia-lsp",
         "lua-language-server",
         "markdown-oxide",
           -- "neocmakelsp",
@@ -30,6 +29,7 @@ return {
         "tailwindcss-language-server",
         "taplo",
         "texlab",
+        "typos-lsp",
         "vtsls",
         "yaml-language-server",
 

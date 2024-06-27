@@ -1,6 +1,6 @@
 -- bootstrap lazy.nvim, AstroNvim, and user plugins
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not (vim.env.LAZY or vim.loop.fs_stat(lazypath)) then
+if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore
   vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
@@ -21,6 +21,7 @@ pcall(require, "user.settings")
 -- vim.opt.rtp:append(dir_nvim_local)
 -- pcall(require, dir_nvim_local .. "/nvim-local.settings")
 pcall(require, "raw")
+pcall(require, "commands")
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   desc = "Close terminal alike pop-ups",

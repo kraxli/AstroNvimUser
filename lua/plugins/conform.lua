@@ -22,7 +22,7 @@ return {
                     ["end"] = { args.line2, end_line:len() },
                   }
                 end
-                require("conform").format { async = true, lsp_fallback = true, range = range }
+                require("conform").format { async = true, lsp_format = "fallback", range = range }
               end,
               desc = "Format buffer",
               range = true,
@@ -61,20 +61,23 @@ return {
         },
       },
     },
+    ---@param opts conform.setupOpts
     opts = function(_, opts)
       opts.format_on_save = function(bufnr)
         if vim.g.autoformat == nil then vim.g.autoformat = true end
         local autoformat = vim.b[bufnr].autoformat
         if autoformat == nil then autoformat = vim.g.autoformat end
-        if autoformat then return { timeout_ms = 2000, lsp_fallback = true } end
+        if autoformat then return { timeout_ms = 2000, lsp_format = "fallback" } end
       end
 
       opts.formatters_by_ft = {
         ["*"] = { "injected" },
+        toml = { "taplo" },
         lua = { "stylua" },
         puppet = { "puppet-lint" },
         sh = { "shfmt" },
         sql = { "sqlfluff" },
+        python = { "ruff_organize_imports", "ruff_format" },
         ["_"] = function(bufnr)
           return require("astrocore.buffer").is_valid(bufnr)
               and { "trim_whitespace", "trim_newlines", "squeeze_blanks" }
@@ -111,6 +114,19 @@ return {
               markdown = "markdown",
             },
           },
+        },
+        shfmt = {
+          prepend_args = function(_, ctx)
+            local args = {}
+            local bo = vim.bo[ctx.buf]
+            if bo.expandtab then
+              local tab_size = bo.tabstop or 2
+              local indent_size = bo.shiftwidth
+              if indent_size == 0 or not indent_size then indent_size = tab_size end
+              vim.list_extend(args, { "-i", tostring(indent_size) })
+            end
+            return args
+          end,
         },
       }
     end,
