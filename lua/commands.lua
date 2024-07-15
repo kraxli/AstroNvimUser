@@ -16,6 +16,7 @@ return {
     command! Qa :qa
 
     cnoreabbrev <silent> W w 
+    cnoreabbrev <silent> Wa wa 
     cnoreabbrev <silent> ww w!
     cnoreabbrev <silent> wwa wa!
     cnoreabbrev <silent> xx x!

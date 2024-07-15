@@ -79,7 +79,8 @@ return {
           desc = "Close terminal alike pop-ups",
           pattern = { "toggleterm", "qf", "help", "man", "lspinfo", "fugitiveblame" },
           callback = function()
-            vim.keymap.set("n", "q", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close" })
+            vim.keymap.set("n", "q", "<cmd>quit<CR>", { expr = false, noremap = true, desc = "Close" })
+            vim.keymap.set("n", "t", "<cmd>quit<CR>", { expr = false, noremap = true, desc = "Close" })
             vim.keymap.set("n", "<c-q>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
             vim.keymap.set(
               "i",
