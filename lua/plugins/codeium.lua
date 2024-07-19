@@ -15,6 +15,17 @@ return {
         maps.i["<M-[>"] = { function() return vim.fn["codeium#CycleCompletions"](-1) end, expr = true, silent = true }
         maps.i["<M-CR>"] = { function() return vim.fn["codeium#Accept"]() end, expr = true, silent = true }
         maps.i["<M-BS>"] = { function() return vim.fn["codeium#Clear"]() end, expr = true, silent = true }
+        maps.n["<Leader>;"] = {
+          function()
+            if vim.g.codeium_enabled == true then
+              vim.cmd "CodeiumDisable"
+            else
+              vim.cmd "CodeiumEnable"
+            end
+          end,
+          silent = true,
+          desc = "Codeium toggle",
+        }
       end,
     },
   },

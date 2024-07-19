@@ -12,8 +12,10 @@ return {
         status = {
           attributes = { mode = { bold = true } },
           separators = {
-            left = { "", " " },
-            right = { " ", "" },
+            -- left = { "", " " },
+            -- right = { " ", "" },
+            left = { " ", "" },
+            right = { " ", "" },
           },
         },
       },
@@ -29,7 +31,7 @@ return {
           ---@cast time string
           return status.utils.stylize(time, {
             icon = { kind = "Clock", padding = { right = 1 } }, -- add icon
-            padding = { right = 1 }, -- pad the right side
+            padding = { right = 1, left = 1 }, -- pad the right side
           })
         end,
       },
