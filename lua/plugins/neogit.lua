@@ -1,9 +1,14 @@
 ---@type LazySpec
 return {
-  {
-    "NeogitOrg/neogit",
-    cmd = "Neogit",
-    dependencies = {
+  "NeogitOrg/neogit",
+  cmd = "Neogit",
+  opts = {
+    disable_builtin_notifications = true,
+    disable_signs = true,
+    integrations = { telescope = true },
+  },
+  specs = {
+    {
       "AstroNvim/astrocore",
       opts = {
         mappings = {
@@ -14,16 +19,11 @@ return {
         },
       },
     },
-    opts = {
-      disable_builtin_notifications = true,
-      integrations = { telescope = true },
-      signs = { section = { "", "" }, item = { "", "" } },
+    {
+      "catppuccin",
+      optional = true,
+      ---@type CatppuccinOptions
+      opts = { integrations = { neogit = true } },
     },
-  },
-  {
-    "catppuccin",
-    optional = true,
-    ---@type CatppuccinOptions
-    opts = { integrations = { neogit = true } },
   },
 }
