@@ -1,3 +1,5 @@
+local prefix = "<Leader>o"
+
 return {
   {
     "nvim-orgmode/orgmode",
@@ -7,20 +9,20 @@ return {
     config = function()
       -- Setup orgmode
       require("orgmode").setup {
-        org_agenda_files =  vim.fn.has('unix') and vim.g.dirPkd .. "/**/*" or vim.g.dirPkd .. '/org/**',
-        org_default_notes_file =  vim.g.dirPkd .. "/org/refile.org",
+        org_agenda_files = vim.fn.has "unix" and vim.g.dirPkd .. "/**/*" or vim.g.dirPkd .. "/org/**",
+        org_default_notes_file = vim.g.dirPkd .. "/org/refile.org",
         org_startup_folded = "showeverything", -- inherit, showeverything, content, overview
         org_capture_templates = { t = { description = "Task", template = "* TODO %?\nSCHEDULED: %t" } },
         mappings = {
           -- see: https://github.com/nvim-orgmode/orgmode/blob/c9bf6d8e926c5d6ad7103ee8e7b1e38500b7bfc5/lua/orgmode/config/defaults.lua
           global = {
-            org_agenda = { "<Leader>oa" },
-            org_capture = { "<Leader>oc" },
+            org_agenda = { prefix .. "a" },
+            org_capture = { prefix .. "c" },
           },
           org = {
-            org_set_tags_command = "<Leader>o:",
-            org_todo = "<Leader>ot",
-            org_todo_prev = "<Leader>oT",
+            org_set_tags_command = prefix .. ":",
+            org_todo = prefix .. "t",
+            org_todo_prev = prefix .. "T",
           },
         },
       }
@@ -70,14 +72,11 @@ return {
       opts = {
         mappings = {
           n = {
-            ["<leader>"] = {
-              ["o"] = {
-                ["b"] = { desc = "Tangle" }, -- ??
-                ["i"] = { desc = "Insert / change" },
-                ["l"] = { desc = "Lsp" },
-                ["x"] = { desc = "Clock effort" },
-              },
-            },
+            -- [prefix] = { desc = "Orgmode" },
+            [prefix .. "b"] = { desc = "Tangle" }, -- ??
+            [prefix .. "i"] = { desc = "Insert / change" },
+            [prefix .. "l"] = { desc = "Lsp" },
+            [prefix .. "x"] = { desc = "Clock effort" },
           },
         },
       },
@@ -102,7 +101,7 @@ return {
   {
     "akinsho/org-bullets.nvim",
     -- enabled=false,
-    ft = 'org',
+    ft = "org",
     config = function()
       require("org-bullets").setup {
         concealcursor = false, -- If false then when the cursor is on a line underlying characters are visible

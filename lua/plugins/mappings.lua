@@ -1,3 +1,5 @@
+local prefixBuffer = "<leader>b"
+local prefixFind = "<leader>f"
 return {
   {
     "AstroNvim/astrocore",
@@ -79,56 +81,55 @@ return {
             function() require("astrocore.buffer").nav(-vim.v.count1) end,
             desc = "Previous buffer",
           },
-          ["<leader>"] = {
-            ["b"] = {
-              name = "Buffers",
-              ["."] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers list" },
-              ["f"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers list" },
-              ["R"] = {
-                '<cmd> lua require("astrocore.buffer").close_right()<CR>',
-                "Close buffers to the right",
-              },
-              ["L"] = {
-                '<cmd> lua require("astrocore.buffer").close_left()<CR>',
-                "Close buffers to the left",
-              },
-              ["r"] = {
-                '<cmd> lua require("astrocore.buffer").move(-vim.v.count1)<CR>',
-                "Previous buffer",
-              },
-              ["l"] = {
-                '<cmd> lua require("astrocore.buffer").move(vim.v.count1)<CR>',
-                "Previous buffer",
-              },
-            },
-            ["f"] = {
-              -- name = "Find / Search",
-              -- " Spelling
-              ["s"] = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
-              ["z"] = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
 
-              ["N"] = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
-              ["T"] = { "<cmd>Telescope termfinder find<CR>", "Terminals" },
-              -- ["T"] = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
-              -- ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
-              ["u"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" }, -- same as: <leader>f<CR>
-              ["x"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" }, -- same as: <leader>f<CR>
-            },
-            ["z"] = {
-              name = "Text / Zettel",
-              ["u"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },
-            },
+          [prefixBuffer] = { desc = "Buffer" },
+          [prefixBuffer .. "."] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", desc = "Buffers list" },
+          [prefixBuffer .. "f"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", desc = "Buffers list" },
+          [prefixBuffer .. "R"] = {
+            '<cmd> lua require("astrocore.buffer").close_right()<CR>',
+            desc = "Close buffers to the right",
           },
+          [prefixBuffer .. "L"] = {
+            '<cmd> lua require("astrocore.buffer").close_left()<CR>',
+            desc = "Close buffers to the left",
+          },
+          [prefixBuffer .. "r"] = {
+            '<cmd> lua require("astrocore.buffer").move(-vim.v.count1)<CR>',
+            desc = "Previous buffer",
+          },
+          [prefixBuffer .. "l"] = {
+            '<cmd> lua require("astrocore.buffer").move(vim.v.count1)<CR>',
+            desc = "Previous buffer",
+          },
+          -- name = "Find / Search",
+          -- " Spelling
+          [prefixFind .. "s"] = {
+            '<cmd>lua require("telescope.builtin").spell_suggest()<CR>',
+            desc = "Spell suggestions",
+          },
+          [prefixFind .. "z"] = {
+            '<cmd>lua require("telescope.builtin").spell_suggest()<CR>',
+            desc = "Spell suggestions",
+          },
+          [prefixFind .. "N"] = {
+            '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>',
+            desc = "Notebook",
+          },
+          [prefixFind .. "T"] = { "<cmd>Telescope termfinder find<CR>", desc = "Terminals" },
+          -- ["T"] = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
+          -- ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
+          [prefixFind .. "u"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', desc = "Resume last" }, -- same as: <leader>f<CR>
+          [prefixFind .. "x"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', desc = "Resume last" }, -- same as: <leader>f<CR>
+          ["<leader>zW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", desc = "Clear postspace" },
+          -- ["uW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },
           -- -- AstroNvim way:
           -- ["<localleader>r"] = {
           --   function() require("astrocore.buffer").move(-vim.v.count1) end,
           --   desc = "Previous buffer",
           -- },
-          ["<localleader>"] = {
-            ["x"] = {
-              name = "xxx",
-              -- ["x"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers list" },
-            },
+          ["<localleader>x"] = {
+            desc = "xxx",
+            -- ["x"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers list" },
           },
         },
         t = {

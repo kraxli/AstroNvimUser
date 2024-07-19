@@ -1,21 +1,22 @@
 ---@type LazySpec
 return {
   "rebelot/heirline.nvim",
-  -- enabled=false,
-  dependencies = {
-    "AstroNvim/astroui",
-    ---@type AstroUIOpts
-    opts = {
-      icons = {
-        Clock = "", -- add icon for clock
-      },
-      status = {
-        attributes = { mode = { bold = true } },
-        separators = {
-          -- left = { "", " " },
-          -- right = { " ", "" },
-          left = { " ", "" },
-          right = { " ", "" },
+  specs = {
+    {
+      "AstroNvim/astroui",
+      ---@type AstroUIOpts
+      opts = {
+        icons = {
+          Clock = "", -- add icon for clock
+        },
+        status = {
+          attributes = { mode = { bold = true } },
+          separators = {
+            -- left = { "", " " },
+            -- right = { " ", "" },
+            left = { " ", "" },
+            right = { " ", "" },
+          },
         },
       },
     },
@@ -35,10 +36,8 @@ return {
         end,
       },
       update = { "ModeChanged", pattern = "*:*", callback = vim.schedule_wrap(function() vim.cmd.redrawstatus() end) },
-
       hl = status.hl.get_attributes "mode", -- highlight based on mode attributes
       surround = { separator = "right", color = status.hl.mode_bg, update = { "ModeChanged", pattern = "*:*" } }, -- background highlight based on mode
-
       init = status.init.update_events {
         { "User", pattern = "UpdateTime", callback = vim.schedule_wrap(function() vim.cmd.redrawstatus() end) },
       },

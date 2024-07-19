@@ -1,4 +1,4 @@
-local keyOpts = { noremap = true, silent = true }
+-- local keyOpts = { noremap = true, silent = true }
 -- vim.cmd [[
 -- 	       " inoremap <c-[> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
 -- 	       inoremap <c-l> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
@@ -20,6 +20,7 @@ local keyOpts = { noremap = true, silent = true }
 -- 	       hi tkTag ctermfg=175 guifg=#d3869B
 -- ]]
 
+local prefix = "<Leader>z"
 return {
   "renerocksai/telekasten.nvim",
   dependencies = {
@@ -33,48 +34,47 @@ return {
             --   ["<space>"] = { "<cmd>lua require('telekasten').toggle_todo()<CR>", "Toggle checkbox" },
             --                 -- { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", "Toggle checkbox" },
             -- },
-            ["<leader>"] = {
-              z = {
-                ["#"] = { '<cmd>lua require("telekasten").show_tags({i = false})<CR>', "Show tags" },
-                b = { '<cmd>lua require("utils").insert_list_bullet()<CR>', "Set bullet" },
-                B = { '<cmd>lua require("utils").show_backlinks()<CR>', "Show back links" },
-                c = { '<cmd>lua require("utils").show_calendar()<CR>', "Show calendar" },
-                C = { "<cmd> CalendarT<CR>", "Calendar" },
-                f = {
-                  name = "find / search",
-                  ["#"] = { '<cmd>lua require("telekasten").show_tags({i = false})<CR>', "Find tags" },
-                  d = { '<cmd>lua require("telekasten").find_dialy_notes()<CR>', "Find daily note" },
-                  f = { '<cmd>lua require("telekasten").find_notes()<CR>', "Find note" },
-                  F = { '<cmd>lua require("telekasten").find_friends()<CR>', "Find friends" },
-                  g = { '<cmd>lua require("telekasten").search_notes()<CR>', "Search notes" },
-                  w = { '<cmd>lua require("telekasten").find_weekly_notes()<CR>', "Find note" },
-                },
-                h = { "<cmd>call HeaderPromote()<CR>", "Header promote" },
-                H = { "<cmd>call HeaderDemote()<CR>", "Header demote" },
-                i = { '<cmd>lua require("telekasten").insert_link({ i=false })<CR>', "Insert link" },
-                I = { '<cmd>lua require("telekasten").insert_img_link({ i=true })<CR>', "Insert image link" },
-                J = { '<cmd>lua require("telekasten").paste_img_and_link()<CR>', "Paste img & link" },
-                l = { '<cmd>lua require("telekasten").follow_link()<CR>', "Follow link" },
-                n = { '<cmd>lua require("telekasten").new_note()<CR>', "New note" },
-                N = { '<cmd>lua require("telekasten").new_templated_note()<CR>', "New template note" },
-                m = { '<cmd>lua require("telekasten").browse_media()<CR>', "Brows media" },
-                p = { '<cmd>lua require("telekasten").preview_img()<CR>', "Preview img" },
-                r = { '<cmd>lua require("telekasten").rename_note()<CR>', "Rename this note" },
-                -- t = { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", "Toggle todo" },
-                t = { "<cmd>lua require('telekasten').toggle_todo()<CR>", "Toggle checkbox" },
-                T = { '<cmd>lua require("telekasten").goto_today()<CR>', "Goto today" },
-                W = { '<cmd>lua require("telekasten").goto_thisweek()<CR>', "Goto this week" },
-                y = { '<cmd>lua require("telekasten").yank_notelink()<CR>', "Yank note link" },
-                z = { '<cmd>lua require("telekasten").panel()<CR>', "Panel" },
-                x = { "<cmd>PasteImg<cr>", "Paste Image" },
-              },
+            [prefix] = { desc = "󰛔 Telekasten" },
+            -- [prefix .. "s"] = { function() require("spectre").toggle() end, desc = "Toggle Spectre" },
+            [prefix .. "#"] = { '<cmd>lua require("telekasten").show_tags({i = false})<CR>', desc = "Show tags" },
+            [prefix .. "b"] = { '<cmd>lua require("utils").insert_list_bullet()<CR>', desc = "Set bullet" },
+            [prefix .. "B"] = { '<cmd>lua require("utils").show_backlinks()<CR>', desc = "Show back links" },
+            [prefix .. "c"] = { '<cmd>lua require("utils").show_calendar()<CR>', desc = "Show calendar" },
+            [prefix .. "C"] = { "<cmd> CalendarT<CR>", desc = "Calendar" },
+            [prefix .. "f"] = { desc = "Find / Search" },
+            [prefix .. "f#"] = { '<cmd>lua require("telekasten").show_tags({i = false})<CR>', desc = "Find tags" },
+            [prefix .. "fd"] = { '<cmd>lua require("telekasten").find_dialy_notes()<CR>', desc = "Find daily note" },
+            [prefix .. "ff"] = { '<cmd>lua require("telekasten").find_notes()<CR>', desc = "Find note" },
+            [prefix .. "fF"] = { '<cmd>lua require("telekasten").find_friends()<CR>', desc = "Find friends" },
+            [prefix .. "fg"] = { '<cmd>lua require("telekasten").search_notes()<CR>', desc = "Search notes" },
+            [prefix .. "fw"] = { '<cmd>lua require("telekasten").find_weekly_notes()<CR>', desc = "Find note" },
+            [prefix .. "h"] = { "<cmd>call HeaderPromote()<CR>", desc = "Header promote" },
+            [prefix .. "H"] = { "<cmd>call HeaderDemote()<CR>", desc = "Header demote" },
+            [prefix .. "i"] = { '<cmd>lua require("telekasten").insert_link({ i=false })<CR>', desc = "Insert link" },
+            [prefix .. "I"] = {
+              '<cmd>lua require("telekasten").insert_img_link({ i=true })<CR>',
+              desc = "Insert image link",
             },
+            [prefix .. "J"] = { '<cmd>lua require("telekasten").paste_img_and_link()<CR>', desc = "Paste img & link" },
+            [prefix .. "l"] = { '<cmd>lua require("telekasten").follow_link()<CR>', desc = "Follow link" },
+            [prefix .. "n"] = { '<cmd>lua require("telekasten").new_note()<CR>', desc = "New note" },
+            [prefix .. "N"] = { '<cmd>lua require("telekasten").new_templated_note()<CR>', desc = "New template note" },
+            [prefix .. "m"] = { '<cmd>lua require("telekasten").browse_media()<CR>', desc = "Brows media" },
+            [prefix .. "p"] = { '<cmd>lua require("telekasten").preview_img()<CR>', desc = "Preview img" },
+            [prefix .. "r"] = { '<cmd>lua require("telekasten").rename_note()<CR>', desc = "Rename this note" },
+            -- t = { "<cmd>lua require('utils').handle_checkbox_bullets()<CR>", desc = "Toggle todo" },
+            [prefix .. "t"] = { "<cmd>lua require('telekasten').toggle_todo()<CR>", desc = "Toggle checkbox" },
+            [prefix .. "T"] = { '<cmd>lua require("telekasten").goto_today()<CR>', desc = "Goto today" },
+            [prefix .. "W"] = { '<cmd>lua require("telekasten").goto_thisweek()<CR>', desc = "Goto this week" },
+            [prefix .. "y"] = { '<cmd>lua require("telekasten").yank_notelink()<CR>', desc = "Yank note link" },
+            [prefix .. "z"] = { '<cmd>lua require("telekasten").panel()<CR>', desc = "Panel" },
+            [prefix .. "x"] = { "<cmd>PasteImg<cr>", desc = "Paste Image" },
           },
           i = {
             -- ["<c-i>"] = false,
             ["]]"] = {
-              "<cmd>Telekasten insert_link<CR>",
               -- "<Cmd>lua require('telekasten').insert_link({ i=true })<CR>",
+              "<cmd>Telekasten insert_link<CR>",
               desc = "Telekasten insert link",
             },
             -- ["<c>"] = {
@@ -95,8 +95,9 @@ return {
           },
           v = {
             -- ["<C-space>"] = { "<cmd>lua require('telekasten').toggle_todo( { v=true} )<CR>", "Toggle checkbox" },
-            ["<leader>"] = {
-              ["zt"] = { "<cmd>lua require('telekasten').toggle_todo( { v=true } )<CR>", "Toggle checkbox" },
+            ["<leader>zt"] = {
+              "<cmd>lua require('telekasten').toggle_todo( { v=true } )<CR>",
+              desc = "Toggle checkbox",
             },
           },
         },
