@@ -41,10 +41,16 @@ return {
       opts = {
         options = {
           g = {
-            slime_target = "kitty",
+            -- slime_target = "kitty",
+            slime_target = "neovim",
             slime_bracketed_paste = true,
             slime_no_mappings = true,
             slime_cell_delimiter = "^\\s*# %%",
+
+            slime_input_pid = true,
+            slime_suggest_default = true,
+            slime_menu_config = true,
+            slime_neovim_ignore_unlisted = false,
           },
         },
         mappings = {

@@ -1,6 +1,5 @@
-return {
-  vim.cmd [[
-    command! N :Neotree position=current
+vim.cmd [[
+    command! Nt :Neotree position=current
     command! Nexplorer :Neotree position=current
     command! E :Oil
     command! O :Oil
@@ -14,6 +13,8 @@ return {
     " command! W :w!
     command! Q :q
     command! Qa :qa
+    cnoreabbrev <silent> Q q 
+    cnoreabbrev <silent> Qa qa 
 
     cnoreabbrev <silent> W w 
     cnoreabbrev <silent> Wa wa 
@@ -26,5 +27,6 @@ return {
     cnoreabbrev <silent> ee e!
 
     command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. '
-  ]],
-}
+  ]]
+
+-- return {}
