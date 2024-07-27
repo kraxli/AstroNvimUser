@@ -22,9 +22,9 @@ return {
       -- { "gs", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
       --
       -- use m instead
-      { "m", '<Plug>(leap-forward)', mode = { "n", "x", "o" }, desc = "Leap Forward to" },
-      { "M", '<Plug>(leap-backward)', mode = { "n", "x", "o" }, desc = "Leap Backward to" },
-      { "gm", '<Plug>(leap-from-window)', mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+      { "l", '<Plug>(leap-forward)', mode = { "n", "x", "o" }, desc = "Leap Forward to" },
+      { "L", '<Plug>(leap-backward)', mode = { "n", "x", "o" }, desc = "Leap Backward to" },
+      { "gw", '<Plug>(leap-from-window)', mode = { "n", "x", "o" }, desc = "Leap from Windows" },
 
     },
     config = function(_, opts)
