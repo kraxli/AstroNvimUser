@@ -1,5 +1,6 @@
 return {
   "machakann/vim-sandwich",
+  event = "BufEnter",
   dependencies = {
     "AstroNvim/astrocore",
     opts = function(_, opts)
@@ -8,13 +9,14 @@ return {
       local maps = assert(opts.mappings)
       maps.n.sa = { "<Plug>(sandwich-add)", desc = "Add surrounding" }
       maps.o.sa = maps.n.sa
+      maps.v.sa = maps.n.sa
       maps.x.sa = maps.n.sa
       maps.n.sd = { "<Plug>(sandwich-delete)", desc = "Delete surrounding" }
       maps.n.sr = { "<Plug>(sandwich-replace)", desc = "Replace surrounding" }
     end,
   },
   keys = {
-    { "<Plug>(sandwich-add)", mode = { "n", "x", "o" } },
+    { "<Plug>(sandwich-add)", mode = { "n", "x", "o", "v" } },
     "<Plug>(sandwich-delete)",
     "<Plug>(sandwich-replace)",
   },

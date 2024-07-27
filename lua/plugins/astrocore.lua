@@ -38,7 +38,7 @@ return {
           relativenumber = false, -- Show relative numberline
           signcolumn = "auto", -- sets `vim.opt.relativenumber`
           number = true,
-          timeoutlen = 150, --- Time out on mappings
+          timeoutlen = 200, --- Time out on mappings
           ttimeoutlen = 10, --- Time out on key codes
           foldlevel = 99,
         },
@@ -134,6 +134,7 @@ return {
       mappings = {
         n = {
           -- disable default bindings
+          ["sa"] = false,
           ["q"] = false,
           ["<leader>o"] = false,
           ["<Leader>ot"] = false,
@@ -226,10 +227,12 @@ return {
           ["<ESC>d"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
         },
         v = {
+          ["sa"] = false,
           -- Telekasten:
           ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo({v=true})<CR>", desc = "Toggle checkbox" },
         },
         x = {
+          ["sa"] = false,
           ["<C-S>"] = false,
           -- better increment/decrement
           ["+"] = { "g<C-a>", desc = "Increment number" },
