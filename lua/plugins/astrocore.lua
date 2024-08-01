@@ -75,28 +75,18 @@ return {
           },
         },
         auto_close = {
-          event = "FileType",
-          desc = "Close terminal alike pop-ups",
-          pattern = { "toggleterm", "qf", "help", "man", "lspinfo", "fugitiveblame" },
-          callback = function()
-            vim.keymap.set("n", "q", "<cmd>quit<CR>", { expr = false, noremap = true, desc = "Close" })
-            vim.keymap.set("n", "t", "<cmd>quit<CR>", { expr = false, noremap = true, desc = "Close" })
-            vim.keymap.set("n", "<c-q>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
-            vim.keymap.set(
-              "i",
-              "<c-q>",
-              "<esc><cmd>close!<CR>",
-              { expr = true, noremap = true, desc = "Close terminal" }
-            )
-            vim.keymap.set("n", "<c-c>", "<cmd>close!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
-            vim.keymap.set(
-              "i",
-              "<c-c>",
-              "<esc><cmd>close!<CR>",
-              { expr = true, noremap = true, desc = "Close terminal" }
-            )
-            -- autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> q :close!<CR>  " ,TelescopePrompt
-          end,
+          {
+            event = "FileType",
+            desc = "Close",
+            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo" },
+            callback = function()
+              vim.keymap.set("n", "q", "<cmd>quit<CR>", { expr = false, noremap = true, desc = "Close" })
+
+              vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
+              vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, desc = "Close terminal" }
+              )
+            end,
+          },
         },
         auto_org_files = {
           {
