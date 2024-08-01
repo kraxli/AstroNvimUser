@@ -1,8 +1,9 @@
 return {
   "famiu/bufdelete.nvim",
-  cmd = {"Bdelete"},
+  cmd = { "Bdelete" },
   dependencies = {
     "AstroNvim/astrocore",
+    ---@type AstroCoreOpts
     opts = {
       mappings = {
         n = {
