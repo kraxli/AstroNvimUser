@@ -38,7 +38,7 @@ return {
           relativenumber = false, -- Show relative numberline
           signcolumn = "auto", -- sets `vim.opt.relativenumber`
           number = true,
-          timeoutlen = 200, --- Time out on mappings
+          timeoutlen = 250, --- Time out on mappings (150)
           ttimeoutlen = 10, --- Time out on key codes
           foldlevel = 99,
         },
