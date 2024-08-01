@@ -78,7 +78,7 @@ return {
           {
             event = "FileType",
             desc = "Close",
-            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo" },
+            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", '' },
             callback = function()
               vim.keymap.set("n", "q", "<cmd>quit<CR>", { expr = false, noremap = true, desc = "Close" })
 

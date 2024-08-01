@@ -20,6 +20,7 @@ vim.cmd [[
     cnoreabbrev <silent> Wa wa 
     cnoreabbrev <silent> ww w!
     cnoreabbrev <silent> wwa wa!
+    cnoreabbrev <silent> X x
     cnoreabbrev <silent> xx x!
     cnoreabbrev <silent> xxa xa!
     cnoreabbrev <silent> qq q!
