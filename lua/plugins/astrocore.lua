@@ -78,13 +78,14 @@ return {
           {
             event = "FileType",
             desc = "Close",
-            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", ''},
+            pattern = { "fugitiveblame",  "toggleterm", "qf", "help", "man", "lspinfo", ''},
             callback = function()
-              vim.keymap.set("n", "q", "<cmd>quit<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
+              vim.keymap.set("n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
+              -- vim.keymap.set("n", "<esc>", "<cmd>quit<CR>", { expr = false, noremap = true, buffer = true, desc = "Close terminal" })
 
+              vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
               vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
-              )
+              vim.keymap.set("n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
             end,
           },
         },
@@ -231,14 +232,13 @@ return {
         },
         -- terminal mappings
         t = {
-          ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          ["<Esc><Esc>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
+          -- ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+          -- ["<Esc><Esc>"] = { "<C-\\><C-n><CR>", desc = "Terminal quit" },
 
+          ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          ["<ESC>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
           ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
-          ["<ESC>k"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
-          ["<ESC>d"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
+          ["<C-d>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
         },
         v = {
           ["sa"] = false,
