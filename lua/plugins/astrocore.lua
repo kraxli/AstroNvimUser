@@ -78,12 +78,12 @@ return {
           {
             event = "FileType",
             desc = "Close",
-            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", '' },
+            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", ''},
             callback = function()
-              vim.keymap.set("n", "q", "<cmd>quit<CR>", { expr = false, noremap = true, desc = "Close" })
+              vim.keymap.set("n", "q", "<cmd>quit<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
 
-              vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, desc = "Close terminal" })
-              vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, desc = "Close terminal" }
+              vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
               )
             end,
           },
@@ -164,18 +164,25 @@ return {
           ["<Leader>o"] = { desc = "Orgmode" },
           ["<Leader>tp"] = {
             function()
+              local term_count = vim.api.nvim_buf_get_number(0)
               local ipython = vim.fn.executable "ipython" == 1 and "ipython"
                 or vim.fn.executable "ipython3" == 1 and "ipython3"
-              if ipython then require("astrocore").toggle_term_cmd(ipython) end
+              if ipython then
+                require("astrocore").toggle_term_cmd { cmd = "ipython --pylab -i --no-autoindent", direction = "float",
+                  count=term_count}  -- , size=80 width=vim.o.columns * 0.3
+              end
+
             end,
             desc = "ToggleTerm ipython",
           },
           ["<Leader>tP"] = {
             function()
+              local term_count = vim.api.nvim_buf_get_number(0)
               local ipython = vim.fn.executable "ipython" == 1 and "ipython"
                 or vim.fn.executable "ipython3" == 1 and "ipython3"
               if ipython then
-                require("astrocore").toggle_term_cmd { cmd = "ipython --pylab -i", direction = "vertical" }
+                require("astrocore").toggle_term_cmd { cmd = "ipython --pylab -i --no-autoindent", direction = "vertical",
+                  count=term_count}  -- , size=80 width=vim.o.columns * 0.3
               end
               -- { "<Cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "ToggleTerm vertical split" }
             end,
