@@ -3,6 +3,8 @@
 - [ ] "rafi/vim-sidemenu" see rafi/nvim-config
 - [ ] https://github.com/amrbashir/nvim-docs-view (just use <leader>K)
 
+Repl: https://github.com/AstroNvim/AstroNvim/issues/1553
+
 ## Journaling / writing
 
 - Goyo: For distraction-free writing.
