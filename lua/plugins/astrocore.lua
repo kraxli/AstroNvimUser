@@ -74,11 +74,25 @@ return {
             end,
           },
         },
+        auto_term = {
+          {
+            event = "FileType",
+            desc = "Close",
+            pattern = { 'term'},
+            callback = function()
+              vim.keymap.set("n", "q", "<cmd>close<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
+
+              -- vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              -- vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              -- vim.keymap.set("n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
+            end,
+          },
+        },
         auto_close = {
           {
             event = "FileType",
             desc = "Close",
-            pattern = { "fugitiveblame",  "toggleterm", "qf", "help", "man", "lspinfo", ''},
+            pattern = { "fugitiveblame",  "toggleterm", "qf", "help", "man", "lspinfo", ''}, -- , 'term'
             callback = function()
               vim.keymap.set("n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
               -- vim.keymap.set("n", "<esc>", "<cmd>quit<CR>", { expr = false, noremap = true, buffer = true, desc = "Close terminal" })
@@ -207,6 +221,7 @@ return {
             desc = "ToggleTerm ipython vsplit",
           },
           ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
+          ["<Leader>uv"] = { "<cmd>vert split<CR>", desc = "Vertical split" },
 
           -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
           -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
