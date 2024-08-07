@@ -1,5 +1,8 @@
 return {
   "Exafunction/codeium.vim",
+  -- enabled = function() if vim.fn.has('unix') then return true else return false end end,
+  -- enabled = (vim.fn.has('unix') and true or false)[1],
+  enabled = vim.fn.has('unix') == 1,
   event = "BufEnter",
   dependencies = {
     {
