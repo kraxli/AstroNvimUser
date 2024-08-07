@@ -1,6 +1,7 @@
 local prefix = "<Leader>r"
 return {
   "geg2102/nvim-python-repl",
+  enabled = false,
   ft = { "python", "lua", "scala" },
   config = function()
     require("nvim-python-repl").setup {
