@@ -52,7 +52,7 @@ return {
         -- mark_visual = "<space>mc",
         -- remove_mark = "<space>md",
         cr = "<space>r<cr>",
-        interrupt = "<space>r<space>",
+        interrupt = "<space>r<space>",  -- ri or rd ?
         exit = "<space>rq",  -- TODO: create autocommand with close q
         clear = "<space>rc",
       },
@@ -71,8 +71,8 @@ return {
       mappings = {
           n = {
             [ prefix ] = { desc = " REPL iron" },
-            [ prefix .. "R" ] = {'<cmd>IronRepl<CR>', desc = 'Iron start repl'},
-            [ prefix .. "r" ] = {'<cmd>IronRestart<CR>', desc = 'Iron restart repl'},
+            [ prefix .. "r" ] = {'<cmd>IronRepl<CR>', desc = 'Iron start repl'},
+            [ prefix .. "R" ] = {'<cmd>IronRestart<CR>', desc = 'Iron restart repl'},
             [ prefix .. "g" ] = {'<cmd>IronFocus<CR>', desc = 'Iron go to repl'}, -- jump to
             [ prefix .. "h" ] = {'<cmd>IronHide<CR>', desc = 'Iron hide repl'},
             -- [ prefix .. 's' ] = {
