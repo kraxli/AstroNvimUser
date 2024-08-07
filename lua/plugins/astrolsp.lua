@@ -8,6 +8,14 @@ return {
   "AstroNvim/astrolsp",
   ---@type AstroLSPOpts
   opts = {
+    formatting = {
+      -- format_on_save = false, -- enable or disable automatic formatting on save
+      format_on_save = {
+        enabled = false,
+        ignore_filetypes = {}, -- disable format on save for specified filetypes
+        allow_filetypes = {},  -- only allow formatting on save for these filetypes
+      },
+    },
     features = { signature_help = true },
     autocmds = {
       no_insert_inlay_hints = {
