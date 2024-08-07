@@ -5,6 +5,7 @@ local disabled = {
   "max397574/better-escape.nvim",
   "nvimtools/none-ls.nvim",
   "jpalardy/vim-slime",
+  "klafyvel/vim-slime-cells",
 }
 if vim.fn.has "nvim-0.10" == 1 then table.insert(disabled, "numToStr/Comment.nvim") end
 
