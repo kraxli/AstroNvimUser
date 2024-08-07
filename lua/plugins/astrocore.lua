@@ -194,7 +194,7 @@ return {
             desc = "Toggle Explorer Focus",
           },
           ["<Leader>o"] = { desc = "Orgmode" },
-          ["<Leader>tp"] = {
+          ["<Leader>tP"] = {
             function()
               local term_count = vim.api.nvim_buf_get_number(0)
               local ipython = vim.fn.executable "ipython" == 1 and "ipython"
@@ -207,19 +207,7 @@ return {
             end,
             desc = "ToggleTerm ipython",
           },
-          ["<Leader>tP"] = {
-            function()
-              local term_count = vim.api.nvim_buf_get_number(0)
-              local ipython = vim.fn.executable "ipython" == 1 and "ipython"
-                or vim.fn.executable "ipython3" == 1 and "ipython3"
-              if ipython then
-                require("astrocore").toggle_term_cmd { cmd = "ipython --pylab -i --no-autoindent", direction = "vertical",
-                  count=term_count}  -- , size=80 width=vim.o.columns * 0.3
-              end
-              -- { "<Cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "ToggleTerm vertical split" }
-            end,
-            desc = "ToggleTerm ipython vsplit",
-          },
+          ["<Leader>tp"] = {"<cmd>IronRepl<CR>", desc = "Open Iron repl vsplit", },
           ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
           ["<Leader>uv"] = { "<cmd>vert split<CR>", desc = "Vertical split" },
 
