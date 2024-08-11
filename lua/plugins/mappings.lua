@@ -32,6 +32,11 @@ return {
           },
         },
         i = {
+          -- hack to select next item for cmp under window
+          ["<C-j>"] = {
+            "<cmd>lua require 'cmp'.mapping(require'cmp'.mapping.select_next_item(), { 'i', 'c' })<CR>",
+            desc = "cmp select next (hack)",
+          },
 
           -- vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = true })
           -- vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
