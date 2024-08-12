@@ -33,6 +33,10 @@ return {
         },
         i = {
 
+          ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
+          ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
+          ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
+          ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
           -- vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = true })
           -- vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
 
@@ -44,9 +48,10 @@ return {
         n = {
 
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
-          ["<BS>"] = { "<C-o>", desc = "Move to previous position" },
-          -- vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = true }) -- backspace
           ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
+          ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
+          ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
+          -- vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = true }) -- backspace
           -- ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
           -- ["<S-BS>"] = { "<C-i>", desc = "Move to previous position" },
 
