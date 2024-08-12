@@ -23,7 +23,14 @@ return {
             end,
           },
           python = {
-            command = { "ipython", "--pylab=qt5" }, -- or { "ipython", "--no-autoindent" } --matplotlib=qt5
+            command = { "ipython", "--pylab=qt5", "--no-autoindent" },
+            -- command = function()
+            --   if vim.fn.has('win64') == 1 then
+            --     return { "ipython", "--pylab=qt5" }
+            --   else
+            --     return { "ipython", "--pylab=qt5", "--no-autoindent" }
+            --   end
+            -- end, -- or { "ipython", "--no-autoindent" } --matplotlib=qt5
             format = require("iron.fts.common").bracketed_paste_python,
           },
         },
@@ -43,8 +50,8 @@ return {
       keymaps = {
         send_motion = "<space>rm",
         visual_send = "<space>rs",
-        send_file = "<space>rf",
-        send_line = "<space>rl",
+        -- send_file = "<space>rf",
+        -- send_line = "<space>rl",
         send_paragraph = "<space>rp",
         send_until_cursor = "<space>ru",
         -- send_mark = "<space>sm",
@@ -52,8 +59,8 @@ return {
         -- mark_visual = "<space>mc",
         -- remove_mark = "<space>md",
         cr = "<space>r<cr>",
-        interrupt = "<space>r<space>",  -- ri or rd ?
-        exit = "<space>rq",  -- TODO: create autocommand with close q
+        interrupt = "<space>r<space>", -- ri or rd ?
+        exit = "<space>rq", -- TODO: create autocommand with close q
         clear = "<space>rc",
       },
       -- If the highlight is on, you can change how it looks
@@ -68,44 +75,66 @@ return {
     "AstroNvim/astrocore",
     ---@param opts AstroCoreOpts
     opts = {
+      autocmds = {
+        auto_iron = {
+          {
+            event = "FileType",
+            pattern = { 'python' },
+            desc = 'Iron repl support',
+            callback = function()
+              vim.keymap.set("n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true, buffer = true, desc = " Start REPL" })
+              vim.keymap.set("n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true, buffer = true, desc = " Restart REPL" })
+              vim.keymap.set("n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, buffer = true, desc = " Jump (in)to REPL" }) -- i
+              vim.keymap.set("n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, buffer = true, desc = "Hide REPL" }) -- i
+              vim.keymap.set("n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send file" })
+              vim.keymap.set("n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send line" })
+            end,
+          },
+        },
+      },
       mappings = {
-          n = {
-            [ prefix ] = { desc = " REPL iron" },
-            [ prefix .. "r" ] = {'<cmd>IronRepl<CR>', desc = 'Iron start repl'},
-            [ prefix .. "R" ] = {'<cmd>IronRestart<CR>', desc = 'Iron restart repl'},
-            [ prefix .. "g" ] = {'<cmd>IronFocus<CR>', desc = 'Iron go to repl'}, -- jump to
-            [ prefix .. "h" ] = {'<cmd>IronHide<CR>', desc = 'Iron hide repl'},
-            -- [ prefix .. 's' ] = {
-            --   "<cmd>lua require('nvim-python-repl').send_statement_definition()<CR>",
-            --   noremap = false,
-            --   desc = "Send semantic unit to REPL",
-            -- },
-            -- [ prefix .. 'r' ] = {
-            --   '<cmd>lua require("nvim-python-repl").open_repl()<CR>',
-            --   noremap = false,
-            --   desc = "Opens the REPL in a window split",
-            -- },
-            -- [ prefix .. 'b' ] = {
-            --   "<cmd>lua require('nvim-python-repl').send_buffer_to_repl()<CR>",
-            --   noremap = false,
-            --   desc = "Send entire buffer to REPL",
-            -- },
-            -- [ prefix .. 't'] = { desc = " Python REPL toggle" },
-            -- [ prefix .. 'te' ] = {
-            --   "<cmd>lua require('nvim-python-repl').toggle_execute()<CR>",
-            --   noremap = false,
-            --   desc = "Toggle automatic command execution in REPL",
-            -- },
-            -- [ prefix .. 'tv' ] = {
-            --   "<cmd>lua require('nvim-python-repl').toggle_vertical()<CR>",
-            --   noremap = false,
-            --   desc = "Toggle vertical REPL split or horizontal split",
-            -- },
-          },
-          v = {
-            -- [prefix] = { desc = " REPL iron" },
-            -- [prefix .. "s"] = {"<cmd> lua require('nvim-python-repl').send_visual_to_repl()<CR>", noremap=false, desc="Send visual selection to REPL"},
-          },
+        n = {
+          [prefix] = { desc = " REPL iron" },
+          -- [prefix .. "r"] = { "<cmd>IronRepl<CR>", desc = "Iron start repl" },
+          -- [prefix .. "R"] = { "<cmd>IronRestart<CR>", desc = "Iron restart repl" },
+          -- [prefix .. "g"] = { "<cmd>IronFocus<CR>", desc = "Iron go to repl" }, -- jump to
+          -- [prefix .. "h"] = { "<cmd>IronHide<CR>", desc = "Iron hide repl" },
+          -- [prefix .. "f"] = { "<cmd> lua require 'iron.core'.send_file()<CR>", desc = "File send" },
+          -- [prefix .. "l"] = { '<cmd> lua require "iron.core".send_line()<CR>', desc = "Line send" },
+          -- [ prefix .. 's' ] = {
+          --   "<cmd>lua require('nvim-python-repl').send_statement_definition()<CR>",
+          --   noremap = false,
+          --   desc = "Send semantic unit to REPL",
+          -- },
+          -- [ prefix .. 'r' ] = {
+          --   '<cmd>lua require("nvim-python-repl").open_repl()<CR>',
+          --   noremap = false,
+          --   desc = "Opens the REPL in a window split",
+          -- },
+          -- [ prefix .. 'b' ] = {
+          --   "<cmd>lua require('nvim-python-repl').send_buffer_to_repl()<CR>",
+          --   noremap = false,
+          --   desc = "Send entire buffer to REPL",
+          -- },
+          -- [ prefix .. 't'] = { desc = " Python REPL toggle" },
+          -- [ prefix .. 'te' ] = {
+          --   "<cmd>lua require('nvim-python-repl').toggle_execute()<CR>",
+          --   noremap = false,
+          --   desc = "Toggle automatic command execution in REPL",
+          -- },
+          -- [ prefix .. 'tv' ] = {
+          --   "<cmd>lua require('nvim-python-repl').toggle_vertical()<CR>",
+          --   noremap = false,
+          --   desc = "Toggle vertical REPL split or horizontal split",
+          -- },
+        },
+        v = {
+          [prefix] = { desc = " REPL iron" },
+          -- [prefix .. "s"] = {
+          --   "<cmd> lua require 'iron.core'.send(nil, core.mark_visual())<CR>",
+          --   desc = "Visual send selection",
+          -- },
+        },
       },
     },
   },
