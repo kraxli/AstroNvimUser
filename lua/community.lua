@@ -16,8 +16,8 @@ local M = {
 
 local win_plugins = {
   { import = "astrocommunity.completion.copilot" },
-  { import = "astrocommunity.completion.copilot-lua" },
-  { import = "astrocommunity.completion.copilot-lua-cmp" },
+  -- { import = "astrocommunity.completion.copilot-lua" },
+  -- { import = "astrocommunity.completion.copilot-lua-cmp" },
 }
 
 if vim.fn.has "win64" == 1 then
