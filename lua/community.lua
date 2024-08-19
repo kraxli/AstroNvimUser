@@ -1,4 +1,4 @@
-return {
+local M = {
   -- Add the community repository of plugin specifications
   "AstroNvim/astrocommunity",
   -- example of importing a plugin
@@ -13,3 +13,17 @@ return {
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.markdown-and-latex.vimtex" },
 }
+
+local win_plugins = {
+  { import = "astrocommunity.completion.copilot" },
+  { import = "astrocommunity.completion.copilot-lua" },
+  { import = "astrocommunity.completion.copilot-lua-cmp" },
+}
+
+if vim.fn.has "win64" == 1 then
+  for _, v in ipairs(win_plugins) do
+    table.insert(M, v)
+  end
+end
+
+return M
