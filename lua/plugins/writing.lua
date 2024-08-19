@@ -149,7 +149,6 @@ return {
     -- version = "v1.11.0",
     ft = {
       "markdown",
-      "org",
       "plaintex",
       "text",
       "tex",
