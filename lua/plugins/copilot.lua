@@ -36,19 +36,16 @@ return {
             if copilot.is_visible() then copilot.accept() end
           end, {"i", "s"})
 
-          opts.mapping["<M-z>"] = cmp.mapping(function()
+          opts.mapping["<M-down>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.next() end
           end)
-          opts.mapping["<M-x>"] = cmp.mapping(function()
+          opts.mapping["<M-up>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.prev() end
           end)
-          opts.mapping["<M-right>"] = cmp.mapping(function()
+          opts.mapping["<M-w>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.accept_word() end
           end)
-          opts.mapping["<M-l>"] = cmp.mapping(function()
-            if copilot.is_visible() then copilot.accept_word() end
-          end)
-          opts.mapping["<M-down>"] = cmp.mapping(function()
+          opts.mapping["<M-s>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.accept_line() end
           end)
           -- opts.mapping["<C-j>"] = cmp.mapping(function()
