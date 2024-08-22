@@ -18,39 +18,46 @@ return {
 
           if not opts.mapping then opts.mapping = {} end
 
-          opts.mapping["<Right>"] = cmp.mapping(function(fallback)
-            if copilot.is_visible() then
-              copilot.accept()
-            elseif cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { "i", "s" })
+          -- opts.mapping["<Right>"] = cmp.mapping(function(fallback)
+          --   if copilot.is_visible() then
+          --     copilot.accept()
+          --   elseif cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" })
 
-          opts.mapping["<C-z>"] = cmp.mapping(function()
+          opts.mapping["<M-CR>"] = cmp.mapping(function(fallback)
+            if copilot.is_visible() then copilot.accept() end
+          end, {"i", "s"})
+
+          opts.mapping["<M-z>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.next() end
           end)
-          opts.mapping["<C-x>"] = cmp.mapping(function()
+          opts.mapping["<M-x>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.prev() end
           end)
-          opts.mapping["<C-right>"] = cmp.mapping(function()
+          opts.mapping["<M-right>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.accept_word() end
           end)
-          opts.mapping["<C-l>"] = cmp.mapping(function()
+          opts.mapping["<M-l>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.accept_word() end
           end)
-          opts.mapping["<C-down>"] = cmp.mapping(function()
+          opts.mapping["<M-down>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.accept_line() end
           end)
           -- opts.mapping["<C-j>"] = cmp.mapping(function()
           --   if copilot.is_visible() then copilot.accept_line() end
           -- end)
-          opts.mapping["<C-up>"] = cmp.mapping(function()
+          opts.mapping["<M-BS>"] = cmp.mapping(function()
+            if copilot.is_visible() then copilot.dismiss() end
+          end)
+          opts.mapping["<M-c>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.dismiss() end
           end)
           return opts
