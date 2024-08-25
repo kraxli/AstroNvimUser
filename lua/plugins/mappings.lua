@@ -132,8 +132,8 @@ return {
           -- ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
           [prefixFind .. "u"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', desc = "Resume last" }, -- same as: <leader>f<CR>
           [prefixFind .. "x"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', desc = "Resume last" }, -- same as: <leader>f<CR>
-          ["<leader>zW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", desc = "Clear postspace" },
-          -- ["uW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },
+          ["<leader>uW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", desc = "Clear postspace" },
+          ["<leader>zw"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", desc = "Clear postspace" },
           -- -- AstroNvim way:
           -- ["<localleader>r"] = {
           --   function() require("astrocore.buffer").move(-vim.v.count1) end,
