@@ -66,6 +66,14 @@ return {
           --   desc = "Pick to close",
           -- },
 
+          -- Clipboard (yank/copy & paste):
+          ["<leader>y"] = { desc = "Yank" },
+          ["<leader>ya"] = { "<cmd>lua require('utils').copy_absolute_path()<CR>", silent = true, desc = 'Yank absolute path'  },
+          ["<leader>yr"] = { "<cmd>lua require('utils').copy_relative_path()<CR>", silent = true, desc = 'Yank relative path' },
+          -- map('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = 'Paste' })
+          -- map('x', 'P', 'P:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = 'Paste In-place' })
+
+
           -- quick save
           ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
 
