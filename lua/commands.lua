@@ -30,4 +30,7 @@ vim.cmd [[
     command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. '
   ]]
 
+vim.api.nvim_create_user_command('CopyPathAbs', ":lua require('utils').copy_absolute_path()", {})
+vim.api.nvim_create_user_command('CopyPathRel', ":lua require('utils').copy_relative_path()", {})
+
 -- return {}

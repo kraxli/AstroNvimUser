@@ -1,5 +1,24 @@
 local M = {}
 
+-- Clipboard {{{
+-- ===
+
+-- Yank buffer's relative path to clipboard
+function M.copy_relative_path()
+	local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':~:.') or ''
+	vim.fn.setreg('+', path)
+	vim.notify(path, vim.log.levels.INFO, { title = 'Yanked relative path' })
+end
+
+-- Yank absolute path
+function M.copy_absolute_path()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':p') or ''
+	vim.fn.setreg('+', path)
+	vim.notify(path, vim.log.levels.INFO, { title = 'Yanked absolute path' })
+end
+
+--- }}}
+
 function M.create_toggle_term(args, count)
   -- local fn = vim.fn
   local term = require("toggleterm.terminal").get(count)

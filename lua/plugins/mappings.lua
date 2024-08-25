@@ -39,7 +39,7 @@ return {
           },
 
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
-          -- ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
+           -- ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
           ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
           ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
            -- vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = true })
@@ -70,6 +70,14 @@ return {
           --   end,
           --   desc = "Pick to close",
           -- },
+
+          -- Clipboard (yank/copy & paste):
+          ["<leader>y"] = { desc = "Yank" },
+          ["<leader>ya"] = { "<cmd>lua require('utils').copy_absolute_path()<CR>", silent = true, desc = 'Yank absolute path'  },
+          ["<leader>yr"] = { "<cmd>lua require('utils').copy_relative_path()<CR>", silent = true, desc = 'Yank relative path' },
+          -- map('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = 'Paste' })
+          -- map('x', 'P', 'P:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = 'Paste In-place' })
+
 
           -- quick save
           ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
@@ -129,8 +137,8 @@ return {
           -- ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
           [prefixFind .. "u"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', desc = "Resume last" }, -- same as: <leader>f<CR>
           [prefixFind .. "x"] = { '<cmd>lua require("telescope.builtin").resume()<CR>', desc = "Resume last" }, -- same as: <leader>f<CR>
-          ["<leader>zW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", desc = "Clear postspace" },
-          -- ["uW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },
+          ["<leader>uW"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", desc = "Clear postspace" },
+          ["<leader>zw"] = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", desc = "Clear postspace" },
           -- -- AstroNvim way:
           -- ["<localleader>r"] = {
           --   function() require("astrocore.buffer").move(-vim.v.count1) end,
