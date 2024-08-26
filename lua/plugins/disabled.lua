@@ -2,7 +2,6 @@ local disabled = {
   "goolord/alpha-nvim",
   "jay-babu/mason-null-ls.nvim",
   "lukas-reineke/indent-blankline.nvim",
-  "max397574/better-escape.nvim",
   "nvimtools/none-ls.nvim",
   "jpalardy/vim-slime",
   "klafyvel/vim-slime-cells",

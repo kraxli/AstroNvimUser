@@ -235,9 +235,6 @@ return {
         },
         -- terminal mappings
         t = {
-          -- ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          -- ["<Esc><Esc>"] = { "<C-\\><C-n><CR>", desc = "Terminal quit" },
-
           ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
@@ -247,6 +244,9 @@ return {
           ["sa"] = false,
           -- Telekasten:
           ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo({v=true})<CR>", desc = "Toggle checkbox" },
+          ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+          -- ["<Esc><Esc>"] = { "<C-\\><C-n><CR>", desc = "Terminal quit" },
+          ["<Esc><Esc>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
         },
         x = {
           ["sa"] = false,

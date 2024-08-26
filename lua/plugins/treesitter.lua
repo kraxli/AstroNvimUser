@@ -1,6 +1,6 @@
 return {
 	-- {
-	-- 	"nvim-treesitter/nvim-treesitter",
+		"nvim-treesitter/nvim-treesitter",
 	-- 	enabled = function()
 	-- 		return not (vim.bo.filetype == "markdown" and vim.fn.has("win64") == 1)  -- jit.os:find("Windows")
 	-- 	end,
@@ -8,4 +8,9 @@ return {
 	-- 			opts.auto_install = vim.fn.has("win64") == 0
 	-- 	end
 	-- },
+  opts = {
+    indent = {
+      disable = { "yaml" },
+    },
+  },
 }
