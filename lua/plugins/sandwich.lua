@@ -15,11 +15,11 @@ return {
       maps.n.sr = { "<Plug>(sandwich-replace)", desc = "Replace surrounding" }
     end,
   },
-  keys = {
-    { "<Plug>(sandwich-add)", mode = { "n", "x", "o", "v" } },
-    "<Plug>(sandwich-delete)",
-    "<Plug>(sandwich-replace)",
-  },
+  -- keys = {
+  --   { "<Plug>(sandwich-add)", mode = { "n", "x", "o", "v" } },
+  --   "<Plug>(sandwich-delete)",
+  --   "<Plug>(sandwich-replace)",
+  -- },
   specs = {
     {
       "catppuccin",
