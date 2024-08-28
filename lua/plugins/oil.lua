@@ -12,7 +12,8 @@ return {
     end
   end,
   opts = function()
-    local get_icon = require("astroui").get_icon
+    local get_icon, cmd = require("astroui").get_icon, require("astrocore").cmd
+    local git_avail = vim.fn.executable "git" == 1
     return {
       columns = {
         { "icon", default_file = get_icon "DefaultFile", directory = get_icon "FolderClosed" },
@@ -21,6 +22,26 @@ return {
       watch_for_changes = true,
       keymaps = {
         ["<Tab>"] = "actions.close",
+      },
+      view_options = {
+        is_hidden_file = function(file, bufnr)
+          local dir = git_avail and require("oil").get_current_dir(bufnr)
+          if vim.startswith(file, ".") then
+            if dir then -- show git tracked hidden files
+              return cmd({ "git", "-C", dir, "ls-files", "--error-unmatch", file }, false) == nil
+            else
+              return true
+            end
+          end
+          if dir then -- hide git untracked files
+            return cmd(
+              { "git", "-C", dir, "ls-files", "--error-unmatch", "--ignored", "--exclude-standard", "--others", file },
+              false
+            ) ~= nil
+          else
+            return false
+          end
+        end,
       },
     }
   end,
