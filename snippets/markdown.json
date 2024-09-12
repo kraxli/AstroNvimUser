@@ -19,6 +19,12 @@
     "body": ["```sh", "$1", "```"],
     "description": "Insert fenced bash code block"
   },
+  "Insert R block": {
+    "prefix": ["R", "r", "codeblock-R"],
+    "body": ["```R", "$1", "```"],
+    "description": "Insert fenced R code block"
+  },
+
   "Insert link": {
     "prefix": ["linkk", "link2", "ll", "--"],
     "body": ["[$2]($1) $3"],

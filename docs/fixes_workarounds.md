@@ -189,3 +189,47 @@ File content of example `.curlrc`: https://gist.github.com/v1m/f1d4751883f19c916
 ```
 
 in neovim run: `:checkhealth nvim-treesitte` and try `TSInstall markdown` or disable it e.g. by `TSBufDisable markdown`.
+
+## R.nvim
+
+
+### Set up and initialization
+
+Create user profile file:
+
+```sh
+touch ~/.Rprofile
+mkdir -p ~/.R/libs
+```
+
+In `~/.Rprofile`
+
+
+```r
+R_LIBS_USER='~/.R/libs/'
+.libPaths(R_LIBS_USER, include.site = TRUE)
+cat("\nUser profile file, ~/.Rprofile, has been loaded\n")
+```
+
+see [stackoverflow](https://stackoverflow.com/a/31707983) 
+
+See `help(Startup)` and `help(.libPaths)` as you have several possibilities where this may have gotten set. Among them are
+
+    setting R_LIBS_USER
+    assigning .libPaths() in .Rprofile or Rprofile.site
+
+and more. 
+
+### Installing the r_language_server
+
+if `vim` command: `LspInstall r_language_server` fails, try in `R`:
+
+```sh
+sudo apt install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev
+```
+
+```R
+install.packages("languageserver")
+# or install the developement version
+# remotes::install_github("REditorSupport/languageserver")
+```
