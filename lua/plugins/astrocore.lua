@@ -239,14 +239,14 @@ return {
           ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
           ["<C-d>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
+          ["<Esc>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
+          -- ["<Esc><Esc>"] = { "<C-\\><C-n><CR>", desc = "Terminal quit" },
+          ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
         },
         v = {
           ["sa"] = false,
           -- Telekasten:
           ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo({v=true})<CR>", desc = "Toggle checkbox" },
-          ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          -- ["<Esc><Esc>"] = { "<C-\\><C-n><CR>", desc = "Terminal quit" },
-          ["<Esc><Esc>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
         },
         x = {
           ["sa"] = false,
