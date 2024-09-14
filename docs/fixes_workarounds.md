@@ -202,7 +202,32 @@ touch ~/.Rprofile
 mkdir -p ~/.R/libs
 ```
 
+In### Set up and initialization
+
+Create user profile file:
+
+```sh
+touch ~/.Rprofile
+mkdir -p ~/.R/libs
+```
+
 In `~/.Rprofile`
+
+
+```r
+R_LIBS_USER='~/.R/libs/'
+.libPaths(R_LIBS_USER, include.site = TRUE)
+cat("\nUser profile file, ~/.Rprofile, has been loaded\n")
+```
+
+see [stackoverflow](https://stackoverflow.com/a/31707983) 
+
+See `help(Startup)` and `help(.libPaths)` as you have several possibilities where this may have gotten set. Among them are
+
+    setting R_LIBS_USER
+    assigning .libPaths() in .Rprofile or Rprofile.site
+
+and more.  `~/.Rprofile`
 
 
 ```r
@@ -229,7 +254,15 @@ sudo apt install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev
 ```
 
 ```R
-install.packages("languageserver")
+install.packages(c("languageserver", "devtools"))
 # or install the developement version
 # remotes::install_github("REditorSupport/languageserver")
+```
+
+### Unix only
+
+```sh
+cd ~/.R/
+git clone https://github.com/jalvesaq/colorout.git
+R CMD INSTALL colorout
 ```
