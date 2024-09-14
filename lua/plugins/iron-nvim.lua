@@ -82,12 +82,19 @@ return {
             pattern = { 'python' },
             desc = 'Iron repl support',
             callback = function()
-              vim.keymap.set("n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true, buffer = true, desc = " Start REPL" })
-              vim.keymap.set("n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true, buffer = true, desc = " Restart REPL" })
-              vim.keymap.set("n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, buffer = true, desc = " Jump (in)to REPL" }) -- i
-              vim.keymap.set("n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, buffer = true, desc = "Hide REPL" }) -- i
-              vim.keymap.set("n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send file" })
-              vim.keymap.set("n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send line" })
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true,  desc = " Start REPL" })
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true,  desc = " Restart REPL" })
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true,  desc = " Jump (in)to REPL" }) -- i
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true,  desc = "Hide REPL" }) -- i
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true,  desc = "Send file" })
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true,  desc = "Send line" })
+              -- vim.keymap.set("n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true, buffer = true, desc = " Start REPL" })
+              -- vim.keymap.set("n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true, buffer = true, desc = " Restart REPL" })
+              -- vim.keymap.set("n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, buffer = true, desc = " Jump (in)to REPL" }) -- i
+              -- vim.keymap.set("n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, buffer = true, desc = "Hide REPL" }) -- i
+              -- vim.keymap.set("n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send file" })
+              -- vim.keymap.set("n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send line" })
+
             end,
           },
         },
