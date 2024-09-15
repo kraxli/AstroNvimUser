@@ -78,7 +78,7 @@ return {
       autocmds = {
         auto_iron = {
           {
-            event = "FileType",
+            event = { "FileType", "BufRead", "BufNewFile" },
             pattern = { 'python' },
             desc = 'Iron repl support',
             callback = function()
@@ -88,20 +88,27 @@ return {
               vim.api.nvim_buf_set_keymap(0, "n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true,  desc = "Hide REPL" }) -- i
               vim.api.nvim_buf_set_keymap(0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true,  desc = "Send file" })
               vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true,  desc = "Send line" })
-              -- vim.keymap.set("n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true, buffer = true, desc = " Start REPL" })
-              -- vim.keymap.set("n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true, buffer = true, desc = " Restart REPL" })
-              -- vim.keymap.set("n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, buffer = true, desc = " Jump (in)to REPL" }) -- i
-              -- vim.keymap.set("n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, buffer = true, desc = "Hide REPL" }) -- i
-              -- vim.keymap.set("n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send file" })
-              -- vim.keymap.set("n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, buffer = true, desc = "Send line" })
+
+              local wk = require("which-key")
+              wk.add({
+                mode = {"n", "v"},
+                {prefix, group = " REPL",
+                  -- expand = function()
+                  -- return require("which-key.extras").expand.buf()
+                  -- end
+                },
+              })
 
             end,
+
+
+
           },
         },
       },
       mappings = {
         n = {
-          [prefix] = { desc = " REPL iron" },
+          -- [prefix] = { desc = " REPL" },
           -- [prefix .. "r"] = { "<cmd>IronRepl<CR>", desc = "Iron start repl" },
           -- [prefix .. "R"] = { "<cmd>IronRestart<CR>", desc = "Iron restart repl" },
           -- [prefix .. "g"] = { "<cmd>IronFocus<CR>", desc = "Iron go to repl" }, -- jump to
@@ -136,7 +143,7 @@ return {
           -- },
         },
         v = {
-          [prefix] = { desc = " REPL iron" },
+          -- [prefix] = { desc = " REPL" },
           -- [prefix .. "s"] = {
           --   "<cmd> lua require 'iron.core'.send(nil, core.mark_visual())<CR>",
           --   desc = "Visual send selection",

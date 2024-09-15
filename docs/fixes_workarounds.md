@@ -266,3 +266,12 @@ cd ~/.R/
 git clone https://github.com/jalvesaq/colorout.git
 R CMD INSTALL colorout
 ```
+## Glyphs / Icons
+
+- For file type icons, copy Glyphs from Oil! :-)
+- Awesome fonts: https://docs.fontawesome.com/desktop/add-icons/glyphs
+
+
+## Debugger
+
+https://www.reddit.com/r/AstroNvim/comments/1f3e7lj/how_to_setup_astorvim_for_net_development/

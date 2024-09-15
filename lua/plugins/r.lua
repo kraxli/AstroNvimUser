@@ -1,8 +1,10 @@
+local prefix = "<Leader>r"
+local localleader = "<LocalLeader>"
 return {
   {
     "hrsh7th/nvim-cmp",
     -- optional = true,
-    ft = {'R'},
+    ft = { "R", "r", "rmd", "rnoweb", "quarto", "rhelp" },
     dependencies = { "R-nvim/cmp-r" },
     opts = function(_, opts)
       if not opts.sources then opts.sources = {} end
@@ -13,12 +15,11 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(plugin, opts) 
-      table.insert(opts.ensure_installed, { "r", "markdown", "rnoweb", "yaml" }) 
-    end,
+    opts = function(plugin, opts) table.insert(opts.ensure_installed, { "r", "markdown", "rnoweb", "yaml" }) end,
   },
   {
     "R-nvim/R.nvim",
+    lazy = false,
     -- ft = {'R'},
     config = function()
       -- vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", "<Plug>RDSendLine", {})
@@ -28,11 +29,30 @@ return {
         R_args = { "--quiet", "--no-save" },
         min_editor_width = 72,
         rconsole_width = 78,
-        disable_cmds = {
-          "RClearConsole",
-          "RCustomStart",
-          "RSPlot",
-          "RSaveClose",
+        disable_cmds = {},
+        nvimpager = "split_v",
+        -- ,,:                |>
+        -- <m--> / Alt + -:   <-
+        user_maps_only = false,
+        hook = {
+          on_filetype = function()
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
+
+            -- If you want an action over an selection, then the second
+            -- argument must be the string `"v"`:
+            -- In this case, the beginning and the end of the selection must be
+            -- in the same line.
+            -- vim.api.nvim_buf_set_keymap(0, "v", "<LocalLeader>T", "<Cmd>lua require('r.run').action('head')<CR>", {})
+
+            -- If a third optional argument starts with a comma, it will be
+            -- inserted as argument(s) to the `action`:
+            -- vim.api.nvim_buf_set_keymap( 0, "n", "<LocalLeader>H", "<Cmd>lua require('r.run').action('head', 'n', ', n = 10')<CR>", {})
+
+            -- If the command that you want to send does not require an R
+            -- object as argument, you can use `cmd()` from the `r.send` module
+            -- to send it directly to R Console:
+            -- vim.api.nvim_buf_set_keymap(0, "n", "<LocalLeader>S", "<Cmd>lua require('r.send').cmd('search()')<CR>", {})
+          end,
         },
       }
       -- Check if the environment variable "R_AUTO_START" exists.
@@ -44,40 +64,33 @@ return {
       end
       require("r").setup(opts)
     end,
-    lazy = false,
+    dependencies = {
+      "AstroNvim/astrocore",
+      ---@param opts AstroCoreOpts
+      opts = {
+        autocmds = {
+          auto_rlang = {
+            {
+              event = "FileType",
+              pattern = { "R", "r", "rmd", "rnoweb", "quarto", "rhelp" },
+              desc = "R-nvim",
+              callback = function()
+                local wk = require "which-key"
+                wk.add({
+                  mode = {"n", "v"},
+                  {prefix, group = "󰟔 Rlang" },  -- Copy Glyphs from Oil! :-)
+                })
+              end,
+            },
+          },
+        },
+        mappings = {
+          n = {
+          },
+          v = {
+          },
+        },
+      },
+    },
   },
-
-  -- R.nvim requires treesitter parsers for "r", "markdown", "rnoweb", and "yaml". Please, install them.
-
-  -- dependencies = {
-  --   "AstroNvim/astrocore",
-  --   ---@param opts AstroCoreOpts
-  --   opts = {
-  --     autocmds = {
-  --       auto_r = {
-  --         {
-  --           event = "FileType",
-  --           pattern = { "R" },
-  --           desc = "R support",
-  --           callback = function()
-  --             -- vim.keymap.set("n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true, buffer = true, desc = " Start REPL" })
-  --             vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", "<Plug>RDSendLine", {})
-  --             vim.api.nvim_buf_set_keymap(0, "v", "<leader>rs", "<Plug>RSendSelection", {})
-  --           end,
-  --         },
-  --       },
-  --     },
-  --     mappings = {},
-  --   },
-  -- },
-
-  -- {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   run = ":TSUpdate",
-  --   config = function()
-  --     require("nvim-treesitter.configs").setup {
-  --       ensure_installed = { "markdown", "markdown_inline", "r", "rnoweb", "yaml" },
-  --     }
-  --   end,
-  -- },
 }
