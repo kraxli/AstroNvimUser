@@ -71,24 +71,45 @@ return {
         autocmds = {
           auto_rlang = {
             {
-              event = "FileType",
-              pattern = { "R", "r", "rmd", "rnoweb", "quarto", "rhelp" },
+              event = {
+                "FileType",
+                "BufWinEnter",
+                "BufRead",
+                "BufNewFile",
+                "BufNew",
+                "BufAdd",
+                "BufEnter",
+                "TabNewEntered",
+                "TabEnter",
+              },
+              pattern = {
+                "R",
+                "r",
+                "rmd",
+                "rnoweb",
+                "quarto",
+                "rhelp",
+                "*.R",
+                "*.r",
+                "*.rmd",
+                "*.rnoweb",
+                "*.quarto",
+                "*.rhelp",
+              },
               desc = "R-nvim",
               callback = function()
                 local wk = require "which-key"
-                wk.add({
-                  mode = {"n", "v"},
-                  {prefix, group = "󰟔 Rlang" },  -- Copy Glyphs from Oil! :-)
-                })
+                wk.add {
+                  mode = { "n", "v" },
+                  { prefix, group = "󰟔 Rlang" }, -- Copy Glyphs from Oil! :-)
+                }
               end,
             },
           },
         },
         mappings = {
-          n = {
-          },
-          v = {
-          },
+          n = {},
+          v = {},
         },
       },
     },

@@ -78,31 +78,39 @@ return {
       autocmds = {
         auto_iron = {
           {
-            event = { "FileType", "BufRead", "BufNewFile" },
-            pattern = { 'python' },
-            desc = 'Iron repl support',
+            event = {
+              "FileType",
+              "BufWinEnter",
+              "BufRead",
+              "BufNewFile",
+              "BufNew",
+              "BufAdd",
+              "BufEnter",
+              "TabNewEntered",
+              "TabEnter",
+            },
+            pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy" },
+            desc = "Iron repl support",
             callback = function()
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true,  desc = " Start REPL" })
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true,  desc = " Restart REPL" })
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true,  desc = " Jump (in)to REPL" }) -- i
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true,  desc = "Hide REPL" }) -- i
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true,  desc = "Send file" })
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true,  desc = "Send line" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true, desc = " Start REPL" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true, desc = " Restart REPL" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, desc = " Jump (in)to REPL" }) -- i
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, desc = "Hide REPL" }) -- i
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, desc = "Send file" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, desc = "Send line" })
 
-              local wk = require("which-key")
-              wk.add({
-                mode = {"n", "v"},
-                {prefix, group = " REPL",
+              local wk = require "which-key"
+              wk.add {
+                mode = { "n", "v" },
+                {
+                  prefix,
+                  group = " REPL",
                   -- expand = function()
                   -- return require("which-key.extras").expand.buf()
                   -- end
                 },
-              })
-
+              }
             end,
-
-
-
           },
         },
       },
