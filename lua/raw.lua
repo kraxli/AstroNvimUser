@@ -11,6 +11,7 @@ vim.cmd [[
   " map [z [Sz=
   map ]z ]S<space>fs
   map [z [S<space>fs
+  map =z <leader>fs
 
   imap jj <ESC>
   imap jk <ESC>
