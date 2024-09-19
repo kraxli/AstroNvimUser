@@ -34,6 +34,7 @@ return {
           end,
           silent = true,
           desc = "Codeium toggle",
+        }
 
         opts.autocmds.codeium = {
           {
