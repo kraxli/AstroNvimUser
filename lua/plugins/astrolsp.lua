@@ -94,8 +94,15 @@ return {
         end,
         settings = {
           julia = {
+            completionmode = "qualify",
             lint = {
               missingrefs = "none",
+            },
+            inlayHints = {
+              static = {
+                enabled = false,
+                variableTypes = { enabled = true },
+              },
             },
           },
         },
