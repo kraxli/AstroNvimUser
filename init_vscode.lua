@@ -38,6 +38,11 @@ if vim.g.vscode then
   keymap("n", "<Leader>q", function() require("vscode-neovim").action "workbench.action.closeWindow" end, opts)
   keymap("n", "<Leader>w", function() require("vscode-neovim").action "workbench.action.files.save" end, opts)
   keymap("n", "<Leader>n", function() require("vscode-neovim").action "welcome.showNewFileEntries" end, opts)
+  -- keymap({ "v", "x" }, "d", '"+x', opts)
+  keymap("n", "dd", '"+dd', opts)
+
+  keymap({"n", "v", "x"} , "gc", function() require("vscode-neovim").action "editor.action.commentLine" end, opts)
+  keymap("n" , "gcc", function() require("vscode-neovim").action "editor.action.commentLine" end, opts)
 
   -- yank / copy and paste to system clipboard
   keymap({ "n", "v" }, "<leader>y", '"+y', opts)
