@@ -54,12 +54,10 @@ npm install tree-sitter-cli -f -y
 - https://stackoverflow.com/questions/36494336/npm-install-error-unable-to-get-local-issuer-certificate
 - https://bobbyhadz.com/blog/npm-err-unable-to-get-local-issuer-certificate
 
-
 ## ipython send to terminal wrong indent
 
 - https://github.com/akinsho/toggleterm.nvim/issues/243
 - https://github.com/akinsho/toggleterm.nvim/issues/425
-
 
 ## Tree-sitter install errors on Windows
 
@@ -192,7 +190,6 @@ in neovim run: `:checkhealth nvim-treesitte` and try `TSInstall markdown` or dis
 
 ## R.nvim
 
-
 ### Set up and initialization
 
 Create user profile file:
@@ -266,6 +263,7 @@ cd ~/.R/
 git clone https://github.com/jalvesaq/colorout.git
 R CMD INSTALL colorout
 ```
+
 ## Glyphs / Icons
 
 - For file type icons, copy Glyphs from Oil! :-)
@@ -275,3 +273,7 @@ R CMD INSTALL colorout
 ## Debugger
 
 https://www.reddit.com/r/AstroNvim/comments/1f3e7lj/how_to_setup_astorvim_for_net_development/
+
+## LSP
+
+- Client ruff quit with exit code 2 and signal 0. Check log for errors --> Run `LspInstall ruff`
