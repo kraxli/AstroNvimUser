@@ -27,9 +27,9 @@ return {
       {
         -- type = "R-Debugger",
         type = "r",
-        request = "attach",
-        -- name = "Attach session",
-        name = "Attach R-file",
+        request = "attach",  -- launch
+        -- program = "${file}",
+        name = "Attach R-file",  -- Attach session
         debugMode = "file",
         stopOnEntry = false,
       },
