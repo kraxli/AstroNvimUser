@@ -33,6 +33,9 @@ return {
             -- end, -- or { "ipython", "--no-autoindent" } --matplotlib=qt5
             format = require("iron.fts.common").bracketed_paste_python,
           },
+          r = {
+            command = {"radian"},
+          },
         },
         -- How the repl window will be displayed
         -- See below for more information
