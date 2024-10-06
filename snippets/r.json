@@ -1,0 +1,7 @@
+{
+  "Insert R libraries": {
+    "prefix": ["R-imports", "r-imports"],
+    "body": ["library('tidyverse')", "",  "$1"],
+    "description": "Insert R libraries"
+  }
+}
