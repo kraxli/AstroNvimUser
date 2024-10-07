@@ -1,5 +1,12 @@
 local prefix = "<Leader>r"
 local localleader = "<LocalLeader>"
+
+function keymap_modes (modes, command, keymap)
+  for _, mode in ipairs(modes) do
+    vim.api.nvim_buf_set_keymap(0, mode, keymap, command, {})
+  end
+end
+
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -36,7 +43,19 @@ return {
         user_maps_only = false,
         hook = {
           on_filetype = function()
-            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
+            -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
+            -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
+
+            vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
+            vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
+            vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", "<Plug>RDSendLine", {})
+            vim.api.nvim_buf_set_keymap(0, "v", "<leader>rs", "<Plug>RSendSelection", {})
+
+            keymap_modes({"n","v","i"}, "<Plug>RStart", "<leader>rr")
+            keymap_modes({"n","v","i"}, "<Plug>RClearConsole", "<leader>rc")
+            keymap_modes({"n","v","i"}, "<Plug>RClearAll", "<leader>rC")
+
+
 
             -- If you want an action over an selection, then the second
             -- argument must be the string `"v"`:
@@ -58,10 +77,13 @@ return {
       -- Check if the environment variable "R_AUTO_START" exists.
       -- If using fish shell, you could put in your config.fish:
       -- alias r "R_AUTO_START=true nvim"
-      if vim.env.R_AUTO_START == "true" then
-        opts.auto_start = 1
-        opts.objbr_auto_start = true
-      end
+      -- if vim.env.R_AUTO_START == "true" then
+      --   opts.auto_start = 1
+      --   opts.objbr_auto_start = true
+      -- end
+      opts.auto_start = "always"
+      opts.objbr_auto_start = true
+
       require("r").setup(opts)
     end,
     dependencies = {
