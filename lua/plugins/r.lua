@@ -1,9 +1,9 @@
 local prefix = "<Leader>r"
 local localleader = "<LocalLeader>"
 
-function keymap_modes (modes, command, keymap)
+function keymap_modes (modes, command, keymap, opts)
   for _, mode in ipairs(modes) do
-    vim.api.nvim_buf_set_keymap(0, mode, keymap, command, {})
+    vim.api.nvim_buf_set_keymap(0, mode, keymap, command, opts)
   end
 end
 
@@ -41,57 +41,75 @@ return {
         -- ,,:                |>
         -- <m--> / Alt + -:   <-
         user_maps_only = false,
+        assignment_keymap = "<m-->",
+        pipe_keymap = ',,',
+
         hook = {
           on_filetype = function()
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
 
-            vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
-            vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
-            vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", "<Plug>RDSendLine", {})
-            vim.api.nvim_buf_set_keymap(0, "v", "<leader>rs", "<Plug>RSendSelection", {})
+            vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {desc='Send selection'})
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "s", "<Plug>RDSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "v", prefix .. "s", "<Plug>RSendSelection", {desc='Send selection'})
 
-            keymap_modes({"n","v","i"}, "<Plug>RStart", "<leader>rr")
-            keymap_modes({"n","v","i"}, "<Plug>RClearConsole", "<leader>rc")
-            keymap_modes({"n","v","i"}, "<Plug>RClearAll", "<leader>rC")
+            -- keys
+            -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RAssign", '<Cmd>lua require("r.edit").assign()<CR>', { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", "--", "<Plug>RAssign", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", ">>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
+            -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RPipe", '<Cmd>lua require("r.edit").pipe()<CR>', { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", "..", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", "<m-.>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
+
+            -- Start
+            -- keymap_modes({"n","v","i"}, "<Plug>RStart", prefix .. "r", {})
+            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').start_R('R')<CR>", prefix .. "r", {desc='R start'})
+            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').start_R('custom')<CR>", prefix .. "R", {desc='R custom start'})
+
+            -- Close
+            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "q", {desc='R close'})
+            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", {desc='R save & close'})
+
+            keymap_modes({"n","v","i"}, "<Plug>RClearConsole", prefix .. "c", {})
+            keymap_modes({"n","v","i"}, "<Plug>RClearAll", prefix .. "C", {})
 
             -- Print,          names,               structure
-            keymap_modes({"n", "i", "v"},  "RObjectPr",         "<leader>rp")
-            keymap_modes({"n", "i", "v"},  "RObjectNames",      "<leader>rn")
-            keymap_modes({"n", "i", "v"},  "RObjectStr",        "<leader>rt")
-            keymap_modes({"n", "i", "v"},  "RViewDF",           "<leader>rv")
-            keymap_modes({"n", "i", "v"},  "RDputObj",          "<leader>td")
+            keymap_modes({"n", "i", "v"},  "<Plug>RObjectPr",         prefix .. "p", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RObjectNames",      prefix .. "n", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RObjectStr",        prefix .. "t", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RViewDF",           prefix .. "v", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RDputObj",          "<leader>td", {})
 
-            keymap_modes({"n", "i"}, "RPackages",          "<leader>rP")
+            keymap_modes({"n", "i"}, "<Plug>RPackages",          prefix .. "P", {})
 
-
-            keymap_modes({"n", "i", "v"},  "RViewDFs",   "<leader>rVs")
-            keymap_modes({"n", "i", "v"},  "RViewDFv",   "<leader>rVv")
-            keymap_modes({"n", "i", "v"},  "RViewDFa",   "<leader>rVh")
+            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFs",   prefix .. "Vs", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFv",   prefix .. "Vv", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFa",   prefix .. "Vh", {})
 
             -- Arguments,      example,      help
-            keymap_modes({"n", "v", "i"}, "RShowArgs",  "<leader>ra")
-            keymap_modes({"n", "v", "i"}, "RShowEx",    "<leader>re")
-            keymap_modes({"n", "v", "i"}, "RHelp",      "<leader>rh")
+            keymap_modes({"n", "v", "i"}, "<Plug>RShowArgs",  prefix .. "a", {})
+            keymap_modes({"n", "v", "i"}, "<Plug>RShowEx",    prefix .. "e", {})
+            keymap_modes({"n", "v", "i"}, "<Plug>RHelp",      prefix .. "h", {})
 
             -- Summary,        plot,       both
-            keymap_modes({"n", "i", "v"},  "RSummary",   "<leader>rS")
-            keymap_modes({"n", "i", "v"},  "RPlot",      "<leader>rg")
-            keymap_modes({"n", "i", "v"},  "RSPlot",     "<leader>rb")
+            keymap_modes({"n", "i", "v"},  "<Plug>RSummary",   prefix .. "S", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RPlot",      prefix .. "g", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RSPlot",     prefix .. "b", {})
 
             -- Object Browser
-            keymap_modes({"n", "v", "i"}, "ROBToggle",       "<leader>ro")
-            keymap_modes({"n", "v", "i"}, "ROBOpenLists",   "<leader>r=")
-            keymap_modes({"n", "v", "i"}, "ROBCloseLists",  "<leader>r-")
+            keymap_modes({"n", "v", "i"}, "<Plug>ROBToggle",       prefix .. "o", {})
+            keymap_modes({"n", "v", "i"}, "<Plug>ROBOpenLists",   prefix .. "=", {})
+            keymap_modes({"n", "v", "i"}, "<Plug>ROBCloseLists",  prefix .. "-", {})
 
             -- Render script with rmarkdown
-            keymap_modes({ "n", "v", "i" }, "RMakeRmd",   "<leader>kr")
-            keymap_modes({ "n", "v", "i" }, "RMakeAll",   "<leader>ka")
-            keymap_modes({ "n", "v", "i" }, "RMakePDFK",  "<leader>kp")
-            keymap_modes({ "n", "v", "i" }, "RMakePDFKb", "<leader>kl")
-            keymap_modes({ "n", "v", "i" }, "RMakeWord",  "<leader>kw")
-            keymap_modes({ "n", "v", "i" }, "RMakeHTML",  "<leader>kh")
-            keymap_modes({ "n", "v", "i" }, "RMakeODT",   "<leader>ko")
+            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeRmd",   prefix .. "kr", {})
+            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeAll",   prefix .. "ka", {})
+            keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFK",  prefix .. "kp", {})
+            keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFKb", prefix .. "kl", {})
+            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeWord",  prefix .. "kw", {})
+            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeHTML",  prefix .. "kh", {})
+            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeODT",   prefix .. "ko", {})
 
 
             -- If you want an action over an selection, then the second
@@ -167,7 +185,10 @@ return {
           },
         },
         mappings = {
-          n = {},
+          n = {
+            [prefix .. "k"] = { desc = "  Rmarkdown" },
+            [prefix .. "V"] = { desc = " View Dataframe" },
+          },
           v = {},
         },
       },
