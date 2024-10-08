@@ -55,6 +55,43 @@ return {
             keymap_modes({"n","v","i"}, "<Plug>RClearConsole", "<leader>rc")
             keymap_modes({"n","v","i"}, "<Plug>RClearAll", "<leader>rC")
 
+            -- Print,          names,               structure
+            keymap_modes({"n", "i", "v"},  "RObjectPr",         "<leader>rp")
+            keymap_modes({"n", "i", "v"},  "RObjectNames",      "<leader>rn")
+            keymap_modes({"n", "i", "v"},  "RObjectStr",        "<leader>rt")
+            keymap_modes({"n", "i", "v"},  "RViewDF",           "<leader>rv")
+            keymap_modes({"n", "i", "v"},  "RDputObj",          "<leader>td")
+
+            keymap_modes({"n", "i"}, "RPackages",          "<leader>rP")
+
+
+            keymap_modes({"n", "i", "v"},  "RViewDFs",   "<leader>rVs")
+            keymap_modes({"n", "i", "v"},  "RViewDFv",   "<leader>rVv")
+            keymap_modes({"n", "i", "v"},  "RViewDFa",   "<leader>rVh")
+
+            -- Arguments,      example,      help
+            keymap_modes({"n", "v", "i"}, "RShowArgs",  "<leader>ra")
+            keymap_modes({"n", "v", "i"}, "RShowEx",    "<leader>re")
+            keymap_modes({"n", "v", "i"}, "RHelp",      "<leader>rh")
+
+            -- Summary,        plot,       both
+            keymap_modes({"n", "i", "v"},  "RSummary",   "<leader>rS")
+            keymap_modes({"n", "i", "v"},  "RPlot",      "<leader>rg")
+            keymap_modes({"n", "i", "v"},  "RSPlot",     "<leader>rb")
+
+            -- Object Browser
+            keymap_modes({"n", "v", "i"}, "ROBToggle",       "<leader>ro")
+            keymap_modes({"n", "v", "i"}, "ROBOpenLists",   "<leader>r=")
+            keymap_modes({"n", "v", "i"}, "ROBCloseLists",  "<leader>r-")
+
+            -- Render script with rmarkdown
+            keymap_modes({ "n", "v", "i" }, "RMakeRmd",   "<leader>kr")
+            keymap_modes({ "n", "v", "i" }, "RMakeAll",   "<leader>ka")
+            keymap_modes({ "n", "v", "i" }, "RMakePDFK",  "<leader>kp")
+            keymap_modes({ "n", "v", "i" }, "RMakePDFKb", "<leader>kl")
+            keymap_modes({ "n", "v", "i" }, "RMakeWord",  "<leader>kw")
+            keymap_modes({ "n", "v", "i" }, "RMakeHTML",  "<leader>kh")
+            keymap_modes({ "n", "v", "i" }, "RMakeODT",   "<leader>ko")
 
 
             -- If you want an action over an selection, then the second
@@ -82,7 +119,7 @@ return {
       --   opts.objbr_auto_start = true
       -- end
       opts.auto_start = "always"
-      opts.objbr_auto_start = true
+      opts.objbr_auto_start = false
 
       require("r").setup(opts)
     end,
