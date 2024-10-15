@@ -60,6 +60,8 @@ sudo pip install bpython
 sudo add-apt-repository ppa:lazygit-team/release
 sudo apt-get update
 sudo apt-get install lazygit
+sudo apt -y install visidata
+
 
 # ripgrep:
 RIPGREP_VERSION=$(curl -s "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K[0-9.]+')
@@ -82,6 +84,8 @@ npm audit fix --force
 
 python -m pip install pynvim neovim
 pip install yapf flake8 black    # for python stuff
+# pip3 install visidata
+
 
 # if you want to use the markdown thingy
 # brew install vale markdownlint-cli

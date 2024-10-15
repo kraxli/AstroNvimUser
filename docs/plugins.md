@@ -2,6 +2,11 @@
 
 - [ ] "rafi/vim-sidemenu" see rafi/nvim-config
 - [ ] https://github.com/amrbashir/nvim-docs-view (just use <leader>K)
+- [ ] https://github.com/karoliskoncevicius/vim-sendtowindow
+- [ ] vim-isort
+- [ ] quarto
+- [ ] ncm2-look spell checker for comments
+- [ ] https://github.com/karoliskoncevicius/vim-sendtowindow
 
 Repl: https://github.com/AstroNvim/AstroNvim/issues/1553
 
