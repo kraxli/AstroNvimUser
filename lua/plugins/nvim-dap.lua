@@ -49,8 +49,9 @@ return {
       {
         -- The first three options are required by nvim-dap
         type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
+        name = "Python: Current file",
         request = "launch",
-        name = "Launch Py-file",
+        console = "externalTerminal",
 
         -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 

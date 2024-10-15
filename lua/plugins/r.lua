@@ -49,18 +49,27 @@ return {
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
 
+            -- send
             vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {desc='Send line'})
             vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {desc='Send selection'})
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "s", "<Plug>RDSendLine", {desc='Send line'})
             vim.api.nvim_buf_set_keymap(0, "v", prefix .. "s", "<Plug>RSendSelection", {desc='Send selection'})
+            -- TODO: send motions!
 
-            -- keys
+            -- edit & operators
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RAssign", '<Cmd>lua require("r.edit").assign()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "--", "<Plug>RAssign", { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", ">>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RPipe", '<Cmd>lua require("r.edit").pipe()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "..", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "<m-.>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
+            -- TODO:
+            -- create_maps("nvi", "RSetwd", "rd", "<Cmd>lua require('r.run').setwd()")
+            -- create_maps("nvi", "RSeparatePath",    "sp", "<Cmd>lua require('r.path').separate()")
+            --
+            -- -- Format functions
+            -- create_maps("nvi", "RFormatNumbers",    "cn", "<Cmd>lua require('r.format.numbers').formatnum()")
+            -- create_maps("nvi", "RFormatSubsetting",    "cs", "<Cmd>lua require('r.format.brackets').formatsubsetting()")
 
             -- Start
             -- keymap_modes({"n","v","i"}, "<Plug>RStart", prefix .. "r", {})
