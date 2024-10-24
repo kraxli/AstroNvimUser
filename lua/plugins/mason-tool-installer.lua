@@ -25,6 +25,8 @@ M = {
       "ruff",
       -- "sqls",
       "sqlls",
+
+      "svelte-language-server",
       "tailwindcss-language-server",
       "taplo",
       "texlab",

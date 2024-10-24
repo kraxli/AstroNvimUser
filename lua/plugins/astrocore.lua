@@ -55,7 +55,20 @@ return {
           {
             event = "FileType",
             desc = "Enable wrap and spell for text like documents",
-            pattern = { "gitcommit", "markdown", "text", "plaintex", "python", "R", "r", "rmarkdown", "rmd", "rnoweb", "quarto", "rhelp"},
+            pattern = {
+              "gitcommit",
+              "markdown",
+              "text",
+              "plaintex",
+              "python",
+              "R",
+              "r",
+              "rmarkdown",
+              "rmd",
+              "rnoweb",
+              "quarto",
+              "rhelp",
+            },
             callback = function()
               vim.opt_local.wrap = true
               vim.opt_local.spell = true
@@ -78,9 +91,14 @@ return {
           {
             event = "FileType",
             desc = "Close",
-            pattern = { 'term'},
+            pattern = { "term" },
             callback = function()
-              vim.keymap.set("n", "q", "<cmd>close<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
+              vim.keymap.set(
+                "n",
+                "q",
+                "<cmd>close<CR>",
+                { expr = false, noremap = true, buffer = true, desc = "Close" }
+              )
 
               -- vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
               -- vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
@@ -92,14 +110,34 @@ return {
           {
             event = "FileType",
             desc = "Close",
-            pattern = { "fugitiveblame",  "toggleterm", "qf", "help", "man", "lspinfo", ''}, -- , 'term'
+            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "" }, -- , 'term'
             callback = function()
-              vim.keymap.set("n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
+              vim.keymap.set(
+                "n",
+                "q",
+                "<cmd>quit!<CR>",
+                { expr = false, noremap = true, buffer = true, desc = "Close" }
+              )
               -- vim.keymap.set("n", "<esc>", "<cmd>quit<CR>", { expr = false, noremap = true, buffer = true, desc = "Close terminal" })
 
-              vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set("n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
+              vim.keymap.set(
+                "i",
+                "<c-q>",
+                "<esc><cmd>quit!<CR>",
+                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
+              )
+              vim.keymap.set(
+                "n",
+                "<c-q>",
+                "<cmd>quit!<CR>",
+                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
+              )
+              vim.keymap.set(
+                "n",
+                "C",
+                "<cmd>bd!<CR>",
+                { expr = false, noremap = true, buffer = true, desc = "Terminate" }
+              )
             end,
           },
         },
@@ -113,23 +151,23 @@ return {
             end,
           },
         },
-        sync_term_background = {
-          {
-            event = { "UIEnter", "User" },
-            desc = "Set background of terminal automatically",
-            callback = function(args)
-              if args.event == "UIEnter" or args.match == "AstroColorScheme" then
-                local bg = vim.tbl_get(require("astroui").get_hlgroup "Normal", "bg")
-                if bg then io.write(string.format("\027]11;#%06x\027\\", bg)) end
-              end
-            end,
-          },
-          {
-            event = "UILeave",
-            desc = "Restore terminal background when leaving",
-            callback = function() io.write "\027]111\027\\" end,
-          },
-        },
+        -- sync_term_background = {
+        --   {
+        --     event = { "UIEnter", "User" },
+        --     desc = "Set background of terminal automatically",
+        --     callback = function(args)
+        --       if args.event == "UIEnter" or args.match == "AstroColorScheme" then
+        --         local bg = vim.tbl_get(require("astroui").get_hlgroup "Normal", "bg")
+        --         if bg then io.write(string.format("\027]11;#%06x\027\\", bg)) end
+        --       end
+        --     end,
+        --   },
+        --   {
+        --     event = "UILeave",
+        --     desc = "Restore terminal background when leaving",
+        --     callback = function() io.write "\027]111\027\\" end,
+        --   },
+        -- },
       },
       diagnostics = {
         update_in_insert = false,
@@ -200,14 +238,16 @@ return {
               local ipython = vim.fn.executable "ipython" == 1 and "ipython"
                 or vim.fn.executable "ipython3" == 1 and "ipython3"
               if ipython then
-                require("astrocore").toggle_term_cmd { cmd = "ipython --pylab -i --no-autoindent", direction = "float",
-                  count=term_count}  -- , size=80 width=vim.o.columns * 0.3
+                require("astrocore").toggle_term_cmd {
+                  cmd = "ipython --pylab -i --no-autoindent",
+                  direction = "float",
+                  count = term_count,
+                } -- , size=80 width=vim.o.columns * 0.3
               end
-
             end,
             desc = "ToggleTerm ipython",
           },
-          ["<Leader>tp"] = {"<cmd>IronRepl<CR>", desc = "Open Iron repl vsplit", },
+          ["<Leader>tp"] = { "<cmd>IronRepl<CR>", desc = "Open Iron repl vsplit" },
           ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
           ["<Leader>uv"] = { "<cmd>vert split<CR>", desc = "Vertical split" },
 
