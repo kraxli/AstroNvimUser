@@ -22,7 +22,7 @@ M = {
       "markdown-oxide",
       -- "neocmakelsp",
       -- "regols",
-      "ruff",
+      -- "ruff",
       -- "sqls",
       "sqlls",
 
@@ -41,6 +41,8 @@ M = {
       "sqlfluff",
 
       -- Formatters
+      "black",
+      "isort",
       "prettier",
       "shfmt",
       "stylua",

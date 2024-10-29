@@ -176,6 +176,8 @@ return {
       filetypes = {
         extension = {
           mdx = "markdown.mdx",
+          nf = "nextflow",
+          ["nf.test"] = "nextflow",
           qmd = "markdown",
           yaml = yaml_ft,
           yml = yaml_ft,
