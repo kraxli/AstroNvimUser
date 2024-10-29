@@ -108,9 +108,9 @@ return {
         },
         auto_close = {
           {
-            event = "FileType",
+            event = {"FileType"},
             desc = "Close",
-            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "" }, -- , 'term'
+            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "nofile", '',  }, -- , 'term'
             callback = function()
               vim.keymap.set(
                 "n",
