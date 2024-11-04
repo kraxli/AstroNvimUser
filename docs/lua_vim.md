@@ -1,4 +1,7 @@
 
+## Tricks
+
+- replace ^M /  : `<shift><ctrl>vm` (keep `<shift><ctrl>` pressed)
 
 ## get file name and file path
 
