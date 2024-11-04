@@ -1,6 +1,7 @@
 
 return {
   "frankroeder/parrot.nvim",
+  enabled =  vim.fn.has('win64') ~= 1,
   dependencies = { 'ibhagwan/fzf-lua', 'nvim-lua/plenary.nvim' },
   -- optionally include "rcarriga/nvim-notify" for beautiful notifications
   -- ft = {'python'},
