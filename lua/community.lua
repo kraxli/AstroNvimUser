@@ -15,7 +15,7 @@ local M = {
 }
 
 local win_plugins = {
-  { import = "astrocommunity.completion.copilot" },
+  -- { import = "astrocommunity.completion.copilot" },
   -- { import = "astrocommunity.completion.copilot-lua" },
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
 }
