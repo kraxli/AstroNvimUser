@@ -22,7 +22,7 @@ M = {
       "markdown-oxide",
       -- "neocmakelsp",
       -- "regols",
-      -- "ruff",
+      "ruff",
       -- "sqls",
       "sqlls",
 
