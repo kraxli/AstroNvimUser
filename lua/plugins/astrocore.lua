@@ -93,14 +93,8 @@ return {
             desc = "Close",
             pattern = { "term" },
             callback = function()
-              vim.keymap.set(
-                "n",
-                "q",
-                "<cmd>close<CR>",
-                { expr = false, noremap = true, buffer = true, desc = "Close" }
-              )
-
-              -- vim.keymap.set("i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set("n", "q", "<cmd>close<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
+              vim.keymap.set("i", "<c-q>", "<esc><cmd>close<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
               -- vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
               -- vim.keymap.set("n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
             end,
