@@ -102,7 +102,7 @@ return {
 
             keymap_modes({"n", "i"}, "<Plug>RPackages",          prefix .. "P", {})
 
-            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFs",   prefix .. "v", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RViewDF",   prefix .. "v", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFs",   prefix .. "Vs", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFv",   prefix .. "Vv", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFa",   prefix .. "Vh", {})
