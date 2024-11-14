@@ -5,9 +5,14 @@ return {
     "AstroNvim/astrocore",
     ---@type AstroCoreOpts
     opts = {
+      ignore = {
+        buftypes = {'terminal'},
+        dirs = {},
+        filetypes = {},
+      },
       mappings = {
         n = {
-          ["q"] = { "<cmd>w!|Bdelete!<cr>", noremap = false, desc = "Delete buffer" },
+          ["q"] = { "<cmd>w!|Bdelete!<cr>", noremap = false, buffer = true, desc = "Delete buffer" },
         },
       },
     },
