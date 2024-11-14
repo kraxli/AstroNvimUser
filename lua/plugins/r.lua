@@ -1,6 +1,11 @@
 local prefix = "<Leader>r"
 local localleader = "<LocalLeader>"
 
+local r_path = '/usr/bin'
+if vim.fn.has('win64') == 1 then
+  r_path = "C:\\Program Files\\R\\R-4.3.1\\bin\\x64"
+end
+
 function keymap_modes (modes, command, keymap, opts)
   for _, mode in ipairs(modes) do
     vim.api.nvim_buf_set_keymap(0, mode, keymap, command, opts)
@@ -27,17 +32,22 @@ return {
   {
     "R-nvim/R.nvim",
     lazy = false,
+    -- branch = 'tsvnm_once',  -- or tag, commit
     -- ft = {'R'},
     config = function()
       -- vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", "<Plug>RDSendLine", {})
       -- vim.api.nvim_buf_set_keymap(0, "v", "<leader>rs", "<Plug>RSendSelection", {})
       -- Create a table with the options to be passed to setup()
       local opts = {
+        R_path = r_path,  -- vim.g.r_path
         R_args = { "--quiet", "--no-save" },
         min_editor_width = 72,
         rconsole_width = 78,
         disable_cmds = {},
         nvimpager = "split_v",
+        -- csv_app = ":TermExec cmd='vd %:r.tsv' direction=float",
+        csv_app = ":TermExec cmd='vd %s' direction=float",
+        -- csv_app = "terminal:vd",
         -- ,,:                |>
         -- <m--> / Alt + -:   <-
         user_maps_only = false,
@@ -59,9 +69,9 @@ return {
             -- edit & operators
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RAssign", '<Cmd>lua require("r.edit").assign()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "--", "<Plug>RAssign", { silent = true, noremap = true, expr = false })
-            vim.api.nvim_buf_set_keymap(0, "i", ">>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", "..", "<Plug>RAssign", { silent = true, noremap = true, expr = false })
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RPipe", '<Cmd>lua require("r.edit").pipe()<CR>', { silent = true, noremap = true, expr = false })
-            vim.api.nvim_buf_set_keymap(0, "i", "..", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", "<<", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "<m-.>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
             -- TODO:
             -- keymap_modes({"n", "i", "v"}, "RSetwd", "rd",  {})  -- "<Cmd>lua require('r.run').setwd()"
@@ -92,6 +102,7 @@ return {
 
             keymap_modes({"n", "i"}, "<Plug>RPackages",          prefix .. "P", {})
 
+            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFs",   prefix .. "v", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFs",   prefix .. "Vs", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFv",   prefix .. "Vv", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFa",   prefix .. "Vh", {})
@@ -122,8 +133,8 @@ return {
 
 
             -- Send block
-            keymap_modes({"n", "i"},  "<Plug>RSendMBlock",   "bb", {}) -- "<Cmd>lua require('r.send').marked_block(false)"
-            keymap_modes({"n", "i"},  "<Plug>RDSendMBlock",  "bd", {}) -- "<Cmd>lua require('r.send').marked_block(true)"
+            keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
+            keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(true)<CR>",  "bd", {}) -- "<Plug>RDSendMBlock<CR>"
 
             -- -- Function
             -- keymap_modes({"n", "i", "v"}, "<Plug>RSendAllFun",    "fa",     {})  -- "<Cmd>lua require('r.send').funs(0, true, false)"
@@ -138,8 +149,10 @@ return {
             -- keymap_modes({"n", "v"}, "RDSendSelection", "sd", {})  -- "<Cmd>lua require('r.send').selection(true)"
             --
             -- -- Paragraph
-            -- keymap_modes({"n", "i"}, "RSendParagraph",  "pp", {})  -- "<Cmd>lua require('r.send').paragraph(false)"
-            -- keymap_modes({"n", "i"}, "RDSendParagraph", "pd", {})  -- "<Cmd>lua require('r.send').paragraph(true)"
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "pp", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  "pp", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "pd", {})  --   RDSendParagraph; i mode ?
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>","pd", {})  --   RDSendParagraph; i mode ?
             --
             -- -- *Line*
             -- keymap_modes({"n", "i"},  "RSendLine",           "l",    {})  --    "<Cmd>lua require('r.send').line(false)")
@@ -155,11 +168,13 @@ return {
             --
             -- -- TODO: clean up and file type specific commands
             --
-            -- -- if file_type == "r" then
+            --   if file_type == "r" then
             --       keymap_modes({"n"},   "RSendAboveLines", "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
-            --       keymap_modes({"n", "i"},  "RSendFile",       "aa", {})  -- "<Cmd>lua require('r.send').source_file()"
-            --       keymap_modes({"n", "i"},  "RShowRout",       "ao", {})  -- "<Cmd>lua require('r').show_R_out()"
-            --   -- end
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", "aa", {})  -- "RSendFile"
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", prefix .. 'f', {desc="Send file"})  -- "RSendFile"
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", "ao", {})  -- "RshowRout"
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", {desc="Show R out"})  -- "RshowRout"
+            --   end
             --   -- if file_type == "rmd" or file_type == "quarto" then
             --       keymap_modes({"n", "v", "i"}, "RKnit",           "kn", {})  -- "<Cmd>lua require('r.run').knit()"
             --       keymap_modes({"n", "i"},  "RSendChunk",      "cc", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
