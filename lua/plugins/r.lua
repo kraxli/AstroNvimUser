@@ -2,8 +2,11 @@ local prefix = "<Leader>r"
 local localleader = "<LocalLeader>"
 
 local r_path = '/usr/bin'
+local csv_app = ":TermExec cmd='vd %s' direction=float"
+
 if vim.fn.has('win64') == 1 then
   r_path = "C:\\Program Files\\R\\R-4.3.1\\bin\\x64"
+  csv_app = "terminal:vd"
 end
 
 function keymap_modes (modes, command, keymap, opts)
@@ -45,9 +48,7 @@ return {
         rconsole_width = 78,
         disable_cmds = {},
         nvimpager = "split_v",
-        -- csv_app = ":TermExec cmd='vd %:r.tsv' direction=float",
-        csv_app = ":TermExec cmd='vd %s' direction=float",
-        -- csv_app = "terminal:vd",
+        csv_app = csv_app,
         -- ,,:                |>
         -- <m--> / Alt + -:   <-
         user_maps_only = false,
