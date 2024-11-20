@@ -51,6 +51,7 @@ return {
         BqfSign = { text = " " .. require("astroui").get_icon "Selected", texthl = "BqfSign" },
       },
       autocmds = {
+        -- for examples of nvim vs vim-script see: https://vi.stackexchange.com/a/43781
         auto_spell = {
           {
             event = "FileType",
@@ -87,7 +88,16 @@ return {
             end,
           },
         },
-        auto_term = {
+        auto_term_enter = {
+          {
+            event = {'BufWinEnter' ,'WinEnter', 'TermOpen'},
+            desc = 'Enter terminal',
+            pattern = {"term://*"},
+            command = "startinsert",
+            -- see: https://vi.stackexchange.com/a/3765
+          },
+        },
+        auto_term_filetype = {
           {
             event = "FileType",
             desc = "Close",
