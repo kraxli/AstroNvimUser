@@ -5,3 +5,5 @@
 # Folders to ignore by git:
 
 user/
+
+node_modules
