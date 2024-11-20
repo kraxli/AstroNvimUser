@@ -1,3 +1,6 @@
+
+pcall(require, "global_vars")
+
 -- bootstrap lazy.nvim, AstroNvim, and user plugins
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
@@ -22,4 +25,5 @@ pcall(require, "user.settings")
 -- pcall(require, dir_nvim_local .. "/nvim-local.settings")
 pcall(require, "raw")
 pcall(require, "commands")
+
 

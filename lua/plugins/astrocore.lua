@@ -94,9 +94,11 @@ return {
             pattern = { "term" },
             callback = function()
               vim.keymap.set("n", "q", "<cmd>close<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
-              vim.keymap.set("i", "<c-q>", "<esc><cmd>close<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set("i", "<c-q>", "<esc><cmd>close!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set("n", "<c-q>", "<cmd>close<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set("n", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              -- vim.keymap.set("i", "c-C", "<esc><cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
               -- vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              -- vim.keymap.set("n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
             end,
           },
         },
@@ -144,6 +146,26 @@ return {
               -- vim.keymap.set("n", "i", "", { expr = true, noremap = true, desc = "Insert" })
             end,
           },
+        },
+        auto_clean_cache = {
+          {
+            event = {"TermClose"},  -- TermLeave (triggers already when entering command line)
+            -- event = {"BufDelete", "BufLeave"},   -- "VimLeave", "BufLeave"  
+            -- pattern = {"*py", "*python"},
+            desc = "Clear toggleterm visidata cache",
+            callback = function ()
+              -- the directory variable is defined in: ~/.config/nvim/lua/global_vars.lua
+              if vim.fn.has('unix') then
+                os.execute('rm -rf ' .. dir_vd_temp .. "*")
+              else
+                -- https://superuser.com/questions/741945/delete-all-files-from-a-folder-and-its-sub-folders
+                -- del /S *
+                -- Get-ChildItem -Path c:\temp -Include * | remove-Item -recurse
+                -- Remove-Item -Path "C:\dotnet-helpers*.*" -recurse -Force
+                os.execute('Remove-Item -Path "' .. dir_vd_temp .. '*.*" -recurse -Force')
+              end
+            end
+          }
         },
         -- sync_term_background = {
         --   {

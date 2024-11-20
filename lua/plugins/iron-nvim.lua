@@ -1,4 +1,38 @@
 local prefix = "<Leader>r"
+
+
+-- get variable under cursor: local variableUnderCursor = vim.fn.expand("<cword>")
+-- get visual selection: https://github.com/Willem-J-an/visidata.nvim/blob/master/lua/visidata.lua
+-- lua require('iron').core.send(python, 'import pyarrow; df_x.to_parquet("df_x.parquet")'); vim.cmd([[TermExec cmd='vd df_x.parquet' direction=float]])
+
+local function get_visual_selection()
+	local _, line_start, col_start = unpack(vim.fn.getpos("v"))
+	local _, line_end, col_end = unpack(vim.fn.getpos("."))
+	local selection = vim.api.nvim_buf_get_text(0, line_start - 1, col_start - 1, line_end - 1, col_end, {})
+	return selection
+end
+
+function visidata_py(direction)
+  local mode = vim.fn.mode()
+  local var_name
+  if mode == 'n' or mode == 'i' then
+    var_name = vim.fn.expand("<cword>")
+  elseif mode == 'v' or mode == 'x' then
+    var_name = get_visual_selection()[1]
+    var_name = var_name:gsub("%s+", "")
+  end
+
+  -- create directory
+  -- the directory variable is defined in: ~/.config/nvim/lua/global_vars.lua
+  os.execute("mkdir " .. dir_vd_temp)  -- require("lfs").mkdir(dir_vd_temp)
+  local var_file_path = dir_vd_temp .. var_name .. '.parquet'  -- os.date('%Y%m%d%H%M%S')
+  require('iron').core.send('python', 'import pyarrow; ' .. var_name .. '.to_parquet("' .. var_file_path .. '")')
+
+  local vd_cmd = 'TermExec cmd="vd ' .. var_file_path .. '"   direction=' .. direction .. ' name=visidataTerm'
+  vim.cmd(vd_cmd)
+
+end
+
 return {
   "Vigemus/iron.nvim",
   ft = { "python" },
@@ -31,6 +65,7 @@ return {
             --     return { "ipython", "--pylab=qt5", "--no-autoindent" }
             --   end
             -- end, -- or { "ipython", "--no-autoindent" } --matplotlib=qt5
+
             format = require("iron.fts.common").bracketed_paste_python,
           },
           r = {
@@ -101,6 +136,14 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, desc = "Hide REPL" }) -- i
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, desc = "Send file" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, desc = "Send line" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "s", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, desc = "Send line" })
+              -- send file: aa
+
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
+              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
+
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vs", "<cmd> lua visidata_py('vertical size=50')<CR>", { expr = false, noremap = true, desc = "View DF vertical" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vh", "<cmd> lua visidata_py('horizontal size=50')<CR>", { expr = false, noremap = true, desc = "View DF horizontal" })
 
               local wk = require "which-key"
               wk.add {
