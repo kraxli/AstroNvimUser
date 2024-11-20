@@ -1,19 +1,49 @@
 local prefix = "<Leader>r"
 local localleader = "<LocalLeader>"
 
+-- -------------------------------------------------------
+-- Set OS specific variables
+-- -------------------------------------------------------
 local r_path = '/usr/bin'
-local csv_app = ":TermExec cmd='vd %s' direction=float"
+local csv_app = ':TermExec cmd="vd %s" direction=float name=visidataTerm'
+
+-- for graphical R devices see: https://bookdown.org/rdpeng/exdata/graphics-devices.html
+local graphical_device = 'X11'
 
 if vim.fn.has('win64') == 1 then
   r_path = "C:\\Program Files\\R\\R-4.3.1\\bin\\x64"
-  csv_app = "terminal:vd"
+  -- csv_app = "terminal:vd"
+  graphical_device = 'windows'
 end
 
-function keymap_modes (modes, command, keymap, opts)
+-- -------------------------------------------------------
+-- Local functions
+-- -------------------------------------------------------
+local function keymap_modes (modes, command, keymap, opts)
   for _, mode in ipairs(modes) do
     vim.api.nvim_buf_set_keymap(0, mode, keymap, command, opts)
   end
 end
+
+
+function sleep (a)
+    local sec = tonumber(os.clock() + a)
+    while (os.clock() < sec) do
+    end
+end
+
+
+function set_csv_app(app, mode, args)
+  local default_app = require("r.config").get_config().csv_app
+  require("r.config").get_config().csv_app = app
+  require('r.run').action('viewobj', mode, args )
+  -- require("r.config").get_config().csv_app = default_app
+  return default_app
+end
+-- vim.api.nvim_buf_set_keymap(0, "n", <localleader>Vt, set_csv_app("terminal:vd", "n", ''), {})
+-- keymap_modes({"n"}, '<cmd>lua app = set_csv_app("terminal:vd", "n", ''); require("r.config").get_config().csv_app = app<CR>', prefix .. "Vt", {})
+
+-- -------------------------------------------------------
 
 return {
   {
@@ -57,6 +87,11 @@ return {
 
         hook = {
           on_filetype = function()
+
+            -- -- httpgd, see:https://github.com/R-nvim/R.nvim/wiki/Configuration#using-httpgd-as-the-default-graphics-device
+            -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "gd", "<cmd>lua require('r.send').cmd('tryCatch(httpgd::hgd_browse(),error=function(e) {httpgd::hgd();httpgd::hgd_browse()})')<CR>", {desc='httpgd'})
+            -- vim.api.nvim_buf_set_keymap(0, "n",  "<localleader>gd", "<cmd>lua require('r.send').cmd('tryCatch({dev.off(); options(device = httpgd::hgd); httpgd::hgd_browse(); dev.off(); options(device = X11)}, error=function(e) {httpgd::hgd();httpgd::hgd_browse()})')<CR>", {desc='httpgd'})
+
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
 
@@ -107,6 +142,8 @@ return {
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFs",   prefix .. "Vs", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFv",   prefix .. "Vv", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RViewDFa",   prefix .. "Vh", {})
+
+            -- keymap_modes({"n"}, '<cmd>lua app = set_csv_app("terminal:vd"); require("r.config").get_config().csv_app = app<CR>', prefix .. "Vt", {})
 
             -- Arguments,      example,      help
             keymap_modes({"n", "v", "i"}, "<Plug>RShowArgs",  prefix .. "a", {})
