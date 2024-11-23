@@ -88,7 +88,7 @@ return {
             end,
           },
         },
-        auto_term_enter = {
+        auto_term_enter_cmd = {
           {
             event = {'BufWinEnter' ,'WinEnter', 'TermOpen'},
             desc = 'Enter terminal',
@@ -303,10 +303,11 @@ return {
         },
         -- terminal mappings
         t = {
+          ["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
-          ["<C-d>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
+          ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },  -- :close
+          ["<C-Q>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
           ["<Esc>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
           -- ["<Esc><Esc>"] = { "<C-\\><C-n><CR>", desc = "Terminal quit" },
           ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },

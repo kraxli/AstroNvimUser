@@ -32,7 +32,6 @@ return {
           },
         },
         i = {
-
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
            -- ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
           ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
@@ -46,7 +45,6 @@ return {
           -- ["<C-left>"] = { "<C-o>", desc = "Move to previous position" },
         },
         n = {
-
           ["diw"] = {"diwx", desc = "Delete word and space"},
 
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
@@ -149,8 +147,6 @@ return {
         t = {
           -- setting a mapping to false will disable it
           -- ["<esc>"] = false,
-
-          ["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
         },
       },
     },
