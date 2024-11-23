@@ -10,11 +10,11 @@
         "path": "./vue.json"
       },
       {
-        "language" : "markdown",
+        "language" : ["markdown", "Rmd"],
         "path" : "./markdown.json"
       },
       {
-        "language" : ["r", "R"],
+        "language" : ["r", "R", "Rmd"],
         "path" : "./r.json"
       }
     ]
