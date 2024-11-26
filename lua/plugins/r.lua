@@ -150,8 +150,8 @@ return {
 
             -- Summary,        plot,       both
             keymap_modes({"n", "i", "v"},  "<Plug>RSummary",   prefix .. "S", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RPlot",      prefix .. "g", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RSPlot",     prefix .. "b", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RPlot",      prefix .. "pp", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RSPlot",     prefix .. "ps", {})
 
             -- Object Browser
             keymap_modes({"n", "v", "i"}, "<Plug>ROBToggle",       prefix .. "o", {})
@@ -213,10 +213,10 @@ return {
             --   end
             --   -- if file_type == "rmd" or file_type == "quarto" then
             --       keymap_modes({"n", "v", "i"}, "RKnit",           "kn", {})  -- "<Cmd>lua require('r.run').knit()"
-            --       keymap_modes({"n", "i"},  "RSendChunk",      "cc", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
-            --       keymap_modes({"n", "i"},  "RDSendChunk",     "cd", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(true)"
-            --       keymap_modes({"n"},   "RNextRChunk",     "gn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
-            --       keymap_modes({"n"},   "RPreviousRChunk", "gN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
+                  keymap_modes({"n", "i"},  "RSendChunk",      prefix .. "c", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
+                  keymap_modes({"n", "i"},  "RDSendChunk",     prefix .. "C", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(true)"
+                  keymap_modes({"n"},   "RNextRChunk",     prefix .. "gn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
+                  keymap_modes({"n"},   "RPreviousRChunk", prefix .. "gN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
             --   -- end
             --   -- if file_type == "rnoweb" or file_type == "rmd" or file_type == "quarto" then
             --       keymap_modes({"n", "i"}, "RSendChunkFH", "ch", {})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
