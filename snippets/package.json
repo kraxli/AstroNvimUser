@@ -18,7 +18,7 @@
         "path" : "./r.json"
       },
       {
-        "language" : ["quarto", "qrt", "rmd", "Rmd"],
+        "language" : ["quarto", "qmd", "rmd", "Rmd"],
         "path" : "./quarto.json"
       }
     ]
