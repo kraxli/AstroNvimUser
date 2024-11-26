@@ -10,12 +10,16 @@
         "path": "./vue.json"
       },
       {
-        "language" : ["markdown", "Rmd"],
+        "language" : ["markdown"],
         "path" : "./markdown.json"
       },
       {
         "language" : ["r", "R", "Rmd"],
         "path" : "./r.json"
+      },
+      {
+        "language" : ["quarto", "qrt", "rmd", "Rmd"],
+        "path" : "./quarto.json"
       }
     ]
   }

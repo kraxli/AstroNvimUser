@@ -1,0 +1,33 @@
+{
+  "Insert matlab block": {
+    "prefix": ["matlab", "codeblock-matlab"],
+    "body": ["```{matlab}", "$1", "```"],
+    "description": "Insert fenced matlab code block"
+  },
+  "Insert python block": {
+    "prefix": ["python", "codeblock-python"],
+    "body": ["```{python}", "$1", "```"],
+    "description": "Insert fenced python code block"
+  },
+  "Insert lua block": {
+    "prefix": ["lua", "codeblock-lua"],
+    "body": ["```{lua}", "$1", "```"],
+    "description": "Insert fenced lua code block"
+  },
+  "Insert bash block": {
+    "prefix": ["sh", "codeblock-sh"],
+    "body": ["```{sh}", "$1", "```"],
+    "description": "Insert fenced bash code block"
+  },
+  "Insert R block": {
+    "prefix": ["R", "r", "codeblock-R"],
+    "body": ["```{R}", "$1", "```"],
+    "description": "Insert fenced R code block"
+  },
+
+  "Insert link": {
+    "prefix": ["linkk", "link2", "ll", "--"],
+    "body": ["[$2]($1) $3"],
+    "description": "Insert markdown link"
+  }
+}
