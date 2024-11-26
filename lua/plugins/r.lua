@@ -6,6 +6,7 @@ local localleader = "<LocalLeader>"
 -- -------------------------------------------------------
 local r_path = '/usr/bin'
 local csv_app = ':TermExec cmd="vd %s" direction=float name=visidataTerm'
+local pdfviewer = ''  -- use default pdfviewer
 
 -- for graphical R devices see: https://bookdown.org/rdpeng/exdata/graphics-devices.html
 local graphical_device = 'X11'
@@ -14,6 +15,7 @@ if vim.fn.has('win64') == 1 then
   r_path = "C:\\Program Files\\R\\R-4.3.1\\bin\\x64"
   -- csv_app = "terminal:vd"
   graphical_device = 'windows'
+  pdfviewer = 'mupdf'  -- or sumatra
 end
 
 -- -------------------------------------------------------
@@ -68,6 +70,7 @@ return {
         R_args = { "--quiet", },
         min_editor_width = 72,
         rconsole_width = 78,
+        pdfviewer = pdfviewer,
         disable_cmds = {},
         nvimpager = "split_v",
         csv_app = csv_app,
