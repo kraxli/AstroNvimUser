@@ -25,14 +25,6 @@ local function keymap_modes (modes, command, keymap, opts)
   end
 end
 
-
-function sleep (a)
-    local sec = tonumber(os.clock() + a)
-    while (os.clock() < sec) do
-    end
-end
-
-
 function set_csv_app(app, mode, args)
   local default_app = require("r.config").get_config().csv_app
   require("r.config").get_config().csv_app = app
@@ -73,7 +65,7 @@ return {
       -- Create a table with the options to be passed to setup()
       local opts = {
         R_path = r_path,  -- vim.g.r_path
-        R_args = { "--quiet", "--no-save" },
+        R_args = { "--quiet", },
         min_editor_width = 72,
         rconsole_width = 78,
         disable_cmds = {},
@@ -94,6 +86,8 @@ return {
 
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
+            --
+-- vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rv", set_csv_app('<cmd>TermExec cmd="vd %s" direction=float<CR>', "n", ''), {})
 
             -- send
             vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {desc='Send line'})
@@ -105,10 +99,11 @@ return {
             -- edit & operators
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RAssign", '<Cmd>lua require("r.edit").assign()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "--", "<Plug>RAssign", { silent = true, noremap = true, expr = false })
-            vim.api.nvim_buf_set_keymap(0, "i", "..", "<Plug>RAssign", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", "__", "<Plug>RAssign", { silent = true, noremap = true, expr = false })
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RPipe", '<Cmd>lua require("r.edit").pipe()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "<<", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "<m-.>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap(0, "i", "<m-,>", "<Plug>RPipe", { silent = true, noremap = true, expr = false })
             -- TODO:
             -- keymap_modes({"n", "i", "v"}, "RSetwd", "rd",  {})  -- "<Cmd>lua require('r.run').setwd()"
             -- keymap_modes({"n", "i", "v"}, "RSeparatePath", {})  --    "sp", "<Cmd>lua require('r.path').separate()"
