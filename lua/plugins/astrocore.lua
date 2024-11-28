@@ -224,6 +224,7 @@ return {
           -- disable default bindings
           ["sa"] = false,
           ["q"] = false,
+          ["<leader>q"] = false,
           ["<leader>o"] = false,
           ["<Leader>ot"] = false,
           ["<Leader>oT"] = false,
@@ -304,12 +305,10 @@ return {
         -- terminal mappings
         t = {
           ["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+          ["<esc><esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },  -- :close
           ["<C-Q>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
-          ["<Esc>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
-          -- ["<Esc><Esc>"] = { "<C-\\><C-n><CR>", desc = "Terminal quit" },
           ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
         },
         v = {
