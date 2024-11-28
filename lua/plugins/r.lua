@@ -277,7 +277,7 @@ return {
                   keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", "ao", {})  -- "RshowRout"
                   keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", {desc="Show R out"})  -- "RshowRout"
 
-                  keymap_modes({"n"},   "RSendAboveLines", prefix .. "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
+                  keymap_modes({"n"},   "<Plug>RSendAboveLines", prefix .. "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
 
                   keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "C", {desc = "Send paragraph"})  -- "RSendParagraph"; i mode ? 
                   keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", {desc = "Send paragraph & down"})  --   RDSendParagraph; i mode ?
@@ -291,9 +291,10 @@ return {
               callback = function ()
                   vim.keymap.set({"n", "v"}, prefix .. "c", "<Plug>RDSendChunk", { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" })
                   keymap_modes({"n", "i"},  "<Plug>RSendChunk",      prefix .. "C", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
-                  keymap_modes({"n"},   "<Plug>RNextRChunk",     prefix .. "kn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
-                  keymap_modes({"n"},   "<Plug>RPreviousRChunk", prefix .. "kN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
-                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "ku", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
+                  keymap_modes({"n"},   "<Plug>RNextRChunk",     prefix .. "sn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
+                  keymap_modes({"n"},   "<Plug>RPreviousRChunk", prefix .. "sN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
+                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "su", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
+                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "U", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
 
                   -- rmd & quarto
                   -- keymap_modes({"n", "v", "i"}, "RKnit",           "kn", {})  -- "<Cmd>lua require('r.run').knit()"
@@ -336,6 +337,7 @@ return {
 
                   -- {prefix .. "m", group = '   Rmarkdown send'},
                   {prefix .. "p", group = ' Plots'},
+                  {prefix .. "s", group = ' Send'},
                 }
               end,
             },
