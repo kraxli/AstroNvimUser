@@ -99,10 +99,14 @@ return {
 -- vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rv", set_csv_app('<cmd>TermExec cmd="vd %s" direction=float<CR>', "n", ''), {})
 
             -- send
-            vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {desc='Send line'})
-            vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {desc='Send selection'})
-            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "s", "<Plug>RDSendLine", {desc='Send line'})
-            vim.api.nvim_buf_set_keymap(0, "v", prefix .. "s", "<Plug>RSendSelection", {desc='Send selection'})
+            vim.api.nvim_buf_set_keymap(0, "n", "<C-Enter>", "<Plug>RSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "i", "<C-Enter>", "<Plug>RSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "v", "<C-Enter>", "<Plug>RSendSelection", {desc='Send selection'})
+            vim.api.nvim_buf_set_keymap(0, "n", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "i", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "v", "<S-Enter>", "<Plug>RDSendSelection", {desc='Send selection'})
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<Plug>RDSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "v", prefix .. "L", "<Plug>RDSendSelection", {desc='Send selection'})
             -- TODO: send motions!
 
             -- edit & operators
@@ -130,14 +134,14 @@ return {
             keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "q", {desc='R close'})
             keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", {desc='R save & close'})
 
-            keymap_modes({"n","v","i"}, "<Plug>RClearConsole", prefix .. "c", {})
-            keymap_modes({"n","v","i"}, "<Plug>RClearAll", prefix .. "C", {})
+            -- Clear console
+            keymap_modes({"n","v","i"}, "<Plug>RClearConsole", prefix .. "d", {})
+            keymap_modes({"n","v","i"}, "<Plug>RClearAll", prefix .. "D", {})
 
             -- Print,          names,               structure
-            keymap_modes({"n", "i", "v"},  "<Plug>RObjectPr",         prefix .. "p", {})
+            keymap_modes({"n", "i", "v"},  "<Plug>RObjectPr",         prefix .. "P", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RObjectNames",      prefix .. "n", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RObjectStr",        prefix .. "t", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RViewDF",           prefix .. "v", {})
             keymap_modes({"n", "i", "v"},  "<Plug>RDputObj",          "<leader>td", {})
 
             keymap_modes({"n", "i"}, "<Plug>RPackages",          prefix .. "P", {})
@@ -164,41 +168,28 @@ return {
             keymap_modes({"n", "v", "i"}, "<Plug>ROBOpenLists",   prefix .. "=", {})
             keymap_modes({"n", "v", "i"}, "<Plug>ROBCloseLists",  prefix .. "-", {})
 
-            -- Render script with rmarkdown
-            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeRmd",   prefix .. "kr", {})
-            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeAll",   prefix .. "ka", {})
-            keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFK",  prefix .. "kp", {})
-            keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFKb", prefix .. "kl", {})
-            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeWord",  prefix .. "kw", {})
-            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeHTML",  prefix .. "kh", {})
-            keymap_modes({ "n", "v", "i" }, "<Plug>RMakeODT",   prefix .. "ko", {})
+            -- -- Paragraph
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "b", {})  --   RDSendParagraph; i mode ?
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>","pd", {})  --   RDSendParagraph; i mode ?
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "B", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  "pp", {})  -- "RSendParagraph"; i mode ? 
 
+            -- Send block - I don't work often with marks
+            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
+            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(true)<CR>",  "bd", {}) -- "<Plug>RDSendMBlock<CR>"
 
-            -- Send block
-            keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
-            keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(true)<CR>",  "bd", {}) -- "<Plug>RDSendMBlock<CR>"
 
             -- -- Function
-            -- keymap_modes({"n", "i", "v"}, "<Plug>RSendAllFun",    "fa",     {})  -- "<Cmd>lua require('r.send').funs(0, true, false)"
-            -- keymap_modes({"n", "i", "v"}, "<Plug>RSendCurrentFun",   "fc",  {})  -- "<Cmd>lua require('r.send').funs(0, false, false)"
-            -- keymap_modes({"n", "i", "v"}, "<Plug>RDSendCurrentFun",   "fd", {})  -- "<Cmd>lua require('r.send').funs(0, false, true)"
-            --
-            -- -- Pipe chain breaker
-            -- keymap_modes({"n", "v"}, "RSendChain",      "sc",  {})  -- "<Cmd>lua require('r.send').chain()"
-            --
-            -- -- Selection
-            -- keymap_modes({"n", "v"}, "RSendSelection",  "ss", {})  -- "<Cmd>lua require('r.send').selection(false)"
-            -- keymap_modes({"n", "v"}, "RDSendSelection", "sd", {})  -- "<Cmd>lua require('r.send').selection(true)"
-            --
-            -- -- Paragraph
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "pp", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  "pp", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "pd", {})  --   RDSendParagraph; i mode ?
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>","pd", {})  --   RDSendParagraph; i mode ?
-            --
+            keymap_modes({"n", "v"}, "<Plug>RSendAllFun",    "fa",     {})  -- "<Cmd>lua require('r.send').funs(0, true, false)"
+            keymap_modes({"n", "v"}, "<Plug>RDSendCurrentFun",   "fd", {})  -- "<Cmd>lua require('r.send').funs(0, false, true)"
+            keymap_modes({"n", "v"}, "<Plug>RDSendCurrentFun",   prefix .. "sf", {})  -- "<Cmd>lua require('r.send').funs(0, false, true)"
+            keymap_modes({"n", "v"}, "<Plug>RSendCurrentFun",   "fc",  {})  -- "<Cmd>lua require('r.send').funs(0, false, false)"
+            keymap_modes({"n", "v"}, "<Plug>RSendCurrentFun",   prefix .. "sF",  {})  -- "<Cmd>lua require('r.send').funs(0, false, false)"
+
+            -- Pipe chain breaker
+            keymap_modes({"n", "v"}, "RSendChain",     prefix .. "sc",  {})  -- "<Cmd>lua require('r.send').chain()"
+
             -- -- *Line*
-            -- keymap_modes({"n", "i"},  "RSendLine",           "l",    {})  --    "<Cmd>lua require('r.send').line(false)")
-            -- keymap_modes({"n", "i"},  "RDSendLine",          "d",    {})  --    "<Cmd>lua require('r.send').line(true)")
             -- keymap_modes({"n", "i"},  "RInsertLineOutput",   "o",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
             -- keymap_modes({"n", "i", "."}, "RSendMotion",     "m",    {})  --    "<Cmd>set opfunc=v:lua.require'r.send'.motion<CR>g@", true)
             -- keymap_modes({"v"},   "RInsertLineOutput",   "o",        {})  --"<Cmd>lua require('r').warn('This command does not work over a selection of lines.')")
@@ -210,22 +201,6 @@ return {
             --
             -- -- TODO: clean up and file type specific commands
             --
-            --   if file_type == "r" then
-            --       keymap_modes({"n"},   "RSendAboveLines", "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", "aa", {})  -- "RSendFile"
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", prefix .. 'f', {desc="Send file"})  -- "RSendFile"
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", "ao", {})  -- "RshowRout"
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", {desc="Show R out"})  -- "RshowRout"
-            --   end
-            --   -- if file_type == "rmd" or file_type == "quarto" then
-            --       keymap_modes({"n", "v", "i"}, "RKnit",           "kn", {})  -- "<Cmd>lua require('r.run').knit()"
-                  keymap_modes({"n", "i"},  "<Plug>RSendChunk",      prefix .. "C", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
-                  keymap_modes({"n", "i"},  "<Plug>RDSendChunk",     prefix .. "c", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(true)"
-                  keymap_modes({"n"},   "<Plug>RNextRChunk",     prefix .. "mn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
-                  keymap_modes({"n"},   "<Plug>RPreviousRChunk", prefix .. "mN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
-            --   -- end
-            --   -- if file_type == "rnoweb" or file_type == "rmd" or file_type == "quarto" then
-                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "mh", {})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
             --   -- if config.rm_knit_cache then
             --           keymap_modes({"n", "v", "i"}, "RKnitRmCache", "kc", {})  -- "<Cmd>lua require('r.rnw').rm_knit_cache()"
             --       -- end
@@ -292,32 +267,54 @@ return {
       ---@param opts AstroCoreOpts
       opts = {
         autocmds = {
+          auto_ft_r = {
+            {
+              event = { "FileType",},  --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
+              pattern = { "r", "R", },
+              callback = function ()
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", "aa", {})  -- "RSendFile"
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", prefix .. 'f', {desc="Send file"})  -- "RSendFile"
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", "ao", {})  -- "RshowRout"
+                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", {desc="Show R out"})  -- "RshowRout"
+
+                  keymap_modes({"n"},   "RSendAboveLines", prefix .. "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
+
+                  keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "C", {"Send paragraph"})  -- "RSendParagraph"; i mode ? 
+                  keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", {"Send paragraph & down"})  --   RDSendParagraph; i mode ?
+              end
+            },
+          },
+          auto_rmd_qmd = {
+            {
+              event = { "FileType",},  --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
+              pattern = { "rmd", "rnoweb", "quarto", "*.rmd", "*.qmd","*.rnoweb", "*.quarto", },
+              callback = function ()
+                  vim.keymap.set({"n", "v"}, prefix .. "c", "<Plug>RDSendChunk", { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" })
+                  keymap_modes({"n", "i"},  "<Plug>RSendChunk",      prefix .. "C", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
+                  keymap_modes({"n"},   "<Plug>RNextRChunk",     prefix .. "kn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
+                  keymap_modes({"n"},   "<Plug>RPreviousRChunk", prefix .. "kN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
+                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "ku", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
+
+                  -- rmd & quarto
+                  -- keymap_modes({"n", "v", "i"}, "RKnit",           "kn", {})  -- "<Cmd>lua require('r.run').knit()"
+
+                  -- Render script with rmarkdown
+                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeRmd",   prefix .. "kr", {})
+                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeAll",   prefix .. "ka", {})
+                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFK",  prefix .. "kp", {})
+                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFKb", prefix .. "kl", {})
+                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeWord",  prefix .. "kw", {})
+                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeHTML",  prefix .. "kh", {})
+                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeODT",   prefix .. "ko", {})
+
+              end
+            },
+          },
           auto_rlang = {
             {
-              event = {
-                "FileType",
-                "BufWinEnter",
-                "BufRead",
-                "BufNewFile",
-                "BufNew",
-                "BufAdd",
-                "BufEnter",
-                "TabNewEntered",
-                "TabEnter",
+              event = { "FileType", "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter",
               },
-              pattern = {
-                "R",
-                "r",
-                "rmd",
-                "rnoweb",
-                "quarto",
-                "rhelp",
-                "*.R",
-                "*.r",
-                "*.rmd",
-                "*.rnoweb",
-                "*.quarto",
-                "*.rhelp",
+              pattern = { "R", "r", "rmd", "rnoweb", "quarto", "rhelp", "*.R", "*.r", "*.rmd", "*.qmd", "*.rnoweb", "*.quarto", "*.rhelp",
               },
               desc = "R-nvim",
               callback = function()
@@ -336,6 +333,9 @@ return {
                   { "<localleader>r", group = " 󰟔 " },
                   { "<localleader>s", group = " 󰟔 More send" },
                   { "<localleader>t", group = " 󰟔 Run (dput)" },
+
+                  -- {prefix .. "m", group = '   Rmarkdown send'},
+                  {prefix .. "p", group = ' Plots'},
                 }
               end,
             },
@@ -343,7 +343,7 @@ return {
         },
         mappings = {
           n = {
-            [prefix .. "k"] = { desc = "  Rmarkdown" },
+            [prefix .. "k"] = { desc = "   Rmarkdown" },
             [prefix .. "V"] = { desc = " View Dataframe" },
           },
           v = {},
