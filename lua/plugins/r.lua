@@ -59,7 +59,7 @@ return {
   {
     "R-nvim/R.nvim",
     lazy = false,
-    -- branch = 'tsvnm_once',  -- or tag, commit
+    -- branch = 'view_df',  -- or tag, commit
     -- ft = {'R'},
     config = function()
       -- vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", "<Plug>RDSendLine", {})
@@ -73,7 +73,13 @@ return {
         pdfviewer = pdfviewer,
         disable_cmds = {},
         nvimpager = "split_v",
-        csv_app = csv_app,
+        view_df = {
+            n_lines = 0,
+            save_fun = "function(obj, obj_name) {f <- paste0(obj_name, '.parquet'); arrow::write_parquet(obj, f) ; f}",
+            -- open_app = "terminal:vd",
+            open_app = csv_app,
+        },
+        -- csv_app = csv_app,
         -- ,,:                |>
         -- <m--> / Alt + -:   <-
         user_maps_only = false,
@@ -215,11 +221,11 @@ return {
             --       keymap_modes({"n", "v", "i"}, "RKnit",           "kn", {})  -- "<Cmd>lua require('r.run').knit()"
                   keymap_modes({"n", "i"},  "RSendChunk",      prefix .. "c", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
                   keymap_modes({"n", "i"},  "RDSendChunk",     prefix .. "C", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(true)"
-                  keymap_modes({"n"},   "RNextRChunk",     prefix .. "gn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
-                  keymap_modes({"n"},   "RPreviousRChunk", prefix .. "gN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
+                  keymap_modes({"n"},   "RNextRChunk",     prefix .. "mn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
+                  keymap_modes({"n"},   "RPreviousRChunk", prefix .. "mN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
             --   -- end
             --   -- if file_type == "rnoweb" or file_type == "rmd" or file_type == "quarto" then
-            --       keymap_modes({"n", "i"}, "RSendChunkFH", "ch", {})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
+                  keymap_modes({"n", "i"}, "RSendChunkFH", prefix .. "mh", {})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
             --   -- if config.rm_knit_cache then
             --           keymap_modes({"n", "v", "i"}, "RKnitRmCache", "kc", {})  -- "<Cmd>lua require('r.rnw').rm_knit_cache()"
             --       -- end
@@ -319,6 +325,17 @@ return {
                 wk.add {
                   mode = { "n", "v" },
                   { prefix, group = "󰟔 Rlang" }, -- Copy Glyphs from Oil! :-)
+                  { "<localleader>", group = "󰟔 Rlang" }, -- Copy Glyphs from Oil! :-)
+                  { "<localleader>b", group = " 󰟔 Between send" },
+                  { "<localleader>c", group = " 󰟔 Chunk (md)" },
+                  { "<localleader>f", group = " 󰟔 Functions send" },
+                  { "<localleader>g", group = " 󰟔 Go to" },
+                  { "<localleader>i", group = " 󰟔 Install" },
+                  { "<localleader>k", group = " 󰟔 Knit" },
+                  { "<localleader>p", group = " 󰟔 Paragraph send" },
+                  { "<localleader>r", group = " 󰟔 " },
+                  { "<localleader>s", group = " 󰟔 More send" },
+                  { "<localleader>t", group = " 󰟔 Run (dput)" },
                 }
               end,
             },
