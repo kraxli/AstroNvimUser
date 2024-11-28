@@ -219,13 +219,13 @@ return {
             --   end
             --   -- if file_type == "rmd" or file_type == "quarto" then
             --       keymap_modes({"n", "v", "i"}, "RKnit",           "kn", {})  -- "<Cmd>lua require('r.run').knit()"
-                  keymap_modes({"n", "i"},  "RSendChunk",      prefix .. "c", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
-                  keymap_modes({"n", "i"},  "RDSendChunk",     prefix .. "C", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(true)"
-                  keymap_modes({"n"},   "RNextRChunk",     prefix .. "mn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
-                  keymap_modes({"n"},   "RPreviousRChunk", prefix .. "mN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
+                  keymap_modes({"n", "i"},  "<Plug>RSendChunk",      prefix .. "C", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
+                  keymap_modes({"n", "i"},  "<Plug>RDSendChunk",     prefix .. "c", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(true)"
+                  keymap_modes({"n"},   "<Plug>RNextRChunk",     prefix .. "mn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
+                  keymap_modes({"n"},   "<Plug>RPreviousRChunk", prefix .. "mN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
             --   -- end
             --   -- if file_type == "rnoweb" or file_type == "rmd" or file_type == "quarto" then
-                  keymap_modes({"n", "i"}, "RSendChunkFH", prefix .. "mh", {})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
+                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "mh", {})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
             --   -- if config.rm_knit_cache then
             --           keymap_modes({"n", "v", "i"}, "RKnitRmCache", "kc", {})  -- "<Cmd>lua require('r.rnw').rm_knit_cache()"
             --       -- end
