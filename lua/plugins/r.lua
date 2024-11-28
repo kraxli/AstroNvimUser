@@ -279,8 +279,8 @@ return {
 
                   keymap_modes({"n"},   "RSendAboveLines", prefix .. "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
 
-                  keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "C", {"Send paragraph"})  -- "RSendParagraph"; i mode ? 
-                  keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", {"Send paragraph & down"})  --   RDSendParagraph; i mode ?
+                  keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "C", {desc = "Send paragraph"})  -- "RSendParagraph"; i mode ? 
+                  keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", {desc = "Send paragraph & down"})  --   RDSendParagraph; i mode ?
               end
             },
           },
