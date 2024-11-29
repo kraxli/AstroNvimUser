@@ -4,7 +4,7 @@ local localleader = "<LocalLeader>"
 -- -------------------------------------------------------
 -- Set OS specific variables
 -- -------------------------------------------------------
-local r_path = '/usr/bin'
+local r_path = "/usr/bin"
 local csv_app = ':TermExec cmd="vd %s" direction=float name=visidataTerm'
 local pdfviewer = ''  -- use default pdfviewer
 
@@ -98,19 +98,19 @@ return {
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
             -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
             --
--- vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rv", set_csv_app('<cmd>TermExec cmd="vd %s" direction=float<CR>', "n", ''), {})
+            -- vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rv", set_csv_app('<cmd>TermExec cmd="vd %s" direction=float<CR>', "n", ''), {})
 
             -- send
             vim.api.nvim_buf_set_keymap(0, "n", "<C-Enter>", "<Plug>RSendLine", {desc='Send line'})
             vim.api.nvim_buf_set_keymap(0, "i", "<C-Enter>", "<Plug>RSendLine", {desc='Send line'})
             vim.api.nvim_buf_set_keymap(0, "v", "<C-Enter>", "<Plug>RSendSelection", {desc='Send selection'})
-            vim.api.nvim_buf_set_keymap(0, "n", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line'})
-            vim.api.nvim_buf_set_keymap(0, "i", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line'})
-            vim.api.nvim_buf_set_keymap(0, "v", "<S-Enter>", "<Plug>RDSendSelection", {desc='Send selection'})
+            vim.api.nvim_buf_set_keymap(0, "n", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line & down'})
+            vim.api.nvim_buf_set_keymap(0, "i", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line & down'})
+            vim.api.nvim_buf_set_keymap(0, "v", "<S-Enter>", "<Plug>RDSendSelection", {desc='Send selection & down'})
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<Plug>RSendLine", {desc='Send line'})
-            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Plug>RDSendLine", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Plug>RDSendLine", {desc='Send line & down'})
             vim.api.nvim_buf_set_keymap(0, "v", prefix .. "l", "<Plug>RSendSelection", {desc='Send selection'})
-            vim.api.nvim_buf_set_keymap(0, "v", prefix .. "L", "<Plug>RDSendSelection", {desc='Send selection'})
+            vim.api.nvim_buf_set_keymap(0, "v", prefix .. "L", "<Plug>RDSendSelection", {desc='Send selection & down'})
             -- TODO: send motions!
 
             -- edit & operators
@@ -135,7 +135,7 @@ return {
             keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').start_R('custom')<CR>", prefix .. "R", {desc='R custom start'})
 
             -- Close
-            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "q", {desc='R close'})
+            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "Q", {desc='R close'})
             keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", {desc='R save & close'})
 
             -- Clear console
@@ -174,8 +174,8 @@ return {
 
 
             -- Miscellaneous
-            keymap_modes({"n", "i", "v"},  "<Plug>RInsertLineOutput",   "o",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
-            keymap_modes({"n", "i", "v"},  "<Plug>RInsertLineOutput",   prefix .. "O",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
+            -- keymap_modes({"n", "i", "v"},  "<Plug>RInsertLineOutput",   "o",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
+            keymap_modes({"n", "i", "v"},  "<Plug>RInsertLineOutput",   prefix .. "I",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
 
             -- -------------------------------------------------------
             -- R send
@@ -293,9 +293,10 @@ return {
                   keymap_modes({ "n", "v", "i" }, "<Plug>RMakeODT",   prefix .. "ko", {})
 
                   -- rmd & quarto
-                  keymap_modes({"n", "v", "i"}, "RKnit",  prefix .. "kk", {})  -- "<Cmd>lua require('r.run').knit()"
+                  keymap_modes({"n", "v", "i"}, "<Plug>RKnit",  prefix .. "kk", {})  -- "<Cmd>lua require('r.run').knit()"
+
                   -- if config.rm_knit_cache then
-                  keymap_modes({"n", "v", "i"}, "RKnitRmCache", prefix .. "kc", {})  -- "<Cmd>lua require('r.rnw').rm_knit_cache()"
+                  keymap_modes({"n", "v", "i"}, "<Plug>RKnitRmCache", prefix .. "kc", {})  -- "<Cmd>lua require('r.rnw').rm_knit_cache()"
                   -- end
 
               end
@@ -304,13 +305,11 @@ return {
           auto_qmd = {
             {
               event = { "FileType",},  --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
-              pattern = {  "quarto",  "*.qmd", "*.quarto", },
+              pattern = { "quarto", "*.qmd", "*.quarto", },
               callback = function ()
-            --   -- if file_type == "quarto" then
-            --       keymap_modes({"n"},   "RQuartoRender",   "qr", {})  -- "<Cmd>lua require('r.quarto').command('render')"
-            --       keymap_modes({"n"},   "RQuartoPreview",  "qp", {})  -- "<Cmd>lua require('r.quarto').command('preview')"
-            --       keymap_modes({"n"},   "RQuartoStop",     "qs", {})  -- "<Cmd>lua require('r.quarto').command('stop')"
-            --   -- end
+                  keymap_modes({"n"},   "<Plug>QuartoRender",   prefix .. "qr", {})  -- "<Cmd>lua require('r.quarto').command('render')"
+                  keymap_modes({"n"},   "<Plug>QuartoPreview",  prefix .. "qp", {})  -- "<Cmd>lua require('r.quarto').command('preview')"
+                  keymap_modes({"n"},   "<Plug>QuartoStop",     prefix .. "qs", {})  -- "<Cmd>lua require('r.quarto').command('stop')"
               end
             },
           },
@@ -325,11 +324,11 @@ return {
                   keymap_modes({"n", "v", "i"}, "<Plug>RKnit",       prefix .. "kn", {})  -- "<Cmd>lua require('r.rnw').weave('nobib',  true, false)"
                   keymap_modes({"n", "v", "i"}, "<Plug>RBibTeXK",    prefix .. "kB", {})  -- "<Cmd>lua require('r.rnw').weave('bibtex', true, true)"
                   keymap_modes({"n", "v", "i"}, "<Plug>ROpenPDF",    prefix .. "gp", {})  -- "<Cmd>lua require('r.pdf').open('Get Master')"
-                  -- keymap_modes({"n", "v", "i"}, "<Plug>ROpenPDF",    prefix .. "Op", {})  -- "<Cmd>lua require('r.pdf').open('Get Master')"
+                  keymap_modes({"n", "v", "i"}, "<Plug>ROpenPDF",    prefix .. "Op", {})  -- "<Cmd>lua require('r.pdf').open('Get Master')"
                   -- if config.synctex then
                   keymap_modes({"n", "i"}, "<Plug>SyncFor", prefix .. "gs", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(false)"
                   keymap_modes({"n", "i"}, "<Plug>GoToTeX", prefix .. "gt", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(true)"
-                  -- keymap_modes({"n", "i"}, "<Plug>GoToTeX", prefix .. "Ot", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(true)"
+                  keymap_modes({"n", "i"}, "<Plug>GoToTeX", prefix .. "Ot", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(true)"
                   -- end
               end
 
@@ -360,9 +359,11 @@ return {
                   { "<localleader>t", group = " 󰟔 Run (dput)" },
 
                   -- {prefix .. "m", group = '   Rmarkdown send'},
-                  {prefix .. "p", group = ' Plots'},
-                  {prefix .. "s", group = ' Send'},
                   {prefix .. "g", group = ' Go to'},
+                  {prefix .. "O", group = ' Open'},
+                  {prefix .. "p", group = ' Plots'},
+                  {prefix .. "q", group = ' Quarto'},
+                  {prefix .. "s", group = ' Send'},
                 }
               end,
             },
