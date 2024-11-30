@@ -18,6 +18,9 @@ vim.cmd [[
 
   vmap <c-c> y
   xmap <c-c> y
+
+  " map <leader>q <Nop>
+  " unmap <leader>q
 ]]
 
 
