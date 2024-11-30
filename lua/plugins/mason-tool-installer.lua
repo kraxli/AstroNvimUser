@@ -78,9 +78,9 @@ M = {
 
 local tools_unix_only = {
   "tree-sitter-cli",
-  "delve",
+  -- "delve",
   "regols",
-  "neocmakelsp",
+  -- "neocmakelsp",
   "ansible-lint",
   "gopls",
 }
