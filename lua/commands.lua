@@ -32,5 +32,6 @@ vim.cmd [[
 
 vim.api.nvim_create_user_command('CopyPathAbs', ":lua require('utils').copy_absolute_path()", {})
 vim.api.nvim_create_user_command('CopyPathRel', ":lua require('utils').copy_relative_path()", {})
+-- vim.cmd.cnoreabbrev('wq', '<nop>')
 
 -- return {}
