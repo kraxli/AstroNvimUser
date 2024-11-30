@@ -1,5 +1,13 @@
 # Vim tips and tricks
 
+## Maps
+
+### `<nop>` and unmap
+
+- `<Nop>` is no operation. See also [man page, special characters](https://neovim.io/doc/user/map.html#%3Amap-special-chars) 
+- [difference between unmap and <nop>](https://vi.stackexchange.com/a/16393):
+  * <c-w> is not a map but a built-in command and so you cannot use `unmap` as for regular maps. But map `map <c-w> <nop>` works.
+
 ## Get list of lazy.nvim plugins
 
 run in nvim with `lua ...`
