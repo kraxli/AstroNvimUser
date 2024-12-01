@@ -43,7 +43,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     -- optional = true,
-    ft = { "R", "r", "rmd", "rnoweb", "quarto", "rhelp" },
+    ft = { "R", "r", "rmd", "rnoweb", "quarto", "qmd", "rhelp" },
     dependencies = { "R-nvim/cmp-r" },
     opts = function(_, opts)
       if not opts.sources then opts.sources = {} end
