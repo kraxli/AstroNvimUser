@@ -1,26 +1,26 @@
 {
   "Insert matlab block": {
-    "prefix": ["matlab", "codeblock-matlab"],
+    "prefix": ["matlab", "chunk-matlab"],
     "body": ["```{matlab}", "$1", "```"],
     "description": "Insert fenced matlab code block"
   },
   "Insert python block": {
-    "prefix": ["python", "codeblock-python"],
+    "prefix": ["python", "chunk-python"],
     "body": ["```{python}", "$1", "```"],
     "description": "Insert fenced python code block"
   },
   "Insert lua block": {
-    "prefix": ["lua", "codeblock-lua"],
+    "prefix": ["lua", "chunk-lua"],
     "body": ["```{lua}", "$1", "```"],
     "description": "Insert fenced lua code block"
   },
   "Insert bash block": {
-    "prefix": ["sh", "codeblock-sh"],
+    "prefix": ["sh", "chunk-sh"],
     "body": ["```{sh}", "$1", "```"],
     "description": "Insert fenced bash code block"
   },
   "Insert R block": {
-    "prefix": ["R", "r", "codeblock-R"],
+    "prefix": ["R", "r", "chunk-R"],
     "body": ["```{R}", "$1", "```"],
     "description": "Insert fenced R code block"
   },
