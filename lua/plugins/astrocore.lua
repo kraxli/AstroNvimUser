@@ -98,17 +98,16 @@ return {
           },
         },
         auto_term_filetype = {
+        auto_bufdelete = {
           {
             event = "FileType",
             desc = "Close",
-            pattern = { "term" },
+            pattern = { "*" },
             callback = function()
-              vim.keymap.set("n", "q", "<cmd>close<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
-              vim.keymap.set("i", "<c-q>", "<esc><cmd>close!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set("n", "<c-q>", "<cmd>close<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set("n", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              -- vim.keymap.set("i", "c-C", "<esc><cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
-              -- vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              if vim.bo.buftype ~= "terminal" or vim.bo.buftype ~= "term" then
+                -- vim.keymap.set( "n", "q", "<cmd>w!|Bdelete!<CR>", {  noremap = true, buffer = true, desc = "Delete buffer" })
+                vim.keymap.set("n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" })
+              end
             end,
           },
         },
