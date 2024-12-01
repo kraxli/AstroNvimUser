@@ -130,6 +130,15 @@ return {
             end,
           },
         },
+        auto_ft_quarto= {
+          {
+            event = "FileType",
+            desc = "Quarto ft",
+            pattern = {"quarto", "qrm", "*.qrm", "*.quarto"},
+            callback = function()
+              -- vim.keymap.set({"n"}, "<leader>q", "<nop>", { expr = true, noremap = true, buffer=true, desc = "Insert" })
+              -- vim.keymap.set({"n"}, "<leader>q", "", { expr = true, noremap = true, buffer=true, desc = "Insert" })
+              -- vim.keymap.del({'n'}, '<leader>q', { buffer = 0 })
             end,
           },
         },
