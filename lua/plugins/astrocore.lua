@@ -103,7 +103,7 @@ return {
             desc = "Close",
             pattern = { "*" },
             callback = function()
-              if vim.bo.buftype ~= "terminal" or vim.bo.buftype ~= "term" then
+              if vim.bo.buftype ~= "terminal" and vim.bo.buftype ~= "term" and vim.bo.buftype ~= "prompt" and vim.bo.filetype ~= "TelescopePrompt" then
                 -- vim.keymap.set( "n", "q", "<cmd>w!|Bdelete!<CR>", {  noremap = true, buffer = true, desc = "Delete buffer" })
                 vim.keymap.set("n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" })
               end
