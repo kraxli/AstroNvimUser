@@ -102,15 +102,16 @@ return {
 
             -- send
             vim.api.nvim_buf_set_keymap(0, "n", "<C-Enter>", "<Plug>RSendLine", {desc='Send line'})
-            vim.api.nvim_buf_set_keymap(0, "i", "<C-Enter>", "<Plug>RSendLine", {desc='Send line'})
             vim.api.nvim_buf_set_keymap(0, "v", "<C-Enter>", "<Plug>RSendSelection", {desc='Send selection'})
             vim.api.nvim_buf_set_keymap(0, "n", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line & down'})
-            vim.api.nvim_buf_set_keymap(0, "i", "<S-Enter>", "<Plug>RDSendLine", {desc='Send line & down'})
             vim.api.nvim_buf_set_keymap(0, "v", "<S-Enter>", "<Plug>RDSendSelection", {desc='Send selection & down'})
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<Plug>RSendLine", {desc='Send line'})
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Plug>RDSendLine", {desc='Send line & down'})
             vim.api.nvim_buf_set_keymap(0, "v", prefix .. "l", "<Plug>RSendSelection", {desc='Send selection'})
             vim.api.nvim_buf_set_keymap(0, "v", prefix .. "L", "<Plug>RDSendSelection", {desc='Send selection & down'})
+            vim.api.nvim_buf_set_keymap(0, "i", "<C-Enter>", "<Cmd>lua require('r.send').line(false)<CR>", {desc='Send line'})
+            vim.api.nvim_buf_set_keymap(0, "i", "<S-Enter>", "<Cmd>lua require('r.send').line(true)<CR>", {desc='Send line & down'})
+
             -- TODO: send motions!
 
             -- edit & operators
