@@ -97,6 +97,39 @@ return {
             -- see: https://vi.stackexchange.com/a/3765
           },
         },
+
+        -- local termital_group = vim.api.nvim_create_augroup("terminal", { clear = true })
+        -- vim.api.nvim_create_autocmd('TermOpen', {
+        --   pattern = '*',
+        --   group = termital_group,
+        --   callback = function() 
+        --     vim.keymap.set(
+        --       'n', 
+        --       '<c-e>', 
+        --       [[<c-\><c-n><cmd>e#<cr>]],
+        --       { buffer = 0, desc = "go from t[E]rminal to previous buffer" }
+        --     ) 
+        --     vim.keymap.set(...)
+        --     ...
+        --   end
+        -- })
+
+
+        -- auto_term_filetype = {
+        --   {
+        --     event = "BufType",
+        --     desc = "Close",
+        --     pattern = { "term" },
+        --     callback = function()
+        --       vim.keymap.set("n", "q", "<cmd>close<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
+        --       vim.keymap.set("i", "<c-q>", "<esc><cmd>close!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+        --       vim.keymap.set("n", "<c-q>", "<cmd>close<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+        --       vim.keymap.set("n", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+        --       -- vim.keymap.set("i", "c-C", "<esc><cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
+        --       -- vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+        --     end,
+        --   },
+        -- },
         auto_bufdelete = {
           {
             event = "FileType",
