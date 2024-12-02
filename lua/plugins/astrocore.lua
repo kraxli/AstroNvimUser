@@ -56,20 +56,7 @@ return {
           {
             event = "FileType",
             desc = "Enable wrap and spell for text like documents",
-            pattern = {
-              "gitcommit",
-              "markdown",
-              "text",
-              "plaintex",
-              "python",
-              "R",
-              "r",
-              "rmarkdown",
-              "rmd",
-              "rnoweb",
-              "quarto",
-              "rhelp",
-            },
+            pattern = { "gitcommit", "markdown", "text", "plaintex", "python", "R", "r", "rmarkdown", "rmd", "rnoweb", "quarto", "rhelp", },
             callback = function()
               vim.opt_local.wrap = true
               vim.opt_local.spell = true
