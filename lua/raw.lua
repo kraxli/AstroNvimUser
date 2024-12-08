@@ -13,16 +13,23 @@ vim.cmd [[
   map [z [S<space>fs
   map =z <leader>fs
 
+  nmap zb viwsa*.
+  nmap zi viwsa_
+
   imap jj <ESC>
   imap jk <ESC>
 
   vmap <c-c> y
   xmap <c-c> y
 
+  vmap zb sa*.
+  vmap zi sa_
+
   " map <leader>q <Nop>
   " unmap <leader>q
 ]]
 
+-- vim.keymap.set("n", "zb", "viwsa*.", {noremap=false, desc = "Bold word"})
 
 -- vim.keymap.del()
 vim.keymap.set("n", "X", "<nop>", {})
