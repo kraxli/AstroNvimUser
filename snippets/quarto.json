@@ -24,7 +24,11 @@
     "body": ["```{R}", "$1", "```"],
     "description": "Insert fenced R code block"
   },
-
+  "Insert mermaid block": {
+    "prefix": ["mermaid",  "chunk-mermaid"],
+    "body": ["```mermaid", "$1", "```"],
+    "description": "Insert fenced mermaid code block"
+  },
   "Insert link": {
     "prefix": ["linkk", "link2", "ll", "--"],
     "body": ["[$2]($1) $3"],
