@@ -8,6 +8,7 @@ return {
   			Abolish {infal}{a,}{tion,ted} {infl}{a}{}
   			Abolish {ulita,ulit}mate {ulti}mate 
   			Abolish {anly,anyla,anali}sis {analy}sis
+  			Abolish {Coros} {Corso}
 			]]
     end,
   },
