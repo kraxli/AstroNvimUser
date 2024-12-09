@@ -12,6 +12,7 @@ vim.cmd [[
   map ]z ]S<space>fs
   map [z [S<space>fs
   map =z <leader>fs
+  nmap z= <leader>fs
 
   nmap zb viwsa*.
   nmap zi viwsa_
