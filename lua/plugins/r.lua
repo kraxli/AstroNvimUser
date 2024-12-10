@@ -210,8 +210,8 @@ return {
             keymap_modes({"n", "v"}, "RSendChain",     prefix .. "sc",  {})  -- "<Cmd>lua require('r.send').chain()"
 
             -- Lines
-            keymap_modes({"n", "i", }, "<Plug>RSendMotion",     "m",    {})  --    "<Cmd>set opfunc=v:lua.require'r.send'.motion<CR>g@", true)
-            keymap_modes({"n", "i", }, "<Plug>RSendMotion",     prefix .. "m",    {})  --    "<Cmd>set opfunc=v:lua.require'r.send'.motion<CR>g@", true)
+            keymap_modes({"n", }, "<Plug>RSendMotion",     "m",    {})  --    "<Cmd>set opfunc=v:lua.require'r.send'.motion<CR>g@", true)  -- "i"
+            keymap_modes({"n", }, "<Plug>RSendMotion",     prefix .. "m",    {})  --    "<Cmd>set opfunc=v:lua.require'r.send'.motion<CR>g@", true)  --"i"
             -- keymap_modes({"i"},   "<Plug>RSendLAndOpenNewOne", "q",        {})  --"<Cmd>lua require('r.send').line('newline')")
             keymap_modes({"n"},   "<Plug>RNLeftPart",          "r<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  false)")
             keymap_modes({"n"},   "<Plug>RNLeftPart",          prefix .. "s<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  false)")
