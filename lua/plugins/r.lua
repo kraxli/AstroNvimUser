@@ -132,51 +132,51 @@ return {
 
             -- Start
             -- keymap_modes({"n","v","i"}, "<Plug>RStart", prefix .. "r", {})
-            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').start_R('R')<CR>", prefix .. "r", {desc='R start'})
-            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').start_R('custom')<CR>", prefix .. "R", {desc='R custom start'})
+            keymap_modes({"n", "v"}, "<Cmd>lua require('r.run').start_R('R')<CR>", prefix .. "r", {desc='R start'})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"}, "<Cmd>lua require('r.run').start_R('custom')<CR>", prefix .. "R", {desc='R custom start'})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Close
-            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "Q", {desc='R close'})
-            keymap_modes({"n", "i", "v"}, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", {desc='R save & close'})
+            keymap_modes({"n", "v"}, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "Q", {desc='R close'})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"}, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", {desc='R save & close'})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Clear console
-            keymap_modes({"n","v","i"}, "<Plug>RClearConsole", prefix .. "d", {})
-            keymap_modes({"n","v","i"}, "<Plug>RClearAll", prefix .. "D", {})
+            keymap_modes({"n","v",}, "<Plug>RClearConsole", prefix .. "d", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n","v",}, "<Plug>RClearAll", prefix .. "D", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Print,          names,               structure
-            keymap_modes({"n", "i", "v"},  "<Plug>RObjectPr",         prefix .. "P", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RObjectNames",      prefix .. "n", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RObjectStr",        prefix .. "t", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RDputObj",          "<leader>td", {})
+            keymap_modes({"n", "v"},  "<Plug>RObjectPr",         prefix .. "P", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RObjectNames",      prefix .. "n", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RObjectStr",        prefix .. "t", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RDputObj",          "<leader>td", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
-            keymap_modes({"n", "i"}, "<Plug>RPackages",          prefix .. "P", {})
+            keymap_modes({"n", }, "<Plug>RPackages",          prefix .. "P", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
-            keymap_modes({"n", "i", "v"},  "<Plug>RViewDF",   prefix .. "v", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFs",   prefix .. "Vs", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFv",   prefix .. "Vv", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RViewDFa",   prefix .. "Vh", {})
+            keymap_modes({"n", "v"},  "<Plug>RViewDF",   prefix .. "v", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RViewDFs",   prefix .. "Vs", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RViewDFv",   prefix .. "Vv", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RViewDFa",   prefix .. "Vh", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- keymap_modes({"n"}, '<cmd>lua app = set_csv_app("terminal:vd"); require("r.config").get_config().csv_app = app<CR>', prefix .. "Vt", {})
 
             -- Arguments,      example,      help
-            keymap_modes({"n", "v", "i"}, "<Plug>RShowArgs",  prefix .. "a", {})
-            keymap_modes({"n", "v", "i"}, "<Plug>RShowEx",    prefix .. "e", {})
-            keymap_modes({"n", "v", "i"}, "<Plug>RHelp",      prefix .. "h", {})
+            keymap_modes({"n", "v", }, "<Plug>RShowArgs",  prefix .. "a", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v", }, "<Plug>RShowEx",    prefix .. "e", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v", }, "<Plug>RHelp",      prefix .. "h", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Summary,        plot,       both
-            keymap_modes({"n", "i", "v"},  "<Plug>RSummary",   prefix .. "S", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RPlot",      prefix .. "pp", {})
-            keymap_modes({"n", "i", "v"},  "<Plug>RSPlot",     prefix .. "ps", {})
+            keymap_modes({"n", "v"},  "<Plug>RSummary",   prefix .. "S", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RPlot",      prefix .. "pp", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"},  "<Plug>RSPlot",     prefix .. "ps", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Object Browser
-            keymap_modes({"n", "v", "i"}, "<Plug>ROBToggle",       prefix .. "o", {})
-            keymap_modes({"n", "v", "i"}, "<Plug>ROBOpenLists",   prefix .. "=", {})
-            keymap_modes({"n", "v", "i"}, "<Plug>ROBCloseLists",  prefix .. "-", {})
+            keymap_modes({"n", "v"}, "<Plug>ROBToggle",       prefix .. "o", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"}, "<Plug>ROBOpenLists",   prefix .. "=", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({"n", "v"}, "<Plug>ROBCloseLists",  prefix .. "-", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
 
             -- Miscellaneous
             -- keymap_modes({"n", "i", "v"},  "<Plug>RInsertLineOutput",   "o",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
-            keymap_modes({"n", "i", "v"},  "<Plug>RInsertLineOutput",   prefix .. "I",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
+            keymap_modes({"n", "v"},  "<Plug>RInsertLineOutput",   prefix .. "I",    {})  --    "<Cmd>lua require('r.run').insert_commented()")  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- -------------------------------------------------------
             -- R send
@@ -187,13 +187,13 @@ return {
             vim.api.nvim_buf_set_keymap(0, "v", prefix .. "sL", "<Plug>RDSendSelection", {desc='Send selection'})
 
             -- Paragraph
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  "pp", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "b", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>","pd", {})  --   RDSendParagraph; i mode ?
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "B", {})  --   RDSendParagraph; i mode ?
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  "pp", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "b", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>","pd", {})  --   RDSendParagraph; i mode ?
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "B", {})  --   RDSendParagraph; i mode ?
 
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "sp", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "sP", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "sp", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "sP", {})  -- "RSendParagraph"; i mode ? 
 
             -- Send block - I don't work often with marks
             -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
@@ -217,6 +217,7 @@ return {
             keymap_modes({"n"},   "<Plug>RNLeftPart",          prefix .. "s<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  false)")
             keymap_modes({"n"},   "<Plug>RNRightPart",         "r<right>", {})  --"<Cmd>lua require('r.send').line_part('right', false)")
             keymap_modes({"n"},   "<Plug>RNRightPart",         prefix .. "s<right>", {})  --"<Cmd>lua require('r.send').line_part('right', false)")
+            -- !! insert mode mappigs without ctrl- or alt-key combination
             keymap_modes({"i"},   "<Plug>RILeftPart",          "r<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  true)")
             keymap_modes({"i"},   "<Plug>RILeftPart",          prefix .. "s<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  true)")
             keymap_modes({"i"},   "<Plug>RIRightPart",         "r<right>", {})  --"<Cmd>lua require('r.send').line_part('right', true)")
@@ -260,15 +261,15 @@ return {
               event = { "FileType",},  --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
               pattern = { "r", "R", },
               callback = function ()
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", "aa", {})  -- "RSendFile"
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').source_file()<CR>", prefix .. 'f', {desc="Send file"})  -- "RSendFile"
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", "ao", {})  -- "RshowRout"
-                  keymap_modes({"n", "i"},  "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", {desc="Show R out"})  -- "RshowRout"
+                  keymap_modes({"n"},  "<Cmd>lua require('r.send').source_file()<CR>", "aa", {})  -- "RSendFile"   -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({"n"},  "<Cmd>lua require('r.send').source_file()<CR>", prefix .. 'f', {desc="Send file"})  -- "RSendFile"  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({"n"},  "<Cmd>lua require('r').show_R_out()<CR>", "ao", {})  -- "RshowRout"  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({"n"},  "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", {desc="Show R out"})  -- "RshowRout"  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
                   keymap_modes({"n"},   "<Plug>RSendAboveLines", prefix .. "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
 
                   keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "C", {desc = "Send paragraph"})  -- "RSendParagraph"; i mode ? 
-                  keymap_modes({"n", "i"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", {desc = "Send paragraph & down"})  --   RDSendParagraph; i mode ?
+                  keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", {desc = "Send paragraph & down"})  --   RDSendParagraph; i mode ?
               end
             },
           },
@@ -277,27 +278,27 @@ return {
               event = { "FileType",},  --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
               pattern = { "rmd", "rnoweb", "quarto", "*.rmd", "*.qmd","*.rnoweb", "*.quarto", },
               callback = function ()
-                  keymap_modes({"n", "i"},  "<Plug>RSendChunk",      prefix .. "c", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)"
+                  keymap_modes({"n"},  "<Plug>RSendChunk",      prefix .. "c", {})  -- "<Cmd>lua require('r.rmd').send_R_chunk(false)" -- i-mode ?
                   vim.keymap.set({"n", "v"}, prefix .. "C", "<Plug>RDSendChunk", { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" })
                   keymap_modes({"n"},   "<Plug>RNextRChunk",     prefix .. "gn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
                   keymap_modes({"n"},   "<Plug>RPreviousRChunk", prefix .. "gN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
-                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "su", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
-                  keymap_modes({"n", "i"}, "<Plug>RSendChunkFH", prefix .. "U", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()"
+                  keymap_modes({"n"}, "<Plug>RSendChunkFH", prefix .. "su", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()" -- i-mode?
+                  keymap_modes({"n"}, "<Plug>RSendChunkFH", prefix .. "U", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()" -- i-mode ?
 
                   -- Render script with rmarkdown
-                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeRmd",   prefix .. "kr", {})
-                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeAll",   prefix .. "ka", {})
-                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFK",  prefix .. "kp", {})
-                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakePDFKb", prefix .. "kl", {})
-                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeWord",  prefix .. "kw", {})
-                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeHTML",  prefix .. "kh", {})
-                  keymap_modes({ "n", "v", "i" }, "<Plug>RMakeODT",   prefix .. "ko", {})
+                  keymap_modes({ "n", "v" }, "<Plug>RMakeRmd",   prefix .. "kr", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({ "n", "v" }, "<Plug>RMakeAll",   prefix .. "ka", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({ "n", "v" }, "<Plug>RMakePDFK",  prefix .. "kp", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({ "n", "v" }, "<Plug>RMakePDFKb", prefix .. "kl", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({ "n", "v" }, "<Plug>RMakeWord",  prefix .. "kw", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({ "n", "v" }, "<Plug>RMakeHTML",  prefix .. "kh", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                  keymap_modes({ "n", "v" }, "<Plug>RMakeODT",   prefix .. "ko", {})  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
                   -- rmd & quarto
-                  keymap_modes({"n", "v", "i"}, "<Plug>RKnit",  prefix .. "kk", {})  -- "<Cmd>lua require('r.run').knit()"
+                  keymap_modes({"n", "v"}, "<Plug>RKnit",  prefix .. "kk", {})  -- "<Cmd>lua require('r.run').knit()"  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
                   -- if config.rm_knit_cache then
-                  keymap_modes({"n", "v", "i"}, "<Plug>RKnitRmCache", prefix .. "kc", {})  -- "<Cmd>lua require('r.rnw').rm_knit_cache()"
+                  keymap_modes({"n", "v"}, "<Plug>RKnitRmCache", prefix .. "kc", {})  -- "<Cmd>lua require('r.rnw').rm_knit_cache()"  -- i-mode removed (to be mapped to ctrl or alt key combination)
                   -- end
 
               end
@@ -319,17 +320,17 @@ return {
               event = { "FileType",},  --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
               pattern = { "rnoweb", },
               callback = function ()
-                  keymap_modes({"n", "v", "i"}, "<Plug>RSweave",     prefix .. "ks", {})  -- "<Cmd>lua require('r.rnw').weave('nobib',  false, false)"
-                  keymap_modes({"n", "v", "i"}, "<Plug>RMakePDF",    prefix .. "kP", {})  -- "<Cmd>lua require('r.rnw').weave('nobib',  false, true)"
-                  keymap_modes({"n", "v", "i"}, "<Plug>RBibTeX",     prefix .. "kb", {})  -- "<Cmd>lua require('r.rnw').weave('bibtex', false, true)"
-                  keymap_modes({"n", "v", "i"}, "<Plug>RKnit",       prefix .. "kn", {})  -- "<Cmd>lua require('r.rnw').weave('nobib',  true, false)"
-                  keymap_modes({"n", "v", "i"}, "<Plug>RBibTeXK",    prefix .. "kB", {})  -- "<Cmd>lua require('r.rnw').weave('bibtex', true, true)"
-                  keymap_modes({"n", "v", "i"}, "<Plug>ROpenPDF",    prefix .. "gp", {})  -- "<Cmd>lua require('r.pdf').open('Get Master')"
-                  keymap_modes({"n", "v", "i"}, "<Plug>ROpenPDF",    prefix .. "Op", {})  -- "<Cmd>lua require('r.pdf').open('Get Master')"
-                  -- if config.synctex then
-                  keymap_modes({"n", "i"}, "<Plug>SyncFor", prefix .. "gs", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(false)"
-                  keymap_modes({"n", "i"}, "<Plug>GoToTeX", prefix .. "gt", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(true)"
-                  keymap_modes({"n", "i"}, "<Plug>GoToTeX", prefix .. "Ot", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(true)"
+                  keymap_modes({"n", "v"}, "<Plug>RSweave",     prefix .. "ks", {})  -- "<Cmd>lua require('r.rnw').weave('nobib',  false, false)"  -- i-mode ?
+                  keymap_modes({"n", "v"}, "<Plug>RMakePDF",    prefix .. "kP", {})  -- "<Cmd>lua require('r.rnw').weave('nobib',  false, true)"  -- i-mode ?
+                  keymap_modes({"n", "v"}, "<Plug>RBibTeX",     prefix .. "kb", {})  -- "<Cmd>lua require('r.rnw').weave('bibtex', false, true)"  -- i-mode ?
+                  keymap_modes({"n", "v"}, "<Plug>RKnit",       prefix .. "kn", {})  -- "<Cmd>lua require('r.rnw').weave('nobib',  true, false)"  -- i-mode ?
+                  keymap_modes({"n", "v"}, "<Plug>RBibTeXK",    prefix .. "kB", {})  -- "<Cmd>lua require('r.rnw').weave('bibtex', true, true)"  -- i-mode ?
+                  keymap_modes({"n", "v"}, "<Plug>ROpenPDF",    prefix .. "gp", {})  -- "<Cmd>lua require('r.pdf').open('Get Master')"  -- i-mode ?
+                  keymap_modes({"n", "v"}, "<Plug>ROpenPDF",    prefix .. "Op", {})  -- "<Cmd>lua require('r.pdf').open('Get Master')"  -- i-mode ?
+                  -- if config.synctex then  -- i-mode ?
+                  keymap_modes({"n"}, "<Plug>SyncFor", prefix .. "gs", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(false)"  -- i-mode ?
+                  keymap_modes({"n"}, "<Plug>GoToTeX", prefix .. "gt", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(true)"  -- i-mode ?
+                  keymap_modes({"n"}, "<Plug>GoToTeX", prefix .. "Ot", {})  -- "<Cmd>lua require('r.rnw').SyncTeX_forward(true)"  -- i-mode ?
                   -- end
               end
 
