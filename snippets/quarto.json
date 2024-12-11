@@ -33,5 +33,10 @@
     "prefix": ["linkk", "link2", "ll", "--"],
     "body": ["[$2]($1) $3"],
     "description": "Insert markdown link"
+  },
+    "Insert right-arrow": {
+    "prefix": ["->", "-->", ">>"],
+    "body": ["→", "$1"],
+    "description": "Insert right-arrow"
   }
 }
