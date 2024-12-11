@@ -10,6 +10,8 @@ return {
   			Abolish {anly,anyla,anali}sis {analy}sis
   			Abolish {Coros,Corso} {CorSo}
 			Abolish {alos} {also}
+			Abolish {boostrap} {bootstrap}
+			Abolish {seperate} {separate}
 			]]
     end,
   },
