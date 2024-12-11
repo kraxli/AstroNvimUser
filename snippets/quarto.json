@@ -36,7 +36,7 @@
   },
     "Insert right-arrow": {
     "prefix": ["->", "-->", ">>"],
-    "body": ["→", "$1"],
+    "body": ["→ "],
     "description": "Insert right-arrow"
   }
 }
