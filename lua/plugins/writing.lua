@@ -8,10 +8,12 @@ return {
   			Abolish {infal}{a,}{tion,ted} {infl}{a}{}
   			Abolish {ulita,ulit}mate {ulti}mate 
   			Abolish {anly,anyla,anali}sis {analy}sis
-  			Abolish {Coros,Corso} {CorSo}
+  			Abolish {Cor, cor}{os,so} {CorSo}
 			Abolish {alos} {also}
 			Abolish {boostrap} {bootstrap}
 			Abolish {seperate} {separate}
+			Abolish {boostrap} {bootstrap}
+			Abolish {exlclud,exlcud}{e,ed} {exclud}{}
 			]]
     end,
   },
