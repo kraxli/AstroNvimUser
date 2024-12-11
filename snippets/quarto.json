@@ -38,5 +38,10 @@
     "prefix": ["->", "-->", ">>"],
     "body": ["→ "],
     "description": "Insert right-arrow"
-  }
+  },
+  "Insert long-right-arrow": {
+    "prefix": ["-->"],
+    "body": ["⟶ "],
+    "description": "Insert long-right-arrow"
+  }  
 }
