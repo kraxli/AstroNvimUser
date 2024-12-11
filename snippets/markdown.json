@@ -30,10 +30,15 @@
     "description": "Insert markdown link"
   },
   "Insert right-arrow": {
-    "prefix": ["->", "-->", ">>"],
+    "prefix": ["->", ">>"],
     "body": ["→ "],
     "description": "Insert right-arrow"
   },
+  "Insert long-right-arrow": {
+    "prefix": ["-->"],
+    "body": ["⟶ "],
+    "description": "Insert long-right-arrow"
+  },  
   "Insert mermaid block": {
     "prefix": ["mermaid",  "codeblock-mermaid"],
     "body": ["```mermaid", "$1", "```"],
