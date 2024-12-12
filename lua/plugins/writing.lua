@@ -172,7 +172,7 @@ return {
 			  let g:bullets_checkbox_markers = ' .oOX'  " '✗○◐●✓'
 			  let g:bullets_checkbox_partials_toggle = 1
 			  let g:bullets_set_mappings = 0 " disable adding default key mappings, default = 1
-			  let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-',]  -- 'std*', 'std+'
+			  let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-' ]   " -- 'std*', 'std+'
 
 				" default = []
 				" N.B. You can set these mappings as-is without using this g:bullets_custom_mappings option but it
