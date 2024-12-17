@@ -16,9 +16,9 @@ return {
 			Abolish tri{nag,ng}{el}{s} tri{ang}{le}{s}
 			Abolish {highlevel} {high-level}
 			Abolish {occurence} {occurrence}
-			Abolish {heterogen}{ous,ious} {}{eous} 
+			Abolish {heterogen}{ous,ious} {heterogen}{eous} 
 			Abolish {tain}ing{s} {train}ing{s}
-			Abolish {profit}{abe,abel} {}{able}
+			Abolish {profit}{abe,abel} {profit}{able}
 			]]
     end,
   },
