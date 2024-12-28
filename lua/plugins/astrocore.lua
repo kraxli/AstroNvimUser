@@ -192,6 +192,18 @@ return {
             end
           }
         },
+        auto_text_files = {
+          {
+            event = "FileType",
+            desc = "Markdown-, text-, tex-file autocmds",
+            pattern = {"markdown", 'tex', 'text'},
+            callback = function()
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Docx', ':!pandoc % -o "%:p:r.docx"', {})
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Html', ':!pandoc % -o "%:p:r.html"', {})
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Pdf', ':!pandoc % -o "%:p:r.pdf"', {})
+            end,
+          },
+        },
         -- sync_term_background = {
         --   {
         --     event = { "UIEnter", "User" },
