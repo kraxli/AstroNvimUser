@@ -2,6 +2,10 @@ return {
   {
     "zbirenbaum/copilot.lua",
     enabled = vim.fn.has "win64" == 1,
+    filetypes = {
+      markdown = true,  -- allow specific filetype
+      -- ["*"] = false, -- disable for all other filetypes and ignore default `filetypes`
+    },
     specs = {
       { import = "astrocommunity.completion.copilot-lua" },
       {
