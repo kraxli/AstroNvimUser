@@ -1,11 +1,15 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    enabled = vim.fn.has "win64" == 1,
-    filetypes = {
-      markdown = true,  -- allow specific filetype
-      -- ["*"] = false, -- disable for all other filetypes and ignore default `filetypes`
-    },
+    -- enabled = vim.fn.has "win64" == 1,
+    event = "InsertEnter",
+
+    opts = function(_, opts)
+      opts.filetypes = {
+        markdown = true,
+      }
+    end,
+
     specs = {
       { import = "astrocommunity.completion.copilot-lua" },
       {
@@ -38,7 +42,7 @@ return {
 
           opts.mapping["<M-CR>"] = cmp.mapping(function(fallback)
             if copilot.is_visible() then copilot.accept() end
-          end, {"i", "s"})
+          end, { "i", "s" })
 
           opts.mapping["<M-down>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.next() end
@@ -61,46 +65,12 @@ return {
           opts.mapping["<M-c>"] = cmp.mapping(function()
             if copilot.is_visible() then copilot.dismiss() end
           end)
+
           return opts
         end,
       },
     },
   },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   opts = {},
-  --   dependencies = {
-  --     {
-  --       "zbirenbaum/copilot.lua",
-  --       opts = {
-  --         suggestion = { enabled = true },
-  --         panel = { enabled = false },
-  --       },
-  --     },
-  --   },
-  --   specs = {
-  --     { import = "astrocommunity.completion.copilot-lua" },
-  --     {
-  --       "hrsh7th/nvim-cmp",
-  --       optional = true,
-  --       dependencies = { "zbirenbaum/copilot-cmp" },
-  --       opts = function(_, opts)
-  --         -- Inject copilot into cmp sources, with high priority
-  --         table.insert(opts.sources, 1, {
-  --           name = "copilot",
-  --           group_index = 1,
-  --           priority = 10000,
-  --         })
-  --       end,
-  --     },
-  --     {
-  --       "onsails/lspkind.nvim",
-  --       optional = true,
-  --       -- Adds icon for copilot using lspkind
-  --       opts = function(_, opts) opts.symbol_map.Copilot = "" end,
-  --     },
-  --   },
-  -- },
   {
     "onsails/lspkind.nvim",
     optional = true,
