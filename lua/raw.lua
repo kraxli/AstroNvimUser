@@ -15,6 +15,7 @@ vim.cmd [[
   nmap z= <leader>fs
 
   nmap zb viwsa*.
+  nmap sb viwsa*.
   nmap zi viwsa_
 
   imap jj <ESC>
@@ -24,6 +25,7 @@ vim.cmd [[
   xmap <c-c> y
 
   vmap zb sa*.
+  vmap sb sa*.
   vmap zi sa_
 
   " map <leader>q <Nop>
