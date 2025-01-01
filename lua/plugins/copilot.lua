@@ -10,7 +10,6 @@ return {
         opts.filetypes = {}
       end
 
-      -- table.insert(opts.filetypes, { markdown = true } )
       opts.filetypes["markdown"] = true
 
     end,
