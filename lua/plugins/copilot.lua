@@ -5,9 +5,14 @@ return {
     event = "InsertEnter",
 
     opts = function(_, opts)
-      opts.filetypes = {
-        markdown = true,
-      }
+
+      if not opts.filetypes then
+        opts.filetypes = {}
+      end
+
+      -- table.insert(opts.filetypes, { markdown = true } )
+      opts.filetypes["markdown"] = true
+
     end,
 
     specs = {
