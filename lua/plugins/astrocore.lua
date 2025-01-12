@@ -198,9 +198,12 @@ return {
             desc = "Markdown-, text-, tex-file autocmds",
             pattern = {"markdown", 'tex', 'text'},
             callback = function()
-              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Docx', ':!pandoc % -o "%:p:r.docx"', {})
-              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Html', ':!pandoc % -o "%:p:r.html"', {})
-              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Pdf', ':!pandoc % -o "%:p:r.pdf"', {})
+              local timestamp = os.date("%Y-%m-%d-T%H%M%S")
+              -- local timestamp = os.date("%Y-%m-%d-T%H:%M:%S")
+              local cmd_trunk = ':!pandoc % -o "%:p:r_' .. timestamp
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Docx', cmd_trunk .. '.docx"', {})
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Html', cmd_trunk .. '.html"', {})
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Pdf',  cmd_trunk .. '.pdf"', {})
             end,
           },
         },
