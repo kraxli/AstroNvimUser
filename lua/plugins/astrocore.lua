@@ -256,6 +256,9 @@ return {
           ["<Leader>ot"] = false,
           ["<Leader>oT"] = false,
 
+          -- use treesitter spelling suggestions
+          ["z="] = false,
+
           ["<C-Q>"] = false,
           ["<C-S>"] = false,
           ["q:"] = ":",

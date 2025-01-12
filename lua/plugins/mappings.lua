@@ -114,7 +114,15 @@ return {
             desc = "Previous buffer",
           },
           -- name = "Find / Search",
+          [prefixFind .. "j"] = {
+            '<cmd>lua require("telescope.builtin").jumplist()<CR>',
+            desc = "Jump list",
+          },
           -- " Spelling
+          ["z="] = {
+            '<cmd>lua require("telescope.builtin").spell_suggest()<CR>',
+            desc = "Spell suggestions",
+          },
           [prefixFind .. "s"] = {
             '<cmd>lua require("telescope.builtin").spell_suggest()<CR>',
             desc = "Spell suggestions",
