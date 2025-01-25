@@ -19,6 +19,16 @@ end
 
 --- }}}
 
+-- Markdown {{{
+
+function M.pandoc2(file_ext)
+  local timestamp = os.date("%Y-%m-%d-T%H%M%S")
+  local cmd = '!pandoc % -o "%:p:r_' .. timestamp .. '.' .. file_ext .. '"'
+  vim.cmd(cmd)
+end
+
+-- }}}
+
 function M.create_toggle_term(args, count)
   -- local fn = vim.fn
   local term = require("toggleterm.terminal").get(count)

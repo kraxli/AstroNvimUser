@@ -203,12 +203,9 @@ return {
               local diagnostic_mode = 0 -- 0: off, 1: only status diagnostics, 2: on with virtual text
               vim.diagnostic.config(require("astrocore").diagnostics[0])
 
-              local timestamp = os.date("%Y-%m-%d-T%H%M%S")
-              -- local timestamp = os.date("%Y-%m-%d-T%H:%M:%S")
-              local cmd_trunk = ':!pandoc % -o "%:p:r_' .. timestamp
-              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Docx', cmd_trunk .. '.docx"', {})
-              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Html', cmd_trunk .. '.html"', {})
-              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Pdf',  cmd_trunk .. '.pdf"', {})
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Docx', ":lua require('utils').pandoc2('docx')" , {})
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Html', ":lua require('utils').pandoc2('html')" , {})
+              vim.api.nvim_buf_create_user_command(0, 'Pandoc2Pdf', ":lua require('utils').pandoc2('pdf')" , {})
             end,
           },
         },
