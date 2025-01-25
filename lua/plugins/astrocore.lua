@@ -198,6 +198,11 @@ return {
             desc = "Markdown-, text-, tex-file autocmds",
             pattern = {"markdown", 'tex', 'text'},
             callback = function()
+
+              -- default diagnostic mode:
+              local diagnostic_mode = 0 -- 0: off, 1: only status diagnostics, 2: on with virtual text
+              vim.diagnostic.config(require("astrocore").diagnostics[0])
+
               local timestamp = os.date("%Y-%m-%d-T%H%M%S")
               -- local timestamp = os.date("%Y-%m-%d-T%H:%M:%S")
               local cmd_trunk = ':!pandoc % -o "%:p:r_' .. timestamp
