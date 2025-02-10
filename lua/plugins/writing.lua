@@ -19,7 +19,7 @@ return {
 			Abolish {heterogen}{ous,ious} {heterogen}{eous} 
 			Abolish {tain}ing{s} {train}ing{s}
 			Abolish {profit}{abe,abel} {profit}{able}
-			Abolish {ifrs}{IFRS}
+			Abolish {ifrs} {IFRS}
 			]]
     end,
   },
