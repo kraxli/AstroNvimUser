@@ -1,4 +1,6 @@
 
+-- kraxli: own setup:
+pcall(require, "user.settings")
 pcall(require, "global_vars")
 
 -- bootstrap lazy.nvim, AstroNvim, and user plugins
@@ -19,7 +21,6 @@ end
 require "lazy_setup"
 
 -- kraxli: own setup:
-pcall(require, "user.settings")
 -- local dir_nvim_local =  os.getenv "XDG_CONFIG_HOME"
 -- vim.opt.rtp:append(dir_nvim_local)
 -- pcall(require, dir_nvim_local .. "/nvim-local.settings")
