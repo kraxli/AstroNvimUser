@@ -1,5 +1,12 @@
 local prefix = "<Leader>o"
 
+local file_gtd_actions = 'gtd-actions.org'
+file_path_gtd_actions = vim.g.dirPkd .. '/org/' .. file_gtd_actions
+local cmd_open_org_actions = ":lua vim.cmd(':e' .. file_path_gtd_actions)"
+
+vim.api.nvim_create_user_command('OrgActions', cmd_open_org_actions, {})
+vim.keymap.set('n', '<leader>oo', cmd_open_org_actions .. '<CR>', {noremap = true, desc='Open gtd-actions'})
+
 return {
   {
     "nvim-orgmode/orgmode",
@@ -10,7 +17,7 @@ return {
       -- Setup orgmode
       require("orgmode").setup {
         org_agenda_files = vim.fn.has "unix" and vim.g.dirPkd .. "/**/*" or vim.g.dirPkd .. "/org/**",
-        org_default_notes_file = vim.g.dirPkd .. "/org/refile.org",
+        org_default_notes_file = file_path_gtd_actions,  -- refile
         org_startup_folded = "showeverything", -- inherit, showeverything, content, overview
         org_capture_templates = { t = { description = "Task", template = "* TODO %?\nSCHEDULED: %t" } },
         mappings = {
@@ -23,6 +30,7 @@ return {
             org_set_tags_command = prefix .. ":",
             org_todo = prefix .. "t",
             org_todo_prev = prefix .. "T",
+            org_open_at_point = prefix .. "O",
           },
         },
       }
