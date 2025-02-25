@@ -2,7 +2,7 @@ local prefix = "<Leader>o"
 
 local file_gtd_actions = 'gtd-actions.org'
 file_path_gtd_actions = vim.g.dirPkd .. '/org/' .. file_gtd_actions
-local cmd_open_org_actions = ":lua vim.cmd(':e' .. file_path_gtd_actions)"
+local cmd_open_org_actions = ":lua vim.cmd(':e ' .. file_path_gtd_actions)"
 
 vim.api.nvim_create_user_command('OrgActions', cmd_open_org_actions, {})
 vim.keymap.set('n', '<leader>oo', cmd_open_org_actions .. '<CR>', {noremap = true, desc='Open gtd-actions'})
