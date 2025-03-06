@@ -79,10 +79,10 @@ M = {
 local tools_unix_only = {
   "tree-sitter-cli",
   -- "delve",
-  "regols",
+  -- "regols",
   -- "neocmakelsp",
   "ansible-lint",
-  "gopls",
+  -- "gopls",
 }
 
 -- if vim.fn.has "unix" == 1 then table.insert(M.opts.ensure_installed, tools_unix_only) end
