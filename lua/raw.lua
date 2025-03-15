@@ -64,7 +64,7 @@ vim.cmd([[
 
   " Commpands
   command! HelpVim :execute('e ' . g:dirOnedrive . 'VimWiki/VimCommands_learning_Vi_Vim.wiki')
-  command! InstallLinux :execute('e ' . g:dirDbox . 'LinuxInstall/A_linux_mint_install_2024_woNvim.sh') 
+  command! InstallLinux :execute('e ' . g:dirDbox . 'LinuxInstall/A_linux_mint_install_2025_woNvim.sh') 
   command! InstallNvim :execute('e ' . g:dirDbox . 'LinuxInstall/nvim_install.sh') 
 
   command! Bash :execute('e ' . g:dirOnedrive . 'SoftwareTools/Linux/Shell/bash_summary.sh')
