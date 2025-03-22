@@ -98,7 +98,7 @@ return {
         -- remove_mark = "<space>md",
         cr = "<space>r<cr>",
         interrupt = "<space>r<space>", -- ri or rd ?
-        exit = "<space>rq", -- TODO: create autocommand with close q
+        exit = "<space>rq",  -- TODO: create autocommand with close q
         clear = "<space>rc",
       },
       -- If the highlight is on, you can change how it looks
@@ -137,6 +137,7 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, desc = "Send file" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, desc = "Send line" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "s", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, desc = "Send line" })
+              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "l", "<cmd> lua require 'iron.core'.visual_send()<CR>", { expr = false, noremap = true, desc = "Send selection" })
               -- send file: aa
 
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
