@@ -12,7 +12,7 @@ local pdfviewer = ''  -- use default pdfviewer
 local graphical_device = 'X11'
 
 if vim.fn.has('win64') == 1 then
-  r_path = "C:\\Program Files\\R\\R-4.3.1\\bin\\x64"
+  r_path = "C:\\Program Files\\R\\R-4.4.2\\bin\\x64"
   -- csv_app = "terminal:vd"
   graphical_device = 'windows'
   pdfviewer = 'mupdf'  -- or sumatra
