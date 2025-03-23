@@ -179,45 +179,45 @@ return {
             vim.api.nvim_buf_set_keymap(0, "i", "<C-Enter>", "<Cmd>lua require('r.send').line(false)<CR>", {desc='Send line'})
             vim.api.nvim_buf_set_keymap(0, "i", "<S-Enter>", "<Cmd>lua require('r.send').line(true)<CR>", {desc='Send line & down'})
 
-            -- TODO: send motions!
-
-
-            -- Paragraph
-            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  "pp", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "b", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>","pd", {})  --   RDSendParagraph; i mode ?
-            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "B", {})  --   RDSendParagraph; i mode ?
-
-            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "sp", {})  -- "RSendParagraph"; i mode ? 
-            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "sP", {})  -- "RSendParagraph"; i mode ? 
-
-            -- Send block - I don't work often with marks
-            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
-            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(true)<CR>",  "bd", {}) -- "<Plug>RDSendMBlock<CR>"
+            -- Send Pipe chain breaker
+            keymap_modes({"n", "v"}, "RSendChain",     prefix .. "xc",  {})  -- "<Cmd>lua require('r.send').chain()"
 
             -- Function
             keymap_modes({"n", "v"}, "<Plug>RSendAllFun",    "fa",     {})  -- "<Cmd>lua require('r.send').funs(0, true, false)"
             keymap_modes({"n", "v"}, "<Plug>RSendCurrentFun",   "fc",  {})  -- "<Cmd>lua require('r.send').funs(0, false, false)"
-            keymap_modes({"n", "v"}, "<Plug>RSendCurrentFun",   prefix .. "sf",  {})  -- "<Cmd>lua require('r.send').funs(0, false, false)"
+            keymap_modes({"n", "v"}, "<Plug>RSendCurrentFun",   prefix .. "xf",  {})  -- "<Cmd>lua require('r.send').funs(0, false, false)"
             keymap_modes({"n", "v"}, "<Plug>RDSendCurrentFun",   "fd", {})  -- "<Cmd>lua require('r.send').funs(0, false, true)"
-            keymap_modes({"n", "v"}, "<Plug>RDSendCurrentFun",   prefix .. "sF", {})  -- "<Cmd>lua require('r.send').funs(0, false, true)"
-
-            -- Pipe chain breaker
-            keymap_modes({"n", "v"}, "RSendChain",     prefix .. "sc",  {})  -- "<Cmd>lua require('r.send').chain()"
+            keymap_modes({"n", "v"}, "<Plug>RDSendCurrentFun",   prefix .. "xF", {})  -- "<Cmd>lua require('r.send').funs(0, false, true)"
 
             -- Lines
             keymap_modes({"n", }, "<Plug>RSendMotion",     "m",    {})  --    "<Cmd>set opfunc=v:lua.require'r.send'.motion<CR>g@", true)  -- "i"
             keymap_modes({"n", }, "<Plug>RSendMotion",     prefix .. "m",    {})  --    "<Cmd>set opfunc=v:lua.require'r.send'.motion<CR>g@", true)  --"i"
             -- keymap_modes({"i"},   "<Plug>RSendLAndOpenNewOne", "q",        {})  --"<Cmd>lua require('r.send').line('newline')")
             keymap_modes({"n"},   "<Plug>RNLeftPart",          "r<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  false)")
-            keymap_modes({"n"},   "<Plug>RNLeftPart",          prefix .. "s<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  false)")
+            keymap_modes({"n"},   "<Plug>RNLeftPart",          prefix .. "x<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  false)")
             keymap_modes({"n"},   "<Plug>RNRightPart",         "r<right>", {})  --"<Cmd>lua require('r.send').line_part('right', false)")
-            keymap_modes({"n"},   "<Plug>RNRightPart",         prefix .. "s<right>", {})  --"<Cmd>lua require('r.send').line_part('right', false)")
+            keymap_modes({"n"},   "<Plug>RNRightPart",         prefix .. "x<right>", {})  --"<Cmd>lua require('r.send').line_part('right', false)")
             -- !! insert mode mappigs without ctrl- or alt-key combination
             keymap_modes({"i"},   "<Plug>RILeftPart",          "r<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  true)")
-            keymap_modes({"i"},   "<Plug>RILeftPart",          prefix .. "s<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  true)")
+            keymap_modes({"i"},   "<Plug>RILeftPart",          prefix .. "x<left>",  {})  --"<Cmd>lua require('r.send').line_part('left',  true)")
             keymap_modes({"i"},   "<Plug>RIRightPart",         "r<right>", {})  --"<Cmd>lua require('r.send').line_part('right', true)")
-            keymap_modes({"i"},   "<Plug>RIRightPart",         prefix .. "s<right>", {})  --"<Cmd>lua require('r.send').line_part('right', true)")
+            keymap_modes({"i"},   "<Plug>RIRightPart",         prefix .. "x<right>", {})  --"<Cmd>lua require('r.send').line_part('right', true)")
+
+
+            -- TODO: send motions!
+
+            -- Send Paragraph
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  "pp", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "b", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>","pd", {})  --   RDSendParagraph; i mode ?
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "B", {})  --   RDSendParagraph; i mode ?
+
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "xp", {})  -- "RSendParagraph"; i mode ? 
+            keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "xP", {})  -- "RSendParagraph"; i mode ? 
+
+            -- Send block - I don't work often with marks
+            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
+            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(true)<CR>",  "bd", {}) -- "<Plug>RDSendMBlock<CR>"
 
             -- If you want an action over an selection, then the second
             -- argument must be the string `"v"`:
@@ -262,7 +262,7 @@ return {
                   keymap_modes({"n"},  "<Cmd>lua require('r').show_R_out()<CR>", "ao", {})  -- "RshowRout"  -- i-mode removed (to be mapped to ctrl or alt key combination)
                   keymap_modes({"n"},  "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", {desc="Show R out"})  -- "RshowRout"  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
-                  keymap_modes({"n"},   "<Plug>RSendAboveLines", prefix .. "su", {})  -- "<Cmd>lua require('r.send').above_lines()"
+                  keymap_modes({"n"},   "<Plug>RSendAboveLines", prefix .. "xu", {})  -- "<Cmd>lua require('r.send').above_lines()"
 
                   keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(false)<CR>",  prefix .. "C", {desc = "Send paragraph"})  -- "RSendParagraph"; i mode ? 
                   keymap_modes({"n"}, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", {desc = "Send paragraph & down"})  --   RDSendParagraph; i mode ?
@@ -278,7 +278,7 @@ return {
                   vim.keymap.set({"n", "v"}, prefix .. "C", "<Plug>RDSendChunk", { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" })
                   keymap_modes({"n"},   "<Plug>RNextRChunk",     prefix .. "gn", {})  -- "<Cmd>lua require('r.rmd').next_chunk()"
                   keymap_modes({"n"},   "<Plug>RPreviousRChunk", prefix .. "gN", {})  -- "<Cmd>lua require('r.rmd').previous_chunk()"
-                  keymap_modes({"n"}, "<Plug>RSendChunkFH", prefix .. "su", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()" -- i-mode?
+                  keymap_modes({"n"}, "<Plug>RSendChunkFH", prefix .. "xu", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()" -- i-mode?
                   keymap_modes({"n"}, "<Plug>RSendChunkFH", prefix .. "U", {desc="Run chunks above"})  -- "<Cmd>lua require('r.send').chunks_up_to_here()" -- i-mode ?
 
                   -- Render script with rmarkdown
@@ -357,11 +357,11 @@ return {
                   { "<localleader>t", group = " 󰟔 Run (dput)" },
 
                   -- {prefix .. "m", group = '   Rmarkdown send'},
-                  {prefix .. "g", group = ' Go to'},
-                  {prefix .. "O", group = ' Open'},
-                  {prefix .. "p", group = ' Plots'},
-                  {prefix .. "q", group = ' Quarto'},
-                  {prefix .. "s", group = ' Send'},
+                  {prefix .. "g", group = ' 󰟔 Go to'},
+                  {prefix .. "O", group = ' 󰟔 Open'},
+                  {prefix .. "p", group = ' 󰟔 Plots'},
+                  {prefix .. "q", group = ' 󰟔 Quarto'},
+                  {prefix .. "x", group = ' 󰟔 Execute / Send'},
                 }
               end,
             },
