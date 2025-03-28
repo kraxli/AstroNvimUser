@@ -11,7 +11,6 @@ git clone https://github.com/kraxli/AstroNvimUser.git ~/.config/nvim
 ```
 
 Initialize AstroVim
-
 ```zsh
 nvim  --headless -c 'quitall'
 ```

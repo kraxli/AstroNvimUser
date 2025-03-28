@@ -1,3 +1,2 @@
 ---@type LazySpec
--- return { "wakatime/vim-wakatime", event = "User AstroFile" }
-return {}
+-- return { "wakatime/vim-wakatime", lazy = false }

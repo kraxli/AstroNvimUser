@@ -4,13 +4,12 @@ return {
   cmd = "Trouble",
   opts = function()
     local get_icon = require("astroui").get_icon
-    local lspkind_avail, lspkind = pcall(require, "lspkind")
 
     ---@type trouble.Config
     return {
       keys = {
         ["<Esc>"] = "close",
-        ["<C-e>"] = "cancel",
+        ["<C-E>"] = "cancel",
       },
       icons = {
         indent = {
@@ -19,7 +18,6 @@ return {
         },
         folder_closed = get_icon "FolderClosed",
         folder_open = get_icon "FolderOpen",
-        kinds = lspkind_avail and lspkind.symbol_map,
       },
     }
   end,

@@ -230,6 +230,10 @@ return {
       diagnostics = {
         update_in_insert = false,
         virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
+        virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.WARN } },
+      },
+      features = {
+        diagnostics = { virtual_lines = false },
       },
       filetypes = {
         extension = {
@@ -239,6 +243,9 @@ return {
           qmd = "markdown",
           yaml = yaml_ft,
           yml = yaml_ft,
+          j2 = "jinja",
+          jinja2 = "jinja",
+          jinja = "jinja",
         },
         filename = {
           ["docker-compose.yaml"] = "yaml.docker-compose",
@@ -270,8 +277,6 @@ return {
           ["c:"] = "q:",
           ["X"] = ":x<CR>",
           -- better buffer navigation
-          ["]b"] = false,
-          ["[b"] = false,
           ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
           ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
           -- better search
@@ -329,7 +334,6 @@ return {
         },
         -- insert mode
         i = {
-          ["<C-S>"] = { function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
           ["<S-Tab>"] = { "<C-V><Tab>", desc = "Tab character" },
 
           -- saving
