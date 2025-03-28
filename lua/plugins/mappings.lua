@@ -46,6 +46,7 @@ return {
         },
         n = {
           ["diw"] = {"diwx", desc = "Delete word and space"},
+          ["c"] = {"q", desc = "Quit buffer (:q)"},
 
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
           -- ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
