@@ -8,6 +8,8 @@ rustup install stable
 cargo +stable install jinja-lsp
 ```
 
+see: https://stackoverflow.com/questions/22758779/is-it-possible-to-have-multiple-coexisting-rust-installations
+
 ## Guide to install neovim on Windows
 
 [The Comprehensive Guide to Using Neovim with LSP and Treesitter on Windows Without Admin Rights](https://devctrl.blog/posts/neovim-on-windows/#treesitter-configuration)
