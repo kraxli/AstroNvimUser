@@ -1,5 +1,12 @@
 # Fixes and Workarounds
 
+## rust / cargo / rustc version incompatibility
+
+```sh
+rustup install stable
+# e.g.
+cargo +stable install jinja-lsp
+```
 
 ## Guide to install neovim on Windows
 
