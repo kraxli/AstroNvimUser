@@ -1,9 +1,0 @@
-# selene.toml may be the problem with ^M file ending in some vim-plugins / vim-files (?)
-std = "neovim"
-
-[rules]
-global_usage = "allow"
-if_same_then_else = "allow"
-incorrect_standard_library_use = "allow"
-mixed_table = "allow"
-multiple_statements = "allow"
