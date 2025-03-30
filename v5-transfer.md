@@ -1,0 +1,3 @@
+- [x] init.lua
+- [x] lua/plugins/astrocore
+- [x] lua/plugins/telescope.lua
