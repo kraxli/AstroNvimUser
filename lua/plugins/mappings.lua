@@ -19,7 +19,7 @@ return {
           -- cnoremap <C-f> <Right>
           -- cnoremap <C-b> <Left>
 
-            -- ["<Up>"] = {
+          -- ["<Up>"] = {
           --   function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>" end,
           --   expr = true,
           --   silent = false,
