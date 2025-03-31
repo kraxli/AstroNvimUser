@@ -1,7 +1,4 @@
 local prefixBuffer = "<leader>b"
-local prefixFind = "<leader>f"
-
-local Snacks = require "snacks"
 
 return {
   {
@@ -21,18 +18,19 @@ return {
           -- cnoremap <C-l> <End>
           -- cnoremap <C-f> <Right>
           -- cnoremap <C-b> <Left>
-          ["<Up>"] = {
-            function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>" end,
-            expr = true,
-            silent = false,
-            desc = "Select item above",
-          },
-          ["<Down>"] = {
-            function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>" end,
-            expr = true,
-            silent = false,
-            desc = "Select item below",
-          },
+
+            -- ["<Up>"] = {
+          --   function() return vim.fn.pumvisible() == 1 and "<C-p>" or "<Up>" end,
+          --   expr = true,
+          --   silent = false,
+          --   desc = "Select item above",
+          -- },
+          -- ["<Down>"] = {
+          --   function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Down>" end,
+          --   expr = true,
+          --   silent = false,
+          --   desc = "Select item below",
+          -- },
         },
         i = {
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
