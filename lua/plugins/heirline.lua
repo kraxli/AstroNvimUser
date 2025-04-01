@@ -7,7 +7,7 @@ return {
       ---@type AstroUIOpts
       opts = {
         icons = {
-          Clock = "", -- add icon for clock
+          Clock = " ", -- add icon for clock
         },
         status = {
           attributes = { mode = { bold = true } },
