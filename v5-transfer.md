@@ -1,5 +1,11 @@
 - [x] init.lua
 
+# lua:
+
+- [x] lazy_setup.lua
+
+
+# lua/plugins:
 
 - [x] astrocore.lua
 - [x] astrolsp.lua
