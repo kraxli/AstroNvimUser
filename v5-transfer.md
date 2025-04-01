@@ -1,3 +1,86 @@
 - [x] init.lua
-- [x] lua/plugins/astrocore
-- [x] lua/plugins/telescope.lua
+
+
+- [x] astrocore.lua
+- [x] astrolsp.lua
+- [x] astroui.lua
+- [x] auto-save-nvim.lua
+- [x] better-escape.lua
+- [x] bqf.lua
+- [?] bufdelete-nvim.lua
+- [x] cache-colorscheme.lua
+- [x] catppuccin.lua
+- [x] clangd_extensions.lua
+- [ ] ~cmp-git.lua~
+- [ ] ~cmp.lua~
+- [ ] code-runner.lua
+- [x] codeium.lua
+- [ ] colorschemes.lua
+- [ ] conform.lua
+- [ ] copilot.lua
+- [ ] diffview.lua
+- [ ] disabled.lua
+- [ ] easy-align.lua
+- [?] fugitive.lua
+- [ ] gitsigns.lua
+- [ ] grug-far.lua
+- [x] heirline.lua
+- [ ] helpview.lua
+- [ ] highlight-colors.lua
+- [ ] image-nvim.lua
+- [ ] indent-tools.lua
+- [x] iron-nvim.lua
+- [ ] kitty-scrollback.lua
+- [ ] leap-nvim.lua
+- [ ] lsp-file-operations.lua
+- [ ] luasnip.lua
+- [x] mappings.lua
+- [ ] mason-nvim-dap.lua
+- [ ] mason-tool-installer.lua
+- [ ] metals.lua
+- [ ] mini-icons.lua
+- [ ] mini-misc.lua
+- [ ] mini-move.lua
+- [ ] mkdnflow-nvim.lua
+- [ ] neo-tree.lua
+- [ ] neogen.lua
+- [ ] neogit.lua
+- [ ] neorg.lua
+- [ ] neotest.lua
+- [ ] nextflow.lua
+- [ ] noice.lua
+- [ ] nvim-dap-virtual-text.lua
+- [ ] nvim-dap.lua
+- [ ] nvim-lint.lua
+- [ ] nvim-notify.lua
+- [ ] nvim-python-repl.lua
+- [x] oil.lua
+- [ ] orgmode-nvim.lua
+- [ ] overridden.lua
+- [ ] overseer.lua
+- [ ] package-info.lua
+- [ ] parrot-nvim.lua
+- [ ] quicker.lua
+- [x] r.lua
+- [ ] rainbow-delimiters.lua
+- [ ] sandwich.lua
+- [ ] schemastore.lua
+- [ ] slime.lua
+- [ ] smart-splits.lua
+- [ ] sqls.lua
+- [ ] telekasten.lua
+- [ ] telescope-bibtex.lua
+- [x] telescope.lua
+- [ ] template-literal-comments.lua
+- [ ] todo.lua
+- [ ] toggleterm.lua
+- [ ] treesitter.lua
+- [ ] trouble.lua
+- [ ] venv-selector.lua
+- [ ] vim-matchup.lua
+- [ ] visidata-nvim.lua
+- [ ] vscode.lua
+- [ ] vtsls.lua
+- [x] wakatime.lua
+- [x] writing.lua
+- [ ] ~zen-mode.lua~
