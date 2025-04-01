@@ -2,6 +2,10 @@ return {
   "Saghen/blink.cmp",
   version = "^1",
   opts = {
+    keymap = {
+      ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "snippet_backward", "fallback" },
+    },
     sources = {
       providers = {
         path = { opts = { trailing_slash = false, show_hidden_files_by_default = true } },
@@ -16,17 +20,17 @@ return {
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<Tab>"] = { "show", "accept" },
-        ["<Right>"] = {
-          function(cmp)
-            if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
-          end,
-          "show_and_insert",
-          "accept", --"select_next",
-        },
-        -- ["<Right>"] = { "show", "accept" },
-        ['<CR>'] = {'accept_and_enter'},
+        ["<Right>"] =  { "accept", "fallback" },
         ['<Left>'] = { 'cancel' },
-        ['<ESC>'] = { 'cancel' },
+        ['<ESC>'] = { 'cancel', 'fallback' },
+        ['<CR>'] = {'accept_and_enter', 'fallback'},
+        -- ["<Right>"] = {
+        --   function(cmp)
+        --     if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
+        --   end,
+        --   "show_and_insert",
+        --   "cancel",  -- "accept", --"select_next",
+        -- },
       },
     },
   },
