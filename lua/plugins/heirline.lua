@@ -12,8 +12,10 @@ return {
         status = {
           attributes = { mode = { bold = true } },
           separators = {
-            left = { "", " " },
-            right = { " ", "" },
+            -- left = { "", " " },
+            -- right = { " ", "" },
+            left = { " ", "" },
+            right = { " ", "" },
           },
         },
       },

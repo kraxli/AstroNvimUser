@@ -138,7 +138,9 @@ return {
         },
         mappings = {
           n = {
-            ["<Tab>"] = { "<Cmd>Oil<CR>", desc = "Oil Filebrowser" },
+            -- ["<Tab>"] = { "<Cmd>Oil<CR>", desc = "Oil Filebrowser" },
+            ["<Space>O"] = { "<Cmd>Oil<CR>", desc = "Oil Filebrowser" },
+            ["<Space>fO"] = { "<Cmd>Oil<CR>", desc = "Oil Filebrowser" },
           },
         },
       },
