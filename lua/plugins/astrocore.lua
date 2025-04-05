@@ -237,7 +237,8 @@ return {
             pattern = { "markdown", "tex", "text" },
             callback = function()
               -- default diagnostic mode:
-              vim.diagnostic.config({ virtual_text=false, })
+              -- vim.diagnostic.config({ virtual_text={ current_line=true }, })  -- virtual_text=false,
+              -- vim.diagnostic.config({ virtual_lines={ current_line=true },})
 
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
@@ -265,8 +266,8 @@ return {
       },
       diagnostics = {
         update_in_insert = false,
-        virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
-        virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.WARN } },
+        virtual_text = { current_line = true, },  -- , severity = { min = vim.diagnostic.severity.WARN }
+        -- virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.WARN } },
       },
       features = {
         diagnostics = { virtual_lines = false },
