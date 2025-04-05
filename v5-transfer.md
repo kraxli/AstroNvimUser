@@ -19,31 +19,31 @@
 - [x] clangd_extensions.lua
 - [ ] ~cmp-git.lua~
 - [ ] ~cmp.lua~
-- [ ] code-runner.lua
+- [o] code-runner.lua
 - [x] codeium.lua
-- [ ] colorschemes.lua
-- [ ] conform.lua
+- [o] colorschemes.lua
+- [x] conform.lua
 - [ ] copilot.lua
-- [ ] diffview.lua
-- [ ] disabled.lua
-- [ ] easy-align.lua
+- [x] diffview.lua
+- [x] disabled.lua
+- [x] easy-align.lua
 - [?] fugitive.lua
-- [ ] gitsigns.lua
-- [ ] grug-far.lua
+- [x] gitsigns.lua
+- [x] grug-far.lua
 - [x] heirline.lua
-- [ ] helpview.lua
-- [ ] highlight-colors.lua
-- [ ] image-nvim.lua
-- [ ] indent-tools.lua
+- [x] helpview.lua
+- [?] highlight-colors.lua  -- could still be useful / let's ee
+- [o] image-nvim.lua
+- [ ] ~indent-tools.lua~ 
 - [x] iron-nvim.lua
-- [ ] kitty-scrollback.lua
-- [ ] leap-nvim.lua
-- [ ] lsp-file-operations.lua
-- [ ] luasnip.lua
+- [x] kitty-scrollback.lua
+- [?] leap-nvim.lua
+- [ ] ~lsp-file-operations.lua~
+- [?] luasnip.lua
 - [x] mappings.lua
-- [ ] mason-nvim-dap.lua
-- [ ] mason-tool-installer.lua
-- [ ] metals.lua
+- [x] mason-nvim-dap.lua
+- [x] mason-tool-installer.lua
+- [x] metals.lua
 - [ ] mini-icons.lua
 - [ ] mini-misc.lua
 - [ ] mini-move.lua
