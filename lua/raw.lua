@@ -4,7 +4,7 @@ local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap("", "<F3>", [[<cmd>lua require('utils').sys_app_open()<CR>]], opts)
 
 -- writer
-vim.api.nvim_set_keymap("n", "<c-s-v>", "<cmd>PasteImg<cr>", { noremap = false })
+-- vim.api.nvim_set_keymap("n", "<c-s-v>", "<cmd>PasteImg<cr>", { noremap = false })
 
 vim.cmd [[
   " map ]z ]Sz=
