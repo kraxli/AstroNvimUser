@@ -84,7 +84,7 @@ return {
           -- map('x', 'P', 'P:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = 'Paste In-place' })
 
           -- quick save
-          ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
+          -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- disable as it conflicts with "native nvim show signature"
 
           ["<C-PageDown>"] = {
             function() require("astrocore.buffer").nav(vim.v.count1) end,

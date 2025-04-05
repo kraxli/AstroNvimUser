@@ -315,7 +315,6 @@ return {
           ["z="] = false,
 
           ["<C-Q>"] = false,
-          ["<C-S>"] = false,
           ["q:"] = ":",
           ["c:"] = "q:",
           ["X"] = ":x<CR>",
@@ -366,7 +365,6 @@ return {
           -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
           -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
 
-          ["<C-s>"] = { ":w!<CR>", desc = "Save" },
           -- recording
           ["Q"] = { "q", desc = "Record" },
           ["gQ"] = { "@q", desc = "Record" },
@@ -402,7 +400,7 @@ return {
         },
         x = {
           ["sa"] = false,
-          ["<C-S>"] = false,
+          -- ["<C-S>"] = false,
           -- better increment/decrement
           ["+"] = { "g<C-a>", desc = "Increment number" },
           ["-"] = { "g<C-x>", desc = "Descrement number" },
