@@ -237,8 +237,7 @@ return {
             pattern = { "markdown", "tex", "text" },
             callback = function()
               -- default diagnostic mode:
-              local diagnostic_mode = 0 -- 0: off, 1: only status diagnostics, 2: on with virtual text
-              vim.diagnostic.config(require("astrocore").diagnostics[0])
+              vim.diagnostic.config({ virtual_text=false, })
 
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
