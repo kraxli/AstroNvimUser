@@ -8,7 +8,7 @@ return {
   lazy = false,
   priority = 1000,
   opts = {
-    dashboard = { enabled = false },
+    dashboard = { enabled = true },
     indent = { enabled = false },
     notifier = { timeout = 1000 },
     gitbrowse = {
