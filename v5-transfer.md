@@ -1,3 +1,23 @@
+# new plugins?
+
+- https://linkarzu.com/posts/neovim/markdown-setup-2024/
+- https://mambusskruj.github.io/posts/pub-neovim-for-markdown/
+
+- https://github.com/jellydn/tiny-nvim:
+  - ! https://github.com/ThePrimeagen/refactoring.nvim
+  - https://github.com/MeanderingProgrammer/render-markdown.nvim
+  - https://github.com/previm/previm
+  - https://github.com/danymat/neogen
+  - https://github.com/nvim-neotest/neotest
+  - https://github.com/stevearc/conform.nvim
+- https://github.com/geg2102/nvim-python-repl?tab=readme-ov-file
+- 
+
+- [o] optional
+- [?] let's if still needed
+
+# nvim
+
 - [x] init.lua
 
 # lua:
@@ -44,49 +64,49 @@
 - [x] mason-nvim-dap.lua
 - [x] mason-tool-installer.lua
 - [x] metals.lua
-- [ ] mini-icons.lua
-- [ ] mini-misc.lua
-- [ ] mini-move.lua
+- [x] mini-icons.lua
+- [ ] ~mini-misc.lua~
+- [x] mini-move.lua
 - [ ] mkdnflow-nvim.lua
-- [ ] neo-tree.lua
-- [ ] neogen.lua
-- [ ] neogit.lua
+- [x] neo-tree.lua
+- [x] neogen.lua
+- [x] neogit.lua
 - [ ] neorg.lua
-- [ ] neotest.lua
-- [ ] nextflow.lua
-- [ ] noice.lua
-- [ ] nvim-dap-virtual-text.lua
-- [ ] nvim-dap.lua
-- [ ] nvim-lint.lua
-- [ ] nvim-notify.lua
+- [x] neotest.lua
+- [x] nextflow.lua
+- [x] noice.lua
+- [x] nvim-dap-virtual-text.lua
+- [ ] nvim-dap.lua (gone)
+- [x] nvim-lint.lua
+- [x] nvim-notify.lua
 - [ ] nvim-python-repl.lua
 - [x] oil.lua
-- [ ] orgmode-nvim.lua
-- [ ] overridden.lua
-- [ ] overseer.lua
-- [ ] package-info.lua
+- [x] orgmode-nvim.lua
+- [x] overridden.lua
+- [x] overseer.lua
+- [x] package-info.lua
 - [ ] parrot-nvim.lua
-- [ ] quicker.lua
+- [x] quicker.lua
 - [x] r.lua
-- [ ] rainbow-delimiters.lua
-- [ ] sandwich.lua
-- [ ] schemastore.lua
-- [ ] slime.lua
-- [ ] smart-splits.lua
-- [ ] sqls.lua
+- [x] rainbow-delimiters.lua
+- [x] sandwich.lua
+- [x] schemastore.lua
+- [x] slime.lua
+- [x] smart-splits.lua
+- [x] sqls.lua
 - [ ] telekasten.lua
 - [ ] telescope-bibtex.lua
-- [x] telescope.lua
-- [ ] template-literal-comments.lua
+- [x] ~telescope.lua~
+- [x] template-literal-comments.lua
 - [ ] todo.lua
-- [ ] toggleterm.lua
-- [ ] treesitter.lua
-- [ ] trouble.lua
-- [ ] venv-selector.lua
-- [ ] vim-matchup.lua
-- [ ] visidata-nvim.lua
-- [ ] vscode.lua
-- [ ] vtsls.lua
+- [?] toggleterm.lua
+- [x] treesitter.lua
+- [x] trouble.lua
+- [x] venv-selector.lua
+- [x] vim-matchup.lua
+- [ ] visidata-nvim.lua (v4 disabled)
+- [x] vscode.lua
+- [x] vtsls.lua
 - [x] wakatime.lua
 - [x] writing.lua
 - [ ] ~zen-mode.lua~
