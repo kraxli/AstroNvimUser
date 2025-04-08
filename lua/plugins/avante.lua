@@ -19,13 +19,20 @@ return {
     { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
   },
   opts = {
-    provider = "copilot_claude",
-    auto_suggestions_provider = "copilot_claude",
+    provider = "glados",
+    auto_suggestions_provider = "glados",
     vendors = {
       copilot_claude = {
         __inherited_from = "copilot",
         api_key_name = "GITHUB_TOKEN",
         model = "claude-3.5-sonnet",
+      },
+      glados = {
+        __inherited_from = "openai",
+        endpoint = "https://glados.ctisl.gtri.org/v1",
+        model = "meta-llama/Llama-3.3-70B-Instruct",
+        api_key_name = "GLADOS_API_KEY",
+        disable_tools = true,
       },
     },
     hints = { enabled = false },
@@ -34,6 +41,7 @@ return {
       edit = prefix .. "e",
       refresh = prefix .. "r",
       focus = prefix .. "f",
+      stop = prefix .. "S",
       toggle = {
         default = prefix .. "t",
         debug = prefix .. "d",
@@ -47,7 +55,10 @@ return {
       },
       files = {
         add_current = prefix .. ".",
+        add_all_buffers = prefix .. "B",
       },
+      select_model = prefix .. "m",
+      select_history = prefix .. "h",
     },
     windows = {
       width = 45,
@@ -55,43 +66,38 @@ return {
   },
   specs = {
     {
-      "Saghen/blink.compat",
+      "Saghen/blink.cmp",
       optional = true,
-      specs = {
-        {
-          "Saghen/blink.cmp",
-          optional = true,
-          opts_extend = { "sources.default" },
-          dependencies = { "yetone/avante.nvim" },
-          opts = {
-            sources = {
-              default = { "avante_commands", "avante_mentions", "avante_files" },
-              providers = {
-                avante_commands = {
-                  name = "avante_commands",
-                  module = "blink.compat.source",
-                  score_offset = 90, -- show at a higher priority than lsp
-                  opts = {},
-                },
-                avante_files = {
-                  name = "avante_commands",
-                  module = "blink.compat.source",
-                  score_offset = 100, -- show at a higher priority than lsp
-                  opts = {},
-                },
-                avante_mentions = {
-                  name = "avante_mentions",
-                  module = "blink.compat.source",
-                  score_offset = 1000, -- show at a higher priority than lsp
-                  opts = {},
-                },
-              },
+      dependencies = { "yetone/avante.nvim" },
+      specs = { "Saghen/blink.compat", version = "*", lazy = true, opts = {} },
+      opts = {
+        sources = {
+          per_filetype = {
+            AvanteInput = { "avante_commands", "avante_mentions", "avante_files" },
+          },
+          providers = {
+            avante_commands = {
+              name = "avante_commands",
+              module = "blink.compat.source",
+              score_offset = 90, -- show at a higher priority than lsp
+              opts = {},
+            },
+            avante_files = {
+              name = "avante_commands",
+              module = "blink.compat.source",
+              score_offset = 100, -- show at a higher priority than lsp
+              opts = {},
+            },
+            avante_mentions = {
+              name = "avante_mentions",
+              module = "blink.compat.source",
+              score_offset = 1000, -- show at a higher priority than lsp
+              opts = {},
             },
           },
         },
       },
     },
-    { "zbirenbaum/copilot.lua", cmd = "Copilot", opts = { panel = { enabled = false }, suggestion = { false } } },
     {
       "MeanderingProgrammer/render-markdown.nvim",
       optional = true,
