@@ -110,3 +110,15 @@
 - [x] wakatime.lua
 - [x] writing.lua
 - [ ] ~zen-mode.lua~
+
+## Others
+
+Python:
+
+run file by 
+
+```lua
+exec(open(r'script.py').read())
+# ipython / jupyter
+%run script.py
+```
