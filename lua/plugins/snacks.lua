@@ -11,6 +11,7 @@ return {
     dashboard = { enabled = true },
     indent = { enabled = false },
     notifier = { timeout = 1000 },
+    notifier = {
     gitbrowse = {
       config = function(opts)
         table.insert(opts.remote_patterns, 1, { "^ssh://git%.mehalter%.com/(.*)", "https://code.mehalter.com/%1" })
