@@ -1,6 +1,6 @@
 return {
   "monkoose/neocodeium",
-  cmd = "NeoCodeium",
+  -- cmd = "NeoCodeium",
   enabled = vim.fn.has("unix") == 1,
   dependencies = {
     {
@@ -87,7 +87,7 @@ return {
     },
   },
   opts = {
-    enabled = false,
+    -- enabled = false,
     manual = true,
     silent = true,
     filetypes = {

@@ -122,3 +122,18 @@ exec(open(r'script.py').read())
 # ipython / jupyter
 %run script.py
 ```
+
+## Additional stuff
+
+R: 
+- open .Rprofiel
+- R send chain??
+- installed packages?
+
+Python:
+- run file by:
+```python
+  exec(open(r'script.py').read())
+  # ipython / jupyter
+  %run script.py
+```
