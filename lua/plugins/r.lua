@@ -54,7 +54,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(plugin, opts) table.insert(opts.ensure_installed, { "r", "markdown", "rnoweb", "yaml" }) end,
+    -- opts = function(plugin, opts) table.insert(opts.ensure_installed, { "r", "markdown", "rnoweb", "yaml" }) end,
   },
   {
     "R-nvim/R.nvim",
