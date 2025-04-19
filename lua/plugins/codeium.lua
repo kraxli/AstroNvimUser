@@ -2,6 +2,7 @@ return {
   "monkoose/neocodeium",
   -- cmd = "NeoCodeium",
   enabled = vim.fn.has("unix") == 1,
+  event = "VeryLazy",
   dependencies = {
     {
       "AstroNvim/astrocore",
@@ -21,27 +22,12 @@ return {
         maps.i["<M-x>"] = maps.i["<M-[>"]
         maps.i["<M-c>"] = maps.i["<M-BS>"]
 
-        maps.n["<Leader>;"] = {
-          function()
-            if vim.g.codeium_enabled == true then
-              -- vim.cmd "NeoCodeium disable_buffer"
-              require("neocodeium.commands").disable_buffer()
-            else
-              -- vim.cmd "NeoCodeium toggle_buffer"
-              require("neocodeium.commands").toggle_buffer()
-              -- require("neocodeium.commands").enable_buffer()
-            end
-          end,
-          silent = true,
-          desc = "Codeium toggle",
-        }
-
         opts.autocmds.codeium = {
-          {
-            event = "User",
-            pattern = "NeoCodeiumCompletionDisplayed",
-            callback = function() require("cmp").abort() end,
-          },
+          -- {
+          --   event = "User",
+          --   pattern = "NeoCodeiumCompletionDisplayed",
+          --   callback = function() require("cmp").abort() end,
+          -- },
         }
       end,
     },
