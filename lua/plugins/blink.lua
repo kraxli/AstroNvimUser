@@ -18,7 +18,9 @@ return {
       keymap = {
         -- recommended, as the default keymap will only show and select the next item
         ["<Up>"] = { "select_prev", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
         ["<Tab>"] = { "show", "accept" },
         ["<Right>"] =  { "accept", "fallback" },
         ['<Left>'] = { 'cancel' },
