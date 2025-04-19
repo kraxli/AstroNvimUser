@@ -1,5 +1,7 @@
 if not vim.g.vscode then return {} end
 
+vim.notify = require("vscode-neovim").notify
+
 local enabled = {}
 vim.tbl_map(function(plugin) enabled[plugin] = true end, {
   -- core plugins
@@ -34,8 +36,11 @@ Config.options.defaults.cond = function(plugin) return enabled[plugin.name] end
 return {
   {
     "AstroNvim/astrocore",
-    ---@type AstroCoreOpts
+    ---@param opts AstroCoreOpts
     opts = function(_, opts)
+      local opt = vim.tbl_get(opts, "options", "opt")
+      if opt then opt.cmdheight = nil end
+
       local maps = assert(opts.mappings)
 
       -- basic actions
@@ -102,6 +107,5 @@ return {
       maps.n["<Leader>lf"] = function() require("vscode-neovim").action "editor.action.formatDocument" end
     end,
   },
-  { "AstroNvim/astroui", opts = { colorscheme = false } },
   { "nvim-treesitter/nvim-treesitter", opts = { highlight = { enable = false } } },
 }

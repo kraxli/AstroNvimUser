@@ -3,6 +3,7 @@ local prefixFind = "<leader>f"
 
 local Snacks = require "snacks"
 
+---@type LazySpec
 return {
   "folke/snacks.nvim",
   lazy = false,

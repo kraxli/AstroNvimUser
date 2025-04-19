@@ -2,7 +2,6 @@
 return {
   "stevearc/conform.nvim",
   event = "User AstroFile",
-  version = vim.fn.has "nvim-0.10" ~= 1 and "7",
   cmd = "ConformInfo",
   dependencies = { "williamboman/mason.nvim" },
   ---@param opts conform.setupOpts
@@ -29,10 +28,12 @@ return {
       sql = { "sqlfluff" },
       python = { "isort", "black" },
       ["_"] = function(bufnr)
-        return buf_utils.is_valid(bufnr)
-            and buf_utils.has_filetype(bufnr)
-            and { "trim_whitespace", "trim_newlines", "squeeze_blanks" }
-          or {}
+        if #vim.lsp.get_clients { bufnr = bufnr, method = "textDocument/formatting" } then
+          return { lsp_format = "last" }
+        elseif buf_utils.is_valid(bufnr) and buf_utils.has_filetype(bufnr) then
+          return { "trim_whitespace", "trim_newlines", "squeeze_blanks" }
+        end
+        return {}
       end,
     }
 
