@@ -6,6 +6,8 @@ return {
     keymap = {
       ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "select_next", "fallback" },
     },
     sources = {
       providers = {
