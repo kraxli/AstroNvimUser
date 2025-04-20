@@ -43,42 +43,36 @@ end
 
 return {
   -- {
-  --   -- "hrsh7th/nvim-cmp",
-  --   "Saghen/blink.cmp",
-  --   -- optional = true,
-  --   ft = { "R", "r", "rmd", "rnoweb", "quarto", "qmd", "rhelp" },
-  --   dependencies = { "R-nvim/cmp-r" },
-  --   opts = function(_, opts)
-  --     if not opts.sources then opts.sources = {} end
-  --     table.insert(opts.sources, {
-  --       { name = "cmp_r", priority = 800 },
-  --     })
-  --   end,
-  -- },
-  -- specs = {
-  --   {
-  --     "L3MON4D3/LuaSnip",
-  --     optional = true,
-  --     specs = { { "Saghen/blink.cmp", opts = { snippets = { preset = "luasnip" } } } },
+  --   "R-nvim/cmp-r",
+  --   -- ft = { "R", "r", "rmd", "rnoweb", "quarto", "qmd", "rhelp" },
+  --   dependencies = { "Saghen/blink.cmp" },
+  --   specs = {
+  --     {
+  --       "Saghen/blink.cmp",
+  --       optional = true,
+  --       opts = {
+  --         sources = {
+  --           providers = {
+  --             cmp_r = {
+  --               name = "cmp_r",
+  --               module = "blink.compat.source",
+  --             },
+  --           },
+  --         },
+  --       },
+  --       -- opts = function(_, opts)
+  --       --   if not opts.sources.providers then opts.sources.providers = {} end
+  --       --   -- table.insert()
+  --       --   require("astrocore").list_insert_unique(opts.sources.providers, {
+  --       --     cmp_r = {
+  --       --       name = "cmp_r",
+  --       --       module = "blink.compat.source",
+  --       --     },
+  --       --   })
+  --       -- end,
+  --     },
   --   },
   -- },
-  {
-    "R-nvim/cmp-r",
-      -- specs = {
-      --   {
-      --     "Saghen/blink.cmp",
-      --     optional = true,
-      --     opts = {
-      --       sources = {
-      --         default = { "R" },
-      --         providers = {
-      --           pandoc = { name = "cmp-r", module = "cmp-r", score_offset = 10 },
-      --         },
-      --       },
-      --     },
-      --   },
-      -- },
-  },
   {
     "R-nvim/R.nvim",
     lazy = false,
