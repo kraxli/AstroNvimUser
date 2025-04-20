@@ -23,10 +23,10 @@ return {
         ["<Down>"] = { "select_next", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
         ["<Tab>"] = { "show", "accept" },
-        ["<Right>"] =  { "accept", "fallback" },
-        ['<Left>'] = { 'cancel' },
-        ['<ESC>'] = { 'cancel', 'fallback' },
-        ['<CR>'] = {'accept_and_enter', 'fallback'},
+        ["<Right>"] = { "accept", "fallback" },
+        ["<Left>"] = { "cancel" },
+        ["<ESC>"] = { "cancel", "fallback" },
+        ["<CR>"] = { "accept_and_enter", "fallback" },
         -- ["<Right>"] = {
         --   function(cmp)
         --     if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
