@@ -130,14 +130,14 @@ return {
             pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy" },
             desc = "Iron repl support",
             callback = function()
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR>", { expr = false, noremap = true, desc = " Start REPL" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "R", "<cmd>IronRestart<CR>", { expr = false, noremap = true, desc = " Restart REPL" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start REPL" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "R", "<cmd>IronRestart<CR><ESC>", { expr = false, noremap = true, desc = " Restart REPL" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, desc = " Jump (in)to REPL" }) -- i
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, desc = "Hide REPL" }) -- i
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR>", { expr = false, noremap = true, desc = "Send file" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, desc = "Send line" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "s", "<cmd> lua require 'iron.core'.send_line()<CR>", { expr = false, noremap = true, desc = "Send line" })
-              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "l", "<cmd> lua require 'iron.core'.visual_send()<CR>", { expr = false, noremap = true, desc = "Send selection" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR><ESC>", { expr = false, noremap = true, desc = "Send file" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR><ESC>", { expr = false, noremap = true, desc = "Send line" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "s", "<cmd> lua require 'iron.core'.send_line()<CR><ESC>", { expr = false, noremap = true, desc = "Send line" })
+              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "l", "<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { expr = false, noremap = true, desc = "Send selection" })
               -- send file: aa
 
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
