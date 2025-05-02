@@ -2,7 +2,7 @@
 return {
   "monkoose/neocodeium",
   -- cmd = "NeoCodeium",
-  enabled = vim.fn.has("unix") == 1,
+  enabled = vim.fn.has "unix" == 1,
   event = "VeryLazy",
   dependencies = {
     {
@@ -10,18 +10,22 @@ return {
       opts = function(_, opts)
         local maps = opts.mappings
         maps.n["<Leader>u!"] = { function() require("neocodeium.commands").toggle() end, desc = "Toggle AI assistant" }
-        maps.n["<M-CR>"] = { function() require("neocodeium").chat() end }
+        maps.n["<M-?>"] = { function() require("neocodeium").chat() end }
+        maps.n["<M-'>"] = { function() require("neocodeium").chat() end }
+        maps.i["<M-?>"] = { function() require("neocodeium").chat() end }
+        maps.i["<M-'>"] = { function() require("neocodeium").chat() end }
+
         maps.i["<M-]>"] = { function() require("neocodeium").cycle_or_complete() end }
         maps.i["<M-\\>"] = maps.i["<M-]>"]
         maps.i["<M-[>"] = { function() require("neocodeium").cycle_or_complete(-1) end }
         maps.i["<M-CR>"] = { function() require("neocodeium").accept() end }
-        maps.i["<M-BS>"] = { function() require("neocodeium").clear() end }
+        maps.i["<M-c>"] = { function() require("neocodeium").clear() end }
 
         maps.i["<M-Up>"] = maps.i["<M-[>"]
         maps.i["<M-Down>"] = maps.i["<M-]>"]
         maps.i["<M-z>"] = maps.i["<M-]>"]
         maps.i["<M-x>"] = maps.i["<M-[>"]
-        maps.i["<M-c>"] = maps.i["<M-BS>"]
+        maps.i["<M-BS>"] = maps.i["<M-c>"]
 
         opts.autocmds.codeium = {
           -- {
