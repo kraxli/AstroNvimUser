@@ -69,6 +69,8 @@ return {
             [prefix .. "y"] = { '<cmd>lua require("telekasten").yank_notelink()<CR>', desc = "Yank note link" },
             [prefix .. "z"] = { '<cmd>lua require("telekasten").panel()<CR>', desc = "Panel" },
             [prefix .. "x"] = { "<cmd>PasteImg<cr>", desc = "Paste Image" },
+
+            ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo()<CR>", desc = "Toggle checkbox" },
           },
           i = {
             -- ["<c-i>"] = false,

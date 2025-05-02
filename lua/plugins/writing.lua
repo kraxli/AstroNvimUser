@@ -238,7 +238,7 @@ return {
 				]]
 
       vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
-      vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
+      -- vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
       -- vim.keymap.set("v", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
     end,
   },
