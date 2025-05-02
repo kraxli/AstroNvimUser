@@ -468,7 +468,7 @@ function M.handle_checkbox_bullets()
   -- local checkbox_pattern_done = " [x]"
 
   local check_mark_string = vim.g.bullets_checkbox_markers
-  local list_items = { "-", "*" }
+  local list_items = { "-", "*", "+" }
   -- local filetype_list = {}
   -- check_mark_string:gsub(".",function(c) table.insert(filetype_list, c) end)
   local line = vim.fn.getline "."
