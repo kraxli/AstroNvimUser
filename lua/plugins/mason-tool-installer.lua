@@ -19,6 +19,7 @@ return {
       "json-lsp",
       "lua-language-server",
       "markdown-oxide",
+      "marksman",
       "neocmakelsp",
       "regols",
       "sqls",
@@ -55,6 +56,9 @@ return {
 
       -- Other Tools
       "tree-sitter-cli",
+
+      "markdownlint-cli2",
+      "markdown-toc",
     },
     integrations = {
       ["mason-lspconfig"] = false,
