@@ -1,3 +1,16 @@
+local function toggle()
+    vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle"
+    return 'g@l'
+end
+
+local function toggle_box()
+    vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle_box"
+    return 'g@l'
+end
+
+-- vim.keymap.set('n', '<c-space>', toggle, { expr = true, desc = 'Toggle Checkmark' })
+-- vim.keymap.set('n', '<leader>zt', toggle_box, { expr = true, desc = 'Toggle Checkbox' })
+
 return {
   {
     "tpope/vim-abolish",
@@ -23,6 +36,7 @@ return {
 			]]
     end,
   },
+  -- !! https://github.com/Skardyy/neo-img
   {
     "toppair/peek.nvim",
     lazy = true,
@@ -175,7 +189,7 @@ return {
 			  let g:bullets_max_alpha_characters = 2
 			  let g:bullets_renumber_on_change = 1
 			  let g:bullets_nested_checkboxes = 1
-			  let g:bullets_checkbox_markers = ' .oOX'  " '✗○◐●✓'
+			  let g:bullets_checkbox_markers = ' .oOx'  " '✗○◐●✓'
 			  let g:bullets_checkbox_partials_toggle = 1
 			  let g:bullets_set_mappings = 0 " disable adding default key mappings, default = 1
 			  let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-' ]   " -- 'std*', 'std+'
@@ -223,13 +237,27 @@ return {
   			vmap      '< '    <Plug>(bullets-promote)
 				]]
 
-      -- vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
-      -- vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
+      vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
+      vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
+      -- vim.keymap.set("v", "<C-space>", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
     end,
   },
   {
     "dhruvasagar/vim-table-mode",
     enabled = true,
     -- ft = { "text", "markdown", "org" },
+  },
+  {
+    "nfrid/markdown-togglecheck",
+    dependencies = { "nfrid/treesitter-utils" },
+    ft = { "markdown" },
+    config = function()
+      require("markdown-togglecheck").setup {
+        -- create empty checkbox on item without any while toggling
+        create = true,
+        -- remove checked checkbox instead of unckecking it while toggling
+        remove = false,
+      }
+    end,
   },
 }

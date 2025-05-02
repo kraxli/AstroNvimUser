@@ -104,7 +104,7 @@ return {
           },
 
           -- Telekasten:
-          ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo()<CR>", desc = "Toggle checkbox" },
+          -- ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo()<CR>", desc = "Toggle checkbox" },
 
           -- Buffer:
           -- [prefixBuffer] = { desc = "Buffer" },
