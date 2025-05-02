@@ -278,7 +278,7 @@ return {
       },
       diagnostics = {
         update_in_insert = false,
-        virtual_text = { current_line = true, },  -- , severity = { min = vim.diagnostic.severity.WARN }
+        virtual_text = { current_line = true }, -- , severity = { min = vim.diagnostic.severity.WARN }
         -- virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.WARN } },
       },
       features = {
