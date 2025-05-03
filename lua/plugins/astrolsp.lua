@@ -17,6 +17,7 @@ return {
       },
     },
     features = { signature_help = true },
+    -- native_lsp_config = true,
     autocmds = {
       no_insert_inlay_hints = {
         cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
@@ -82,7 +83,7 @@ return {
         },
       },
       julials = {
-        on_new_config = function(new_config)
+        before_init = function(_, config)
           -- check for nvim-lspconfig julia sysimage shim
           local found_shim
           for _, depot in
@@ -99,9 +100,9 @@ return {
             end
           end
           if found_shim then
-            new_config.cmd[1] = found_shim
+            config.cmd[1] = found_shim
           else
-            new_config.autostart = false -- only auto start if sysimage is available
+            config.autostart = false -- only auto start if sysimage is available
           end
         end,
         on_attach = function(client)
@@ -145,7 +146,10 @@ return {
           },
         },
       },
-      typos_lsp = { single_file_support = false },
+      typos_lsp = {
+        single_file_support = false, -- TODO: remove when dropping support for Neovim v0.10
+        workspace_required = true,
+      },
       volar = { init_options = { vue = { hybridMode = true } } },
       vtsls = {
         filetypes = {
