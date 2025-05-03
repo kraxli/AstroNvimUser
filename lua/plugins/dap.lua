@@ -1,3 +1,10 @@
+local r_exe
+if vim.fn.has "win64" == 1 then
+  r_exe = "R.exe"
+else
+  r_exe = "R"
+end
+
 return {
   "mfussenegger/nvim-dap",
   -- recommended = true,
@@ -34,4 +41,31 @@ return {
       end,
     },
   },
+  config = function()
+    -- see: https://github.com/mfussenegger/nvim-dap/discussions/1274
+    --      https://manuelhentschel.github.io/vscDebugger/
+    local dap = require "dap"
+    dap.adapters.r = {
+      type = "server",
+      port = "18721",
+      name = "R",
+      executable = {
+        command = r_exe,
+        args = { "--slave", "-e", "vscDebugger::.vsc.listenForDAP()" },
+        -- args = { "--slave", "-e", "vscDebugger::.vsc.listen()" },
+      },
+    }
+    dap.configurations.r = {
+      {
+        type = "r",
+        name = "Debug R-File",
+        request = "attach",
+        debugMode = "file",
+        stopOnEntry = false,
+        enableVariablesPanel = true,
+        -- request = "launch",
+        -- program = "${file}", -- This configuration will launch the current file if used.
+      },
+    }
+  end,
 }
