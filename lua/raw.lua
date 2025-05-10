@@ -7,13 +7,6 @@ vim.api.nvim_set_keymap("", "<F3>", [[<cmd>lua require('utils').sys_app_open()<C
 -- vim.api.nvim_set_keymap("n", "<c-s-v>", "<cmd>PasteImg<cr>", { noremap = false })
 
 vim.cmd [[
-  " map ]z ]Sz=
-  " map [z [Sz=
-  nmap ]z ]S<space>fs
-  nmap [z [S<space>fs
-  nmap =z <leader>fs
-  nmap z= <leader>fs
-
   nmap zb viwsa*.
   nmap sb viwsa*.
   nmap zi viwsa_

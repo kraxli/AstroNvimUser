@@ -3,6 +3,13 @@ local prefixFind = "<leader>f"
 
 local Snacks = require "snacks"
 
+local opts_spell = {
+  finder = "vim_spelling",
+  format = "text",
+  layout = { preset = "vscode" },
+  confirm = "item_action",
+}
+
 ---@type LazySpec
 return {
   "folke/snacks.nvim",
@@ -50,10 +57,17 @@ return {
           desc = "Jump list",
         }
         -- Spelling
-        maps.n["z="] = {
-          '<cmd>lua require("telescope.builtin").spell_suggest()<CR>',
+        maps.n["z="] = { '<cmd>lua Snacks.picker.spelling(opts_spell)<CR>',
           desc = "Spell suggestions",
         }
+        maps.n["=z"] = maps.n["z="]
+        maps.n["]z"] =  { ']S<cmd>lua Snacks.picker.spelling(opts_spell)<CR>',
+          desc = "Next spell suggestions",
+        }
+        maps.n["[z"] =  { '[S<cmd>lua Snacks.picker.spelling(opts_spell)<CR>',
+          desc = "Previous spell suggestions",
+        }
+
 
         maps.n[prefixFind .. "/"] = { function() Snacks.picker.lines() end, desc = "Buffer Lines" }
         -- [prefixFind .. "s"] = {
