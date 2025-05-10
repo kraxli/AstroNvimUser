@@ -358,7 +358,7 @@ return {
             end,
             desc = "ToggleTerm ipython",
           },
-          ["<Leader>tp"] = { "<cmd>IronRepl<CR>", desc = "Open Iron repl vsplit" },
+          ["<Leader>tp"] = { "<cmd>IronRepl<CR><ESC>", desc = "Open Iron repl vsplit" },
           ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
           ["<Leader>uv"] = { "<cmd>vert split<CR>", desc = "Vertical split" },
 

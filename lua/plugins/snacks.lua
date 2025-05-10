@@ -53,7 +53,7 @@ return {
 
         -- Find / Search (= name)
         maps.n[prefixFind .. "j"] = {
-          '<cmd>lua require("telescope.builtin").jumplist()<CR>',
+          function() Snacks.picker.jumps() end,
           desc = "Jump list",
         }
         -- Spelling
@@ -61,6 +61,7 @@ return {
           desc = "Spell suggestions",
         }
         maps.n["=z"] = maps.n["z="]
+        maps.n[prefixFind .. "s"] = maps.n["z="]
         maps.n["]z"] =  { ']S<cmd>lua Snacks.picker.spelling(opts_spell)<CR>',
           desc = "Next spell suggestions",
         }
@@ -70,23 +71,17 @@ return {
 
 
         maps.n[prefixFind .. "/"] = { function() Snacks.picker.lines() end, desc = "Buffer Lines" }
-        -- [prefixFind .. "s"] = {
-        --   '<cmd>lua require("telescope.builtin").spell_suggest()<CR>',
-        --   desc = "Spell suggestions",
-        -- },
-        -- [prefixFind .. "z"] = {
-        --   '<cmd>lua require("telescope.builtin").spell_suggest()<CR>',
-        --   desc = "Spell suggestions",
-        -- },
         -- [prefixFind .. "N"] = {
         --   '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>',
         --   desc = "Notebook",
         -- },
-        -- [prefixFind .. "T"] = { "<cmd>Telescope termfinder find<CR>", desc = "Terminals" },
         -- -- ["T"] = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
         -- -- ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
         maps.n[prefixFind .. "u"] = { function() Snacks.picker.resume() end, desc = "Resume last" } -- same as: <leader>f<CR>
         maps.n[prefixFind .. "x"] = { function() Snacks.picker.resume() end, desc = "Resume last" } -- same as: <leader>f<CR>
+        maps.n[prefixFind .. "o"] = { function() require("snacks").picker.smart() end, desc = "Find buffers/recent/files" }
+        maps.n[prefixFind .. "t"] = { function () Snacks.picker.actions.terminal(_, _) end, desc = "Terminals"}  -- TODO: not working
+        maps.n[prefixFind .. "S"] = { function() Snacks.picker.colorschemes() end, desc = "Colorschemes" }
 
         -- mode insert:
         maps.i["<C-D>"] = { function() Snacks.bufdelete() end, desc = "Delete Buffer" }
