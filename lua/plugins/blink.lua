@@ -1,10 +1,23 @@
+local extra_curl_args = {}
+local fuzzy_implementation = "prefer_rust" -- prefer_rust_with_warning
+
+if vim.fn.has "win64" == 1 then
+  extra_curl_args = { "-k", "--insecure" }
+  fuzzy_implementation = "lua"
+end
+
 ---@type LazySpec
 return {
   "Saghen/blink.cmp",
   version = "^1",
   -- build = 'cargo +nightly build --release',
   opts = {
-    -- fuzzy = {implementation = "prefer_rust" or "lua" },  -- prefer_rust_with_warning
+    fuzzy = {
+      implementation = fuzzy_implementation,
+      prebuilt_binaries = {
+        extra_curl_args = extra_curl_args,
+      },
+    },
     keymap = {
       ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
