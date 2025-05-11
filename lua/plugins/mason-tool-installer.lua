@@ -21,6 +21,7 @@ return {
       "markdown-oxide",
       "marksman",
       "neocmakelsp",
+      "pyright",
       "regols",
       "sqls",
       -- "svelte-language-server",
