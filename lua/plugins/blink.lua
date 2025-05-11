@@ -2,7 +2,9 @@
 return {
   "Saghen/blink.cmp",
   version = "^1",
+  -- build = 'cargo +nightly build --release',
   opts = {
+    -- fuzzy = {implementation = "prefer_rust" or "lua" },  -- prefer_rust_with_warning
     keymap = {
       ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
