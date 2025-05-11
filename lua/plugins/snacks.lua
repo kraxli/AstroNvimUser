@@ -57,18 +57,11 @@ return {
           desc = "Jump list",
         }
         -- Spelling
-        maps.n["z="] = { '<cmd>lua Snacks.picker.spelling(opts_spell)<CR>',
-          desc = "Spell suggestions",
-        }
+        maps.n["z="] = { "<cmd>lua Snacks.picker.spelling(opts_spell)<CR>", desc = "Spell suggestions" }
         maps.n["=z"] = maps.n["z="]
         maps.n[prefixFind .. "s"] = maps.n["z="]
-        maps.n["]z"] =  { ']S<cmd>lua Snacks.picker.spelling(opts_spell)<CR>',
-          desc = "Next spell suggestions",
-        }
-        maps.n["[z"] =  { '[S<cmd>lua Snacks.picker.spelling(opts_spell)<CR>',
-          desc = "Previous spell suggestions",
-        }
-
+        maps.n["]z"] = { "]S<cmd>lua Snacks.picker.spelling(opts_spell)<CR>", desc = "Next spell suggestions" }
+        maps.n["[z"] = { "[S<cmd>lua Snacks.picker.spelling(opts_spell)<CR>", desc = "Previous spell suggestions" }
 
         maps.n[prefixFind .. "/"] = { function() Snacks.picker.lines() end, desc = "Buffer Lines" }
         -- [prefixFind .. "N"] = {
@@ -79,8 +72,17 @@ return {
         -- -- ["u"] = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" }, -- same as: <leader>fo
         maps.n[prefixFind .. "u"] = { function() Snacks.picker.resume() end, desc = "Resume last" } -- same as: <leader>f<CR>
         maps.n[prefixFind .. "x"] = { function() Snacks.picker.resume() end, desc = "Resume last" } -- same as: <leader>f<CR>
-        maps.n[prefixFind .. "o"] = { function() require("snacks").picker.smart() end, desc = "Find buffers/recent/files" }
-        maps.n[prefixFind .. "t"] = { function () Snacks.picker.actions.terminal(_, _) end, desc = "Terminals"}  -- TODO: not working
+        maps.n[prefixFind .. "o"] =
+          { function() require("snacks").picker.smart() end, desc = "Find buffers/recent/files" }
+        -- maps.n[prefixFind .. "t"] = { function () Snacks.picker.actions.terminal() end, desc = "Terminals"}
+        maps.n[prefixFind .. "t"] = { function () Snacks.terminal.list() end, desc = "Terminals"}
+        -- maps.n[prefixFind .. "t"] = {
+        --   function()
+        --     ---@return snacks.win[]
+        --     Snacks.terminal.list()
+        --   end,
+        --   desc = "Terminals",
+        -- }
         maps.n[prefixFind .. "S"] = { function() Snacks.picker.colorschemes() end, desc = "Colorschemes" }
 
         -- mode insert:
