@@ -33,7 +33,7 @@ return {
       "yaml-language-server",
 
       -- Linters
-      "ansible-lint",
+      -- "ansible-lint",  -- fails on windows
       "selene",
       "shellcheck",
       "sqlfluff",
