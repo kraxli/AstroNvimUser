@@ -2,7 +2,7 @@ local extra_curl_args = {}
 local fuzzy_implementation = "prefer_rust" -- prefer_rust_with_warning
 
 if vim.fn.has "win64" == 1 then
-  extra_curl_args = { "-k", "--insecure" }
+  extra_curl_args = { "-k", "--insecure", "--ssl-no-revoke" }
   fuzzy_implementation = "lua"
 end
 
