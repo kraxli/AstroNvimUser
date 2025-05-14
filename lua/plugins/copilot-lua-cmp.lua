@@ -25,11 +25,10 @@ return {
     -- panel = { enabled = false },
   },
   specs = {
-    -- for hrsh7th/nvim-cmp support see: 
+    -- for hrsh7th/nvim-cmp support see:
     -- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/completion/copilot-lua-cmp/init.lua}
     {
       "Saghen/blink.cmp",
-      optional = true,
       opts = function(_, opts)
         if not opts.keymap then opts.keymap = {} end
 
@@ -45,8 +44,8 @@ return {
         -- opts.keymap["<M-[>"] = { copilot_action "prev" }
         -- opts.keymap["<M-]>"] = { copilot_action "next" }
         opts.keymap["<M-CR>"] = { copilot_action "accept" }
-        opts.keymap["<M-down>"] = { copilot_action "next" }
-        opts.keymap["<M-up>"] = { copilot_action "prev" }
+        opts.keymap["<M-Down>"] = { copilot_action "next" }
+        opts.keymap["<M-Up>"] = { copilot_action "prev" }
         opts.keymap["<M-w>"] = { copilot_action "accept_word" }
         opts.keymap["<M-CR>"] = { copilot_action "accept" }
         opts.keymap["<M-l>"] = { copilot_action "accept_line" }
@@ -65,6 +64,5 @@ return {
         opts.symbol_map.copilot = { glyph = "", hl = "MiniIconsAzure" }
       end,
     },
-
   },
 }
