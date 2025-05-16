@@ -133,32 +133,12 @@ return {
 
             -- Start
             -- keymap_modes({"n","v","i"}, "<Plug>RStart", prefix .. "r", {})
-            keymap_modes(
-              { "n", "v" },
-              "<Cmd>lua require('r.run').start_R('R')<CR>",
-              prefix .. "r",
-              { desc = "R start" }
-            ) -- i-mode removed (to be mapped to ctrl or alt key combination)
-            keymap_modes(
-              { "n", "v" },
-              "<Cmd>lua require('r.run').start_R('custom')<CR>",
-              prefix .. "R",
-              { desc = "R custom start" }
-            ) -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').start_R('R')<CR>", prefix .. "r", { desc = "R start" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').start_R('custom')<CR>", prefix .. "R", { desc = "R custom start" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Close
-            keymap_modes(
-              { "n", "v" },
-              "<Cmd>lua require('r.run').quit_R('nosave')<CR>",
-              prefix .. "Q",
-              { desc = "R close" }
-            ) -- i-mode removed (to be mapped to ctrl or alt key combination)
-            keymap_modes(
-              { "n", "v" },
-              "<Cmd>lua require('r.run').quit_R('save')<CR>",
-              prefix .. "w",
-              { desc = "R save & close" }
-            ) -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "Q", { desc = "R close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", { desc = "R save & close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Clear console
             keymap_modes({ "n", "v" }, "<Plug>RClearConsole", prefix .. "d", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
@@ -291,30 +271,17 @@ return {
               event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
               pattern = { "r", "R" },
               callback = function()
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<Plug>RSendLine", { desc = "Send line" })
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "s", "<Plug>RSendLine", { desc = "Send line" })
                 keymap_modes({ "n" }, "<Cmd>lua require('r.send').source_file()<CR>", "aa", {}) -- "RSendFile"   -- i-mode removed (to be mapped to ctrl or alt key combination)
-                keymap_modes(
-                  { "n" },
-                  "<Cmd>lua require('r.send').source_file()<CR>",
-                  prefix .. "f",
-                  { desc = "Send file" }
-                ) -- "RSendFile"  -- i-mode removed (to be mapped to ctrl or alt key combination)
+                keymap_modes( { "n" }, "<Cmd>lua require('r.send').source_file()<CR>", prefix .. "f", { desc = "Send file" }) -- "RSendFile"  -- i-mode removed (to be mapped to ctrl or alt key combination)
                 keymap_modes({ "n" }, "<Cmd>lua require('r').show_R_out()<CR>", "ao", {}) -- "RshowRout"  -- i-mode removed (to be mapped to ctrl or alt key combination)
                 keymap_modes({ "n" }, "<Cmd>lua require('r').show_R_out()<CR>", prefix .. "O", { desc = "Show R out" }) -- "RshowRout"  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
                 keymap_modes({ "n" }, "<Plug>RSendAboveLines", prefix .. "xu", {}) -- "<Cmd>lua require('r.send').above_lines()"
 
-                keymap_modes(
-                  { "n" },
-                  "<Cmd>lua require('r.send').paragraph(false)<CR>",
-                  prefix .. "C",
-                  { desc = "Send paragraph" }
-                ) -- "RSendParagraph"; i mode ?
-                keymap_modes(
-                  { "n" },
-                  "<Cmd>lua require('r.send').paragraph(true)<CR>",
-                  prefix .. "c",
-                  { desc = "Send paragraph & down" }
-                ) --   RDSendParagraph; i mode ?
+                keymap_modes( { "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "C", { desc = "Send paragraph" }) -- "RSendParagraph"; i mode ?
+                keymap_modes( { "n" }, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "c", { desc = "Send paragraph & down" }) --   RDSendParagraph; i mode ?
               end,
             },
           },

@@ -83,23 +83,10 @@ return {
           filetype = "ironrepl",
         }),
       },
-      -- Iron doesn't set keymaps by default anymore.
-      -- You can set them here or manually add keymaps to the functions in iron.core
       keymaps = {
-        send_motion = "<space>rm",
-        visual_send = "<space>rs",
-        -- send_file = "<space>rf",
-        -- send_line = "<space>rl",
-        send_paragraph = "<space>rp",
-        send_until_cursor = "<space>ru",
-        -- send_mark = "<space>sm",
-        -- mark_motion = "<space>mc",
-        -- mark_visual = "<space>mc",
-        -- remove_mark = "<space>md",
-        cr = "<space>r<cr>",
-        interrupt = "<space>r<space>", -- ri or rd ?
-        exit = "<space>rq",  -- TODO: create autocommand with close q
-        clear = "<space>rc",
+        -- Iron doesn't set keymaps by default anymore.
+        -- You can set them here or manually add keymaps to the functions in iron.core
+        -- see:https://github.com/Vigemus/iron.nvim/blob/master/doc/iron.txt
       },
       -- If the highlight is on, you can change how it looks
       -- For the available options, check nvim_set_hl
@@ -116,17 +103,8 @@ return {
       autocmds = {
         auto_iron = {
           {
-            event = {
-              "FileType",
-              "BufWinEnter",
-              "BufRead",
-              "BufNewFile",
-              "BufNew",
-              "BufAdd",
-              "BufEnter",
-              "TabNewEntered",
-              "TabEnter",
-            },
+            event = { "FileType", },
+            -- "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter",
             pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy" },
             desc = "Iron repl support",
             callback = function()
@@ -138,8 +116,21 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR><ESC>", { expr = false, noremap = true, desc = "Send line" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "s", "<cmd> lua require 'iron.core'.send_line()<CR><ESC>", { expr = false, noremap = true, desc = "Send line" })
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "l", "<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { expr = false, noremap = true, desc = "Send selection" })
+              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "s", "<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { expr = false, noremap = true, desc = "Send selection" })
               -- send file: aa
 
+              -- core plugin mappints
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "<cr>", "<cmd> lua require('iron').core.send(nil, string.char(13))<CR><ESC>", { expr = false, noremap = true, desc = "Send return to repl" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "m", "<cmd> lua require('iron.core').run_motion('send_motion')<CR><ESC>", { expr = false, noremap = true, desc = "Send motion" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "p", "<cmd> lua require('iron').core.send_paragraph<CR><ESC>", { expr = false, noremap = true, desc = "Send paragrph" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_code_block(false)<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "B", "<cmd> lua require('iron').core.send_code_block(true)<CR><ESC>", { expr = false, noremap = true, desc = "Send block and move" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "I", "<cmd> lua require('iron').core.send(nil, string.char(03))<CR><ESC>", { expr = false, noremap = true, desc = "Interupt" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "q", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit"})
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "L", "<cmd> lua require('iron').core.send(nil, string.char(12))<CR><ESC>", { expr = false, noremap = true, desc = "Clear"})
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "u", "<cmd> lua require('iron').core.send_until_cursor<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor"})
+
+              -- Visidata
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
 
