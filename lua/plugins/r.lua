@@ -116,49 +116,13 @@ return {
             -- edit & operators
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RAssign", '<Cmd>lua require("r.edit").assign()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "<m-->", "<Plug>RInsertAssign", { noremap = true })
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              "--",
-              "<Plug>RInsertAssign",
-              { silent = true, noremap = true, expr = false }
-            )
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              "__",
-              "<Plug>RInsertAssign",
-              { silent = true, noremap = true, expr = false }
-            )
+            vim.api.nvim_buf_set_keymap( 0, "i", "--", "<Plug>RInsertAssign", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap( 0, "i", "__", "<Plug>RInsertAssign", { silent = true, noremap = true, expr = false })
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RPipe", '<Cmd>lua require("r.edit").pipe()<CR>', { silent = true, noremap = true, expr = false })
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              "<<",
-              "<Plug>RInsertPipe",
-              { silent = true, noremap = true, expr = false }
-            )
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              ",,",
-              "<Plug>RInsertPipe",
-              { silent = true, noremap = true, expr = false }
-            )
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              "<m-.>",
-              "<Plug>RInsertPipe",
-              { silent = true, noremap = true, expr = false }
-            )
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              "<m-,>",
-              "<Plug>RInsertPipe",
-              { silent = true, noremap = true, expr = false }
-            )
+            vim.api.nvim_buf_set_keymap( 0, "i", "<<", "<Plug>RInsertPipe", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap( 0, "i", ",,", "<Plug>RInsertPipe", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap( 0, "i", "<m-.>", "<Plug>RInsertPipe", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap( 0, "i", "<m-,>", "<Plug>RInsertPipe", { silent = true, noremap = true, expr = false })
             -- TODO:
             -- keymap_modes({"n", "i", "v"}, "RSetwd", "rd",  {})  -- "<Cmd>lua require('r.run').setwd()"
             -- keymap_modes({"n", "i", "v"}, "RSeparatePath", {})  --    "sp", "<Cmd>lua require('r.path').separate()"
@@ -240,39 +204,15 @@ return {
             vim.api.nvim_buf_set_keymap(0, "n", "<C-Enter>", "<Plug>RSendLine", { desc = "Send line" })
             vim.api.nvim_buf_set_keymap(0, "v", "<C-Enter>", "<Plug>RSendSelection", { desc = "Send selection" })
             vim.api.nvim_buf_set_keymap(0, "n", "<S-Enter>", "<Plug>RDSendLine", { desc = "Send line & down" })
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "v",
-              "<S-Enter>",
-              "<Plug>RDSendSelection",
-              { desc = "Send selection & down" }
-            )
+            vim.api.nvim_buf_set_keymap( 0, "v", "<S-Enter>", "<Plug>RDSendSelection", { desc = "Send selection & down" })
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<Plug>RSendLine", { desc = "Send line" })
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "s", "<Plug>RSendLine", { desc = "Send line" })
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Plug>RDSendLine", { desc = "Send line & down" })
             vim.api.nvim_buf_set_keymap(0, "v", prefix .. "l", "<Plug>RSendSelection", { desc = "Send selection" })
             vim.api.nvim_buf_set_keymap(0, "v", prefix .. "s", "<Plug>RSendSelection", { desc = "Send selection" })
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "v",
-              prefix .. "L",
-              "<Plug>RDSendSelection",
-              { desc = "Send selection & down" }
-            )
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              "<C-Enter>",
-              "<Cmd>lua require('r.send').line(false)<CR>",
-              { desc = "Send line" }
-            )
-            vim.api.nvim_buf_set_keymap(
-              0,
-              "i",
-              "<S-Enter>",
-              "<Cmd>lua require('r.send').line(true)<CR>",
-              { desc = "Send line & down" }
-            )
+            vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "L", "<Plug>RDSendSelection", { desc = "Send selection & down" })
+            vim.api.nvim_buf_set_keymap( 0, "i", "<C-Enter>", "<Cmd>lua require('r.send').line(false)<CR>", { desc = "Send line" })
+            vim.api.nvim_buf_set_keymap( 0, "i", "<S-Enter>", "<Cmd>lua require('r.send').line(true)<CR>", { desc = "Send line & down" })
 
             -- Send Pipe chain breaker
             keymap_modes({ "n", "v" }, "RSendChain", prefix .. "xc", {}) -- "<Cmd>lua require('r.send').chain()"
