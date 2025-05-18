@@ -83,38 +83,6 @@ return {
             -- see: https://vi.stackexchange.com/a/3765
           },
         },
-
-        -- local termital_group = vim.api.nvim_create_augroup("terminal", { clear = true })
-        -- vim.api.nvim_create_autocmd('TermOpen', {
-        --   pattern = '*',
-        --   group = termital_group,
-        --   callback = function()
-        --     vim.keymap.set(
-        --       'n',
-        --       '<c-e>',
-        --       [[<c-\><c-n><cmd>e#<cr>]],
-        --       { buffer = 0, desc = "go from t[E]rminal to previous buffer" }
-        --     )
-        --     vim.keymap.set(...)
-        --     ...
-        --   end
-        -- })
-
-        -- auto_term_filetype = {
-        --   {
-        --     event = "BufType",
-        --     desc = "Close",
-        --     pattern = { "term" },
-        --     callback = function()
-        --       vim.keymap.set("n", "q", "<cmd>close<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" })
-        --       vim.keymap.set("i", "<c-q>", "<esc><cmd>close!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-        --       vim.keymap.set("n", "<c-q>", "<cmd>close<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-        --       vim.keymap.set("n", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-        --       -- vim.keymap.set("i", "c-C", "<esc><cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
-        --       -- vim.keymap.set("n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-        --     end,
-        --   },
-        -- },
         auto_bufdelete = {
           {
             event = "FileType",
@@ -127,13 +95,7 @@ return {
                 and vim.bo.buftype ~= "prompt"
                 and vim.bo.filetype ~= "TelescopePrompt"
               then
-                -- vim.keymap.set( "n", "q", "<cmd>w!|Bdelete!<CR>", {  noremap = true, buffer = true, desc = "Delete buffer" })
-                vim.keymap.set(
-                  "n",
-                  "q",
-                  "<cmd>lua require('astrocore.buffer').close(0)<CR>",
-                  { noremap = true, buffer = true, desc = "Delete buffer" }
-                )
+                vim.keymap.set( "n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" })
               end
             end,
           },
@@ -142,15 +104,13 @@ return {
           {
             event = { "FileType" },
             desc = "Terminal keymaps",
-            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "nofile", "term", "rdoc" }, -- , , '', 'term'
+            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "nofile", "term", "rdoc" },
             callback = function()
               -- Notice that buffer = 0 sets this keymap only for current buffer. So when you live the terminal you will not have those keymaps.
               -- Should be the same
-              -- vim.api.nvim_buf_set_keymap(0, "n", "q", "<Cmd>quit!<CR>", { silent = true, noremap = true, expr = false, desc = "Close" })
               vim.keymap.set( "n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" }) -- close!
               vim.keymap.set( "i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
               vim.keymap.set( "n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              -- vim.keymap.set("n", "<esc>", "<cmd>quit<CR>", { expr = false, noremap = true, buffer = true, desc = "Close terminal" })
               vim.keymap.set( "n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
               vim.keymap.set( "n", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
               vim.keymap.set( "i", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
@@ -175,15 +135,12 @@ return {
             desc = "Orgmode settings",
             pattern = "org",
             callback = function()
-              -- vim.keymap.set("n", "i", "", { expr = true, noremap = true, desc = "Insert" })
             end,
           },
         },
         auto_clean_cache = {
           {
             event = { "TermClose" }, -- TermLeave (triggers already when entering command line)
-            -- event = {"BufDelete", "BufLeave"},   -- "VimLeave", "BufLeave"
-            -- pattern = {"*py", "*python"},
             desc = "Clear toggleterm visidata cache",
             callback = function()
               -- the directory variable is defined in: ~/.config/nvim/lua/global_vars.lua
@@ -191,9 +148,6 @@ return {
                 os.execute("rm -rf " .. dir_vd_temp .. "*")
               else
                 -- https://superuser.com/questions/741945/delete-all-files-from-a-folder-and-its-sub-folders
-                -- del /S *
-                -- Get-ChildItem -Path c:\temp -Include * | remove-Item -recurse
-                -- Remove-Item -Path "C:\dotnet-helpers*.*" -recurse -Force
                 os.execute('Remove-Item -Path "' .. dir_vd_temp .. '*.*" -recurse -Force')
               end
             end,
@@ -205,10 +159,6 @@ return {
             desc = "Markdown-, text-, tex-file autocmds",
             pattern = { "markdown", "tex", "text" },
             callback = function()
-              -- default diagnostic mode:
-              -- vim.diagnostic.config({ virtual_text={ current_line=true }, })  -- virtual_text=false,
-              -- vim.diagnostic.config({ virtual_lines={ current_line=true },})
-
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Pdf", ":lua require('utils').pandoc2('pdf')", {})
@@ -226,6 +176,8 @@ return {
                 vim.diagnostic.enable(vim.bo.filetype ~= ft)
                 if vim.bo.filetype == ft then break end
               end
+              -- vim.diagnostic.config({ virtual_text={ current_line=true }, })  -- virtual_text=false,
+              -- vim.diagnostic.config({ virtual_lines={ current_line=true },})
             end
           }
         },
@@ -341,12 +293,7 @@ return {
         },
         -- insert mode
         i = {
-          -- ["<C-S>"] = { function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
           ["<S-Tab>"] = { "<C-V><Tab>", desc = "Tab character" },
-
-          -- -- saving
-          -- ["<C-s>"] = { "<ESC>:w!<CR>a", desc = "Save" },
-
           -- date/time input
           ["<F4>"] = { '<C-R>=strftime("%Y-%m-%d")<CR>', desc = "Time stamp" },
         },
@@ -366,7 +313,6 @@ return {
         },
         x = {
           ["sa"] = false,
-          -- ["<C-S>"] = false,
           -- better increment/decrement
           ["+"] = { "g<C-a>", desc = "Increment number" },
           ["-"] = { "g<C-x>", desc = "Descrement number" },
