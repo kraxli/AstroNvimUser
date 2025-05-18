@@ -221,7 +221,7 @@ return {
             pattern = { "*" },
             desc = "diagnostics",
             callback = function ()
-              local filetypes = {'markdown', 'orgmode', 'org', 'neorg', 'norg', 'tex', 'text'}
+              local filetypes = {'markdown', 'org', 'norg', 'tex', 'text'}
               for _, ft in pairs(filetypes) do
                 vim.diagnostic.enable(vim.bo.filetype ~= ft)
                 if vim.bo.filetype == ft then break end
