@@ -51,6 +51,19 @@ return {
         BqfSign = { text = " " .. require("astroui").get_icon "Selected", texthl = "BqfSign" },
       },
       autocmds = {
+        -- auto_default = {
+        --   event = "FileType",
+        --   -- event = "BufWinEnter",
+        --   -- pattern = "",
+        --   callback = function ()
+        --     if vim.bo.filetype ~= "markdown" then
+        --       vim.diagnostic.enable(true)
+        --     else
+        --       vim.diagnostic.enable(false)
+        --     end
+        --     -- vim.diagnostic.enable(vim.bo.filetype ~= 'markdown')
+        --   end
+        -- },
         auto_spell = {
           {
             event = "FileType",
@@ -239,13 +252,27 @@ return {
               -- default diagnostic mode:
               -- vim.diagnostic.config({ virtual_text={ current_line=true }, })  -- virtual_text=false,
               -- vim.diagnostic.config({ virtual_lines={ current_line=true },})
-              -- vim.diagnostic.enable(false)
 
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Pdf", ":lua require('utils').pandoc2('pdf')", {})
             end,
           },
+        },
+        auto_diagnostics = {
+          {
+            event = { "BufWinEnter"}, -- "BufRead"
+            pattern = { "*" },
+            desc = "diagnostics",
+            callback = function ()
+              local filetypes = {'markdown', 'orgmode', 'org', 'neorg', 'norg', 'tex', 'text'}
+              for _, ft in pairs(filetypes) do
+                print(vim.bo.filetype)
+                vim.diagnostic.enable(vim.bo.filetype ~= ft)
+                if vim.bo.filetype == ft then break end
+              end
+            end
+          }
         },
         -- sync_term_background = {
         --   {
@@ -269,7 +296,8 @@ return {
         update_in_insert = false,
         virtual_text = { current_line = true }, -- , severity = { min = vim.diagnostic.severity.WARN }
         -- virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.WARN } },
-        enable = vim.bo.filetype ~= 'markdown' and vim.bo.filetype ~= 'text' and vim.bo.filetype ~= 'tex',
+        -- enable = true, -- vim.bo.filetype ~= 'markdown' and vim.bo.filetype ~= 'text' and vim.bo.filetype ~= 'tex',
+        underline = true,
       },
       features = {
         diagnostics = { virtual_lines = false },
