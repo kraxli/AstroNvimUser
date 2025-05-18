@@ -51,19 +51,6 @@ return {
         BqfSign = { text = " " .. require("astroui").get_icon "Selected", texthl = "BqfSign" },
       },
       autocmds = {
-        -- auto_default = {
-        --   event = "FileType",
-        --   -- event = "BufWinEnter",
-        --   -- pattern = "",
-        --   callback = function ()
-        --     if vim.bo.filetype ~= "markdown" then
-        --       vim.diagnostic.enable(true)
-        --     else
-        --       vim.diagnostic.enable(false)
-        --     end
-        --     -- vim.diagnostic.enable(vim.bo.filetype ~= 'markdown')
-        --   end
-        -- },
         auto_spell = {
           {
             event = "FileType",
@@ -160,44 +147,13 @@ return {
               -- Notice that buffer = 0 sets this keymap only for current buffer. So when you live the terminal you will not have those keymaps.
               -- Should be the same
               -- vim.api.nvim_buf_set_keymap(0, "n", "q", "<Cmd>quit!<CR>", { silent = true, noremap = true, expr = false, desc = "Close" })
-              vim.keymap.set(
-                "n",
-                "q",
-                "<cmd>quit!<CR>",
-                { expr = false, noremap = true, buffer = true, desc = "Close" }
-              ) -- close!
-
-              vim.keymap.set(
-                "i",
-                "<c-q>",
-                "<esc><cmd>quit!<CR>",
-                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
-              )
-              vim.keymap.set(
-                "n",
-                "<c-q>",
-                "<cmd>quit!<CR>",
-                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
-              )
+              vim.keymap.set( "n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" }) -- close!
+              vim.keymap.set( "i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set( "n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
               -- vim.keymap.set("n", "<esc>", "<cmd>quit<CR>", { expr = false, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set(
-                "n",
-                "C",
-                "<cmd>bd!<CR>",
-                { expr = false, noremap = true, buffer = true, desc = "Terminate" }
-              )
-              vim.keymap.set(
-                "n",
-                "<c-Q>",
-                "<cmd>bd!<CR>",
-                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
-              )
-              vim.keymap.set(
-                "i",
-                "<c-Q>",
-                "<cmd>bd!<CR>",
-                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
-              )
+              vim.keymap.set( "n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
+              vim.keymap.set( "n", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set( "i", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
             end,
           },
         },
