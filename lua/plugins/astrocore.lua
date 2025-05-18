@@ -184,11 +184,12 @@ return {
       },
       diagnostics = {
         update_in_insert = false,
-        virtual_text = { current_line = true, severity = { max = vim.diagnostic.severity.INFO } },
+        virtual_text = { current_line = true, severity = { min = vim.diagnostic.severity.ERROR } },
+        -- virtual_text = { current_line = true, severity = { max = vim.diagnostic.severity.INFO } },
         virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.ERROR } },
       },
       features = {
-        diagnostics = { virtual_lines = true, virtual_text = true },
+        diagnostics = { virtual_lines = false, virtual_text = true },
       },
       filetypes = {
         extension = {
