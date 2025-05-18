@@ -22,7 +22,6 @@ return {
       "markdown-oxide",
       "marksman",
       "neocmakelsp",
-      "regols",
       "sqls",
       -- "svelte-language-server",
       "tailwindcss-language-server",
@@ -32,6 +31,8 @@ return {
       "vtsls",
       "vue-language-server",
       "yaml-language-server",
+
+      "opa",
 
       -- Linters
       -- "ansible-lint",  -- fails on windows
