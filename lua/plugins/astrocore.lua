@@ -162,6 +162,16 @@ return {
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Pdf", ":lua require('utils').pandoc2('pdf')", {})
+
+              -- LivePreview
+              vim.api.nvim_create_user_command('PreviewStart', ":LivePreview start", {})
+              vim.api.nvim_create_user_command('Pv', ":LivePreview start", {})
+              vim.api.nvim_create_user_command('PreviewClose', ":LivePreview start", {})
+              vim.api.nvim_create_user_command('Pc', ":LivePreview close", {})
+              vim.api.nvim_create_user_command('PreviewPeek', ":LivePreview pick", {})
+              vim.api.nvim_create_user_command('Ps', ":LivePreview pick", {})
+              vim.keymap.set({"n"}, "<leader>V", ":LivePreview start<CR>", { expr = false, noremap = true, buffer=true, desc = "Preview" })
+
             end,
           },
         },

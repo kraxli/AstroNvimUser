@@ -36,9 +36,39 @@ return {
 			]]
     end,
   },
-  -- !! https://github.com/Skardyy/neo-img
+  {
+    'brianhuster/live-preview.nvim',
+    ft = { 'markdown', 'html', 'text'},
+    cmd = { 'LivePreview', 'Pv', 'PreviewClose', 'Pc', 'PreviewPeek', 'Ps', },
+    keys = {'<leader>V'},
+    dependencies = {
+        -- You can choose one of the following pickers
+        -- 'nvim-telescope/telescope.nvim',
+        -- 'ibhagwan/fzf-lua',
+        'echasnovski/mini.pick',
+        -- {
+        --   "AstroNvim/astrocore",
+        --   opts = {
+        --     commands = {
+        --       PreviewStart = { ":LivePreview start", desc = "Open preview window" },
+        --       Pv = { ":LivePreview start", desc = "Open preview window" },
+        --       PreviewClose = { ":LivePreview start", desc = "Close preview window" },
+        --       Pc = { ":LivePreview start", desc = "Close preview window" },
+        --       PreviewPeek =  { ":LivePreview peek", desc = "Preview peek" },
+        --       Ps =  { ":LivePreview peek", desc = "Preview peek" },
+        --     },
+        --     mappings = {
+        --       n = {
+        --         ["<Leader>V"] = { "<CMD>LivePreview start<CR>", desc = "Preview" },
+        --       },
+        --     },
+        --   },
+        -- },
+    },
+  },
   {
     "toppair/peek.nvim",
+    enabled = false,
     lazy = true,
     build = "deno task --quiet build:fast",
     dependencies = {
@@ -100,7 +130,33 @@ return {
     end,
   },
   {
+    "HakonHarnes/img-clip.nvim",
+    cmd = { "PasteImage", "ImgClipDebug", "ImgClipConfig" },
+    specs = {
+      {
+        "AstroNvim/astrocore",
+        opts = {
+          mappings = {
+            n = {
+              ["<Leader>P"] = { "<CMD>PasteImage<CR>", desc = "Paste image from system clipboard" },
+            },
+          },
+        },
+      },
+    },
+    opts = {
+      default = {
+        prompt_for_file_name = false,
+        drag_and_drop = {
+          insert_mode = true,
+        },
+        use_absolute_path = vim.fn.has "win32" == 1, -- default to absolute path for windows users
+      },
+    },
+  },
+  {
     "kraxli/clipboard-image.nvim",
+    enabled = false,
     cmd = "PasteImg",
     ft = { "markdown", "text", "vimwiki" },
     config = function()
@@ -259,5 +315,13 @@ return {
         remove = false,
       }
     end,
+  },
+  {
+    'skardyy/neo-img',
+    enabled = false,
+    build = ":NeoImg Install",  -- requires go and kitty terminal
+    config = function()
+        require('neo-img').setup()
+    end
   },
 }
