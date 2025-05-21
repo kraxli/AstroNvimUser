@@ -8,6 +8,12 @@ local function toggle_box()
     return 'g@l'
 end
 
+-- local port = vim.fn.has('win64') == 1 ? 8080 : 5500
+local port = 5500
+if vim.fn.has('win64') == 1 then 
+  port = 8080 
+end
+
 -- vim.keymap.set('n', '<c-space>', toggle, { expr = true, desc = 'Toggle Checkmark' })
 -- vim.keymap.set('n', '<leader>zt', toggle_box, { expr = true, desc = 'Toggle Checkbox' })
 
@@ -65,6 +71,15 @@ return {
         --   },
         -- },
     },
+    config = function ()
+      require('livepreview.config').set({
+	      port = port,
+	      browser = 'default',
+	      dynamic_root = false,
+	      sync_scroll = true,
+	      picker = "",
+      })
+    end
   },
   {
     "toppair/peek.nvim",
