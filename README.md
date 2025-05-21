@@ -1,6 +1,6 @@
 # AstroNvim User Configuration
 
-My personal AstroNvim user configuration for [AstroNvim v4](https://github.com/AstroNvim/AstroNvim)
+My personal AstroNvim user configuration for [AstroNvim v5](https://github.com/AstroNvim/AstroNvim)
 
 This AstroNvimUser configuration builds on the user configuraion of [Micah Halter](https://code.mehalter.com/AstroNvim_user/~files/master)
 
