@@ -51,6 +51,18 @@ return {
         BqfSign = { text = " " .. require("astroui").get_icon "Selected", texthl = "BqfSign" },
       },
       autocmds = {
+        -- auto_save = {
+        --   {
+        --     -- You can create an autocmd that auto save the file when you leave insert mode.
+        --     --- Lua
+        --     vim.o.autowriteall = true
+        --     vim.api.nvim_create_autocmd({ 'InsertLeavePre', 'TextChanged', 'TextChangedP' }, {
+        --         pattern = '*', callback = function()
+        --             vim.cmd('silent! write')
+        --         end
+        --     })
+        --   },
+        -- },
         auto_spell = {
           {
             event = "FileType",
