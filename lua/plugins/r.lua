@@ -116,7 +116,7 @@ return {
             -- edit & operators
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RAssign", '<Cmd>lua require("r.edit").assign()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap(0, "i", "<m-->", "<Plug>RInsertAssign", { noremap = true })
-            vim.api.nvim_buf_set_keymap( 0, "i", "--", "<Plug>RInsertAssign", { silent = true, noremap = true, expr = false })
+            vim.api.nvim_buf_set_keymap( 0, "i", "ee", "<Plug>RInsertAssign", { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap( 0, "i", "__", "<Plug>RInsertAssign", { silent = true, noremap = true, expr = false })
             -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RPipe", '<Cmd>lua require("r.edit").pipe()<CR>', { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap( 0, "i", "<<", "<Plug>RInsertPipe", { silent = true, noremap = true, expr = false })

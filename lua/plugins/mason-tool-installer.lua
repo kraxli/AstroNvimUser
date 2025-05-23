@@ -22,6 +22,7 @@ return {
       "markdown-oxide",
       "marksman",
       "neocmakelsp",
+      "r-languageserver",
       "sqls",
       -- "svelte-language-server",
       "tailwindcss-language-server",
