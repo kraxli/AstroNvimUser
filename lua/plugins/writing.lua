@@ -11,7 +11,7 @@ end
 -- local port = vim.fn.has('win64') == 1 ? 8080 : 5500
 local port = 5500
 if vim.fn.has('win64') == 1 then 
-  port = 8080 
+  port = 8086  -- 8060
 end
 
 -- vim.keymap.set('n', '<c-space>', toggle, { expr = true, desc = 'Toggle Checkmark' })
@@ -24,26 +24,27 @@ return {
     config = function()
       vim.cmd [[
   			Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
-			Abolish {seperate} {separate}
+			  Abolish {seperate} {separate}
   			Abolish {infal}{a,}{tion,ted} {infl}{a}{}
   			Abolish {ulita,ulit,utili,utli}mate {ulti}mate 
   			Abolish {anly,anyla,anali}sis {analy}sis
   			Abolish {Cor, cor}{os,so} {Cor}{So}
-			Abolish {alos} {also}
-			Abolish {boostrap} {bootstrap}
-			Abolish {exlcl,exlc,exl}ud{e,ed} {excl}ud{}
-			Abolish tri{nag,ng}{el}{s} tri{ang}{le}{s}
-			Abolish {highlevel} {high-level}
-			Abolish {occurence} {occurrence}
-			Abolish {heterogen}{ous,ious} {heterogen}{eous} 
-			Abolish {tain}ing{s} {train}ing{s}
-			Abolish {profit}{abe,abel} {profit}{able}
-			Abolish {ifrs} {IFRS}
+			  Abolish {alos} {also}
+			  Abolish {boostrap} {bootstrap}
+			  Abolish {exlcl,exlc,exl}ud{e,ed} {excl}ud{}
+			  Abolish tri{nag,ng}{el}{s} tri{ang}{le}{s}
+			  Abolish {highlevel} {high-level}
+			  Abolish {occurence} {occurrence}
+			  Abolish {heterogen}{ous,ious} {heterogen}{eous} 
+			  Abolish {tain}ing{s} {train}ing{s}
+			  Abolish {profit}{abe,abel} {profit}{able}
+			  Abolish {ifrs} {IFRS}
 			]]
     end,
   },
   {
     'brianhuster/live-preview.nvim',
+    enabled = vim.fn.has('unix') == 1,
     ft = { 'markdown', 'html', 'text'},
     cmd = { 'LivePreview', 'Pv', 'PreviewClose', 'Pc', 'PreviewPeek', 'Ps', },
     keys = {'<leader>V'},
@@ -83,7 +84,7 @@ return {
   },
   {
     "toppair/peek.nvim",
-    enabled = false,
+    enabled = vim.fn.has('win64') == 1,
     lazy = true,
     build = "deno task --quiet build:fast",
     dependencies = {
@@ -100,16 +101,6 @@ return {
       theme = "light",
     },
   },
-  {
-    "iamcco/markdown-preview.nvim",
-    enabled = false,
-    -- version = "v0.0.10",
-    build = "cd $XDG_DATA_HOME/nvim/lazy/markdown-preview.nvim/app && npm install && npm audit fix --force", -- npm install && npm audit fix --force",
-    -- build = function() vim.fn["call mkdp#util#install"]() end,
-    ft = { "markdown" },
-    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-  },
-  --  [markdown markmap]
   --  https://github.com/Zeioth/markmap.nvim
   {
     "Zeioth/markmap.nvim",
@@ -132,18 +123,7 @@ return {
     cmd = "Glow",
     opts = {},
   },
-  {
-    "TobinPalmer/pastify.nvim",
-    enabled = false, -- vim.has('win64') == 1
-    cmd = { "Pastify" },
-    config = function()
-      require("pastify").setup {
-        opts = {
-          apikey = "YOUR API KEY (https://api.imgbb.com/)", -- Needed if you want to save online.
-        },
-      }
-    end,
-  },
+  -- "TobinPalmer/pastify.nvim",
   {
     "HakonHarnes/img-clip.nvim",
     cmd = { "PasteImage", "ImgClipDebug", "ImgClipConfig" },
@@ -168,79 +148,6 @@ return {
         use_absolute_path = vim.fn.has "win32" == 1, -- default to absolute path for windows users
       },
     },
-  },
-  {
-    "kraxli/clipboard-image.nvim",
-    enabled = false,
-    cmd = "PasteImg",
-    ft = { "markdown", "text", "vimwiki" },
-    config = function()
-      require("clipboard-image").setup {
-        default = {
-          img_dir = "img",
-          img_dir_txt = "img",
-          img_name = function()
-            -- local img_dir = 'img' -- require'clipboard-image.config'.get_config().img_dir()
-            return os.date "%Y-%m-%d-%H-%M-%S"
-          end,
-          affix = function()
-            if vim.has "win64" then
-              return "![](%s)"
-            else
-              return "![](/%s)"
-            end
-          end,
-        },
-        -- markdown = {
-        --   img_dir = 'src/assets/img',
-        --   img_dir_txt = '/assets/img',
-        --   affix = '![](%s)',
-        -- },
-      }
-    end,
-    -- enabled = false,
-  },
-  {
-    "gaoDean/autolist.nvim",
-    enabled = false,
-    ft = {
-      "markdown",
-      "text",
-      "tex",
-      "plaintex",
-      "norg",
-    },
-    config = function()
-      require("autolist").setup()
-
-      -- vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>")
-      -- vim.keymap.set("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>")
-      -- vim.keymap.set("i", "<c-t>", "<c-t><cmd>AutolistRecalculate<cr>") -- an example of using <c-t> to indent
-      vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>")
-      vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>")
-      -- vim.keymap.set("n", "<C-space>", "<cmd>AutolistToggleCheckbox<cr>")
-      vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_autolist()<CR>")
-      -- vim.keymap.set("n", "<C-space>", "<cmd>lua require('utils').handle_checkbox_autolist()<CR>")
-      -- vim.keymap.set("v", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
-      -- vim.keymap.set("v", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
-      vim.keymap.set("i", "<CR>", "<esc>o<cmd>AutolistNewBullet<cr>")
-
-      -- cycle list types with dot-repeat
-      vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true })
-      vim.keymap.set("n", "<leader>cp", require("autolist").cycle_prev_dr, { expr = true })
-
-      -- if you don't want dot-repeat
-      -- vim.keymap.set("n", "<leader>cn", "<cmd>AutolistCycleNext<cr>")
-      -- vim.keymap.set("n", "<leader>cp", "<cmd>AutolistCycleNext<cr>")
-
-      -- functions to recalculate list on edit
-      vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>")
-      vim.keymap.set("n", "<<", "<<<cmd>AutolistRecalculate<cr>")
-      vim.keymap.set("n", "> ", ">><cmd>AutolistRecalculate<cr>")
-      vim.keymap.set("n", "< ", "<<<cmd>AutolistRecalculate<cr>")
-      vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>")
-      vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>")
-    end,
   },
   {
     "dkarter/bullets.vim",
