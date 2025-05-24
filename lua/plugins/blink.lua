@@ -32,7 +32,7 @@ return {
     signature = { enabled = true },
     cmdline = {
       enabled = true,
-      completion = { menu = { auto_show = false } },
+      completion = { menu = { auto_show = true,  }, ghost_text = { enabled = true }, },
       keymap = {
         -- recommended, as the default keymap will only show and select the next item
         ["<Up>"] = { "select_prev", "fallback" },
