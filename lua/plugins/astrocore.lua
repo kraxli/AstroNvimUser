@@ -97,7 +97,7 @@ return {
         },
         auto_bufdelete = {
           {
-            event = "FileType",
+            event = { 'BufWinEnter' },
             desc = "Close",
             pattern = { "*" },
             callback = function()
@@ -106,17 +106,24 @@ return {
                 and vim.bo.buftype ~= "term"
                 and vim.bo.buftype ~= "prompt"
                 and vim.bo.filetype ~= "TelescopePrompt"
+                and vim.bo.filetype ~= '' and vim.bo.buftype ~= 'nofile'
               then
                 vim.keymap.set( "n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" })
+              elseif (vim.bo.filetype == '' and vim.bo.buftype == '') then  -- close empty buffers
+                vim.keymap.set( "n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" })
+              -- else
+                -- for R Object_browser
+                -- elseif (vim.bo.filetype == '' and vim.bo.buftype == 'nofile') then
+                -- vim.keymap.set( "n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" }) -- close!
               end
             end,
           },
         },
         auto_term_filetype_close = {
           {
-            event = { "FileType" },
+            event = { "FileType", },
             desc = "Terminal keymaps",
-            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "nofile", "term", "rdoc" },
+            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "nofile", "term", "rdoc", "TelescopePrompt", "" },
             callback = function()
               -- Notice that buffer = 0 sets this keymap only for current buffer. So when you live the terminal you will not have those keymaps.
               -- Should be the same
