@@ -17,7 +17,6 @@ if vim.fn.has "win64" == 1 then
   graphical_device = "windows"
   pdfviewer = "mupdf" -- or sumatra
 end
-
 -- vim.g.R_path = r_path
 
 -- -------------------------------------------------------
@@ -38,6 +37,24 @@ function set_csv_app(app, mode, args)
 end
 -- vim.api.nvim_buf_set_keymap(0, "n", <localleader>Vt, set_csv_app("terminal:vd", "n", ''), {})
 -- keymap_modes({"n"}, '<cmd>lua app = set_csv_app("terminal:vd", "n", ''); require("r.config").get_config().csv_app = app<CR>', prefix .. "Vt", {})
+
+local function view_object_details()
+  local browser = require 'r.browser'
+  local lnum = vim.api.nvim_win_get_cursor(0)[1]
+  local curline = vim.api.nvim_buf_get_lines(0, lnum - 1, lnum, true)[1]
+  local object_name = browser.get_name(lnum, curline)
+  if object_name == '' then
+    require('r').warn 'No object selected.'
+    return
+  end
+
+  -- Open a split window and show the object's details
+  vim.cmd 'split'
+  vim.cmd 'enew'
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, { 'Details of ' .. object_name })
+  -- More logic here to fetch and display details
+end
+
 
 -- -------------------------------------------------------
 
@@ -95,6 +112,25 @@ return {
           save_fun = "function(obj, obj_name) {f <- paste0(obj_name, '.parquet'); arrow::write_parquet(obj, f) ; f}",
           -- open_app = "terminal:vd",
           open_app = csv_app,
+        },
+        objbr_mappings = {
+          c = 'class({object})',
+          dd = 'rm',
+          e = view_object_details,
+          g = 'dplyr::glimpse',
+          h = 'head({object}, 10)', -- Command with arguments
+          l = 'length({object})',
+          m = 'object.size',
+          n = 'names', -- Command without placeholder, object name will be appended.
+          p = 'plot({object})',
+          s = 'str({object})',
+          ss = 'summary({object})',
+          v = function()
+            require('r.browser').toggle_view()
+          end,
+          q = function() 
+            require('r.browser').start()
+          end,
         },
         rm_knit_cache = true,
         synctex = true,
