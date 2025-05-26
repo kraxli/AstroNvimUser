@@ -9,7 +9,7 @@ local function toggle_box()
 end
 
 -- local port = vim.fn.has('win64') == 1 ? 8080 : 5500
-local port = 5500
+local port = 5500  -- 8080
 if vim.fn.has('win64') == 1 then 
   port = 8086  -- 8060
 end

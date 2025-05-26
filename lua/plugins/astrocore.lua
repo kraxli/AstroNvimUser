@@ -186,14 +186,15 @@ return {
               -- vim.keymap.set("i", "<C-l>", function() require("luasnip").snip_expand(require("keymap_snippets")["link2"]) end)
 
               -- LivePreview
-              vim.api.nvim_create_user_command('PreviewStart', ":LivePreview start", {})
-              vim.api.nvim_create_user_command('Pv', ":LivePreview start", {})
-              vim.api.nvim_create_user_command('PreviewClose', ":LivePreview start", {})
-              vim.api.nvim_create_user_command('Pc', ":LivePreview close", {})
-              vim.api.nvim_create_user_command('PreviewPeek', ":LivePreview pick", {})
-              vim.api.nvim_create_user_command('Ps', ":LivePreview pick", {})
-              vim.keymap.set({"n"}, "<leader>V", ":LivePreview start<CR>", { expr = false, noremap = true, buffer=true, desc = "Preview" })
-
+              if vim.fn.has('unix') then
+                vim.api.nvim_create_user_command('PreviewStart', ":LivePreview start", {})
+                vim.api.nvim_create_user_command('Pv', ":LivePreview start", {})
+                vim.api.nvim_create_user_command('PreviewClose', ":LivePreview start", {})
+                vim.api.nvim_create_user_command('Pc', ":LivePreview close", {})
+                vim.api.nvim_create_user_command('PreviewPeek', ":LivePreview pick", {})
+                vim.api.nvim_create_user_command('Ps', ":LivePreview pick", {})
+                vim.keymap.set({"n"}, "<leader>V", ":LivePreview start<CR>", { expr = false, noremap = true, buffer=true, desc = "Preview" })
+              end
             end,
           },
         },
