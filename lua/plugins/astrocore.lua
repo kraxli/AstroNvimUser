@@ -182,6 +182,9 @@ return {
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Pdf", ":lua require('utils').pandoc2('pdf')", {})
 
+              -- TODO: mini.snippets equivalent to the below is missing:
+              -- vim.keymap.set("i", "<C-l>", function() require("luasnip").snip_expand(require("keymap_snippets")["link2"]) end)
+
               -- LivePreview
               vim.api.nvim_create_user_command('PreviewStart', ":LivePreview start", {})
               vim.api.nvim_create_user_command('Pv', ":LivePreview start", {})
