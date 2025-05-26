@@ -29,7 +29,7 @@ return {
       "taplo",
       "texlab",
       "typos-lsp",
-      "vtsls",
+      -- "vtsls",
       "vue-language-server",
       "yaml-language-server",
 
