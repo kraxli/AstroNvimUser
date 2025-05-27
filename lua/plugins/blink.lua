@@ -27,6 +27,13 @@ return {
     sources = {
       providers = {
         path = { opts = { trailing_slash = false, show_hidden_files_by_default = true } },
+        cmdline = {
+          min_keyword_length = function(ctx)
+            -- when typing a command, only show when the keyword is 3 characters or longer
+            if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 2 end
+          return 0
+          end
+        },
       },
     },
     signature = { enabled = true },
@@ -37,9 +44,9 @@ return {
       completion = { menu = { auto_show = true,  }, ghost_text = { enabled = true }, },
       keymap = {
         -- recommended, as the default keymap will only show and select the next item
-        -- ["<Up>"] = { "select_prev", "fallback" },
+        ["<Up>"] = { "select_prev", "fallback" },
         ["<C-k>"] = { "select_prev", "fallback" },
-        -- ["<Down>"] = { "select_next", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
         ["<Tab>"] = { "show", "accept" },
         ["<Right>"] = { "accept", "fallback" },
