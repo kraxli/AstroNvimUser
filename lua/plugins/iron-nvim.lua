@@ -1,8 +1,9 @@
 local prefix = "<Leader>r"
+local is_mswindows = vim.fn.has('win64') == 1 and true or false
 
 -- python command
 local py_command = { "ipython", "--pylab=qt5", "--no-autoindent" }
--- if vim.fn.has('win64') == 1 then
+-- if is_mswindows == 1 then
 --   table.insert(py_command, "--simple-prompt")
 --   py_command = {"python"}  -- use python 3.13
 -- end
