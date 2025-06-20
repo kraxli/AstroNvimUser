@@ -1,5 +1,12 @@
 local prefix = "<Leader>r"
 
+-- python command
+local py_command = { "ipython", "--pylab=qt5", "--no-autoindent" }
+-- if vim.fn.has('win64') == 1 then
+--   table.insert(py_command, "--simple-prompt")
+--   py_command = {"python"}  -- use python 3.13
+-- end
+
 
 -- get variable under cursor: local variableUnderCursor = vim.fn.expand("<cword>")
 -- get visual selection: https://github.com/Willem-J-an/visidata.nvim/blob/master/lua/visidata.lua
@@ -26,7 +33,7 @@ function visidata_py(direction)
   -- the directory variable is defined in: ~/.config/nvim/lua/global_vars.lua
   os.execute("mkdir " .. dir_vd_temp)  -- require("lfs").mkdir(dir_vd_temp)
   local var_file_path = dir_vd_temp .. var_name .. '.parquet'  -- os.date('%Y%m%d%H%M%S')
-  require('iron').core.send('python', 'import pyarrow; ' .. var_name .. '.to_parquet("' .. var_file_path .. '")')
+  require('iron').core.send('python', 'import pyarrow; ' .. var_name .. '.to_parquet("' .. var_file_path .. '")\n')
 
   local vd_cmd = 'TermExec cmd="vd ' .. var_file_path .. '"   direction=' .. direction .. ' name=visidataTerm'
   vim.cmd(vd_cmd)
@@ -57,7 +64,7 @@ return {
             end,
           },
           python = {
-            command = { "ipython", "--pylab=qt5", "--no-autoindent" },
+            command = py_command,
             -- command = function()
             --   if vim.fn.has('win64') == 1 then
             --     return { "ipython", "--pylab=qt5" }
