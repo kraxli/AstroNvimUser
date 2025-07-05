@@ -176,7 +176,7 @@ return {
           {
             event = "FileType",
             desc = "Markdown-, text-, tex-file autocmds",
-            pattern = { "markdown", "tex", "text" },
+            pattern = { "markdown", "tex", "text", "org", 'norg' },
             callback = function()
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
@@ -186,7 +186,7 @@ return {
               -- vim.keymap.set("i", "<C-l>", function() require("luasnip").snip_expand(require("keymap_snippets")["link2"]) end)
 
               -- LivePreview
-              if vim.fn.has('unix') then
+              if vim.fn.has('unix') == 1 then
                 vim.api.nvim_create_user_command('PreviewStart', ":LivePreview start", {})
                 vim.api.nvim_create_user_command('Pv', ":LivePreview start", {})
                 vim.api.nvim_create_user_command('PreviewClose', ":LivePreview start", {})
