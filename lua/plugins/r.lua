@@ -175,7 +175,7 @@ return {
 
             -- Close
             keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "Q", { desc = "R close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
-            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", { desc = "R save & close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "W", { desc = "R save & close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Clear console
             keymap_modes({ "n", "v" }, "<Plug>RClearConsole", prefix .. "d", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
@@ -230,6 +230,9 @@ return {
             vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "L", "<Plug>RDSendSelection", { desc = "Send selection & down" })
             vim.api.nvim_buf_set_keymap( 0, "i", "<C-Enter>", "<Cmd>lua require('r.send').line(false)<CR>", { desc = "Send line" })
             vim.api.nvim_buf_set_keymap( 0, "i", "<S-Enter>", "<Cmd>lua require('r.send').line(true)<CR>", { desc = "Send line & down" })
+
+            -- send variable / word under cursor:
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "w", "viW<Plug>RSendSelection", { desc = "Send selection" })
 
             -- Send Pipe chain breaker
             keymap_modes({ "n", "v" }, "RSendChain", prefix .. "xc", {}) -- "<Cmd>lua require('r.send').chain()"
