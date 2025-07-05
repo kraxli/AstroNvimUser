@@ -106,6 +106,7 @@ return {
         rconsole_width = 78,
         pdfviewer = pdfviewer,
         disable_cmds = {},
+        pipe_version = "magrittr",  -- or native
         nvimpager = "split_v",
         view_df = {
           n_lines = 0,
