@@ -21,7 +21,7 @@ return {
   event = "User AstroFile", -- "InsertEnter", "BufReadPost",
   cmd = "Copilot",
   opts = {
-    suggestion = { enabled = true, auto_trigger = false }, -- , debounce = 150
+    suggestion = { enabled = true, auto_trigger = true }, -- , debounce = 150
     -- panel = { enabled = false },
   },
   specs = {
