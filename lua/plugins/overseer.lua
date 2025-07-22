@@ -56,12 +56,6 @@ return {
   end,
   specs = {
     {
-      "catppuccin",
-      optional = true,
-      ---@type CatppuccinOptions
-      opts = { integrations = { overseer = true } },
-    },
-    {
       "AstroNvim/astrocore",
       opts = {
         commands = {

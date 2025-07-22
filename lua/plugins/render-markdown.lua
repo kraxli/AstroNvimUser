@@ -12,12 +12,4 @@ return {
     pipe_table = { enabled = false },
     sign = { enabled = false },
   },
-  specs = {
-    {
-      "catppuccin",
-      optional = true,
-      ---@type CatppuccinOptions
-      opts = { integrations = { render_markdown = true } },
-    },
-  },
 }

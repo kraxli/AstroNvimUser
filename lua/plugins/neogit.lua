@@ -27,11 +27,5 @@ return {
         },
       },
     },
-    {
-      "catppuccin",
-      optional = true,
-      ---@type CatppuccinOptions
-      opts = { integrations = { neogit = true } },
-    },
   },
 }

@@ -19,12 +19,4 @@ return {
     "<Plug>(sandwich-delete)",
     "<Plug>(sandwich-replace)",
   },
-  specs = {
-    {
-      "catppuccin",
-      optional = true,
-      ---@type CatppuccinOptions
-      opts = { integrations = { sandwich = true } },
-    },
-  },
 }

@@ -136,6 +136,5 @@ return {
         },
       },
     },
-    { "catppuccin", optional = true, opts = { integrations = { grug_far = true } } },
   },
 }

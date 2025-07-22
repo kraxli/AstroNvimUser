@@ -8,12 +8,4 @@ return {
     { "<M-h>", mode = { "n", "v" } },
   },
   opts = {},
-  specs = {
-    {
-      "catppuccin",
-      optional = true,
-      ---@type CatppuccinOptions
-      opts = { integrations = { mini = true } },
-    },
-  },
 }

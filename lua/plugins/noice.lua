@@ -21,11 +21,5 @@ return {
   },
   specs = {
     { "rcarriga/nvim-notify", init = false, config = true },
-    {
-      "catppuccin",
-      optional = true,
-      ---@type CatppuccinOptions
-      opts = { integrations = { noice = true } },
-    },
   },
 }
