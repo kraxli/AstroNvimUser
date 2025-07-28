@@ -10,6 +10,7 @@ return {
     integrations = {
       illuminate = { lsp = true },
       native_lsp = { inlay_hints = { background = false } },
+      snacks = { enabled = true, picker_style = "nvchad" },
       telescope = { style = "nvchad" },
     },
     custom_highlights = {

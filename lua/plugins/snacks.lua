@@ -20,5 +20,10 @@ return {
         },
       },
     },
+    picker = {
+      win = {
+        preview = { wo = { number = false, relativenumber = false, signcolumn = "no", foldcolumn = "0" } },
+      },
+    },
   },
 }
