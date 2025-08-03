@@ -1,6 +1,9 @@
 local prefix = "<Leader>r"
 local is_mswindows = vim.fn.has('win64') == 1 and true or false
 
+-- https://www.playfulpython.com/configuring-neovim-as-a-python-ide/
+-- https://github.com/akinsho/toggleterm.nvim/wiki/Tips-and-Tricks#using-toggleterm-with-powershell
+
 -- python command
 local py_command = { "ipython", "--pylab=qt5", "--no-autoindent" }
 -- if is_mswindows == 1 then
@@ -126,6 +129,9 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "l", "<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { expr = false, noremap = true, desc = "Send selection" })
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "s", "<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { expr = false, noremap = true, desc = "Send selection" })
               -- send file: aa
+
+              -- send variable / word under cursor:
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "w", "viW<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { desc = "Send word / variable" })
 
               -- core plugin mappints
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "<cr>", "<cmd> lua require('iron').core.send(nil, string.char(13))<CR><ESC>", { expr = false, noremap = true, desc = "Send return to repl" })
