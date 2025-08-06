@@ -5,13 +5,12 @@ return {
   ---@type CatppuccinOptions
   opts = {
     dim_inactive = { enabled = true, percentage = 0.25 },
+    float = { solid = true },
     default_integrations = false,
     auto_integrations = true,
     integrations = {
       illuminate = { lsp = true },
       native_lsp = { inlay_hints = { background = false } },
-      snacks = { enabled = true, picker_style = "nvchad" },
-      telescope = { style = "nvchad" },
     },
     custom_highlights = {
       -- disable italics  for treesitter highlights
