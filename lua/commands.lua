@@ -32,10 +32,24 @@ vim.cmd [[
     cnoreabbrev <silent> ee e!
 
     command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. '
+
+    command! -range WordCount :lua vim.api.nvim_feedkeys('gvg<c-g><esc>', "v", false)
   ]]
 
 vim.api.nvim_create_user_command('CopyPathAbs', ":lua require('utils').copy_absolute_path()", {})
 vim.api.nvim_create_user_command('CopyPathRel', ":lua require('utils').copy_relative_path()", {})
 -- vim.cmd.cnoreabbrev('wq', '<nop>')
+
+-- Create the user command
+-- vim.api.nvim_create_user_command(
+--     'WordCount',
+--     'g<c-g>',
+--     {
+--         desc = 'Count words in visual selection',
+--         range = '%', -- Allow it to work on a range, e.g., :'<,'>VisualWordCount
+--         bar = true,  -- Allow other commands after this one
+--         mode = 'v',  -- Only available in visual mode (or visual line/block)
+--     }
+-- )
 
 -- return {}
