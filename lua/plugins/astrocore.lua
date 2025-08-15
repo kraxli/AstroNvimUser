@@ -214,6 +214,15 @@ return {
             end
           }
         },
+        auto_neo_tree = {
+          {  
+            event = { "FileType" },
+            pattern = "neo-tree", 
+            callback = function() 
+              local state = require("neo-tree.sources.manager").get_state('filesystem', nil, nil) state.commands.order_by_modified(state) 
+            end,
+          },
+      },
       },
       diagnostics = {
         update_in_insert = false,
