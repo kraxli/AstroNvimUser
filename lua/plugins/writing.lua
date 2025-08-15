@@ -9,7 +9,7 @@ local function toggle_box()
 end
 
 -- local port = vim.fn.has('win64') == 1 ? 8080 : 5500
-local port = 5500  -- 8080
+local port = 5500
 if vim.fn.has('win64') == 1 then 
   port = 8086  -- 8060
 end
@@ -39,6 +39,7 @@ return {
 			  Abolish {tain}ing{s} {train}ing{s}
 			  Abolish {profit}{abe,abel} {profit}{able}
 			  Abolish {ifrs} {IFRS}
+			  Abolish {experiance}{s} {experience}{s}
 			]]
     end,
   },
