@@ -36,6 +36,8 @@ vim.cmd [[
     command! -range WordCount :lua vim.api.nvim_feedkeys('gvg<c-g><esc>', "v", false)
   ]]
 
+-- WordCount visual selection key map: g<c-g>
+
 vim.api.nvim_create_user_command('CopyPathAbs', ":lua require('utils').copy_absolute_path()", {})
 vim.api.nvim_create_user_command('CopyPathRel', ":lua require('utils').copy_relative_path()", {})
 -- vim.cmd.cnoreabbrev('wq', '<nop>')
