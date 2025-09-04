@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  "echasnovski/mini.move",
+  "nvim-mini/mini.move",
   keys = {
     { "<M-l>", mode = { "n", "v" } },
     { "<M-k>", mode = { "n", "v" } },

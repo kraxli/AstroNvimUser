@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  "echasnovski/mini.snippets",
+  "nvim-mini/mini.snippets",
   dependencies = "rafamadriz/friendly-snippets",
   opts_extend = { "snippets" },
   opts = function(_, opts)
