@@ -68,33 +68,18 @@ return {
   },
   specs = {
     {
-      "Saghen/blink.cmp",
-      optional = true,
-      dependencies = { "yetone/avante.nvim" },
-      specs = { "Saghen/blink.compat", version = "*", lazy = true, opts = {} },
-      opts = {
-        sources = {
-          per_filetype = {
-            AvanteInput = { "avante_commands", "avante_mentions", "avante_files" },
-          },
-          providers = {
-            avante_commands = {
-              name = "avante_commands",
-              module = "blink.compat.source",
-              score_offset = 90, -- show at a higher priority than lsp
-              opts = {},
+      "Kaiser-Yang/blink-cmp-avante",
+      lazy = true,
+      specs = {
+        "Saghen/blink.cmp",
+        optional = true,
+        opts = {
+          sources = {
+            per_filetype = {
+              AvanteInput = { "avante" },
             },
-            avante_files = {
-              name = "avante_commands",
-              module = "blink.compat.source",
-              score_offset = 100, -- show at a higher priority than lsp
-              opts = {},
-            },
-            avante_mentions = {
-              name = "avante_mentions",
-              module = "blink.compat.source",
-              score_offset = 1000, -- show at a higher priority than lsp
-              opts = {},
+            providers = {
+              avante = { module = "blink-cmp-avante", name = "Avante", opts = {} },
             },
           },
         },
