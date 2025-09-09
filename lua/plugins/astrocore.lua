@@ -136,36 +136,6 @@ return {
             end,
           },
         },
-        auto_ft_quarto = {
-          {
-            event = "FileType",
-            desc = "Quarto ft",
-            pattern = { "quarto", "qrm", "*.qrm", "*.quarto" },
-            callback = function()
-              -- vim.opt.filetype = 'quarto'
-              -- vim.keymap.set({"n"}, "<leader>q", "<nop>", { expr = true, noremap = true, buffer=true, desc = "Insert" })
-              -- vim.keymap.set({"n"}, "<leader>q", "", { expr = true, noremap = true, buffer=true, desc = "Insert" })
-              -- vim.keymap.del({'n'}, '<leader>q', { buffer = 0 })
-
-              local quarto = require('quarto')
-
-              vim.api.nvim_buf_set_keymap(0, 'n', '<leader>qp', "quarto.quartoPreview", { silent = true, noremap = true, desc="Quarto preview" })
-              -- vim.keymap.set('n', '<leader>qp', quarto.quartoPreview, { silent = true, noremap = true, desc="Quarto preview" })
-              -- vim.keymap.set("n", "<leader>rc", runner.runner.run_cell,  { desc = "run cell", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "n", "<leader>rc", '<cmd>QuartoSend<CR>',  { desc = "Quarto run cell", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "n", "<leader>ra", '<cmd>QuartoSendAbove<CR>', { desc = "Quarto run cell & above", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "n", "<leader>rb", '<cmd>QuartoSendBelow<CR>', { desc = "Quarto run cell & below", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "n", "<leader>rA", '<cmd>QuartoSendAll<CR>',   { desc = "Quarto run all cells", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "n", "<leader>rl", '<cmd>QuartoSendLine<CR>',  { desc = "Quarto run line", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", '<cmd>QuartoSendLine<CR>',  { desc = "Quarto run line", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "v", "<leader>rs",  '<cmd>QuartoSendRange<CR>', { desc = "Quarto run visual range", silent = true })
-              vim.api.nvim_buf_set_keymap(0, "n", "<leader>rE", 
-                "function() quarto.runner.run_all(true) end", 
-                { desc = "run everything (all languages)", silent = true }
-              )
-            end,
-          },
-        },
         auto_org_files = {
           {
             event = "FileType",
