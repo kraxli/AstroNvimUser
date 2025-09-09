@@ -22,6 +22,7 @@ end
 ---@type LazySpec
 return {
   "jpalardy/vim-slime",
+  enabled=false,
   cmd = { "SlimeConfig", "SlimeSend", "SlimeSend0", "SlimeSend1", "SlimeSendCurrentLine" },
   keys = {
     "<Plug>SlimeMotionSend",
@@ -42,7 +43,8 @@ return {
       opts = {
         options = {
           g = {
-            slime_target = "kitty",
+            slime_target = "neovim",
+            -- slime_target = "kitty",
             slime_bracketed_paste = true,
             slime_no_mappings = true,
             slime_cell_delimiter = "^\\s*# %%",
