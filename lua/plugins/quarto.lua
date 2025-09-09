@@ -57,8 +57,14 @@ return {
                 local wk = require "which-key"
 
                 vim.keymap.set('n', '<leader>qp', quarto.quartoPreview, { silent = true, noremap = true, desc="󰐗 Quarto preview" })
+                vim.keymap.set('n', '<leader>qc', quarto.quartoClosePreview, { silent = true, noremap = true, desc="󰐗 Quarto close preview" })
+                vim.keymap.set('n', '<leader>qu', quarto.quartoUpdatePreview, { silent = true, noremap = true, desc="󰐗 Quarto update preview" })
+                vim.keymap.set('n', '<leader>qa', "<cmd>QuartoActivate<CR>", { silent = true, noremap = true, desc="󰐗 Quarto activate" })
+                vim.keymap.set('n', '<leader>qh', "<cmd>QuartoHelp<CR>", { silent = true, noremap = true, desc="󰐗 Quarto help" })
+                vim.keymap.set('n', '<leader>qd', "<cmd>QuartoDiagnostics<CR>", { silent = true, noremap = true, desc="󰐗 Quarto diagnostics" })
+
                 -- vim.keymap.set("n", "<leader>rc", runner.runner.run_cell,  { desc = "run cell", silent = true })
-                vim.api.nvim_buf_set_keymap( 0, "n", "<leader>rc", "<cmd>QuartoSend<CR>", { desc = "Quarto run cell", silent = true })  -- 󰐗 )
+                vim.api.nvim_buf_set_keymap( 0, "n", "<leader>rc", "<cmd>QuartoSend<CR>", { desc = "Quarto run cell", silent = true })  -- 󰐗
                 vim.api.nvim_buf_set_keymap( 0, "n", "<leader>ra", "<cmd>QuartoSendAbove<CR>", { desc = "Quarto run cell & above", silent = true })
                 vim.api.nvim_buf_set_keymap( 0, "n", "<leader>rb", "<cmd>QuartoSendBelow<CR>", { desc = "Quarto run cell & below", silent = true })
                 vim.api.nvim_buf_set_keymap( 0, "n", "<leader>rA", "<cmd>QuartoSendAll<CR>", { desc = "Quarto run all cells", silent = true })
