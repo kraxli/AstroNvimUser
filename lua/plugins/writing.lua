@@ -127,6 +127,8 @@ return {
   -- "TobinPalmer/pastify.nvim",
   {
     "HakonHarnes/img-clip.nvim",
+    event = 'BufEnter',
+    ft = { 'markdown', 'quarto', 'latex' },
     cmd = { "PasteImage", "ImgClipDebug", "ImgClipConfig" },
     specs = {
       {
