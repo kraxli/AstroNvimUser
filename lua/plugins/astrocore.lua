@@ -97,7 +97,7 @@ return {
         },
         auto_bufdelete = {
           {
-            event = { 'BufWinEnter' },
+            event = { "BufWinEnter" },
             desc = "Close",
             pattern = { "*" },
             callback = function()
@@ -106,12 +106,23 @@ return {
                 and vim.bo.buftype ~= "term"
                 and vim.bo.buftype ~= "prompt"
                 and vim.bo.filetype ~= "TelescopePrompt"
-                and vim.bo.filetype ~= '' and vim.bo.buftype ~= 'nofile'
+                and vim.bo.filetype ~= ""
+                and vim.bo.buftype ~= "nofile"
               then
-                vim.keymap.set( "n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" })
-              elseif (vim.bo.filetype == '' and vim.bo.buftype == '') then  -- close empty buffers
-                vim.keymap.set( "n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" })
-              -- else
+                vim.keymap.set(
+                  "n",
+                  "q",
+                  "<cmd>lua require('astrocore.buffer').close(0)<CR>",
+                  { noremap = true, buffer = true, desc = "Delete buffer" }
+                )
+              elseif vim.bo.filetype == "" and vim.bo.buftype == "" then -- close empty buffers
+                vim.keymap.set(
+                  "n",
+                  "q",
+                  "<cmd>lua require('astrocore.buffer').close(0)<CR>",
+                  { noremap = true, buffer = true, desc = "Delete buffer" }
+                )
+                -- else
                 -- for R Object_browser
                 -- elseif (vim.bo.filetype == '' and vim.bo.buftype == 'nofile') then
                 -- vim.keymap.set( "n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" }) -- close!
@@ -121,18 +132,60 @@ return {
         },
         auto_term_filetype_close = {
           {
-            event = { "FileType", },
+            event = { "FileType" },
             desc = "Terminal keymaps",
-            pattern = { "fugitiveblame", "toggleterm", "qf", "help", "man", "lspinfo", "nofile", "term", "rdoc", "TelescopePrompt", "" },
+            pattern = {
+              "fugitiveblame",
+              "toggleterm",
+              "qf",
+              "help",
+              "man",
+              "lspinfo",
+              "nofile",
+              "term",
+              "rdoc",
+              "TelescopePrompt",
+              "",
+            },
             callback = function()
               -- Notice that buffer = 0 sets this keymap only for current buffer. So when you live the terminal you will not have those keymaps.
               -- Should be the same
-              vim.keymap.set( "n", "q", "<cmd>quit!<CR>", { expr = false, noremap = true, buffer = true, desc = "Close" }) -- close!
-              vim.keymap.set( "i", "<c-q>", "<esc><cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set( "n", "<c-q>", "<cmd>quit!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set( "n", "C", "<cmd>bd!<CR>", { expr = false, noremap = true, buffer = true, desc = "Terminate" })
-              vim.keymap.set( "n", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
-              vim.keymap.set( "i", "<c-Q>", "<cmd>bd!<CR>", { expr = true, noremap = true, buffer = true, desc = "Close terminal" })
+              vim.keymap.set(
+                "n",
+                "q",
+                "<cmd>quit!<CR>",
+                { expr = false, noremap = true, buffer = true, desc = "Close" }
+              ) -- close!
+              vim.keymap.set(
+                "i",
+                "<c-q>",
+                "<esc><cmd>quit!<CR>",
+                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
+              )
+              vim.keymap.set(
+                "n",
+                "<c-q>",
+                "<cmd>quit!<CR>",
+                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
+              )
+              vim.keymap.set(
+                "n",
+                "C",
+                "<cmd>bd!<CR>",
+                { expr = false, noremap = true, buffer = true, desc = "Terminate" }
+              )
+              vim.keymap.set(
+                "n",
+                "<c-Q>",
+                "<cmd>bd!<CR>",
+                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
+              )
+              vim.keymap.set(
+                "i",
+                "<c-Q>",
+                "<cmd>bd!<CR>",
+                { expr = true, noremap = true, buffer = true, desc = "Close terminal" }
+              )
             end,
           },
         },
@@ -141,8 +194,7 @@ return {
             event = "FileType",
             desc = "Orgmode settings",
             pattern = "org",
-            callback = function()
-            end,
+            callback = function() end,
           },
         },
         auto_clean_cache = {
@@ -164,7 +216,7 @@ return {
           {
             event = "FileType",
             desc = "Markdown-, text-, tex-file autocmds",
-            pattern = { "markdown", "tex", "text", "org", 'norg' },
+            pattern = { "markdown", "tex", "text", "org", "norg" },
             callback = function()
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
@@ -176,42 +228,48 @@ return {
               -- LivePreview
               -- if vim.fn.has('unix') == 1 then
               if false then
-                vim.api.nvim_create_user_command('PreviewStart', ":LivePreview start", {})
-                vim.api.nvim_create_user_command('Pv', ":LivePreview start", {})
-                vim.api.nvim_create_user_command('PreviewClose', ":LivePreview close", {})
-                vim.api.nvim_create_user_command('Pc', ":LivePreview close", {})
-                vim.api.nvim_create_user_command('PreviewPeek', ":LivePreview pick", {})
-                vim.api.nvim_create_user_command('Ps', ":LivePreview pick", {})
-                vim.keymap.set({"n"}, "<leader>V", ":LivePreview start<CR>", { expr = false, noremap = true, buffer=true, desc = "Preview" })
+                vim.api.nvim_create_user_command("PreviewStart", ":LivePreview start", {})
+                vim.api.nvim_create_user_command("Pv", ":LivePreview start", {})
+                vim.api.nvim_create_user_command("PreviewClose", ":LivePreview close", {})
+                vim.api.nvim_create_user_command("Pc", ":LivePreview close", {})
+                vim.api.nvim_create_user_command("PreviewPeek", ":LivePreview pick", {})
+                vim.api.nvim_create_user_command("Ps", ":LivePreview pick", {})
+                vim.keymap.set(
+                  { "n" },
+                  "<leader>V",
+                  ":LivePreview start<CR>",
+                  { expr = false, noremap = true, buffer = true, desc = "Preview" }
+                )
               end
             end,
           },
         },
         auto_diagnostics = {
           {
-            event = { "BufWinEnter"}, -- "BufRead"
+            event = { "BufWinEnter" }, -- "BufRead"
             pattern = { "*" },
             desc = "diagnostics",
-            callback = function ()
-              local filetypes = {'markdown', 'org', 'norg', 'tex', 'text'}
+            callback = function()
+              local filetypes = { "markdown", "org", "norg", "tex", "text" }
               for _, ft in pairs(filetypes) do
                 vim.diagnostic.enable(vim.bo.filetype ~= ft)
                 if vim.bo.filetype == ft then break end
               end
               -- vim.diagnostic.config({ virtual_text={ current_line=true }, })  -- virtual_text=false,
               -- vim.diagnostic.config({ virtual_lines={ current_line=true },})
-            end
-          }
-        },
-        auto_neo_tree = {
-          {  
-            event = { "FileType" },
-            pattern = "neo-tree", 
-            callback = function() 
-              local state = require("neo-tree.sources.manager").get_state('filesystem', nil, nil) state.commands.order_by_modified(state) 
             end,
           },
-      },
+        },
+        auto_neo_tree = {
+          {
+            event = { "FileType" },
+            pattern = "neo-tree",
+            callback = function()
+              local state = require("neo-tree.sources.manager").get_state("filesystem", nil, nil)
+              state.commands.order_by_modified(state)
+            end,
+          },
+        },
       },
       diagnostics = {
         update_in_insert = false,
@@ -333,7 +391,7 @@ return {
         -- terminal mappings
         t = {
           ["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- ["<esc><esc>"]
+          ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" }, -- ["<esc><esc>"]
           ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
           ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" }, -- :close
           ["<C-Q>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
