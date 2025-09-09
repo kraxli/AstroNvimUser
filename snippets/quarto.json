@@ -21,7 +21,7 @@
   },
   "Quarto R code": {
     "prefix": ["R", "r", "chunk-R", "qR","rQ", "qr"],
-    "body": ["```{R}", "$1", "```"],
+    "body": ["```{r}", "$1", "```"],
     "description": "Quarto fenced R code"
   },
   "Quarto mermaid code": {

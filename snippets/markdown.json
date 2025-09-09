@@ -21,7 +21,7 @@
   },
   "Insert R block": {
     "prefix": ["R", "r", "codeblock-R"],
-    "body": ["```R", "$1", "```"],
+    "body": ["```r", "$1", "```"],
     "description": "Insert fenced R code block"
   },
   "Insert link": {
@@ -61,7 +61,7 @@
   },
   "MD Quarto R code": {
     "prefix": ["R", "qR", "qr", "chunk-qR", "rq"],
-    "body": ["```{R}", "$1", "```"],
+    "body": ["```{r}", "$1", "```"],
     "description": "MD Quarto fenced R code"
   },
   "MD Quarto mermaid code": {
