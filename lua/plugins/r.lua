@@ -1,7 +1,7 @@
 local prefix = "<Leader>r"
 local localleader = "<LocalLeader>"
 
-vim.g.R_filetypes = { "r", "rmd", "rnoweb", "rhelp" }  -- , "quarto"
+-- vim.g.R_filetypes = { "r", "rmd", "rnoweb", "rhelp" }  -- , "quarto"
 
 -- -------------------------------------------------------
 -- Set OS specific variables
@@ -332,7 +332,7 @@ return {
           auto_rmd_qmd = {
             {
               event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
-              pattern = { "rmd", "rnoweb", "*.rmd", "*.rnoweb" }, -- "quarto", "*.quarto", "*.qmd",
+              pattern = { "rmd", "rnoweb", "*.rmd", "*.rnoweb", "quarto", "*.quarto", "*.qmd", },
               callback = function()
                 keymap_modes({ "n" }, "<Plug>RSendChunk", prefix .. "c", {}) -- "<Cmd>lua require('r.rmd').send_R_chunk(false)" -- i-mode ?
                 vim.keymap.set(
@@ -364,17 +364,17 @@ return {
               end,
             },
           },
-          -- auto_qmd = {
-          --   {
-          --     event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
-          --     pattern = { "quarto", "*.qmd", "*.quarto" },
-          --     callback = function()
-          --       keymap_modes({ "n" }, "<Plug>QuartoRender", prefix .. "qr", {}) -- "<Cmd>lua require('r.quarto').command('render')"
-          --       keymap_modes({ "n" }, "<Plug>QuartoPreview", prefix .. "qp", {}) -- "<Cmd>lua require('r.quarto').command('preview')"
-          --       keymap_modes({ "n" }, "<Plug>QuartoStop", prefix .. "qs", {}) -- "<Cmd>lua require('r.quarto').command('stop')"
-          --     end,
-          --   },
-          -- },
+          auto_qmd = {
+            {
+              event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
+              pattern = { "quarto", "*.qmd", "*.quarto" },
+              callback = function()
+                keymap_modes({ "n" }, "<Plug>QuartoRender", prefix .. "qr", {}) -- "<Cmd>lua require('r.quarto').command('render')"
+                keymap_modes({ "n" }, "<Plug>QuartoPreview", prefix .. "qp", {}) -- "<Cmd>lua require('r.quarto').command('preview')"
+                keymap_modes({ "n" }, "<Plug>QuartoStop", prefix .. "qs", {}) -- "<Cmd>lua require('r.quarto').command('stop')"
+              end,
+            },
+          },
           auto_ft_rnoweb = {
             {
               event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
@@ -413,14 +413,14 @@ return {
                 "r",
                 "rmd",
                 "rnoweb",
-                -- "quarto",
+                "quarto",
                 "rhelp",
                 "*.R",
                 "*.r",
                 "*.rmd",
-                -- "*.qmd",
+                "*.qmd",
                 "*.rnoweb",
-                -- "*.quarto",
+                "*.quarto",
                 "*.rhelp",
               },
               desc = "R-nvim",
