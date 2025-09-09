@@ -6,10 +6,13 @@ local is_mswindows = vim.fn.has('win64') == 1 and true or false
 
 -- python command
 local py_command = { "ipython", "--pylab=qt5", "--no-autoindent" }
--- if is_mswindows == 1 then
+local r_command = "R"
+
+if is_mswindows then
 --   table.insert(py_command, "--simple-prompt")
 --   py_command = {"python"}  -- use python 3.13
--- end
+  r_command = 'R.exe'
+end
 
 
 -- get variable under cursor: local variableUnderCursor = vim.fn.expand("<cword>")
@@ -80,7 +83,8 @@ return {
             format = require("iron.fts.common").bracketed_paste_python,
           },
           r = {
-            command = {"radian"},
+            -- command = {"radian"},
+            command = r_command,
           },
         },
         -- How the repl window will be displayed
