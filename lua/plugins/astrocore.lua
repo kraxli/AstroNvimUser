@@ -204,10 +204,11 @@ return {
               -- vim.keymap.set("i", "<C-l>", function() require("luasnip").snip_expand(require("keymap_snippets")["link2"]) end)
 
               -- LivePreview
-              if vim.fn.has('unix') == 1 then
+              -- if vim.fn.has('unix') == 1 then
+              if false then
                 vim.api.nvim_create_user_command('PreviewStart', ":LivePreview start", {})
                 vim.api.nvim_create_user_command('Pv', ":LivePreview start", {})
-                vim.api.nvim_create_user_command('PreviewClose', ":LivePreview start", {})
+                vim.api.nvim_create_user_command('PreviewClose', ":LivePreview close", {})
                 vim.api.nvim_create_user_command('Pc', ":LivePreview close", {})
                 vim.api.nvim_create_user_command('PreviewPeek', ":LivePreview pick", {})
                 vim.api.nvim_create_user_command('Ps', ":LivePreview pick", {})
