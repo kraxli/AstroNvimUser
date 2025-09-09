@@ -1,7 +1,7 @@
 local prefix = "<Leader>r"
 local localleader = "<LocalLeader>"
 
--- vim.g.R_filetypes = { "r", "rmd", "rnoweb", "rhelp" }  -- , "quarto"
+vim.g.R_filetypes = { "r", "rmd", "rnoweb", "rhelp" }  -- , "quarto"
 
 -- -------------------------------------------------------
 -- Set OS specific variables
@@ -19,7 +19,8 @@ if vim.fn.has "win64" == 1 then
   graphical_device = "windows"
   pdfviewer = "mupdf" -- or sumatra
 end
--- vim.g.R_path = r_path
+
+R_path = r_path
 
 -- -------------------------------------------------------
 -- Local functions
@@ -107,6 +108,8 @@ return {
         min_editor_width = 72,
         rconsole_width = 78,
         pdfviewer = pdfviewer,
+        open_pdf = "open",
+        open_html = "open",
         disable_cmds = {},
         pipe_version = "magrittr",  -- or native
         nvimpager = "split_v",
@@ -315,8 +318,8 @@ return {
               event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
               pattern = { "r", "R" },
               callback = function()
-            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<Plug>RSendLine", { desc = "Send line" })
-            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "s", "<Plug>RSendLine", { desc = "Send line" })
+                vim.api.nvim_buf_set_keymap(0, "n", prefix .. "l", "<Plug>RSendLine", { desc = "Send line" })
+                vim.api.nvim_buf_set_keymap(0, "n", prefix .. "s", "<Plug>RSendLine", { desc = "Send line" })
                 keymap_modes({ "n" }, "<Cmd>lua require('r.send').source_file()<CR>", "aa", {}) -- "RSendFile"   -- i-mode removed (to be mapped to ctrl or alt key combination)
                 keymap_modes( { "n" }, "<Cmd>lua require('r.send').source_file()<CR>", prefix .. "f", { desc = "Send file" }) -- "RSendFile"  -- i-mode removed (to be mapped to ctrl or alt key combination)
                 keymap_modes({ "n" }, "<Cmd>lua require('r').show_R_out()<CR>", "ao", {}) -- "RshowRout"  -- i-mode removed (to be mapped to ctrl or alt key combination)
@@ -332,15 +335,12 @@ return {
           auto_rmd_qmd = {
             {
               event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
-              pattern = { "rmd", "rnoweb", "*.rmd", "*.rnoweb", "quarto", "*.quarto", "*.qmd", },
+              -- pattern = { "rmd", "rnoweb", "*.rmd", "*.rnoweb", "quarto", "*.quarto", "*.qmd", },  
+              pattern = { "rmd", "rnoweb", "*.rmd", "*.rnoweb",  },
               callback = function()
                 keymap_modes({ "n" }, "<Plug>RSendChunk", prefix .. "c", {}) -- "<Cmd>lua require('r.rmd').send_R_chunk(false)" -- i-mode ?
-                vim.keymap.set(
-                  { "n", "v" },
-                  prefix .. "C",
-                  "<Plug>RDSendChunk",
-                  { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" }
-                )
+                -- keymap_modes({ "n" }, "<Plug>RSendChunk", "<leader>q" .. "c", {}) -- "<Cmd>lua require('r.rmd').send_R_chunk(false)" -- i-mode ?
+                vim.keymap.set( { "n", "v" }, prefix .. "C", "<Plug>RDSendChunk", { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" })
                 keymap_modes({ "n" }, "<Plug>RNextRChunk", prefix .. "gn", {}) -- "<Cmd>lua require('r.rmd').next_chunk()"
                 keymap_modes({ "n" }, "<Plug>RPreviousRChunk", prefix .. "gN", {}) -- "<Cmd>lua require('r.rmd').previous_chunk()"
                 keymap_modes({ "n" }, "<Plug>RSendChunkFH", prefix .. "xu", { desc = "Run chunks above" }) -- "<Cmd>lua require('r.send').chunks_up_to_here()" -- i-mode?
@@ -364,17 +364,17 @@ return {
               end,
             },
           },
-          auto_qmd = {
-            {
-              event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
-              pattern = { "quarto", "*.qmd", "*.quarto" },
-              callback = function()
-                keymap_modes({ "n" }, "<Plug>QuartoRender", prefix .. "qr", {}) -- "<Cmd>lua require('r.quarto').command('render')"
-                keymap_modes({ "n" }, "<Plug>QuartoPreview", prefix .. "qp", {}) -- "<Cmd>lua require('r.quarto').command('preview')"
-                keymap_modes({ "n" }, "<Plug>QuartoStop", prefix .. "qs", {}) -- "<Cmd>lua require('r.quarto').command('stop')"
-              end,
-            },
-          },
+          -- auto_qmd = {
+          --   {
+          --     event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
+          --     pattern = { "quarto", "*.qmd", "*.quarto" },
+          --     callback = function()
+          --       keymap_modes({ "n" }, "<Plug>QuartoRender", "<leader>" .. "qr", {}) -- "<Cmd>lua require('r.quarto').command('render')"
+          --       keymap_modes({ "n" }, "<Plug>QuartoPreview", "<leader>" .. "qp", {}) -- "<Cmd>lua require('r.quarto').command('preview')"
+          --       keymap_modes({ "n" }, "<Plug>QuartoStop", "<leader>" .. "qs", {}) -- "<Cmd>lua require('r.quarto').command('stop')"
+          --     end,
+          --   },
+          -- },
           auto_ft_rnoweb = {
             {
               event = { "FileType" }, --  "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter"
@@ -413,14 +413,14 @@ return {
                 "r",
                 "rmd",
                 "rnoweb",
-                "quarto",
+                -- "quarto",
                 "rhelp",
                 "*.R",
                 "*.r",
                 "*.rmd",
-                "*.qmd",
+                -- "*.qmd",
                 "*.rnoweb",
-                "*.quarto",
+                -- "*.quarto",
                 "*.rhelp",
               },
               desc = "R-nvim",
@@ -446,6 +446,7 @@ return {
                   { prefix .. "O", group = " 󰟔 Open" },
                   { prefix .. "p", group = " 󰟔 Plots" },
                   -- { prefix .. "q", group = " 󰟔 Quarto" },
+                  -- { "<leader>" .. "q", group = " 󰟔 Quarto" },
                   { prefix .. "x", group = " 󰟔 Execute / Send" },
                 }
               end,
