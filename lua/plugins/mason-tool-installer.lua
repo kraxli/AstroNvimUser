@@ -23,6 +23,7 @@ return {
       "marksman",
       "neocmakelsp",
       "r-languageserver",
+      "reorder-python-imports",
       "sqls",
       -- "svelte-language-server",
       "tailwindcss-language-server",
