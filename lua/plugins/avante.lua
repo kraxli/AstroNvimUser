@@ -2,8 +2,9 @@ local prefix = "<Leader>A"
 ---@type LazySpec
 return {
   "yetone/avante.nvim",
-  -- enabled = false, -- test out CodeCompanion
-  build = "make",
+    build = vim.fn.has "win32" == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+    or "make",
+  -- build = "make",
   event = "User AstroFile",
   cmd = {
     "AvanteAsk",
@@ -11,11 +12,16 @@ return {
     "AvanteEdit",
     "AvanteRefresh",
     "AvanteSwitchProvider",
+    "AvanteShowRepoMap",
+    "AvanteModels",
     "AvanteChat",
     "AvanteToggle",
     "AvanteClear",
+    "AvanteFocus",
+    "AvanteStop",  
   },
   dependencies = {
+    { "stevearc/dressing.nvim", optional = true },
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
@@ -42,6 +48,7 @@ return {
       ask = prefix .. "<CR>",
       edit = prefix .. "e",
       refresh = prefix .. "r",
+      new_ask = prefix .. "n",
       focus = prefix .. "f",
       stop = prefix .. "S",
       toggle = {
@@ -106,6 +113,16 @@ return {
       opts = function(_, opts)
         if not opts.file_types then opts.file_types = { "markdown" } end
         opts.file_types = require("astrocore").list_insert_unique(opts.file_types, { "Avante" })
+      end,
+    },
+    {
+      -- make sure `Avante` is added as a filetype
+      "OXY2DEV/markview.nvim",
+      optional = true,
+      opts = function(_, opts)
+        if not opts.preview then opts.preview = {} end
+        if not opts.preview.filetypes then opts.preview.filetypes = { "markdown", "quarto", "rmd" } end
+        opts.preview.filetypes = require("astrocore").list_insert_unique(opts.preview.filetypes, { "Avante" })
       end,
     },
   },
