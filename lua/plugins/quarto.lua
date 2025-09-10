@@ -8,7 +8,7 @@ return {
   {
     "quarto-dev/quarto-nvim",
     -- enabled = false,
-    ft = { "quarto", "qmd" },
+    ft = { "quarto", "qmd", "markdown", "md", "*.qmd" },
     cmd = { "QuartoPreview" },
     config = function()
       require("quarto").setup {
@@ -16,8 +16,7 @@ return {
         closePreviewOnExit = true,
         lspFeatures = {
           enabled = true,
-          -- chunks = "curly",
-          chunks = "",
+          chunks = "",  --  "curly"
           languages = { "python", "julia", "bash", "html" },  -- , "r"
           diagnostics = {
             enabled = true,
@@ -50,7 +49,7 @@ return {
             {
               event = "FileType",
               desc = "Quarto ft",
-              pattern = { "quarto", "qrm", "*.qrm", "*.quarto" },
+              pattern = { "quarto", "qrm", "*.qrm", "*.quarto", "markdown", "md", },
               callback = function()
 
                 local quarto = require "quarto"
@@ -76,7 +75,7 @@ return {
                 wk.add {
                   mode = { "n", "v" },
                   -- { prefix .. "q", group = " 󰟔 Quarto" },
-                  { "<leader>" .. "q", group = " Quarto" },
+                  { "<leader>" .. "q", group = "󰐗 Quarto" },
                 }
               end,
             },
