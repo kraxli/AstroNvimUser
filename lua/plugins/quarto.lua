@@ -8,8 +8,9 @@ return {
   {
     "quarto-dev/quarto-nvim",
     -- enabled = false,
-    ft = { "quarto", "qmd", "markdown", "md", "*.qmd" },
+    ft = { "quarto", "qmd", },  -- "markdown", "md",
     cmd = { "QuartoPreview" },
+    opts = {},
     config = function()
       require("quarto").setup {
         debug = false,
@@ -29,16 +30,16 @@ return {
         codeRunner = {
           enabled = true,
           default_method = "iron", -- "molten", "slime", "iron" or <function>
-          ft_runners = { python = "iron" }, -- filetype to runner, ie. `{ python = "molten" }`.
+          ft_runners = { python = "iron" }, -- filetype to runner, ie. `{ python = "iron" }`.
           -- Takes precedence over `default_method`
           never_run = { "yaml" }, -- filetypes which are never sent to a code runner
         },
       }
     end,
     dependencies = {
-      "jmbuhr/otter.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "Vigemus/iron.nvim",
+      { "jmbuhr/otter.nvim" },
+      { "nvim-treesitter/nvim-treesitter" },
+      { "Vigemus/iron.nvim" }, 
     },
     specs = {
       "AstroNvim/astrocore",
@@ -101,5 +102,29 @@ return {
         },
       },
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    optional = true,
+    opts = function(_, opts)
+      if opts.ensure_installed ~= "all" then
+        opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+          "r",
+          "python",
+          "markdown",
+          "markdown_inline",
+          "julia",
+          "bash",
+          "yaml",
+          "lua",
+          "vim",
+          "query",
+          "vimdoc",
+          -- "latex",
+          "html",
+          "css",
+        })
+      end
+    end,
   },
 }
