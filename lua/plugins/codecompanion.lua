@@ -1,3 +1,5 @@
+-- see: astro-community: https://github.com/AstroNvim/astrocommunity/blob/92c859efc67cf7c29444344a5e033e6c3800806e/lua/astrocommunity/editing-support/codecompanion-nvim/init.lua
+
 ---@type LazySpec
 return {
   "olimorris/codecompanion.nvim",
@@ -89,6 +91,15 @@ return {
       opts = function(_, opts)
         if not opts.file_types then opts.file_types = { "markdown" } end
         opts.file_types = require("astrocore").list_insert_unique(opts.file_types, { "codecompanion" })
+      end,
+    },
+    {
+      "OXY2DEV/markview.nvim",
+      optional = true,
+      opts = function(_, opts)
+        if not opts.preview then opts.preview = {} end
+        if not opts.preview.filetypes then opts.preview.filetypes = { "markdown", "quarto", "rmd" } end
+        opts.preview.filetypes = require("astrocore").list_insert_unique(opts.preview.filetypes, { "codecompanion" })
       end,
     },
   },
