@@ -4,6 +4,10 @@
 -- https://github.com/jmbuhr/nvim-config/blob/main/lua/plugins/quarto.lua
 -- snippets: https://github.com/jmbuhr/nvim-config/blob/main/snips/snippets/quarto.json
 
+local path_python = vim.fn.exepath "python"
+vim.env.QUARTO_PYTHON = path_python
+
+
 return {
   {
     "quarto-dev/quarto-nvim",
@@ -17,7 +21,7 @@ return {
         closePreviewOnExit = true,
         lspFeatures = {
           enabled = true,
-          chunks = "",  --  "curly"
+          chunks = "",  --  "curly" or ""
           languages = { "python", "julia", "bash", "html" },  -- , "r"
           diagnostics = {
             enabled = true,
@@ -30,16 +34,18 @@ return {
         codeRunner = {
           enabled = true,
           default_method = "iron", -- "molten", "slime", "iron" or <function>
-          ft_runners = { python = "iron" }, -- filetype to runner, ie. `{ python = "iron" }`.
+          -- ft_runners = { python = "iron" }, -- filetype to runner, ie. `{ python = "iron" }`.
           -- Takes precedence over `default_method`
           never_run = { "yaml" }, -- filetypes which are never sent to a code runner
         },
       }
     end,
     dependencies = {
-      { "jmbuhr/otter.nvim" },
-      { "nvim-treesitter/nvim-treesitter" },
-      { "Vigemus/iron.nvim" }, 
+      { "jmbuhr/otter.nvim" ,
+          dependencies = {'nvim-treesitter/nvim-treesitter', },
+          opts = {},
+      },
+      'neovim/nvim-lspconfig',
     },
     specs = {
       "AstroNvim/astrocore",
@@ -78,6 +84,9 @@ return {
                   -- { prefix .. "q", group = " 󰟔 Quarto" },
                   { "<leader>" .. "q", group = "󰐗 Quarto" },
                 }
+
+                -- vim.lsp.enable({'basedpyright'})
+
               end,
             },
           },
@@ -109,8 +118,8 @@ return {
     opts = function(_, opts)
       if opts.ensure_installed ~= "all" then
         opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-          "r",
           "python",
+          "r",
           "markdown",
           "markdown_inline",
           "julia",

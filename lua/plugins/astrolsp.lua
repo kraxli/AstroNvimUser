@@ -55,6 +55,7 @@ return {
             },
           },
         },
+        -- filetypes = {'python', 'ipython', 'quarto', 'markdown', }  -- this is a hack to use python language-server with code blocks in quart and markdown files
       },
       clangd = { capabilities = { offsetEncoding = "utf-8" } },
       gopls = {
