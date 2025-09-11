@@ -1,4 +1,7 @@
 ---@type LazySpec
+
+local prefix = "<leader>v"
+
 return {
   "linux-cultist/venv-selector.nvim",
   branch = "regexp",
@@ -22,7 +25,8 @@ return {
       opts = {
         mappings = {
           n = {
-            ["<Leader>v"] = { "<Cmd>VenvSelect<CR>", desc = "Activate virtual environment" },
+            [prefix] = { desc = "Venv & Uv" },
+            [prefix .. "v"] = { "<Cmd>VenvSelect<CR>", desc = "Activate virtual environment" },
           },
         },
       },
