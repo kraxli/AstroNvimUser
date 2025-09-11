@@ -4,6 +4,8 @@
 -- https://github.com/jmbuhr/nvim-config/blob/main/lua/plugins/quarto.lua
 -- snippets: https://github.com/jmbuhr/nvim-config/blob/main/snips/snippets/quarto.json
 
+-- lsp: https://github.com/jmbuhr/otter.nvim/issues/235 
+
 local path_python = vim.fn.exepath "python"
 vim.env.QUARTO_PYTHON = path_python
 
