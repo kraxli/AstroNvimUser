@@ -1,7 +1,9 @@
 ---@type LazySpec
 return {
   "andymass/vim-matchup",
+  event = "User AstroFile",
   dependencies = {
+    { "nvim-treesitter/nvim-treesitter", optional = true },
     {
       "AstroNvim/astrocore",
       opts = {
@@ -12,17 +14,6 @@ return {
             matchup_matchparen_offscreen = {},
           },
         },
-      },
-    },
-  },
-  specs = {
-    {
-      "nvim-treesitter/nvim-treesitter",
-      dependencies = { "andymass/vim-matchup" },
-      ---@type TSConfig
-      ---@diagnostic disable-next-line: missing-fields
-      opts = {
-        matchup = { enable = true },
       },
     },
   },
