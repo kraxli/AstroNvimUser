@@ -7,7 +7,7 @@ git fetch AstroNvim --tags
 git merge --allow-unrelated-histories AstroNvim/main
 ``` 
 
-```zsh
+```bash
 git clone https://github.com/kraxli/astroNvim-config-mh-plus.git ~/.config/astronvim/lua/user/
 ```
 
@@ -17,6 +17,8 @@ git co -b merge_user_mehalter
 git remote add user_mehalter https://code.mehalter.com/AstroNvim_user
 git fetch user_mehalter --tags
 git merge --allow-unrelated-histories user_mehalter
+
+npm install -g deno
 ```
 
   cd ~/astronvim
