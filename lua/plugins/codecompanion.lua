@@ -4,7 +4,7 @@
 return {
   "olimorris/codecompanion.nvim",
   event = "User AstroFile",
-  enabled = false, -- test out Avante
+  enabled = false, -- test out / use Avante
   cmd = {
     "CodeCompanion",
     "CodeCompanionActions",
@@ -26,38 +26,65 @@ return {
     },
     strategies = {
       chat = {
-        adapter = "glados",
+        adapter = "gemini_cli", -- "glados",
       },
       inline = {
-        adapter = "glados",
+        adapter = "gemini_cli", -- "glados",
       },
       cmd = {
-        adapter = "glados",
+        adapter = "gemini_cli", -- "glados",
       },
     },
     adapters = {
-      opts = { show_defaults = false },
-      glados = function()
-        return require("codecompanion.adapters").extend("openai", {
-          name = "glados",
-          formatted_name = "Glados",
-          url = "https://glados.ctisl.gtri.org/v1/chat/completions",
-          env = { api_key = "GLADOS_API_KEY" },
-          schema = {
-            model = {
-              default = "meta-llama/Llama-3.3-70B-Instruct",
-              choices = {
-                "meta-llama/Llama-3.3-70B-Instruct",
-                "nvidia/Llama-3_3-Nemotron-Super-49B-v1",
-                "OpenGVLab/InternVL2_5-38B-MPO",
-                "mistralai/Mistral-Small-24B-Instruct-2501",
-                "Qwen/Qwen2.5-Coder-32B-Instruct",
-                "google/gemma-3-27b-it",
+      http = {
+        -- https://github.com/olimorris/codecompanion.nvim/blob/e571dd92e85ae0a7907f6767446f1f0d48e0b61f/doc/extending/adapters.md?plain=1#L44
+        opts = { show_defaults = false },
+        gemini_cli = function()
+          return require("codecompanion.adapters").extend("gemini_cli", {
+            name = "gemini",
+            formatted_name = "Gemini",
+            env = {
+              api_key = "GEMINI_API_KEY",
+              model = "schema.model.default",
+            },
+            schema = {
+              model = {
+                default = "google/gemini-2.5-flash",
+                choices = {
+                  "google/gemini-2.5-flash",
+                  "mistralai/Mistral-Small-24B-Instruct-2501",
+                  "google/gemma-3-27b-it",
+                  "meta-llama/Llama-3.3-70B-Instruct",
+                  "nvidia/Llama-3_3-Nemotron-Super-49B-v1",
+                  "OpenGVLab/InternVL2_5-38B-MPO",
+                  "Qwen/Qwen2.5-Coder-32B-Instruct",
+                },
               },
             },
-          },
-        })
-      end,
+          })
+        end,
+        glados = function()
+          return require("codecompanion.adapters").extend("openai", {
+            name = "glados",
+            formatted_name = "Glados",
+            url = "https://glados.ctisl.gtri.org/v1/chat/completions",
+            env = { api_key = "GLADOS_API_KEY" },
+            schema = {
+              model = {
+                default = "meta-llama/Llama-3.3-70B-Instruct",
+                choices = {
+                  "meta-llama/Llama-3.3-70B-Instruct",
+                  "nvidia/Llama-3_3-Nemotron-Super-49B-v1",
+                  "OpenGVLab/InternVL2_5-38B-MPO",
+                  "mistralai/Mistral-Small-24B-Instruct-2501",
+                  "Qwen/Qwen2.5-Coder-32B-Instruct",
+                  "google/gemma-3-27b-it",
+                },
+              },
+            },
+          })
+        end,
+      },
     },
   },
   specs = {

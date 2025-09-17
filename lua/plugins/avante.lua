@@ -1,9 +1,13 @@
 local prefix = "<Leader>A"
+
+local provider = (environment == 'work') and "copilot" or "gemini"  -- glados
+local authentication = (environment == 'work') and "copilot" or ""
+
 ---@type LazySpec
 return {
   "yetone/avante.nvim",
-    build = vim.fn.has "win32" == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-    or "make",
+  -- enabled = false,  -- test out codecompanion
+  build = vim.fn.has "win32" == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
   -- build = "make",
   event = "User AstroFile",
   cmd = {
@@ -27,10 +31,13 @@ return {
     { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
   },
   opts = {
-    provider = "glados",
-    auto_suggestions_provider = "glados",
+    provider = provider,
+    auto_suggestions_provider = provider,
     providers = {
-      copilot = { api_key_name = "GITHUB_TOKEN", hide_in_model_selector = false },
+      gemini = {
+        model = "gemini-2.5-flash",
+      },
+      copilot = { hide_in_model_selector = false },  -- api_key_name = "GITHUB_TOKEN",
       openai = { hide_in_model_selector = true },
       vertex = { hide_in_model_selector = true },
       vertex_claude = { hide_in_model_selector = true },
@@ -43,6 +50,25 @@ return {
         hide_in_model_selector = false,
       },
     },
+    acp_providers = {
+      ["gemini-cli"] = {
+        command = "gemini",
+        args = { "--experimental-acp" },
+        env = {
+          NODE_NO_WARNINGS = "1",
+          GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
+        },
+      },
+      ["claude-code"] = {
+        command = "npx",
+        args = { "@zed-industries/claude-code-acp" },
+        env = {
+          NODE_NO_WARNINGS = "1",
+          ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
+        },
+      },
+    },
+    -- other configuration options...
     hints = { enabled = false },
     mappings = {
       ask = prefix .. "<CR>",
