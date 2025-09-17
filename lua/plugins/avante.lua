@@ -38,6 +38,16 @@ return {
         model = "gemini-2.5-flash",
       },
       copilot = { hide_in_model_selector = false },  -- api_key_name = "GITHUB_TOKEN",
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-sonnet-4-20250514",
+        timeout = 30000, -- Timeout in milliseconds
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 20480,
+          },
+        -- hide_in_model_selector = true,
+      },
       openai = { hide_in_model_selector = true },
       vertex = { hide_in_model_selector = true },
       vertex_claude = { hide_in_model_selector = true },
