@@ -11,6 +11,12 @@
   gemini
 ```
 
+https://programmablesearchengine.google.com/about/
+My search engine:
+  - https://programmablesearchengine.google.com/controlpanel/overview?cx=42c1f2ada0894479b
+  - API key: https://developers.google.com/custom-search/v1/introduction
+
+
 ## Claude / anthropic
 
 Claude-Code: https://docs.anthropic.com/en/docs/claude-code/overview

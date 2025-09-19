@@ -1,6 +1,6 @@
 local prefix = "<Leader>A"
 
-local provider = (environment == 'work') and "copilot" or "mistral"  -- gemeni, glados
+local provider = (environment == 'work') and "copilot" or "gemini"  -- gemini, glados, mistral, ...
 local authentication = (environment == 'work') and "copilot" or ""
 
 ---@type LazySpec
@@ -18,6 +18,7 @@ return {
     "AvanteSwitchProvider",
     "AvanteShowRepoMap",
     "AvanteModels",
+    "AvanteChatNew",
     "AvanteChat",
     "AvanteToggle",
     "AvanteClear",
@@ -34,6 +35,15 @@ return {
     provider = provider,
     auto_suggestions_provider = provider,
     providers = {
+      gemini = {
+        model = "gemini-2.5-flash",
+        -- api_key_name = 'AVANTE_GEMINI_API_KEY'
+      },
+      ollama = {
+        endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
+        model = "qwq:32b",
+      },
+
       mistral = {
         __inherited_from = "openai",
         endpoint = "https://api.mistral.ai/v1",  -- 'https://api.mistral.ai/v1/chat/completions',
@@ -45,14 +55,7 @@ return {
           -- Higher temperature values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
           max_tokens = 20480,  -- 4096,  -- to avoid using max_completion_tokens
         },
-        hide_in_model_selector = true,
-      },
-      gemini = {
-        model = "gemini-2.5-flash",
-      },
-      ollama = {
-        endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
-        model = "qwq:32b",
+        -- hide_in_model_selector = true,
       },
       copilot = { hide_in_model_selector = false },  -- api_key_name = "GITHUB_TOKEN",
       claude = {
@@ -94,6 +97,10 @@ return {
           ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
         },
       },
+    },
+    web_search_engine = {
+      provider = "google", -- tavily, serpapi, google, kagi, brave, or searxng
+      proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
     -- other configuration options...
     hints = { enabled = false },
