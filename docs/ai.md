@@ -17,6 +17,8 @@ Claude-Code: https://docs.anthropic.com/en/docs/claude-code/overview
 Pricing: https://claude.com/pricing
 
 ds3113@protonmail.com
+Geb. 19.04.1975
+
 
 ```sh
 # Install Claude Code
@@ -29,4 +31,12 @@ cd your-awesome-project
 claude
 # You'll be prompted to log in on first use
 ```
+## Ollama
+
+```sh
+curl -fsSL https://ollama.com/install.sh | sh
+```
+Models:
+  - https://github.com/ollama/ollama
+  - https://ollama.com/search
 
