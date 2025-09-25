@@ -22,10 +22,6 @@ My search engine:
 Claude-Code: https://docs.anthropic.com/en/docs/claude-code/overview
 Pricing: https://claude.com/pricing
 
-ds3113@protonmail.com
-Geb. 19.04.1975
-
-
 ```sh
 # Install Claude Code
 npm install -g @anthropic-ai/claude-code

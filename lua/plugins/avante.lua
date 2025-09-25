@@ -99,7 +99,7 @@ return {
       },
     },
     web_search_engine = {
-      provider = "google", -- tavily, serpapi, google, kagi, brave, or searxng
+      provider = "tavily", -- tavily, serpapi, google, kagi, brave, or searxng
       proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
     -- other configuration options...
