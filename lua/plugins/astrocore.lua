@@ -3,16 +3,9 @@ return {
   "AstroNvim/astrocore",
   ---@param opts AstroCoreOpts
   opts = function(_, opts)
-    local function yaml_ft(path, bufnr)
+    local function yaml_ft(_, bufnr)
       local buf_text = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
-      if
-        -- check if file is in roles, tasks, or handlers folder
-        vim.regex("(tasks\\|roles\\|handlers)/"):match_str(path)
-        -- check for known ansible playbook text and if found, return yaml.ansible
-        or vim.regex("hosts:\\|tasks:"):match_str(buf_text)
-      then
-        return "yaml.ansible"
-      elseif vim.regex("AWSTemplateFormatVersion:"):match_str(buf_text) then
+      if vim.regex("AWSTemplateFormatVersion:"):match_str(buf_text) then
         return "yaml.cfn"
       else -- return yaml if nothing else
         return "yaml"
@@ -93,6 +86,16 @@ return {
           [".*%.pkr.*%.hcl"] = "hcl.packer",
           [".*/kitty/.+%.conf"] = "bash",
           ["/tmp/neomutt.*"] = "markdown",
+          [".*/defaults/.*%.ya?ml"] = "yaml.ansible",
+          [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
+          [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
+          [".*/group_vars/.*/.*%.ya?ml"] = "yaml.ansible",
+          [".*/playbook.*%.ya?ml"] = "yaml.ansible",
+          [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
+          [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
+          [".*/roles/.*/handlers/.*%.ya?ml"] = "yaml.ansible",
+          [".*/tasks/.*%.ya?ml"] = "yaml.ansible",
+          [".*/molecule/.*%.ya?ml"] = "yaml.ansible",
         },
       },
       mappings = {
