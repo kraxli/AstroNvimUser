@@ -36,7 +36,7 @@ return {
     auto_suggestions_provider = provider,
     providers = {
       gemini = {
-        model = "gemini-2.5-flash",
+        model = "gemini-flash-lite-latest",  -- gemini-2.5-flash, gemini-2.5-flash-lite, gemini-flash-latest, gemini-flash-lite-latest
         -- api_key_name = 'AVANTE_GEMINI_API_KEY'
       },
       ollama = {
