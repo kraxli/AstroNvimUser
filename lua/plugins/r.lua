@@ -169,7 +169,7 @@ return {
             vim.api.nvim_buf_set_keymap( 0, "i", "<m-,>", "<Plug>RInsertPipe", { silent = true, noremap = true, expr = false })
 
 
-            vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", [[<cmd>lua require('r.send').cmd('setwd("' .. vim.fn.expand('%:p:h'):gsub("\\", "/") .. '")')<CR>]] , { silent = true, noremap = true, desc = 'SetWd' })
+            vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", [[<cmd>lua require('r.send').cmd('setwd("' .. vim.fn.expand('%:p:h'):gsub("\\", "/") .. '")')<CR>]] , { silent = true, noremap = true, desc = 'Set working dir' })
             -- TODO:
             -- keymap_modes({"n", "i", "v"}, "RSetwd", "rd",  {})  -- "<Cmd>lua require('r.run').setwd()"
             -- keymap_modes({"n", "i", "v"}, "RSeparatePath", {})  --    "sp", "<Cmd>lua require('r.path').separate()"
@@ -429,7 +429,7 @@ return {
               desc = "R-nvim",
               callback = function()
 
-                vim.api.nvim_create_user_command("RSetWd", [[<cmd>lua require('r.send').cmd('setwd("' .. vim.fn.expand("%:p:h"):gsub("\\", "/") .. '")')]], {})
+                vim.api.nvim_create_user_command("RSetWd", [[lua require('r.send').cmd('setwd("' .. vim.fn.expand("%:p:h"):gsub("\\", "/") .. '")')]], {})
 
                 local wk = require "which-key"
                 wk.add {
