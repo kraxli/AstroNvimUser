@@ -61,6 +61,9 @@ return {
               pattern = { "quarto", "qrm", "*.qrm", "*.quarto", "markdown", "md", },
               callback = function()
 
+              -- vim.api.nvim_create_user_command("RSetWd", [[<cmd>lua require('r.send').cmd('setwd("' .. vim.fn.expand('%:p:h'):gsub("\\", "/") .. '")')]], {})
+
+
                 local quarto = require "quarto"
                 local wk = require "which-key"
 
