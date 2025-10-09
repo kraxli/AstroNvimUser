@@ -60,7 +60,7 @@ return {
       "Saghen/blink.cmp",
       dependencies = "echasnovski/mini.snippets",
       optional = true,
-      opts = { snippets = { preset = "mini_snippets" } },
+      opts = { snippets = { preset = "mini_snippets", score_offset = -2,  } },
     },
     {
       "danymat/neogen",
