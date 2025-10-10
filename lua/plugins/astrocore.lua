@@ -12,6 +12,11 @@ return {
       end
     end
     opts = require("astrocore").extend_tbl(opts, {
+      treesitter = {
+        indent = {
+          disabled = { "yaml" },
+        },
+      },
       rooter = {
         ignore = { servers = { "julials" } },
         autochdir = true,
