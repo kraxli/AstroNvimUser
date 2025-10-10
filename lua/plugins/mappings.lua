@@ -46,6 +46,8 @@ return {
           -- ["<C-left>"] = { "<C-o>", desc = "Move to previous position" },
         },
         n = {
+          ["<leader>gB"] = { ":Git blame<CR>", desc = 'Git Blame'},
+
           ["diw"] = { "diwx", desc = "Delete word and space" },
 
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
