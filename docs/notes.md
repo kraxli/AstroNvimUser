@@ -100,3 +100,11 @@ You can use the following name to view Buftype settings, when Buftype=nofile, ca
 # Nerdfonts
 
 [find a symbol](https://www.nerdfonts.com/cheat-sheet)
+
+# Treesitter
+
+Treesitter install directories:
+
+- lazy.nvim: ~/.local/share/nvim/lazy/nvim-treesitter/parser
+- packer.nvim: ~/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/parser
+
