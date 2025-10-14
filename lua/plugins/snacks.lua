@@ -13,10 +13,10 @@ return {
       end,
       url_patterns = {
         ["code%.mehalter%.com"] = {
-          branch = "/~files/{branch}",
-          file = "/~files/{branch}/{file}?position=source-{line_start}-{line_end}",
-          permalink = "/~files/{commit}/{file}?position=source-{line_start}-{line_end}",
-          commit = "/~commits/{commit}",
+          branch = "/src/branch/{branch}",
+          file = "/src/branch/{branch}/{file}#L{line_start}-L{line_end}",
+          permalink = "/src/commit/{commit}/{file}#L{line_start}-L{line_end}",
+          commit = "/commit/{commit}",
         },
       },
     },
