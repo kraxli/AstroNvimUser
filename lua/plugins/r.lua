@@ -245,7 +245,7 @@ return {
             vim.api.nvim_buf_set_keymap(0, "n", prefix .. "v", "viW<Plug>RSendSelection", { desc = "Send variable / word" })
 
             -- Send Pipe chain breaker
-            keymap_modes({ "n", "v" }, "RSendChain", prefix .. "xc", {}) -- "<Cmd>lua require('r.send').chain()"
+            keymap_modes({ "n", "v" }, "<Plug>RSendChain", prefix .. "xc", {}) -- "<Cmd>lua require('r.send').chain()"
 
             -- Function
             keymap_modes({ "n", "v" }, "<Plug>RSendAllFun", "fa", {}) -- "<Cmd>lua require('r.send').funs(0, true, false)"
