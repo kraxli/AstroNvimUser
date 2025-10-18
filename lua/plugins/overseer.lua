@@ -39,10 +39,14 @@ return {
         name = "compile with compiler",
         builder = function() 
           local cmd = 'compiler'
+          -- local args = vim.fn.expand "%:p"
           if vim.bo.filetype == 'cpp' then
             cmd = 'g++'
-          elseif vim.bo.filetype == 'python' or vim.bo.filetype == 'R' then
-            cmd = vim.fn.has('unix') and vim.bo.filetype or vim.bo.filetype .. '.exe'
+          elseif vim.bo.filetype == 'python' then
+            cmd = vim.bo.filetype
+            cmd = vim.fn.has('unix') == 1 and cmd or cmd .. '.exe'
+          elseif vim.bo.filetype == 'r' or vim.bo.filetype == 'R' then
+            cmd = vim.fn.has('unix') and 'Rscript' or 'Rscript.exe'
           end
 
           return { cmd = { cmd }, args = { vim.fn.expand "%:p" } } 
@@ -53,11 +57,15 @@ return {
         builder = function() 
           local cmd = 'opout'
           local args = vim.fn.expand "%:p"
+
           if vim.bo.filetype == 'cpp' then
             cmd = vim.fn.expand "%:p:r" .. '.out'
             args = ''
-          elseif vim.bo.filetype == 'python' or vim.bo.filetype == 'R' then
-            cmd = vim.fn.has('unix') and vim.bo.filetype or vim.bo.filetype .. '.exe'
+          elseif vim.bo.filetype == 'python' then
+            cmd = vim.bo.filetype
+            cmd = vim.fn.has('unix') and cmd or cmd .. '.exe'
+          elseif vim.bo.filetype == 'r' or vim.bo.filetype == 'R' then
+            cmd = vim.fn.has('unix') and 'Rscript' or 'Rscript.exe'
           end
 
           return { cmd = { cmd }, args = { args } } 
@@ -90,6 +98,9 @@ return {
         builder = function() 
           local file = vim.fn.expand("%:p")
           local cmd = vim.bo.filetype
+          if vim.bo.filetype == 'r' or vim.bo.filetype == 'R' then
+            cmd = 'Rscript'
+          end
           cmd = vim.fn.has('unix') == 1 and { cmd } or { cmd .. '.exe' }
           if vim.bo.filetype == "go" then
             cmd = { "go", "run" }
@@ -105,7 +116,7 @@ return {
           }
         end,
         condition = {
-          filetype = { "sh", "python", "go", "R" },
+          filetype = { "sh", "python", "go", "R", "r" },
         },
       },
     },
