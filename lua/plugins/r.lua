@@ -120,18 +120,25 @@ return {
           open_app = csv_app,
         },
         objbr_mappings = {
+          ['<localleader>gg'] = 'head({object}, 30)',
+          ['<localleader>sna'] = 'sum(is.na({object}))', -- count NAs of a vector.
+          a = 'attributes({object})',
           c = 'class({object})',
-          dd = 'rm',
           e = view_object_details,
-          g = 'dplyr::glimpse',
+          d = 'rm',
+          -- g = 'dplyr::glimpse',
+          g = 'dplyr::glimpse({object})',
           h = 'head({object}, 10)', -- Command with arguments
           l = 'length({object})',
           m = 'object.size',
           n = 'names', -- Command without placeholder, object name will be appended.
           p = 'plot({object})',
+          r = 'rep({object})',
           s = 'str({object})',
           ss = 'summary({object})',
-          v = function()
+          t = 'table({object})',
+          v = 'rep({object})',
+          V = function()
             require('r.browser').toggle_view()
           end,
           q = function() 
