@@ -24,22 +24,23 @@ return {
     config = function()
       vim.cmd [[
   			Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
-			  Abolish {seperate} {separate}
+			Abolish {seperate} {separate}
   			Abolish {infal}{a,}{tion,ted} {infl}{a}{}
   			Abolish {ulita,ulit,utili,utli}mate {ulti}mate 
   			Abolish {anly,anyla,anali}sis {analy}sis
   			Abolish {Cor, cor}{os,so} {Cor}{So}
-			  Abolish {alos} {also}
-			  Abolish {boostrap} {bootstrap}
-			  Abolish {exlcl,exlc,exl}ud{e,ed} {excl}ud{}
-			  Abolish tri{nag,ng}{el}{s} tri{ang}{le}{s}
-			  Abolish {highlevel} {high-level}
-			  Abolish {occurence} {occurrence}
-			  Abolish {heterogen}{ous,ious} {heterogen}{eous} 
-			  Abolish {tain}ing{s} {train}ing{s}
-			  Abolish {profit}{abe,abel} {profit}{able}
-			  Abolish {ifrs} {IFRS}
-			  Abolish {experiance}{s} {experience}{s}
+			Abolish {alos} {also}
+			Abolish {boostrap} {bootstrap}
+			Abolish {exlcl,exlc,exl}ud{e,ed} {excl}ud{}
+			Abolish tri{nag,ng}{el}{s} tri{ang}{le}{s}
+			Abolish {highlevel} {high-level}
+			Abolish {occurence} {occurrence}
+			Abolish {heterogen}{ous,ious} {heterogen}{eous} 
+			Abolish {tain}ing{s} {train}ing{s}
+			Abolish {profit}{abe,abel} {profit}{able}
+			Abolish {ifrs} {IFRS}
+			Abolish {ibrn, IBRN}{s} {IBNR}{s}
+			Abolish {experiance}{s} {experience}{s}
 			]]
     end,
   },
