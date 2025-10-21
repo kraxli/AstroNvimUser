@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   "MeanderingProgrammer/render-markdown.nvim",
-  enabled = false,
+  -- enabled = false,
   cmd = "RenderMarkdown",
   ft = function()
     local plugin = require("lazy.core.config").spec.plugins["render-markdown.nvim"]

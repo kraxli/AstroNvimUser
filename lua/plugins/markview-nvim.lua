@@ -2,7 +2,7 @@
 
 return {
   "OXY2DEV/markview.nvim",
-  -- enabled=false,
+  enabled=false,
   ft = function()
     local plugin = require("lazy.core.config").spec.plugins["markview.nvim"]
     local opts = require("lazy.core.plugin").values(plugin, "opts", false)
