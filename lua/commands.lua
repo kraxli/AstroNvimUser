@@ -5,8 +5,8 @@ vim.cmd [[
     command! O :Oil
     command! Explorer :Oil
 
-    command! HeaderPromote call HeaderPromte()
-    command! HeaderDemote call HeaderDemote()
+    command! HeaderPromote call Header_promote()
+    command! HeaderDemote call Header_demote()
 
     command! KeyMaps :call utils#KeyMaps()
     " save and quit

@@ -78,7 +78,7 @@ vim.cmd([[
 
 vim.cmd([[
 
-function! HeaderPromote(...)
+function! Header_promote(...)
     if a:0 == 0 | let lineNum = line('.') | else | let lineNum = a:1 | endif
 
     let header_depth_max = 6
@@ -100,7 +100,7 @@ function! HeaderPromote(...)
 
   endfunction
 
-  function! HeaderDemote(...)
+  function! Header_demote(...)
     if a:0 == 0 | let lineNum = line('.') | else | let lineNum = a:1 | endif
 
     let header_depth_max = 6

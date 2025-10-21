@@ -48,8 +48,8 @@ return {
             [prefix .. "fF"] = { '<cmd>lua require("telekasten").find_friends()<CR>', desc = "Find friends" },
             [prefix .. "fg"] = { '<cmd>lua require("telekasten").search_notes()<CR>', desc = "Search notes" },
             [prefix .. "fw"] = { '<cmd>lua require("telekasten").find_weekly_notes()<CR>', desc = "Find note" },
-            [prefix .. "h"] = { "<cmd>call HeaderPromote()<CR>", desc = "Header promote" },
-            [prefix .. "H"] = { "<cmd>call HeaderDemote()<CR>", desc = "Header demote" },
+            [prefix .. "h"] = { "<cmd>call Header_promote()<CR>", desc = "Header promote" },
+            [prefix .. "H"] = { "<cmd>call Header_demote()<CR>", desc = "Header demote" },
             [prefix .. "i"] = { '<cmd>lua require("telekasten").insert_link({ i=false })<CR>', desc = "Insert link" },
             [prefix .. "I"] = {
               '<cmd>lua require("telekasten").insert_img_link({ i=true })<CR>',
