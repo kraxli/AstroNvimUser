@@ -7,7 +7,11 @@ vim.g.R_filetypes = { "r", "rmd", "rnoweb", "rhelp" }  -- , "quarto"
 -- Set OS specific variables
 -- -------------------------------------------------------
 local r_path = "/usr/bin"
-local csv_app = ':TermExec cmd="vd %s" direction=float name=visidataTerm'
+
+local vd_cmd = vim.fn.has('unix') == 1 and 'vd' or 'vd.exe'
+local csv_app = ':TermExec cmd="' .. vd_cmd .. ' %s" direction=float name=visidataTerm'
+-- local csv_app = ':TermExec cmd="vd %s" direction=float name=visidataTerm'
+
 local pdfviewer = "" -- use default pdfviewer
 
 -- for graphical R devices see: https://bookdown.org/rdpeng/exdata/graphics-devices.html
