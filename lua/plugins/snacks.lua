@@ -45,6 +45,8 @@ return {
               end,
               desc = "Hover image",
             },
+            ["<Leader>gI"] = { function() require("snacks").gh.issue() end, desc = "GitHub Issues" },
+            ["<Leader>gP"] = { function() require("snacks").gh.pr() end, desc = "GitHub Pull Requests" },
           },
         },
       },
