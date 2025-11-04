@@ -291,7 +291,7 @@ return {
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "xP", {}) -- "RSendParagraph"; i mode ?
 
 
-            vim.api.nvim_buf_set_keymap(0, "n",  prefix .. 'I', [[<Cmd>lua require('r.send').cmd('install.packages("]] .. vim.fn.expand("<cword>") .. [[")')<CR>]], {})
+            vim.api.nvim_buf_set_keymap(0, "n",  prefix .. 'I', [[<Cmd>lua require('r.send').cmd('install.packages("]] .. vim.fn.expand("<cword>") .. [[")')<CR>]], {desc='Install package under cursor'})
 
             -- Send block - I don't work often with marks
             -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
