@@ -41,7 +41,7 @@ return {
 			Abolish {ifrs} {IFRS}
 			Abolish {ibrn, IBRN}{s} {IBNR}{s}
 			Abolish {experiance}{s} {experience}{s}
-		Abolish {dpylr}{::} {dplyr}{::}
+		Abolish {dpylr} {dplyr}
 			]]
     end,
   },
