@@ -210,7 +210,7 @@ return {
 
             keymap_modes({ "n" }, "<Plug>RPackages", prefix .. "P", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
 
-            keymap_modes({ "n", "v" }, "<Plug>RViewDF", prefix .. "F", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({ "n", "v" }, "<Plug>RViewDF", prefix .. "T", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
             keymap_modes({ "n", "v" }, "<Plug>RViewDFs", prefix .. "Vs", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
             keymap_modes({ "n", "v" }, "<Plug>RViewDFv", prefix .. "Vv", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
             keymap_modes({ "n", "v" }, "<Plug>RViewDFa", prefix .. "Vh", {}) -- i-mode removed (to be mapped to ctrl or alt key combination)
@@ -234,7 +234,7 @@ return {
 
             -- Miscellaneous
             -- keymap_modes({"n", "i", "v"},  "<Plug>RInsertLineOutput",   "o",    {})  --    "<Cmd>lua require('r.run').insert_commented()")
-            keymap_modes({ "n", "v" }, "<Plug>RInsertLineOutput", prefix .. "I", {}) --    "<Cmd>lua require('r.run').insert_commented()")  -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes({ "n", "v" }, "<Plug>RInsertLineOutput", prefix .. "i", {}) --    "<Cmd>lua require('r.run').insert_commented()")  -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- -------------------------------------------------------
             -- R send
@@ -289,6 +289,9 @@ return {
 
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "xp", {}) -- "RSendParagraph"; i mode ?
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "xP", {}) -- "RSendParagraph"; i mode ?
+
+
+            vim.api.nvim_buf_set_keymap(0, "n",  prefix .. 'I', [[<Cmd>lua require('r.send').cmd('install.packages("]] .. vim.fn.expand("<cword>") .. [[")')<CR>]], {})
 
             -- Send block - I don't work often with marks
             -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
@@ -451,7 +454,7 @@ return {
                   { "<localleader>c", group = " 󰟔 Chunk (md)" },
                   { "<localleader>f", group = " 󰟔 Functions send" },
                   { "<localleader>g", group = " 󰟔 Go to" },
-                  { "<localleader>i", group = " 󰟔 Install" },
+                  { "<localleader>I", group = " 󰟔 Install" },
                   { "<localleader>k", group = " 󰟔 Knit" },
                   { "<localleader>p", group = " 󰟔 Paragraph send" },
                   { "<localleader>r", group = " 󰟔 " },
