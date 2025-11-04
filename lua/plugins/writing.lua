@@ -20,7 +20,7 @@ end
 return {
   {
     "tpope/vim-abolish",
-    ft = { "markdown", "text", "vimwiki" },
+    ft = { "markdown", "text", "vimwiki", "R", "r" },
     config = function()
       vim.cmd [[
   		Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
@@ -41,6 +41,7 @@ return {
 			Abolish {ifrs} {IFRS}
 			Abolish {ibrn, IBRN}{s} {IBNR}{s}
 			Abolish {experiance}{s} {experience}{s}
+		Abolish {dpylr}{::} {dplyr}{::}
 			]]
     end,
   },
