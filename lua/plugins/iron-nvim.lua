@@ -138,6 +138,9 @@ return {
               -- send variable / word under cursor:
               vim.api.nvim_buf_set_keymap(0, "n", prefix .. "w", "viW<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { desc = "Send word / variable" })
 
+              -- run file
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd>IronSend %run " .. vim.api.nvim_buf_get_name(0) .. "<CR>", { expr = false, noremap = true, desc = "Run file" })
+
               -- core plugin mappints
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "<cr>", "<cmd> lua require('iron').core.send(nil, string.char(13))<CR><ESC>", { expr = false, noremap = true, desc = "Send return to repl" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "m", "<cmd> lua require('iron.core').run_motion('send_motion')<CR><ESC>", { expr = false, noremap = true, desc = "Send motion" })
