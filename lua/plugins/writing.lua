@@ -38,7 +38,7 @@ return {
 			Abolish {heterogen}{ous,ious} {heterogen}{eous} 
 			Abolish {tain}ing{s} {train}ing{s}
 			Abolish {profit}{abe,abel} {profit}{able}
-			Abolish {ifrs} {IFRS}
+			Abolish {ifrs, IfRS} {IFRS}
 			Abolish {ibrn, IBRN}{s} {IBNR}{s}
 			Abolish {experiance}{s} {experience}{s}
 		Abolish {dpylr} {dplyr}
