@@ -264,8 +264,8 @@ return {
             event = { "FileType" },
             pattern = "neo-tree",
             callback = function()
-              local state = require("neo-tree.sources.manager").get_state("filesystem", nil, nil)
-              state.commands.order_by_modified(state)
+              -- local state = require("neo-tree.sources.manager").get_state("filesystem", nil, nil)
+              -- state.commands.order_by_modified(state)
             end,
           },
         },
