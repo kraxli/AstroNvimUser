@@ -42,6 +42,7 @@ function visidata_py(direction)
   local var_file_path = dir_vd_temp .. var_name .. '.parquet'  -- os.date('%Y%m%d%H%M%S')
   require('iron').core.send('python', {var_name .. '.to_parquet("' .. var_file_path .. '")'})
   -- require('iron').core.send('python', {'import pyarrow; ' .. var_name .. '.to_parquet("' .. var_file_path .. '") '})
+  require('iron').core.send('r', {'arrow::write_parquet(' .. var_name .. ', "' .. var_file_path .. '")'})
 
   local vd_cmd = vim.fn.has('unix') == 1 and 'vd' or 'vd.exe'
   vd_cmd = 'TermExec cmd="' .. vd_cmd .. ' ' .. var_file_path .. '"   direction=' .. direction .. ' name=visidataTerm'
