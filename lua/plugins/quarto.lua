@@ -15,7 +15,7 @@ return {
   {
     "quarto-dev/quarto-nvim",
     -- enabled = false,
-    ft = { "quarto", "qmd", },  -- "markdown", "md",
+    ft = { "quarto", "qmd", },  -- "markdown", "md", "rmd"
     cmd = { "QuartoPreview" },
     opts = {},
     config = function()
