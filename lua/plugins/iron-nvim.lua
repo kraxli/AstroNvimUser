@@ -105,6 +105,7 @@ return {
         -- Iron doesn't set keymaps by default anymore.
         -- You can set them here or manually add keymaps to the functions in iron.core
         -- see:https://github.com/Vigemus/iron.nvim/blob/master/doc/iron.txt
+        send_motion = "<localleader>sc",
       },
       -- If the highlight is on, you can change how it looks
       -- For the available options, check nvim_set_hl
@@ -123,7 +124,7 @@ return {
           {
             event = { "FileType", },
             -- "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter",
-            pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy" },
+            pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy", "r" },
             desc = "Iron repl support",
             callback = function()
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start REPL" })
@@ -137,11 +138,13 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "s", "<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { expr = false, noremap = true, desc = "Send selection" })
               -- send file: aa
 
+              -- send function
+              -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "xf", "viW<localleader>sc", {desc = "Send function"})
+              -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "xf", "<cmd> lua require('iron.core').run_motion('send_motion')<CR><ESC>viWaf", {desc = "Send function"})  -- so far the best
+              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "xf", "<cmd> lua require('iron.core').run_motion('send_motion')<CR>af", {desc = "Send function"}) -- works for python
+
               -- send variable / word under cursor:
               vim.api.nvim_buf_set_keymap(0, "n", prefix .. "w", "viW<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { desc = "Send word / variable" })
-
-              -- run file
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd>IronSend %run " .. vim.api.nvim_buf_get_name(0) .. "<CR>", { expr = false, noremap = true, desc = "Run file" })
 
               -- core plugin mappints
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "<cr>", "<cmd> lua require('iron').core.send(nil, string.char(13))<CR><ESC>", { expr = false, noremap = true, desc = "Send return to repl" })
@@ -173,6 +176,21 @@ return {
                 },
               }
             end,
+          },
+          {
+            event = { "FileType", },
+            pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy"},
+            callback = function ()
+              -- run file
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd>IronSend %run " .. vim.api.nvim_buf_get_name(0) .. "<CR>", { expr = false, noremap = true, desc = "Run file" })
+            end
+          },
+          {
+            event = { "FileType", },
+            pattern = { "r" },
+            callback = function ()
+              -- ...
+            end
           },
         },
       },
