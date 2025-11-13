@@ -28,6 +28,29 @@ return {
         },
       },
     },
+    handlers = {
+      julials = function()
+        local julials = vim.lsp.config.julials
+        if julials then
+          local cmd = julials.cmd
+          for _, depot in
+            ipairs(
+              vim.env.JULIA_DEPOT_PATH and vim.split(vim.env.JULIA_DEPOT_PATH, vim.fn.has "win32" == 1 and ";" or ":")
+                or { vim.fn.expand "~/.julia" }
+            )
+          do
+            local bin = vim.fs.joinpath(depot, "environments", "nvim-lspconfig", "bin", "julia")
+            local file = (vim.uv or vim.loop).fs_stat(bin)
+            if file and file.type == "file" then
+              cmd[1] = bin
+              vim.lsp.config("julials", { cmd = cmd })
+              break
+            end
+          end
+          vim.lsp.enable "julials"
+        end
+      end,
+    },
     servers = servers,
   },
 }
