@@ -61,7 +61,7 @@ return {
         commands = {
           AutoCompile = {
             function()
-              require("overseer").run_template({ name = "compile with compiler" }, function(task)
+              require("overseer").run_task({ name = "compile with compiler" }, function(task)
                 if task then
                   task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
                 else
@@ -72,16 +72,16 @@ return {
             desc = "Automatically compile the current file with `compiler` on save",
           },
           Compile = {
-            function() require("overseer").run_template { name = "compile with compiler" } end,
+            function() require("overseer").run_task { name = "compile with compiler" } end,
             desc = "Compile the current file with `compiler`",
           },
           OpOut = {
-            function() require("overseer").run_template { name = "view file output" } end,
+            function() require("overseer").run_task { name = "view file output" } end,
             desc = "View the current file ouptut with `opout`",
           },
           Present = {
             function()
-              require("overseer").run_template({ name = "present with pdfpc" }, function(task)
+              require("overseer").run_task({ name = "present with pdfpc" }, function(task)
                 if not task then vim.notify("Unable to start presentation", vim.log.levels.ERROR) end
               end)
             end,
