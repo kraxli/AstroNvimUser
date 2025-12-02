@@ -99,6 +99,7 @@ return {
   -- },
   {
     "R-nvim/R.nvim",
+    enabled = false,
     lazy = false,
     -- branch = 'view_df',  -- or tag, commit
     -- ft = {'R'},
@@ -253,7 +254,7 @@ return {
             vim.api.nvim_buf_set_keymap( 0, "i", "<S-Enter>", "<Cmd>lua require('r.send').line(true)<CR>", { desc = "Send line & down" })
 
             -- send variable / word under cursor:
-            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "v", "viW<Plug>RSendSelection", { desc = "Send variable / word" })
+            vim.api.nvim_buf_set_keymap(0, "n", prefix .. "v", "viw<Plug>RSendSelection", { desc = "Send variable / word" })
 
             -- Send Pipe chain breaker
             keymap_modes({ "n", "v" }, "<Plug>RSendChain", prefix .. "xc", {}) -- "<Cmd>lua require('r.send').chain()"
