@@ -1,5 +1,5 @@
 local prefix = "<Leader>r"
-local is_mswindows = vim.fn.has('win64') == 1 and true or false
+local is_mswindows = vim.fn.has "win64" == 1 and true or false
 
 -- https://www.playfulpython.com/configuring-neovim-as-a-python-ide/
 -- https://github.com/akinsho/toggleterm.nvim/wiki/Tips-and-Tricks#using-toggleterm-with-powershell
@@ -9,50 +9,92 @@ local py_command = { "ipython", "--pylab=qt5", "--no-autoindent" }
 local r_command = "R"
 
 if is_mswindows then
---   table.insert(py_command, "--simple-prompt")
---   py_command = {"python"}  -- use python 3.13
-  r_command = 'R.exe'
+  --   table.insert(py_command, "--simple-prompt")
+  --   py_command = {"python"}  -- use python 3.13
+  r_command = "R.exe"
 end
-
 
 -- get variable under cursor: local variableUnderCursor = vim.fn.expand("<cword>")
 -- get visual selection: https://github.com/Willem-J-an/visidata.nvim/blob/master/lua/visidata.lua
 -- lua require('iron').core.send(python, 'import pyarrow; df_x.to_parquet("df_x.parquet")'); vim.cmd([[TermExec cmd='vd df_x.parquet' direction=float]])
 
 local function get_visual_selection()
-	local _, line_start, col_start = unpack(vim.fn.getpos("v"))
-	local _, line_end, col_end = unpack(vim.fn.getpos("."))
-	local selection = vim.api.nvim_buf_get_text(0, line_start - 1, col_start - 1, line_end - 1, col_end, {})
-	return selection
+  local _, line_start, col_start = unpack(vim.fn.getpos "v")
+  local _, line_end, col_end = unpack(vim.fn.getpos ".")
+  local selection = vim.api.nvim_buf_get_text(0, line_start - 1, col_start - 1, line_end - 1, col_end, {})
+  return selection
 end
 
-function visidata_py(direction)
+local function get_vriable_name()
   local mode = vim.fn.mode()
   local var_name
-  if mode == 'n' or mode == 'i' then
-    var_name = vim.fn.expand("<cword>")
-  elseif mode == 'v' or mode == 'x' then
+  if mode == "n" or mode == "i" then
+    var_name = vim.fn.expand "<cword>"
+  elseif mode == "v" or mode == "x" then
     var_name = get_visual_selection()[1]
     var_name = var_name:gsub("%s+", "")
   end
+  return var_name
+end
+
+function visidata(direction)
+
+  local var_name = get_vriable_name()
 
   -- create directory
   -- the directory variable is defined in: ~/.config/nvim/lua/global_vars.lua
-  os.execute("mkdir " .. dir_vd_temp)  -- require("lfs").mkdir(dir_vd_temp)
-  local var_file_path = dir_vd_temp .. var_name .. '.parquet'  -- os.date('%Y%m%d%H%M%S')
-  require('iron').core.send('python', {var_name .. '.to_parquet("' .. var_file_path .. '")'})
-  -- require('iron').core.send('python', {'import pyarrow; ' .. var_name .. '.to_parquet("' .. var_file_path .. '") '})
-  require('iron').core.send('r', {'arrow::write_parquet(' .. var_name .. ', "' .. var_file_path .. '")'})
+  os.execute("mkdir " .. dir_vd_temp) -- require("lfs").mkdir(dir_vd_temp)
+  local var_file_path = dir_vd_temp .. var_name .. ".parquet" -- os.date('%Y%m%d%H%M%S')
 
-  local vd_cmd = vim.fn.has('unix') == 1 and 'vd' or 'vd.exe'
-  vd_cmd = 'TermExec cmd="' .. vd_cmd .. ' ' .. var_file_path .. '"   direction=' .. direction .. ' name=visidataTerm'
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { var_name .. '.to_parquet("' .. var_file_path .. '")' })
+    -- require('iron').core.send('python', {'import pyarrow; ' .. var_name .. '.to_parquet("' .. var_file_path .. '") '})
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { "arrow::write_parquet(" .. var_name .. ', "' .. var_file_path .. '")' })
+  end
+  -- require("iron").core.send("r", { "arrow::write_parquet(" .. var_name .. ', "' .. var_file_path .. '")' })
+
+  local vd_cmd = vim.fn.has "unix" == 1 and "vd" or "vd.exe"
+  vd_cmd = 'TermExec cmd="' .. vd_cmd .. " " .. var_file_path .. '"   direction=' .. direction .. " name=visidataTerm"
   vim.cmd(vd_cmd)
+end
 
+function file_run()
+  local file_path = vim.api.nvim_buf_get_name(0)
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { "%run " .. file_path })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'source("' .. file_path .. '")' })
+  end
+end
+
+function display_scope()
+  if vim.bo.filetype == "python" then
+    -- require("iron").core.send("python", { var_name .. '.to_parquet("' .. var_file_path .. '")' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'matrix(ls())' })
+  end
+end
+
+function df_columns()
+  local var_name = get_vriable_name()
+
+  if vim.bo.filetype == "python" then
+    -- require("iron").core.send("python", { var_name .. '.to_parquet("' .. var_file_path .. '")' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'names(' .. var_name .. ')' })
+  end
+
+end
+
+function variable_str()
+  local var_name = get_vriable_name()
 end
 
 return {
   "Vigemus/iron.nvim",
-  ft = { "python" },
+  ft = { "python", "r" },
   cmd = { "IronRepl" },
   config = function()
     local iron = require "iron.core"
@@ -122,16 +164,24 @@ return {
       autocmds = {
         auto_iron = {
           {
-            event = { "FileType", },
+            event = { "FileType" },
+            pattern = { "python", "r" },
             -- "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter",
-            pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy", "r" },
+            -- pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy", "r", "*.r" },
             desc = "Iron repl support",
             callback = function()
+
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Ov", "<cmd> lua display_scope()<CR>", { expr = false, noremap = true, desc = "Display scope vars." })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Os", "<cmd> lua variable_str()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "On", "<cmd> lua df_columns()<CR>", { expr = false, noremap = true, desc = "Dispaly (col) names" })
+
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start REPL" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "R", "<cmd>IronRestart<CR><ESC>", { expr = false, noremap = true, desc = " Restart REPL" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, desc = " Jump (in)to REPL" }) -- i
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "h", "<cmd>IronHide<CR>", { expr = false, noremap = true, desc = "Hide REPL" }) -- i
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd> lua require 'iron.core'.send_file()<CR><ESC>", { expr = false, noremap = true, desc = "Send file" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd> lua require 'iron.core'.send_file()<CR><ESC>", { expr = false, noremap = true, desc = "Send file" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd> lua file_run()<CR>", { expr = false, noremap = true, desc = "Run file" })
+              -- vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "f", "<cmd>IronSend %run " .. vim.api.nvim_buf_get_name(0) .. "<CR>", { expr = false, noremap = true, desc = "Run file" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "l", "<cmd> lua require 'iron.core'.send_line()<CR><ESC>", { expr = false, noremap = true, desc = "Send line" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "s", "<cmd> lua require 'iron.core'.send_line()<CR><ESC>", { expr = false, noremap = true, desc = "Send line" })
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "l", "<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { expr = false, noremap = true, desc = "Send selection" })
@@ -141,28 +191,52 @@ return {
               -- send function
               -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "xf", "viw<localleader>sc", {desc = "Send function"})
               -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "xf", "<cmd> lua require('iron.core').run_motion('send_motion')<CR><ESC>viwaf", {desc = "Send function"})  -- so far the best
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "xf", "<cmd> lua require('iron.core').run_motion('send_motion')<CR>af", {desc = "Send function"}) -- works for python
+              vim.api.nvim_buf_set_keymap(
+                0,
+                "n",
+                prefix .. "xf",
+                "<cmd> lua require('iron.core').run_motion('send_motion')<CR>af",
+                { desc = "Send function" }
+              ) -- works for python
 
               -- send variable / word under cursor:
-              vim.api.nvim_buf_set_keymap(0, "n", prefix .. "w", "viw<cmd> lua require 'iron.core'.visual_send()<CR><ESC>", { desc = "Send word / variable" })
+              vim.api.nvim_buf_set_keymap(
+                0,
+                "n",
+                prefix .. "w",
+                "viw<cmd> lua require 'iron.core'.visual_send()<CR><ESC>",
+                { desc = "Send word / variable" }
+              )
 
               -- core plugin mappints
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "<cr>", "<cmd> lua require('iron').core.send(nil, string.char(13))<CR><ESC>", { expr = false, noremap = true, desc = "Send return to repl" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "m", "<cmd> lua require('iron.core').run_motion('send_motion')<CR><ESC>", { expr = false, noremap = true, desc = "Send motion" })
+              vim.api.nvim_buf_set_keymap(
+                0,
+                "n",
+                prefix .. "<cr>",
+                "<cmd> lua require('iron').core.send(nil, string.char(13))<CR><ESC>",
+                { expr = false, noremap = true, desc = "Send return to repl" }
+              )
+              vim.api.nvim_buf_set_keymap(
+                0,
+                "n",
+                prefix .. "m",
+                "<cmd> lua require('iron.core').run_motion('send_motion')<CR><ESC>",
+                { expr = false, noremap = true, desc = "Send motion" }
+              )
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "p", "<cmd> lua require('iron').core.send_paragraph<CR><ESC>", { expr = false, noremap = true, desc = "Send paragrph" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_code_block(false)<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "B", "<cmd> lua require('iron').core.send_code_block(true)<CR><ESC>", { expr = false, noremap = true, desc = "Send block and move" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "I", "<cmd> lua require('iron').core.send(nil, string.char(03))<CR><ESC>", { expr = false, noremap = true, desc = "Interupt" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "q", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit"})
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "L", "<cmd> lua require('iron').core.send(nil, string.char(12))<CR><ESC>", { expr = false, noremap = true, desc = "Clear"})
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "u", "<cmd> lua require('iron').core.send_until_cursor<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor"})
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "q", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "L", "<cmd> lua require('iron').core.send(nil, string.char(12))<CR><ESC>", { expr = false, noremap = true, desc = "Clear" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "u", "<cmd> lua require('iron').core.send_until_cursor<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
 
               -- Visidata
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
-              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "v", "<cmd> lua visidata_py('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "v", "<cmd> lua visidata('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
+              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "v", "<cmd> lua visidata('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
 
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vs", "<cmd> lua visidata_py('vertical size=50')<CR>", { expr = false, noremap = true, desc = "View DF vertical" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vh", "<cmd> lua visidata_py('horizontal size=50')<CR>", { expr = false, noremap = true, desc = "View DF horizontal" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vs", "<cmd> lua visidata('vertical size=50')<CR>", { expr = false, noremap = true, desc = "View DF vertical" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vh", "<cmd> lua visidata('horizontal size=50')<CR>", { expr = false, noremap = true, desc = "View DF horizontal" })
 
               local wk = require "which-key"
               wk.add {
@@ -174,23 +248,48 @@ return {
                   -- return require("which-key.extras").expand.buf()
                   -- end
                 },
+                {
+                  prefix .. 'V',
+                  group = " Visidata",
+                  -- expand = function()
+                  -- return require("which-key.extras").expand.buf()
+                  -- end
+                },
+                {
+                  prefix .. 'O',
+                  group = " Object Browser",
+                  -- expand = function()
+                  -- return require("which-key.extras").expand.buf()
+                  -- end
+                },
+
               }
+              -- wk.add {
+              --   mode = { "n" },
+              --   {
+              --     prefix,
+              --     group = " REPL",
+              --     -- expand = function()
+              --     -- return require("which-key.extras").expand.buf()
+              --     -- end
+              --   },
+              -- }
             end,
           },
           {
-            event = { "FileType", },
-            pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy"},
-            callback = function ()
+            event = { "FileType" },
+            pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy" },
+            callback = function()
               -- run file
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd>IronSend %run " .. vim.api.nvim_buf_get_name(0) .. "<CR>", { expr = false, noremap = true, desc = "Run file" })
-            end
+              -- vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd>IronSend %run " .. vim.api.nvim_buf_get_name(0) .. "<CR>", { expr = false, noremap = true, desc = "Run file" })
+            end,
           },
           {
-            event = { "FileType", },
+            event = { "FileType" },
             pattern = { "r" },
-            callback = function ()
+            callback = function()
               -- ...
-            end
+            end,
           },
         },
       },
