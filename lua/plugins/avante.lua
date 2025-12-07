@@ -1,13 +1,14 @@
 local prefix = "<Leader>A"
 
-local provider = (environment == 'work') and "copilot" or "gemini"  -- gemini, glados, mistral, ...
-local authentication = (environment == 'work') and "copilot" or ""
+local provider = (environment == "work") and "openai" or "gemini" -- gemini, glados, mistral, copilot,...
+local authentication = (environment == "work") and "copilot" or ""
 
 ---@type LazySpec
 return {
   "yetone/avante.nvim",
   -- enabled = false,  -- test out codecompanion
-  build = vim.fn.has "win32" == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
+  build = vim.fn.has "win32" == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+    or "make",
   -- build = "make",
   event = "User AstroFile",
   cmd = {
@@ -23,7 +24,7 @@ return {
     "AvanteToggle",
     "AvanteClear",
     "AvanteFocus",
-    "AvanteStop",  
+    "AvanteStop",
   },
   dependencies = {
     { "stevearc/dressing.nvim", optional = true },
@@ -36,39 +37,47 @@ return {
     auto_suggestions_provider = provider,
     providers = {
       gemini = {
-        model = "gemini-flash-lite-latest",  -- gemini-2.5-flash, gemini-2.5-flash-lite, gemini-flash-latest, gemini-flash-lite-latest
+        model = "gemini-flash-latest", -- gemini-2.5-flash, gemini-2.5-flash-lite, gemini-flash-latest, gemini-flash-lite-latest
+        -- model = "gemini-flash-lite-latest",
         -- api_key_name = 'AVANTE_GEMINI_API_KEY'
       },
+      openai = {
+        model = "gpt-4o", -- Specify your desired model
+        api_key_name = "OPENAI_API_KEY", -- The name of the environment variable holding the key
+        endpoint = "https://api.openai.com/v1/chat/completions", -- Default OpenAI endpoint
+        -- You can add other options here, e.g., timeout or temperature
+        -- extra_request_body = { temperature = 0.7 },
+        -- hide_in_model_selector = true
+      },
+      -- openai = { hide_in_model_selector = true },
       ollama = {
         endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
         model = "qwq:32b",
       },
-
       mistral = {
         __inherited_from = "openai",
-        endpoint = "https://api.mistral.ai/v1",  -- 'https://api.mistral.ai/v1/chat/completions',
-        model = "mistral-large-latest",  -- "mistral-small-latest",
+        endpoint = "https://api.mistral.ai/v1", -- 'https://api.mistral.ai/v1/chat/completions',
+        model = "mistral-large-latest", -- "mistral-small-latest",
         api_key_name = "AVANTE_MISTRAL_API_KEY",
         -- timeout = 30000, -- Timeout in milliseconds
         extra_request_body = {
           temperature = 0.5,
           -- Higher temperature values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-          max_tokens = 20480,  -- 4096,  -- to avoid using max_completion_tokens
+          max_tokens = 20480, -- 4096,  -- to avoid using max_completion_tokens
         },
         -- hide_in_model_selector = true,
       },
-      copilot = { hide_in_model_selector = false },  -- api_key_name = "GITHUB_TOKEN",
+      copilot = { hide_in_model_selector = false }, -- api_key_name = "GITHUB_TOKEN",
       claude = {
         endpoint = "https://api.anthropic.com",
         model = "claude-sonnet-4-20250514",
         timeout = 30000, -- Timeout in milliseconds
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 20480,
-          },
+        extra_request_body = {
+          temperature = 0.75,
+          max_tokens = 20480,
+        },
         -- hide_in_model_selector = true,
       },
-      openai = { hide_in_model_selector = true },
       vertex = { hide_in_model_selector = true },
       vertex_claude = { hide_in_model_selector = true },
       glados = {
@@ -86,7 +95,7 @@ return {
         args = { "--experimental-acp" },
         env = {
           NODE_NO_WARNINGS = "1",
-          GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
+          GEMINI_API_KEY = os.getenv "GEMINI_API_KEY",
         },
       },
       ["claude-code"] = {
@@ -94,7 +103,7 @@ return {
         args = { "@zed-industries/claude-code-acp" },
         env = {
           NODE_NO_WARNINGS = "1",
-          ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
+          ANTHROPIC_API_KEY = os.getenv "ANTHROPIC_API_KEY",
         },
       },
     },
@@ -220,6 +229,5 @@ return {
         },
       },
     },
-
   },
 }
