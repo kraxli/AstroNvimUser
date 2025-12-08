@@ -181,6 +181,7 @@ return {
             vim.api.nvim_buf_set_keymap( 0, "i", "<m-,>", "<Plug>RInsertPipe", { silent = true, noremap = true, expr = false })
 
 
+            vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Q", [[<cmd>lua require('r.send').cmd('Q')<CR>]] , { silent = true, noremap = true, desc = 'Debug quit' })
             vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "W", [[<cmd>lua require('r.send').cmd('setwd("' .. vim.fn.expand('%:p:h'):gsub("\\", "/") .. '")')<CR>]] , { silent = true, noremap = true, desc = 'Set working dir' })
             -- TODO:
             -- keymap_modes({"n", "i", "v"}, "RSetwd", "rd",  {})  -- "<Cmd>lua require('r.run').setwd()"
@@ -196,7 +197,7 @@ return {
             keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').start_R('custom')<CR>", prefix .. "R", { desc = "R custom start" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Close
-            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "Q", { desc = "R close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
+            keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('nosave')<CR>", prefix .. "K", { desc = "R close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
             keymap_modes( { "n", "v" }, "<Cmd>lua require('r.run').quit_R('save')<CR>", prefix .. "w", { desc = "R save & close" }) -- i-mode removed (to be mapped to ctrl or alt key combination)
 
             -- Clear console
@@ -284,9 +285,9 @@ return {
 
             -- Send Paragraph
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", "pp", {}) -- "RSendParagraph"; i mode ?
-            keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "b", {}) -- "RSendParagraph"; i mode ?
+            keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "B", {}) -- "RSendParagraph"; i mode ?
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(true)<CR>", "pd", {}) --   RDSendParagraph; i mode ?
-            keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "B", {}) --   RDSendParagraph; i mode ?
+            keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(true)<CR>", prefix .. "b", {}) --   RDSendParagraph; i mode ?
 
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "xp", {}) -- "RSendParagraph"; i mode ?
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "xP", {}) -- "RSendParagraph"; i mode ?
@@ -356,9 +357,9 @@ return {
               -- pattern = { "rmd", "rnoweb", "*.rmd", "*.rnoweb", "quarto", "*.quarto", "*.qmd", },  
               pattern = { "rmd", "rnoweb", "*.rmd", "*.rnoweb",  },
               callback = function()
-                keymap_modes({ "n" }, "<Plug>RSendChunk", prefix .. "c", {}) -- "<Cmd>lua require('r.rmd').send_R_chunk(false)" -- i-mode ?
+                keymap_modes({ "n" }, "<Plug>RSendChunk", prefix .. "C", {}) -- "<Cmd>lua require('r.rmd').send_R_chunk(false)" -- i-mode ?
                 -- keymap_modes({ "n" }, "<Plug>RSendChunk", "<leader>q" .. "c", {}) -- "<Cmd>lua require('r.rmd').send_R_chunk(false)" -- i-mode ?
-                vim.keymap.set( { "n", "v" }, prefix .. "C", "<Plug>RDSendChunk", { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" })
+                vim.keymap.set( { "n", "v" }, prefix .. "c", "<Plug>RDSendChunk", { expr = false, noremap = true, buffer = true, desc = "RDSendChunk" })
                 keymap_modes({ "n" }, "<Plug>RNextRChunk", prefix .. "gn", {}) -- "<Cmd>lua require('r.rmd').next_chunk()"
                 keymap_modes({ "n" }, "<Plug>RPreviousRChunk", prefix .. "gN", {}) -- "<Cmd>lua require('r.rmd').previous_chunk()"
                 keymap_modes({ "n" }, "<Plug>RSendChunkFH", prefix .. "xu", { desc = "Run chunks above" }) -- "<Cmd>lua require('r.send').chunks_up_to_here()" -- i-mode?
