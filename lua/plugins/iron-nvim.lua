@@ -286,7 +286,7 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_code_block(false)<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "B", "<cmd> lua require('iron').core.send_code_block(true)<CR><ESC>", { expr = false, noremap = true, desc = "Send block and move" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "I", "<cmd> lua require('iron').core.send(nil, string.char(03))<CR><ESC>", { expr = false, noremap = true, desc = "Interupt" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "q", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "K", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit / close" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "L", "<cmd> lua require('iron').core.send(nil, string.char(12))<CR><ESC>", { expr = false, noremap = true, desc = "Clear" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "u", "<cmd> lua require('iron').core.send_until_cursor<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
 
@@ -310,23 +310,14 @@ return {
                 {
                   prefix .. 'V',
                   group = " Visidata",
-                  -- expand = function()
-                  -- return require("which-key.extras").expand.buf()
-                  -- end
                 },
                 {
                   prefix .. 'O',
                   group = " Object Browser",
-                  -- expand = function()
-                  -- return require("which-key.extras").expand.buf()
-                  -- end
                 },
                 {
                   prefix .. 'x',
                   group = " Execute / run",
-                  -- expand = function()
-                  -- return require("which-key.extras").expand.buf()
-                  -- end
                 },
 
 }
