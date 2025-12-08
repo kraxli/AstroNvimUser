@@ -81,7 +81,7 @@ function df_columns()
   local var_name = get_vriable_name()
 
   if vim.bo.filetype == "python" then
-    -- require("iron").core.send("python", { var_name .. '.to_parquet("' .. var_file_path .. '")' })
+    require("iron").core.send("python", { var_name .. '.columns' })
   elseif vim.bo.filetype == "r" then
     require("iron").core.send("r", { 'names(' .. var_name .. ')' })
   end
@@ -91,6 +91,58 @@ end
 function variable_str()
   local var_name = get_vriable_name()
 end
+
+function view_var()
+  local var_name = get_vriable_name()
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { var_name .. '.head()' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'View(' .. var_name .. ')' })
+  end
+
+end
+
+function df_head()
+  local var_name = get_vriable_name()
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { var_name .. '.head()' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'head(' .. var_name .. ')' })
+  end
+
+end
+
+function df_tail()
+  local var_name = get_vriable_name()
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { var_name .. '.tail()' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'tail(' .. var_name .. ')' })
+  end
+end
+
+function debug_quit()
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { 'Q' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'Q' })
+  end
+end
+
+function object_summary()
+  local var_name = get_vriable_name()
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { var_name .. '.describe()' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'summary(' .. var_name .. ')' })
+  end
+end
+
+
 
 return {
   "Vigemus/iron.nvim",
@@ -171,10 +223,17 @@ return {
             desc = "Iron repl support",
             callback = function()
 
+              -- Own functions mappings --
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Ov", "<cmd> lua display_scope()<CR>", { expr = false, noremap = true, desc = "Display scope vars." })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Os", "<cmd> lua variable_str()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "On", "<cmd> lua df_columns()<CR>", { expr = false, noremap = true, desc = "Dispaly (col) names" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "OS", "<cmd> lua object_summary()<CR>", { expr = false, noremap = true, desc = "Summary" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "VV", "<cmd> lua view_var()<CR>", { expr = false, noremap = true, desc = "View" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vh", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vh", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Q", "<cmd> lua debug_quit()<CR>", { expr = false, noremap = true, desc = "Debug quit" })
 
+              -- General mappings --
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start REPL" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "R", "<cmd>IronRestart<CR><ESC>", { expr = false, noremap = true, desc = " Restart REPL" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, desc = " Jump (in)to REPL" }) -- i
@@ -262,8 +321,15 @@ return {
                   -- return require("which-key.extras").expand.buf()
                   -- end
                 },
+                {
+                  prefix .. 'x',
+                  group = " Execute / run",
+                  -- expand = function()
+                  -- return require("which-key.extras").expand.buf()
+                  -- end
+                },
 
-              }
+}
               -- wk.add {
               --   mode = { "n" },
               --   {
