@@ -7,14 +7,27 @@ local M = {}
 function M.copy_relative_path()
 	local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':~:.') or ''
 	vim.fn.setreg('+', path)
-	vim.notify(path, vim.log.levels.INFO, { title = 'Yanked relative path' })
+	vim.notify(path, vim.log.levels.INFO, { title = 'Relative path' })
 end
 
 -- Yank absolute path
 function M.copy_absolute_path()
   local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':p') or ''
 	vim.fn.setreg('+', path)
-	vim.notify(path, vim.log.levels.INFO, { title = 'Yanked absolute path' })
+	vim.notify(path, vim.log.levels.INFO, { title = 'Absolute path' })
+end
+
+-- Copy / show directory
+function M.copy_dir(quotes)
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':p:h') or ''
+
+  if quotes then
+	  vim.fn.setreg('+', '"' .. path .. '"')
+	else
+	  vim.fn.setreg('+', path)
+	end
+
+	vim.notify(path, vim.log.levels.INFO, { title = 'Copy dir' })
 end
 
 --- }}}

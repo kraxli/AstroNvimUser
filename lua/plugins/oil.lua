@@ -77,6 +77,15 @@ return {
         },
         R = "actions.refresh",
         ["<Tab>"] = "actions.close",
+        ["<leader>p"] = function()
+          local oil = require("oil")
+          local filename = oil.get_cursor_entry().name
+          local dir = oil.get_current_dir()
+          oil.close()
+
+          local img_clip = require("img-clip")
+          img_clip.paste_image({}, dir .. filename)
+        end,
       },
       lsp_file_methods = { autosave_changes = "unmodified" },
       view_options = {

@@ -20,7 +20,7 @@ end
 return {
   {
     "tpope/vim-abolish",
-    ft = { "markdown", "text", "vimwiki", "R", "r" },
+    ft = { "markdown", "text", "vimwiki", "R", "r", "tex" },
     config = function()
       vim.cmd [[
   		Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
@@ -41,7 +41,7 @@ return {
 			Abolish {ifrs, IfRS} {IFRS}
 			Abolish {ibrn, IBRN}{s} {IBNR}{s}
 			Abolish {experiance}{s} {experience}{s}
-		Abolish {dpylr} {dplyr}
+		  Abolish {dpylr} {dplyr}
 			]]
     end,
   },
@@ -87,7 +87,7 @@ return {
   },
   {
     "toppair/peek.nvim",
-    -- enabled = vim.fn.has('win64') == 1,
+    enabled = vim.fn.has('win64') == 1,
     lazy = true,
     build = "deno task --quiet build:fast",
     dependencies = {
@@ -150,9 +150,22 @@ return {
         drag_and_drop = {
           insert_mode = true,
         },
-        use_absolute_path = vim.fn.has "win32" == 1, -- default to absolute path for windows users
+        -- use_absolute_path = vim.fn.has "win32" == 1, -- default to absolute path for windows users
+        -- relative_to_current_file = false, ---@type boolean | fun(): boolean
+        -- template = "$FILE_PATH", ---@type string | fun(context: table): string
+        -- url_encode_path = false, ---@type boolean | fun(): boolean
+        -- relative_template_path = true, ---@type boolean | fun(): boolean
       },
     },
+    -- config = function()
+    --   local oil = require("oil")
+    --   local filename = oil.get_cursor_entry().name
+    --   local dir = oil.get_current_dir()
+    --   oil.close()
+    --
+    --   local img_clip = require("img-clip")
+    --   img_clip.paste_image({}, dir .. filename)
+    -- end,
   },
   {
     "dkarter/bullets.vim",

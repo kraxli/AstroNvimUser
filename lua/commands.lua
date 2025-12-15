@@ -41,6 +41,11 @@ vim.cmd [[
 
 vim.api.nvim_create_user_command('CopyPathAbs', ":lua require('utils').copy_absolute_path()", {})
 vim.api.nvim_create_user_command('CopyPathRel', ":lua require('utils').copy_relative_path()", {})
+
+vim.api.nvim_create_user_command('ShowPathAbs', ":lua require('utils').show_absolute_path()", {})
+vim.api.nvim_create_user_command('Pwd', ":lua require('utils').copy_dir()", {})
+vim.api.nvim_create_user_command('CopyDir', ":lua require('utils').copy_dir(false)", {})
+vim.api.nvim_create_user_command('CopyDirQuotes', ":lua require('utils').copy_dir(true)", {})
 -- vim.cmd.cnoreabbrev('wq', '<nop>')
 
 -- Create the user command
