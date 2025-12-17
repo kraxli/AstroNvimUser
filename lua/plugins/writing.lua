@@ -39,7 +39,6 @@ return {
 			Abolish {profit}{abe,abel} {profit}{able}
 			Abolish {ifrs, IfRS} {IFRS}
 			"Abolish -flags=I {ifrs, IfRS} {IFRS}
-			Abolish -substitute {ifrs, IfRS} {IFRS}
 			Abolish {ibrn, IBRN}{s} {IBNR}{s}
 			Abolish {experiance}{s} {experience}{s}
 		  Abolish {dpylr} {dplyr}
