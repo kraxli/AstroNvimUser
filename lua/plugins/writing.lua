@@ -28,7 +28,6 @@ return {
   		Abolish {infal}{a,}{tion,ted} {infl}{a}{}
   		Abolish {ulita,ulit,utili,utli}mate {ulti}mate 
   		Abolish {anly,anyla,anali}sis {analy}sis
-  		Abolish {Cor, cor}{os,so} {Cor}{So}
 			Abolish {alos} {also}
 			Abolish {boostrap} {bootstrap}
 			Abolish {exlcl,exlc,exl}ud{e,ed} {excl}ud{}
@@ -39,6 +38,7 @@ return {
 			Abolish {tain}ing{s} {train}ing{s}
 			Abolish {profit}{abe,abel} {profit}{able}
 			Abolish {ifrs, IfRS} {IFRS}
+			"Abolish -flags=I {ifrs, IfRS} {IFRS}
 			Abolish {ibrn, IBRN}{s} {IBNR}{s}
 			Abolish {experiance}{s} {experience}{s}
 		  Abolish {dpylr} {dplyr}

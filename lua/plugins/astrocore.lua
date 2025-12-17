@@ -109,18 +109,10 @@ return {
                 and vim.bo.filetype ~= ""
                 and vim.bo.buftype ~= "nofile"
               then
-                vim.keymap.set(
-                  "n",
-                  "q",
-                  "<cmd>lua require('astrocore.buffer').close(0)<CR>",
-                  { noremap = true, buffer = true, desc = "Delete buffer" }
+                vim.keymap.set( "n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" }
                 )
               elseif vim.bo.filetype == "" and vim.bo.buftype == "" then -- close empty buffers
-                vim.keymap.set(
-                  "n",
-                  "q",
-                  "<cmd>lua require('astrocore.buffer').close(0)<CR>",
-                  { noremap = true, buffer = true, desc = "Delete buffer" }
+                vim.keymap.set( "n", "q", "<cmd>lua require('astrocore.buffer').close(0)<CR>", { noremap = true, buffer = true, desc = "Delete buffer" }
                 )
                 -- else
                 -- for R Object_browser
@@ -221,6 +213,9 @@ return {
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Pdf", ":lua require('utils').pandoc2('pdf')", {})
+
+              vim.keymap.set( "n", "<leader>zh", "<cmd>call Header_promote()<CR>", { noremap = true, buffer = true, desc = "Header promote" })
+              vim.keymap.set( "n", "<leader>zH", "<cmd>call Header_demote()<CR>", { noremap = true, buffer = true, desc = "Header demote" })
 
               -- TODO: mini.snippets equivalent to the below is missing:
               -- vim.keymap.set("i", "<C-l>", function() require("luasnip").snip_expand(require("keymap_snippets")["link2"]) end)
