@@ -99,7 +99,7 @@ return {
   -- },
   {
     "R-nvim/R.nvim",
-    enabled = false,
+    enabled = vim.fn.has('win64') == 1,
     lazy = false,
     -- branch = 'view_df',  -- or tag, commit
     -- ft = {'R'},
