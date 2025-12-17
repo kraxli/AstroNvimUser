@@ -2,7 +2,8 @@
 return {
   "monkoose/neocodeium",
   -- cmd = "NeoCodeium",
-  enabled = vim.fn.has "unix" == 1,
+  -- enabled = vim.fn.has "unix" == 1,
+  enabled = environment ~= 'work',
   event = "VeryLazy",
   dependencies = {
     {
