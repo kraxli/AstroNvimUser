@@ -1,6 +1,6 @@
 local prefix = "<Leader>A"
 
-local provider = (environment == "work") and "openai" or "gemini" -- gemini, glados, mistral, copilot,...
+local provider = (environment == "work") and "openai" or "claude"  -- "mistral" -- claude, gemini, glados, mistral, copilot,...
 local authentication = (environment == "work") and "copilot" or ""
 
 ---@type LazySpec
@@ -55,25 +55,27 @@ return {
         model = "qwq:32b",
       },
       mistral = {
+        -- works with credit
         __inherited_from = "openai",
         endpoint = "https://api.mistral.ai/v1", -- 'https://api.mistral.ai/v1/chat/completions',
         model = "mistral-large-latest", -- "mistral-small-latest",
-        api_key_name = "AVANTE_MISTRAL_API_KEY",
-        -- timeout = 30000, -- Timeout in milliseconds
+        api_key_name = "MISTRAL_API_KEY",
+        timeout = 30000, -- Timeout in milliseconds
         extra_request_body = {
-          temperature = 0.5,
           -- Higher temperature values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+          temperature = 0.3,
           max_tokens = 20480, -- 4096,  -- to avoid using max_completion_tokens
         },
         -- hide_in_model_selector = true,
       },
       copilot = { hide_in_model_selector = false }, -- api_key_name = "GITHUB_TOKEN",
       claude = {
+        -- works with credit
         endpoint = "https://api.anthropic.com",
         model = "claude-sonnet-4-20250514",
         timeout = 30000, -- Timeout in milliseconds
         extra_request_body = {
-          temperature = 0.75,
+          temperature = 0.3,
           max_tokens = 20480,
         },
         -- hide_in_model_selector = true,
