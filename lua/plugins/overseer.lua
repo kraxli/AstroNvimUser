@@ -139,7 +139,7 @@ return {
           OverseerWatchRun = {
             function()
               local overseer = require("overseer")
-              overseer.run_template({ name = "run script" }, function(task)
+              overseer.run_task({ name = "run script" }, function(task)
                 if task then
                   task:add_component({ "restart_on_save", paths = {vim.fn.expand("%:p")} })
                   local main_win = vim.api.nvim_get_current_win()
@@ -153,7 +153,7 @@ return {
           },
           AutoCompile = {
             function()
-              require("overseer").run_template({ name = "compile with compiler" }, function(task)
+              require("overseer").run_task({ name = "compile with compiler" }, function(task)
                 if task then
                   task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
                 else
@@ -164,13 +164,29 @@ return {
             desc = "Automatically compile the current file with `compiler` on save",
           },
           Compile = {
-            function() require("overseer").run_template { name = "compile with compiler" } end,
+            function() require("overseer").run_task { name = "compile with compiler" } end,
             desc = "Compile the current file with `compiler`",
           },
           ViewOut = {
-            function() require("overseer").run_template({ name = "view file output" }, function(task)  
+            function() require("overseer").run_task({ name = "view file output" }, function(task)  
                 local overseer = require("overseer")
                 if task then
+                  -- task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
+                  if vim.bo.filetype == 'cpp' or vim.bo.filetype == 'python' or vim.bo.filetype == 'R' then
+                    overseer.run_action(task, "open vsplit")
+                  end
+                else
+                  vim.notify("No viewer implemented", vim.log.levels.ERROR)
+                end
+              end) 
+            end,
+            desc = "View the current file ouptut with `opout`",
+          },
+          ViewOutAuto = {
+            function() require("overseer").run_task({ name = "view file output" }, function(task)  
+                local overseer = require("overseer")
+                if task then
+                  task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
                   if vim.bo.filetype == 'cpp' or vim.bo.filetype == 'python' or vim.bo.filetype == 'R' then
                     overseer.run_action(task, "open vsplit")
                   end
@@ -183,7 +199,7 @@ return {
           },
           Present = {
             function()
-              require("overseer").run_template({ name = "present with pdfpc" }, function(task)
+              require("overseer").run_task({ name = "present with pdfpc" }, function(task)
                 if not task then vim.notify("Unable to start presentation", vim.log.levels.ERROR) end
               end)
             end,
@@ -201,6 +217,7 @@ return {
             [prefix .. "p"] = { "<Cmd>Present<CR>", desc = "Present file output" },
             [prefix .. "r"] = { "<Cmd>OverseerRun<CR>", desc = "Run" },
             [prefix .. "v"] = { "<Cmd>ViewOut<CR>", desc = "View Output" },
+            [prefix .. "V"] = { "<Cmd>ViewOutAuto<CR>", desc = "Auto View Output" },
             [prefix .. "w"] = { "<Cmd>OverseerWatchRun<CR>", desc = "Watch Rn" },
           },
         },
