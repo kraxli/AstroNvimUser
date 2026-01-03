@@ -1,7 +1,11 @@
 local prefix = "<Leader>A"
 
-local provider = (environment == "work") and "openai" or "claude"  -- "mistral" -- claude, gemini, glados, mistral, copilot,...
+-- local provider = (environment == "work") and "openai" or "claude"  -- "mistral" -- claude, gemini, glados, mistral, copilot,...
+local provider = (environment == "work") and "copilot" or "claude"  -- "mistral", openai, claude, gemini, glados, mistral, copilot,...
 local authentication = (environment == "work") and "copilot" or ""
+
+-- Higher temperature values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+local temperature = 0.2
 
 ---@type LazySpec
 return {
@@ -45,8 +49,7 @@ return {
         model = "gpt-4o", -- Specify your desired model
         api_key_name = "OPENAI_API_KEY", -- The name of the environment variable holding the key
         endpoint = "https://api.openai.com/v1/chat/completions", -- Default OpenAI endpoint
-        -- You can add other options here, e.g., timeout or temperature
-        -- extra_request_body = { temperature = 0.7 },
+        -- extra_request_body = { temperature = temperature },
         -- hide_in_model_selector = true
       },
       -- openai = { hide_in_model_selector = true },
@@ -62,8 +65,7 @@ return {
         api_key_name = "MISTRAL_API_KEY",
         timeout = 30000, -- Timeout in milliseconds
         extra_request_body = {
-          -- Higher temperature values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-          temperature = 0.3,
+          temperature = temperature,
           max_tokens = 20480, -- 4096,  -- to avoid using max_completion_tokens
         },
         -- hide_in_model_selector = true,
@@ -75,8 +77,8 @@ return {
         model = "claude-sonnet-4-20250514",
         timeout = 30000, -- Timeout in milliseconds
         extra_request_body = {
-          temperature = 0.3,
-          max_tokens = 20480,
+          temperature = temperature,
+          -- max_tokens = 20480,
         },
         -- hide_in_model_selector = true,
       },
