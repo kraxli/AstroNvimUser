@@ -20,11 +20,19 @@
 -- 	       hi tkTag ctermfg=175 guifg=#d3869B
 -- ]]
 
+vim.g.calendar_keys = { goto_next_month = '<C-Right>', goto_prev_month = '<C-Left>',
+                        goto_next_year = 'C-Down', goto_prev_year = '<C-Up>',
+                        goto_today = 't'
+                      }
+
+
 local prefix = "<Leader>z"
 return {
   "renerocksai/telekasten.nvim",
   dependencies = {
-    { "nvim-telescope/telescope.nvim" },
+    { "nvim-telescope/telescope.nvim", 
+      "nvim-telekasten/calendar-vim",
+    },
     {
       "AstroNvim/astrocore",
       opts = {
@@ -39,7 +47,7 @@ return {
             [prefix .. "#"] = { '<cmd>lua require("telekasten").show_tags({i = false})<CR>', desc = "Show tags" },
             [prefix .. "b"] = { '<cmd>lua require("utils").insert_list_bullet()<CR>', desc = "Set bullet" },
             [prefix .. "B"] = { '<cmd>lua require("utils").show_backlinks()<CR>', desc = "Show back links" },
-            [prefix .. "c"] = { '<cmd>lua require("utils").show_calendar()<CR>', desc = "Show calendar" },
+            [prefix .. "c"] = { '<cmd>lua require("telekasten").show_calendar()<CR>', desc = "Show calendar" },
             [prefix .. "C"] = { "<cmd> CalendarT<CR>", desc = "Calendar" },
             [prefix .. "f"] = { desc = "Find / Search" },
             [prefix .. "f#"] = { '<cmd>lua require("telekasten").show_tags({i = false})<CR>', desc = "Find tags" },
@@ -113,7 +121,7 @@ return {
   end,
   ft = { "markdown", "vimwiki", "text", "telekasten" },
   keys = { "<leader>z" },
-  cmd = { "Telekasten", "Tk" },
+  cmd = { "Telekasten", "Tk", "Calendar", "CalendarT", "CalendarH" },
   init = function()
     vim.cmd [[
          command! Tk :Telekasten
