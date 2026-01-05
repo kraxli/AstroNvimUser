@@ -47,7 +47,6 @@ return {
         opts.keymap["<M-Down>"] = { copilot_action "next" }
         opts.keymap["<M-Up>"] = { copilot_action "prev" }
         opts.keymap["<M-w>"] = { copilot_action "accept_word" }
-        opts.keymap["<M-CR>"] = { copilot_action "accept" }
         opts.keymap["<M-l>"] = { copilot_action "accept_line" }
         opts.keymap["<M-j>"] = { copilot_action "accept_line", "select_next", "fallback" }
         opts.keymap["<M-c>"] = { copilot_action "dismiss" }

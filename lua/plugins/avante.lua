@@ -39,6 +39,7 @@ return {
   opts = {
     provider = provider,
     auto_suggestions_provider = provider,
+    auto_suggestions = true,  -- default: false
     providers = {
       gemini = {
         model = "gemini-flash-latest", -- gemini-2.5-flash, gemini-2.5-flash-lite, gemini-flash-latest, gemini-flash-lite-latest
@@ -117,6 +118,10 @@ return {
     },
     -- other configuration options...
     hints = { enabled = false },
+    selection = {
+      enabled = true,
+      hint_display = "immediate" ,  -- "delayed" | "immediate" | "none"
+    },
     mappings = {
       ask = prefix .. "<CR>",
       edit = prefix .. "e",
@@ -138,6 +143,16 @@ return {
       files = {
         add_current = prefix .. ".",
         add_all_buffers = prefix .. "B",
+      },
+      suggestion = {
+        accept = "<M-$>",
+        next = "<M-]>",
+        prev = "<M-[>",
+        dismiss = "<C-]>",
+      },
+      jump = {
+        next = "]]",
+        prev = "[[",
       },
       select_model = prefix .. "m",
       select_history = prefix .. "h",

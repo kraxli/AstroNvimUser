@@ -16,16 +16,17 @@ return {
         maps.i["<M-?>"] = { function() require("neocodeium").chat() end }
         maps.i["<M-'>"] = { function() require("neocodeium").chat() end }
 
-        maps.i["<M-]>"] = { function() require("neocodeium").cycle_or_complete() end }
-        maps.i["<M-\\>"] = maps.i["<M-]>"]
-        maps.i["<M-[>"] = { function() require("neocodeium").cycle_or_complete(-1) end }
+        -- maps.i["<M-]>"] = { function() require("neocodeium").cycle_or_complete() end }
+        -- maps.i["<M-[>"] = { function() require("neocodeium").cycle_or_complete(-1) end }
         maps.i["<M-CR>"] = { function() require("neocodeium").accept() end }
+        -- maps.i["<M-a>"] = maps.i["<M-CR>"]
         maps.i["<M-c>"] = { function() require("neocodeium").clear() end }
 
-        maps.i["<M-Up>"] = maps.i["<M-[>"]
-        maps.i["<M-Down>"] = maps.i["<M-]>"]
-        maps.i["<M-z>"] = maps.i["<M-]>"]
-        maps.i["<M-x>"] = maps.i["<M-[>"]
+        maps.i["<M-Up>"] =  { function() require("neocodeium").cycle_or_complete(-1) end }
+        maps.i["<M-Down>"] = { function() require("neocodeium").cycle_or_complete() end }
+        maps.i["<M-\\>"] = maps.i["<M-Down>"]
+        maps.i["<M-z>"] = maps.i["<M-Down>"]
+        maps.i["<M-x>"] = maps.i["<M-Up>"]
         maps.i["<M-BS>"] = maps.i["<M-c>"]
 
         opts.autocmds.codeium = {
