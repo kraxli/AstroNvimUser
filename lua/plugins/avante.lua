@@ -34,7 +34,10 @@ return {
     { "stevearc/dressing.nvim", optional = true },
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
-    { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
+    { "AstroNvim/astrocore", 
+      ---@param opts AstroCoreOpts
+      opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end 
+    },
   },
   opts = {
     provider = provider,
