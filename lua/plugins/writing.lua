@@ -49,7 +49,7 @@ return {
   {
     'brianhuster/live-preview.nvim',
     enabled = vim.fn.has('unix') == 1,
-    ft = { 'markdown', 'html', 'text', 'quarto', 'avante' },
+    ft = { 'markdown', 'html', 'text', 'quarto', 'Avante' },
     cmd = { 'LivePreview', 'Pv', 'PreviewClose', 'Pc', 'PreviewPeek', 'Ps', },
     keys = {'<leader>V'},
     dependencies = {
@@ -90,7 +90,7 @@ return {
     "toppair/peek.nvim",
     enabled = vim.fn.has('win64') == 1,
     lazy = true,
-    ft = {'markdown', 'avante'},
+    ft = {'markdown', 'Avante'},
     build = "deno task --quiet build:fast",
     dependencies = {
       "AstroNvim/astrocore",

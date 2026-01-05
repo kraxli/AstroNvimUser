@@ -208,7 +208,7 @@ return {
           {
             event = "FileType",
             desc = "Markdown-, text-, tex-file autocmds",
-            pattern = { "markdown", "tex", "text", "org", "norg", 'avante' },
+            pattern = { "markdown", "tex", "text", "org", "norg", 'Avante' },
             callback = function()
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Docx", ":lua require('utils').pandoc2('docx')", {})
               vim.api.nvim_buf_create_user_command(0, "Pandoc2Html", ":lua require('utils').pandoc2('html')", {})
