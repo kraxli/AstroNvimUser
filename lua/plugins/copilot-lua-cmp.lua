@@ -17,7 +17,7 @@ end
 
 return {
   "zbirenbaum/copilot.lua",
-  enabled = vim.fn.has('win64') == 1,
+  enabled = environment == 'work',
   event = "User AstroFile", -- "InsertEnter", "BufReadPost",
   cmd = "Copilot",
   opts = {

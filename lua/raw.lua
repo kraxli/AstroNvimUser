@@ -37,40 +37,36 @@ vim.keymap.set("n", "X", "<nop>", {})
 local create_command = vim.api.nvim_create_user_command
 create_command("Ids", "execute('e " .. dirGdrive .. fileIds .. "')", { desc = "Id file" })
 
+if environment ~= 'work' then
+  vim.cmd([[
 
-vim.cmd([[
+    if has('unix')
+      let g:python_host_prog = '/usr/bin/python'
+      let g:python3_host_prog = '/usr/bin/python3'
+      " let g:python3_host_prog = '/~/.pyenv/versions/python364/bin/python'
 
-  " ┌────────────────┐
-  " │ local settings │
-  " └────────────────┘
+      "" To disable Python 2 support:
+      " let g:loaded_python_provider = 1
+    else
+      let g:python3_host_prog = 'C:/ProgramData/Anaconda3-5.2.0/python.exe'
+    endif
 
-  if has('unix')
-    let g:python_host_prog = '/usr/bin/python'
-    let g:python3_host_prog = '/usr/bin/python3'
-    " let g:python3_host_prog = '/~/.pyenv/versions/python364/bin/python'
+    " Commpands
+    command! HelpVim :execute('e ' . g:dirOnedrive . 'VimWiki/VimCommands_learning_Vi_Vim.wiki')
+    command! InstallLinux :execute('e ' . g:dirDbox . 'LinuxInstall/A_linux_mint_install_2025_woNvim.sh') 
+    command! InstallNvim :execute('e ' . g:dirDbox . 'LinuxInstall/nvim_install.sh') 
 
-    "" To disable Python 2 support:
-    " let g:loaded_python_provider = 1
-  else
-    let g:python3_host_prog = 'C:/ProgramData/Anaconda3-5.2.0/python.exe'
-  endif
+    command! Bash :execute('e ' . g:dirOnedrive . 'SoftwareTools/Linux/Shell/bash_summary.sh')
+    command! TBash :execute('e ' . g:dirOnedrive . 'SoftwareTools/Linux/Shell/bash_summary.sh')
+    command! Plugins :e /home/dave/.config/nvim/config/plugins.yaml
 
-  " Commpands
-  command! HelpVim :execute('e ' . g:dirOnedrive . 'VimWiki/VimCommands_learning_Vi_Vim.wiki')
-  command! InstallLinux :execute('e ' . g:dirDbox . 'LinuxInstall/A_linux_mint_install_2025_woNvim.sh') 
-  command! InstallNvim :execute('e ' . g:dirDbox . 'LinuxInstall/nvim_install.sh') 
+    command! Cd2Pkd :execute('cd ' . g:dirPkd)
+    command! Cd2Nvim :cd g:dirNvim
+    command! Cd2D :execute('cd ' . g:dirOnedrive . '03_Coding/D')
+    command! Cd2Python :execute('cd ' . g:dirOnedrive . '03_Coding/Python')
 
-  command! Bash :execute('e ' . g:dirOnedrive . 'SoftwareTools/Linux/Shell/bash_summary.sh')
-  command! TBash :execute('e ' . g:dirOnedrive . 'SoftwareTools/Linux/Shell/bash_summary.sh')
-  command! Plugins :e /home/dave/.config/nvim/config/plugins.yaml
-
-  command! Cd2Pkd :execute('cd ' . g:dirPkd)
-  command! Cd2Nvim :cd g:dirNvim
-  command! Cd2D :execute('cd ' . g:dirOnedrive . '03_Coding/D')
-  command! Cd2Python :execute('cd ' . g:dirOnedrive . '03_Coding/Python')
-
-]])
-
+  ]])
+end
 
 -- -------------------------------------------------------
 -- Functions:
