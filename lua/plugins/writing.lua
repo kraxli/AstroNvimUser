@@ -14,6 +14,10 @@ if vim.fn.has('win64') == 1 then
   port = 8086  -- 8060
 end
 
+-- lsof -i4
+vim.api.nvim_create_user_command('PvKill', ':!fuser -k ' .. port .. '/tcp', {desc = "Preview kill"})
+
+
 -- vim.keymap.set('n', '<c-space>', toggle, { expr = true, desc = 'Toggle Checkmark' })
 -- vim.keymap.set('n', '<leader>zt', toggle_box, { expr = true, desc = 'Toggle Checkbox' })
 
@@ -63,8 +67,8 @@ return {
         --     commands = {
         --       PreviewStart = { ":LivePreview start", desc = "Open preview window" },
         --       Pv = { ":LivePreview start", desc = "Open preview window" },
-        --       PreviewClose = { ":LivePreview start", desc = "Close preview window" },
-        --       Pc = { ":LivePreview start", desc = "Close preview window" },
+        --       PreviewClose = { ":LivePreview close", desc = "Close preview window" },
+        --       Pc = { ":LivePreview close", desc = "Close preview window" },
         --       PreviewPeek =  { ":LivePreview peek", desc = "Preview peek" },
         --       Ps =  { ":LivePreview peek", desc = "Preview peek" },
         --     },
