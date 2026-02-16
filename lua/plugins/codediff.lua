@@ -41,6 +41,16 @@ return {
   },
   specs = {
     {
+      "NeogitOrg/neogit",
+      optional = true,
+      opts = {
+        integrations = {
+          codediff = true,
+        },
+        diff_viewer = "codediff",
+      },
+    },
+    {
       "AstroNvim/astrocore",
       opts = {
         mappings = {
