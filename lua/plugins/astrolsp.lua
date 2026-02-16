@@ -47,6 +47,18 @@ return {
               break
             end
           end
+          local codesettings_avail, codesettings = pcall(require, "codesettings")
+          if codesettings_avail then
+            vim.lsp.config("julials", {
+              before_init = require("astrocore").patch_func(
+                vim.lsp.config["julials"].before_init,
+                function(orig, params, config)
+                  codesettings.with_local_settings(config.name, config)
+                  return orig(params, config)
+                end
+              ),
+            })
+          end
           vim.lsp.enable "julials"
         end
       end,
