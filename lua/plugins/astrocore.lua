@@ -13,6 +13,9 @@ return {
     end
     opts = require("astrocore").extend_tbl(opts, {
       treesitter = {
+        highlight = {
+          disabled = { "csv", "tsv" },
+        },
         indent = {
           disabled = { "yaml" },
         },
