@@ -3,7 +3,13 @@ return {
   "saghen/blink.cmp",
   opts = {
     keymap = {
-      ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
+      ["<Tab>"] = {
+        function()
+          if vim.g.ai_accept then return vim.g.ai_accept() end
+        end,
+        "snippet_forward",
+        "fallback",
+      },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
     },
     sources = {

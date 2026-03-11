@@ -154,7 +154,14 @@ return {
         },
         mappings = {
           n = {
-            ["<Tab>"] = { "<Cmd>Oil<CR>", desc = "Oil Filebrowser" },
+            ["<Tab>"] = {
+              function()
+                local sidekick_avail, sidekick = pcall(require, "sidekick")
+                if sidekick_avail and sidekick.nes_jump_or_apply() then return end
+                vim.cmd.Oil()
+              end,
+              desc = "Oil Filebrowser",
+            },
           },
         },
       },
