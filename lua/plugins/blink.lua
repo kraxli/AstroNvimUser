@@ -11,6 +11,10 @@ return {
   "Saghen/blink.cmp",
   version = "^1",
   -- build = 'cargo +nightly build --release',
+  dependencies = { 
+    "milanglacier/minuet-ai.nvim",
+    -- "giuxtaposition/blink-cmp-copilot",
+  },
   opts = {
     fuzzy = {
       implementation = fuzzy_implementation,
@@ -25,6 +29,7 @@ return {
       ["<C-j>"] = { "select_next", "fallback" },
     },
     sources = {
+      default = { "lsp", "path", "snippets", "buffer", "minuet", }, -- "copilot" 
       providers = {
         path = { opts = { trailing_slash = false, show_hidden_files_by_default = true } },
         cmdline = {
@@ -58,9 +63,23 @@ return {
           score_offset = 1000, -- show at a higher priority than lsp
           opts = {},
         },
+        minuet = {
+          name = "minuet",
+          module = "minuet.blink",
+          score_offset = 100,
+        },
+        -- copilot = {
+        --   name = "copilot",
+        --   module = "blink-cmp-copilot",
+        --   score_offset = 100,
+        --   async = true,
+        -- },
       },
     },
     signature = { enabled = true },
+    completion = {
+      ghost_text = { enabled = true },
+    },
     cmdline = {
       -- keymap = { preset = 'inherit' },
       -- completion = { menu = { auto_show = true } },
@@ -73,17 +92,16 @@ return {
         ["<Down>"] = { "select_next", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
         ["<Tab>"] = { "show", "accept", "fallback" },
-        ["<Right>"] = { "accept", "fallback" },
+        -- ["<Right>"] = { "accept", "fallback" },
         ["<Left>"] = { "cancel", "fallback" },
         ["<ESC>"] = { "cancel", "fallback" },
         ["<CR>"] = { "fallback" },  -- { "accept_and_enter", "fallback" },
-        -- ["<Right>"] = {
-        --   function(cmp)
-        --     if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
-        --   end,
-        --   "show_and_insert",
-        --   "cancel",  -- "accept", --"select_next",
-        -- },
+        ["<Right>"] = { function(cmp)
+            if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
+          end,
+          "show_and_insert",
+          "cancel",  -- "accept", --"select_next",
+        },
       },
     },
   },

@@ -1,7 +1,7 @@
 local prefix = "<Leader>A"
 
 -- local provider = (environment == "work") and "openai" or "claude"  -- "mistral" -- claude, gemini, glados, mistral, copilot,...
-local provider = (environment == "work") and "copilot" or "claude"  -- "mistral", openai, claude, gemini, glados, mistral, copilot,...
+local provider = (environment == "work") and "copilot" or "mistral" -- "claude"  -- "mistral", openai, claude, gemini-cli, glados, mistral, copilot,...
 local authentication = (environment == "work") and "copilot" or ""
 
 -- Higher temperature values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -42,7 +42,9 @@ return {
   opts = {
     provider = provider,
     auto_suggestions_provider = provider,
-    auto_suggestions = true,  -- default: false
+    behaviour = {
+      auto_suggestions = true, -- Experimental stage
+    },
     providers = {
       gemini = {
         model = "gemini-flash-latest", -- gemini-2.5-flash, gemini-2.5-flash-lite, gemini-flash-latest, gemini-flash-lite-latest
@@ -61,18 +63,16 @@ return {
         endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
         model = "qwq:32b",
       },
-      mistral = {
-        -- works with credit
+      mistral= {
         __inherited_from = "openai",
-        endpoint = "https://api.mistral.ai/v1", -- 'https://api.mistral.ai/v1/chat/completions',
-        model = "mistral-large-latest", -- "mistral-small-latest",
         api_key_name = "MISTRAL_API_KEY",
-        timeout = 30000, -- Timeout in milliseconds
+        endpoint = "https://api.mistral.ai/v1/",
+        model = "mistral-large-latest",
         extra_request_body = {
-          temperature = temperature,
           max_tokens = 20480, -- 4096,  -- to avoid using max_completion_tokens
+          temperature = temperature,
         },
-        -- hide_in_model_selector = true,
+        -- timeout = 30000, -- Timeout in milliseconds
       },
       copilot = { hide_in_model_selector = false }, -- api_key_name = "GITHUB_TOKEN",
       claude = {
@@ -116,7 +116,7 @@ return {
       },
     },
     web_search_engine = {
-      provider = "tavily", -- tavily, serpapi, google, kagi, brave, or searxng
+      provider = "google", -- tavily, serpapi, google, kagi, brave, or searxng
       proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
     -- other configuration options...
@@ -148,7 +148,7 @@ return {
         add_all_buffers = prefix .. "B",
       },
       suggestion = {
-        accept = "<M-$>",
+        accept = '<Tab>', -- "<M-$>", "<M-l>"
         next = "<M-]>",
         prev = "<M-[>",
         dismiss = "<C-]>",
