@@ -9,12 +9,13 @@ local function toggle_box()
 end
 
 -- local port = vim.fn.has('win64') == 1 ? 8080 : 5500
-local port = 5500
+local port = 8086 -- 8080 5500
 if vim.fn.has('win64') == 1 then 
   port = 8086  -- 8060
 end
 
 -- lsof -i4
+-- local preview_kill = vim.fn.system { 'fuser', '-k', port .. '/tcp' }
 vim.api.nvim_create_user_command('PvKill', ':!fuser -k ' .. port .. '/tcp', {desc = "Preview kill"})
 
 
@@ -52,7 +53,7 @@ return {
   },
   {
     'brianhuster/live-preview.nvim',
-    enabled = vim.fn.has('unix') == 1,
+    -- enabled = vim.fn.has('unix') == 1,
     ft = { 'markdown', 'html', 'text', 'quarto', 'Avante' },
     cmd = { 'LivePreview', 'Pv', 'PreviewClose', 'Pc', 'PreviewPeek', 'Ps', },
     keys = {'<leader>V'},
@@ -83,32 +84,34 @@ return {
     config = function ()
       require('livepreview.config').set({
 	      port = port,
+	      -- address = '127.0.0.1',
 	      browser = 'default',
 	      dynamic_root = false,
 	      sync_scroll = true,
+	      -- picker = 'mini.pick',
 	      picker = "",
       })
     end
   },
   {
-    "toppair/peek.nvim",
-    enabled = vim.fn.has('win64') == 1,
-    lazy = true,
-    ft = {'markdown', 'Avante'},
-    build = "deno task --quiet build:fast",
-    dependencies = {
-      "AstroNvim/astrocore",
-      opts = {
-        commands = {
-          PeekOpen = { function() require("peek").open() end, desc = "Open preview window" },
-          Pv = { function() require("peek").open() end, desc = "Open preview window" },
-          PeekClose = { function() require("peek").close() end, desc = "Close preview window" },
-        },
+    "iamcco/markdown-preview.nvim",
+    enabled=false,
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = function()
+      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+      vim.fn["mkdp#util#install"]()
+    end,
+    keys = {
+      {
+        "<leader>cp",
+        ft = "markdown",
+        "<cmd>MarkdownPreviewToggle<cr>",
+        desc = "Markdown Preview",
       },
     },
-    opts = {
-      theme = "light",
-    },
+    config = function()
+      vim.cmd([[do FileType]])
+    end,
   },
   --  https://github.com/Zeioth/markmap.nvim
   {
