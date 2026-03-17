@@ -67,6 +67,17 @@ return {
               end,
               desc = "Toggle Copilot LSP",
             },
+            [prefix .. "P"] = {
+              function()
+                require("snacks").picker.files {
+                  cmd = "rg",
+                  ignored = true,
+                  auto_confirm = true,
+                  args = { "-g", "PLAN.md", "-g", "PLAN.*.md" },
+                }
+              end,
+              desc = "Select an agent plan",
+            },
           },
           x = {
             [prefix] = { desc = " AI" },
