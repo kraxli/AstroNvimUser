@@ -1,4 +1,3 @@
-if vim.lsp.inline_completion then vim.lsp.inline_completion.enable() end
 local prefix = "<Leader>A"
 return {
   "folke/sidekick.nvim",
@@ -125,6 +124,7 @@ return {
       "AstroNvim/astrolsp",
       ---@type AstroLSPOpts
       opts = {
+        features = { inline_completion = true },
         handlers = { copilot = false },
       },
     },
