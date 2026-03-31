@@ -17,8 +17,7 @@ return {
       "intelephense",
       "jinja-lsp",
       "json-lsp",
-      -- HACK: pin version until lazydev bug is resolved: https://github.com/folke/lazydev.nvim/issues/136
-      { "lua-language-server", version = "3.16.4", auto_update = false },
+      "lua-language-server",
       "markdown-oxide",
       "neocmakelsp",
       "sqls",
