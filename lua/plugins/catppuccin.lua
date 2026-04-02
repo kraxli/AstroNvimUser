@@ -2,10 +2,11 @@
 return {
   "catppuccin/nvim",
   name = "catppuccin",
+  ---@module "catppuccin"
   ---@type CatppuccinOptions
   opts = {
     dim_inactive = { enabled = true, percentage = 0.25 },
-    float = { solid = true },
+    float = { solid = true, transparent = false },
     default_integrations = false,
     auto_integrations = true,
     integrations = {
