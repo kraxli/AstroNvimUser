@@ -13,4 +13,11 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
+local ui2_avail, ui2 = pcall(require, "vim._core.ui2")
+if ui2_avail then ui2.enable {
+  msg = {
+    targets = "msg",
+  },
+} end
+
 require "lazy_setup"
