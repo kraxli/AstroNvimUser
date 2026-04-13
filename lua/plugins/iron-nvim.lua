@@ -75,6 +75,16 @@ function file_run()
   end
 end
 
+function reset_clear()
+   local file_path = vim.api.nvim_buf_get_name(0)
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { '%reset -f"' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'rm(list=ls())' })
+  end
+end
+
 function display_scope()
   if vim.bo.filetype == "python" then
     -- require("iron").core.send("python", { var_name .. '.to_parquet("' .. var_file_path .. '")' })
@@ -238,6 +248,7 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oh", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ot", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Q", "<cmd> lua debug_quit()<CR>", { expr = false, noremap = true, desc = "Debug quit" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "c", "<cmd> lua reset_clear()<CR>", { expr = false, noremap = true, desc = "Reset / Clear" })
 
               -- General mappings --
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start REPL" })
