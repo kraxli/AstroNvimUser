@@ -1,6 +1,8 @@
 local prefix = "<Leader>r"
 local is_mswindows = vim.fn.has "win64" == 1 and true or false
 
+local newlines = vim.fn.has "win64" == 1 and "" or {}  -- windows: "", "r", or "\r"
+
 -- https://www.playfulpython.com/configuring-neovim-as-a-python-ide/
 -- https://github.com/akinsho/toggleterm.nvim/wiki/Tips-and-Tricks#using-toggleterm-with-powershell
 
@@ -17,6 +19,10 @@ end
 -- get variable under cursor: local variableUnderCursor = vim.fn.expand("<cword>")
 -- get visual selection: https://github.com/Willem-J-an/visidata.nvim/blob/master/lua/visidata.lua
 -- lua require('iron').core.send(python, 'import pyarrow; df_x.to_parquet("df_x.parquet")'); vim.cmd([[TermExec cmd='vd df_x.parquet' direction=float]])
+
+-- TDOO:
+--    R: see how r-nvim gets function to send function to terminal incl. function name
+--    R: snippets
 
 local function get_visual_selection()
   local _, line_start, col_start = unpack(vim.fn.getpos "v")
@@ -63,7 +69,7 @@ function file_run()
   local file_path = vim.api.nvim_buf_get_name(0)
 
   if vim.bo.filetype == "python" then
-    require("iron").core.send("python", { "%run " .. file_path })
+    require("iron").core.send("python", { '%run "' .. file_path .. '"' })
   elseif vim.bo.filetype == "r" then
     require("iron").core.send("r", { 'source("' .. file_path .. '")' })
   end
@@ -224,13 +230,13 @@ return {
             callback = function()
 
               -- Own functions mappings --
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Ov", "<cmd> lua display_scope()<CR>", { expr = false, noremap = true, desc = "Display scope vars." })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Os", "<cmd> lua variable_str()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "On", "<cmd> lua df_columns()<CR>", { expr = false, noremap = true, desc = "Dispaly (col) names" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "OS", "<cmd> lua object_summary()<CR>", { expr = false, noremap = true, desc = "Summary" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "VV", "<cmd> lua view_var()<CR>", { expr = false, noremap = true, desc = "View" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vh", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Vh", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ov", "<cmd> lua display_scope()<CR>", { expr = false, noremap = true, desc = "Display scope vars." })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "os", "<cmd> lua variable_str()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "on", "<cmd> lua df_columns()<CR>", { expr = false, noremap = true, desc = "Dispaly (col) names" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oS", "<cmd> lua object_summary()<CR>", { expr = false, noremap = true, desc = "Summary" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ov", "<cmd> lua view_var()<CR>", { expr = false, noremap = true, desc = "View" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oh", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ot", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Q", "<cmd> lua debug_quit()<CR>", { expr = false, noremap = true, desc = "Debug quit" })
 
               -- General mappings --
@@ -312,15 +318,14 @@ return {
                   group = " Visidata",
                 },
                 {
-                  prefix .. 'O',
+                  prefix .. 'o',
                   group = " Object Browser",
                 },
                 {
                   prefix .. 'x',
                   group = " Execute / run",
                 },
-
-}
+              }
               -- wk.add {
               --   mode = { "n" },
               --   {
