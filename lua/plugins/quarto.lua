@@ -48,7 +48,7 @@ return {
           dependencies = {'nvim-treesitter/nvim-treesitter', },
           opts = {},
       },
-      'neovim/nvim-lspconfig',
+      -- 'neovim/nvim-lspconfig',  -- vim.lsp.config
     },
     specs = {
       "AstroNvim/astrocore",
