@@ -17,6 +17,18 @@ return {
       { filter = { event = "msg_show", find = "^%d+ more lines$" }, opts = { skip = true } }, -- skip paste notifications
       { filter = { event = "msg_show", find = "^%d+ fewer lines$" }, opts = { skip = true } }, -- skip delete notifications
       { filter = { event = "msg_show", find = "^%d+ lines yanked$" }, opts = { skip = true } }, -- skip yank notifications
+      -- { filter = { event = 'msg_show', find = "*lspconfig*" }, opts = { skip = true } }, -- skip lspconfig deprecation warning
+      --   { filter = {
+      --     event = "msg_show",
+      --     any = {
+      --       { find = "require('lspconfig') framework is deprecated" },
+      --       { find = "lspconfig.lua module will be dropped" },
+      --     },
+      --   },
+      --   opts = { skip = true },
+      -- }
+      { filter = { find = "lspconfig.*deprecated" }, opts = { skip = true } }, -- skip lspconfig deprecation warning                                                
+      { filter = { find = "lspconfig%-nvim%-0%.11" }, opts = { skip = true } }, -- skip lspconfig deprecation warning  
     },
   },
   specs = {
