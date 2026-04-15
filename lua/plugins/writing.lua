@@ -95,7 +95,7 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    enabled=false,
+    enabled=true,
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = function()
       require("lazy").load({ plugins = { "markdown-preview.nvim" } })
@@ -111,6 +111,8 @@ return {
     },
     config = function()
       vim.cmd([[do FileType]])
+      vim.cmd([[let g:mkdp_auto_close = 0 ]])
+      -- vim.g.mkdp_auto_open = false
     end,
   },
   --  https://github.com/Zeioth/markmap.nvim
