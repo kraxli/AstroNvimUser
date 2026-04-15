@@ -69,7 +69,7 @@ return {
         endpoint = "https://api.mistral.ai/v1/",
         model = "mistral-large-latest",
         extra_request_body = {
-          max_tokens = 20480, -- 4096,  -- to avoid using max_completion_tokens
+          max_tokens =  128000,  -- 32768 -- 20480, -- to avoid using max_completion_tokens
           temperature = temperature,
         },
         -- timeout = 30000, -- Timeout in milliseconds
