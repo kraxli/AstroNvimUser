@@ -4,7 +4,7 @@ return {
   opts = {
     ensure_installed = {
       -- Language Servers
-      "ansible-language-server",
+      -- "ansible-language-server",
       "astro-language-server",
       "basedpyright",
       -- "pyright",
@@ -12,10 +12,10 @@ return {
       "clangd",
       "css-lsp",
       "dockerfile-language-server",
-      "gopls",
+      -- "gopls",
       -- "haskell-language-server",
       "html-lsp",
-      "intelephense",
+      -- "intelephense",
       "jinja-lsp",
       "json-lsp",
       "lua-language-server",
@@ -27,14 +27,13 @@ return {
       "sqls",
       -- "svelte-language-server",
       "tailwindcss-language-server",
-      "taplo",
+    --   "taplo",
       "texlab",
       "typos-lsp",
       -- "vtsls",
-      "vue-language-server",
+      -- "vue-language-server",
       "yaml-language-server",
-
-      "opa",
+      -- "opa",
 
       -- Linters
       -- "ansible-lint",  -- fails on windows
