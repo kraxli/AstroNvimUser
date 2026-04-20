@@ -28,6 +28,9 @@ return {
         },
       },
     },
+    features = {
+      codelens = false,
+    },
     handlers = {
       julials = function()
         local julials = vim.lsp.config.julials
