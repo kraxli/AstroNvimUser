@@ -1,7 +1,7 @@
 local prefix = "<Leader>A"
 
 -- local provider = (environment == "work") and "openai" or "claude"  -- "mistral" -- claude, gemini, glados, mistral, copilot,...
-local provider = (environment == "work") and "copilot" or "mistral" -- "claude"  -- "mistral", openai, claude, gemini-cli, glados, mistral, copilot,...
+local provider = (environment == "work") and "copilot" or "mistral" -- "claude"  -- "mistral", openai, claude, gemini, glados, mistral, copilot,...
 local authentication = (environment == "work") and "copilot" or ""
 
 -- Higher temperature values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -42,6 +42,7 @@ return {
   opts = {
     provider = provider,
     auto_suggestions_provider = provider,
+    auto_suggestions = true,
     behaviour = {
       auto_suggestions = true, -- Experimental stage
     },
@@ -49,13 +50,19 @@ return {
       gemini = {
         model = "gemini-flash-latest", -- gemini-2.5-flash, gemini-2.5-flash-lite, gemini-flash-latest, gemini-flash-lite-latest
         -- model = "gemini-flash-lite-latest",
-        -- api_key_name = 'AVANTE_GEMINI_API_KEY'
+        api_key_name = 'AVANTE_GEMINI_API_KEY',
+        extra_request_body = {
+          -- max_tokens =  128000,  -- 32768 -- 20480, -- to avoid using max_completion_tokens
+          temperature = temperature,
+          timeout = 1000000,  -- 30000
+        },
       },
       openai = {
         model = "gpt-4o", -- Specify your desired model
         api_key_name = "OPENAI_API_KEY", -- The name of the environment variable holding the key
         endpoint = "https://api.openai.com/v1/chat/completions", -- Default OpenAI endpoint
-        -- extra_request_body = { temperature = temperature },
+        timeout = 1000000,
+        extra_request_body = { temperature = temperature },
         -- hide_in_model_selector = true
       },
       -- openai = { hide_in_model_selector = true },
@@ -67,7 +74,9 @@ return {
         __inherited_from = "openai",
         api_key_name = "MISTRAL_API_KEY",
         endpoint = "https://api.mistral.ai/v1/",
-        model = "mistral-large-latest",
+        -- model = "mistral-large-latest",
+        -- model = "codestral-latest",
+        model = "mistral-medium-latest",
         extra_request_body = {
           max_tokens =  128000,  -- 32768 -- 20480, -- to avoid using max_completion_tokens
           temperature = temperature,
