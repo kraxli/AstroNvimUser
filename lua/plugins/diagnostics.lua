@@ -13,9 +13,8 @@ return {
       virtual_text = {
         current_line = true,
         severity = { min = vim.diagnostic.severity.HINT },
-        -- severity = { min = vim.diagnostic.severity.WARN },
+        -- severity = { min = vim.diagnostic.severity.WARN, max = vim.diagnostic.severity.INFO }, 
       },
-      -- virtual_text = { current_line = true, severity = { max = vim.diagnostic.severity.INFO } },
       -- virtual_text = true,
       virtual_lines = false,
       -- virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.WARN } },
