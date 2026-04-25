@@ -1,12 +1,11 @@
-local function toggle()
-    vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle"
-    return 'g@l'
-end
-
-local function toggle_box()
-    vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle_box"
-    return 'g@l'
-end
+-- local function toggle()
+--     vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle"
+--     return 'g@l'
+-- end
+-- local function toggle_box()
+--     vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle_box"
+--     return 'g@l'
+-- end
 
 -- local port = vim.fn.has('win64') == 1 ? 8080 : 5500
 local port = 8086 -- 8080 5500
@@ -216,6 +215,9 @@ return {
           \ ['vmap', 'gN', '<Plug>(bullets-renumber)'],
           \ ['nmap', 'gN', '<Plug>(bullets-renumber)'],
           \
+          "\ ['nmap', '<leader>x', '<Plug>(bullets-toggle-checkbox)'],
+          "\ ['nmap', '<leader>zt', '<Plug>(bullets-toggle-checkbox)'],
+          \
           \ ['imap', '<C-t>', '<Plug>(bullets-demote)'],
           \ ['nmap', '>>', '<Plug>(bullets-demote)'],
           \ ['nmap', '> ', '<Plug>(bullets-demote)'],
@@ -253,19 +255,6 @@ return {
     "dhruvasagar/vim-table-mode",
     enabled = true,
     -- ft = { "text", "markdown", "org" },
-  },
-  {
-    "nfrid/markdown-togglecheck",
-    dependencies = { "nfrid/treesitter-utils" },
-    ft = { "markdown" },
-    config = function()
-      require("markdown-togglecheck").setup {
-        -- create empty checkbox on item without any while toggling
-        create = true,
-        -- remove checked checkbox instead of unckecking it while toggling
-        remove = false,
-      }
-    end,
   },
   {
     'skardyy/neo-img',
