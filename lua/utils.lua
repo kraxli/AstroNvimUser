@@ -511,6 +511,48 @@ function M.handle_checkbox_bullets()
   ::continue::
 end
 
+
+-- This is using nerd fonts, so you might not be able to see the icons.
+local checkboxes = {
+  { char = ' ', icon = '', label = 'to-do' },
+  { char = '/', icon = '', label = 'incomplete' },
+  { char = 'x', icon = '', label = 'done' },
+  { char = '>', icon = '󰒊', label = 'forwarded' },
+  { char = '<', icon = '󰃭', label = 'scheduling' },
+  { char = 'l', icon = '', label = 'location' },
+  { char = 'b', icon = '', label = 'bookmark' },
+  { char = 'u', icon = '󰔵', label = 'up' },
+  { char = 'd', icon = '󰔳', label = 'down' },
+}
+
+function M.select_checkbox()
+  if vim.bo.filetype ~= 'markdown' then
+    return
+  end
+
+  local pattern = '%- %[.-%] '
+
+  local line = vim.api.nvim_get_current_line()
+  if not line:match(pattern) then
+    return
+  end
+
+  vim.ui.select(checkboxes, {
+    prompt = 'Checkboxes:',
+    format_item = function(item)
+      return string.format('%s %s', item.icon, item.label)
+    end,
+  }, function(choice)
+    if not choice then
+      return
+    end
+
+    local checkbox = string.format('- [%s] ', choice.char)
+    local modified_line = line:gsub(pattern, checkbox, 1)
+    vim.api.nvim_set_current_line(modified_line)
+  end)
+end
+
 -- function M.NumberedList()
 --   vim.cmd [[
 --   function! NumberedList(...) range
@@ -529,5 +571,7 @@ end
 --   endfunction
 --   ]]
 -- end
+
+vim.keymap.set('n', '<leader>tt', select_checkbox)
 
 return M
