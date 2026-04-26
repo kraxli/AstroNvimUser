@@ -48,6 +48,7 @@ vim.api.nvim_create_user_command('CopyDir', ":lua require('utils').copy_dir(fals
 vim.api.nvim_create_user_command('CopyDirQuotes', ":lua require('utils').copy_dir(true)", {})
 -- vim.cmd.cnoreabbrev('wq', '<nop>')
 
+
 -- Create the user command
 -- vim.api.nvim_create_user_command(
 --     'WordCount',

@@ -474,8 +474,8 @@ function M.handle_checkbox_autolist()
   ::continue::
 end
 
-function M.handle_checkbox_bullets()
-  local line = vim.fn.getline(".")
+function M.handle_checkbox_line(line_num)
+  local line = vim.fn.getline(line_num)
   local list_items = { "-", "*", "+" }
   
   -- Patterns for matching
@@ -489,12 +489,14 @@ function M.handle_checkbox_bullets()
     -- 1. Check for Bullet + [x] -> Convert back to plain Bullet
     if line:match("^%s*" .. escaped_bullet .. "%s*" .. checked_checkbox) then
       local new_line = line:gsub(checked_checkbox .. "%s*", "", 1)
-      vim.fn.setline(".", new_line)
+      vim.fn.setline(line_num, new_line)
       goto continue
 
     -- 2. Check for Bullet + [ ] -> Delegate to Toggle (turns it into [x])
     elseif line:match("^%s*" .. escaped_bullet .. "%s*" .. empty_checkbox) then
-      vim.cmd "ToggleCheckbox"
+      -- vim.cmd "ToggleCheckbox"
+      local new_line = line:gsub(empty_checkbox .. "%s*", checked_checkbox .. " ", 1)
+      vim.fn.setline(line_num, new_line)
       goto continue
 
     -- 3. Check for plain Bullet -> Convert to Bullet + [ ]
@@ -502,7 +504,7 @@ function M.handle_checkbox_bullets()
       local checkbox_addition = " [ ]"
       -- Insert checkbox after the bullet
       local new_line = line:gsub(escaped_bullet, escaped_bullet .. checkbox_addition, 1)
-      vim.fn.setline(".", new_line)
+      vim.fn.setline(line_num, new_line)
       
       -- Shift cursor to account for added characters
       local cursor_pos = vim.api.nvim_win_get_cursor(0)
@@ -513,6 +515,30 @@ function M.handle_checkbox_bullets()
 
   ::continue::
 end
+
+function M.handle_checkbox_bullets()
+  M.handle_checkbox_line(".")
+end
+
+function M.handle_checkbox_range()
+  -- Get the start and end of the range
+  -- If not in visual mode, these will both point to the current line
+  local start_line = vim.fn.getpos("'<")[2] -- local start_line = vim.fn.line("v")
+  local end_line = vim.fn.getpos("'>")[2]  -- local end_line = vim.fn.line(".")
+
+  -- Ensure start_line is always the smaller number
+  -- if start_line > end_line then
+  --   start_line, end_line = end_line, start_line
+  -- end
+
+  -- Loop through every line in the range
+  for lnum = start_line, end_line do
+    M.handle_checkbox_line(lnum)
+  end
+
+end
+-- ========================================================================
+
 
 -- This is using nerd fonts, so you might not be able to see the icons.
 local checkboxes = {
@@ -573,6 +599,5 @@ end
 --   endfunction
 --   ]]
 -- end
-
 
 return M
