@@ -394,7 +394,7 @@ function M.better_search(key)
 end
 
 function M.insert_list_bullet(bullet_type)
-  bullet = bullet_type or "-"
+  local bullet = bullet_type or "-"
   local _, cursor_line, cursor_col, _, _ = unpack(vim.fn.getcurpos())
   -- vim.cmd([[normal ^i- <esc>]])
   vim.cmd [[ execute "normal ^i" . luaeval('bullet') . ' ' ]]
@@ -475,42 +475,44 @@ function M.handle_checkbox_autolist()
 end
 
 function M.handle_checkbox_bullets()
-  -- TODO: support more list item types like alpha-numerics
-
-  local checkbox_pattern = " [ ]"
-  -- local checkbox_pattern_done = " [x]"
-
-  local check_mark_string = vim.g.bullets_checkbox_markers
+  local line = vim.fn.getline(".")
   local list_items = { "-", "*", "+" }
-  -- local filetype_list = {}
-  -- check_mark_string:gsub(".",function(c) table.insert(filetype_list, c) end)
-  local line = vim.fn.getline "."
+  
+  -- Patterns for matching
+  local empty_checkbox = "%[ %]"
+  local checked_checkbox = "%[x%]" -- You can expand this if you use other markers like [o] or [/]
 
-  for i, list_pattern in ipairs(list_items) do
-    local list_item = line:match("^%s*" .. list_pattern .. "%s*") -- only bullet, no checkbox
-    if list_item == nil then goto continue_for_loop end
-    list_item = list_item:gsub("%s+", "")
-    local is_list_item = list_item ~= nil -- only bullet, no checkbox
-    local is_checkbox_item = line:match("^%s*" .. list_pattern .. "%s*" .. "%[.%]" .. "%s*") ~= nil -- bullet and checkbox
-
-    if is_list_item == true and is_checkbox_item == false then
-      list_item = list_item:gsub("%)", "%%)")
-      vim.fn.setline(".", (line:gsub(list_item, list_item .. checkbox_pattern, 1)))
-
-      local cursor_pos = vim.api.nvim_win_get_cursor(0)
-      if cursor_pos[2] > 0 then
-        vim.api.nvim_win_set_cursor(0, { cursor_pos[1], cursor_pos[2] + checkbox_pattern:len() })
-      end
+  for _, list_pattern in ipairs(list_items) do
+    -- Escaped pattern for the bullet itself (e.g., "-" becomes "%-")
+    local escaped_bullet = list_pattern:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%1")
+    
+    -- 1. Check for Bullet + [x] -> Convert back to plain Bullet
+    if line:match("^%s*" .. escaped_bullet .. "%s*" .. checked_checkbox) then
+      local new_line = line:gsub(checked_checkbox .. "%s*", "", 1)
+      vim.fn.setline(".", new_line)
       goto continue
-    else
+
+    -- 2. Check for Bullet + [ ] -> Delegate to Toggle (turns it into [x])
+    elseif line:match("^%s*" .. escaped_bullet .. "%s*" .. empty_checkbox) then
       vim.cmd "ToggleCheckbox"
       goto continue
+
+    -- 3. Check for plain Bullet -> Convert to Bullet + [ ]
+    elseif line:match("^%s*" .. escaped_bullet .. "%s+") or line:match("^%s*" .. escaped_bullet .. "$") then
+      local checkbox_addition = " [ ]"
+      -- Insert checkbox after the bullet
+      local new_line = line:gsub(escaped_bullet, escaped_bullet .. checkbox_addition, 1)
+      vim.fn.setline(".", new_line)
+      
+      -- Shift cursor to account for added characters
+      local cursor_pos = vim.api.nvim_win_get_cursor(0)
+      vim.api.nvim_win_set_cursor(0, { cursor_pos[1], cursor_pos[2] + checkbox_addition:len() })
+      goto continue
     end
-    ::continue_for_loop::
   end
+
   ::continue::
 end
-
 
 -- This is using nerd fonts, so you might not be able to see the icons.
 local checkboxes = {
@@ -572,6 +574,5 @@ end
 --   ]]
 -- end
 
-vim.keymap.set('n', '<leader>tt', select_checkbox)
 
 return M
