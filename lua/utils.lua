@@ -168,9 +168,6 @@ function M.send_visual_lines_to_ipython()
   vim.api.nvim_set_current_win(current_window)
 end
 
--- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
--- maps.n["<leader>tP"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='float'}, py_term_num) end }
-
 
 function M.quick_notification(msg, type) astronvim.notify(msg, type or "info", { timeout = 0 }) end
 
@@ -409,71 +406,8 @@ function M.reset_cursor_pos(callback, offset, ...)
   vim.fn.setpos(".", { 0, cursor_line, cursor_col + offset, 0 }) -- 15G25|
 end
 
--- --- Install all Mason packages from mason-lspconfig, mason-null-ls, mason-nvim-dap
--- function M.mason.install_all()
---   local registry_avail, registry = pcall(require, "mason-registry")
---   if not registry_avail then
---     vim.api.nvim_err_writeln "Unable to access mason registry"
---     return
---   end
---
---   local installed = false
---   for plugin_name, opts in pairs {
---     ["mason-lspconfig"] = { type = "server", map = "lspconfig" },
---     ["mason-null-ls"] = { type = "source", map = "null_ls" },
---     ["mason-nvim-dap"] = { type = "source", map = "nvim_dap" },
---   } do
---     local plugin_avail, plugin = pcall(require, plugin_name .. ".settings")
---     if plugin_avail then
---       local mappings = require(plugin_name .. ".mappings." .. opts.type)[opts.map .. "_to_package"]
---       local pkgs = plugin.current.ensure_installed
---       for _, pkg in ipairs(pkgs) do
---         local mason_pkg = mappings[pkg]
---         if not registry.is_installed(mason_pkg) then
---           installed = true
---           astronvim.mason.update(mason_pkg)
---         end
---       end
---     end
---   end
---   if not installed then astronvim.notify "Mason: No packages to install" end
--- end
 
-function M.handle_checkbox_autolist()
-  local config = require "autolist.config"
-  local auto = require "autolist.auto"
-
-  local checkbox_pattern = " [ ]"
-  -- local checkbox_pattern_done = " [x]"
-
-  local filetype_list = config.lists[vim.bo.filetype]
-  local line = vim.fn.getline "."
-
-  for i, list_pattern in ipairs(filetype_list) do
-    local list_item = line:match("^%s*" .. list_pattern .. "%s*") -- only bullet, no checkbox
-    if list_item == nil then goto continue_for_loop end
-    list_item = list_item:gsub("%s+", "")
-    local is_list_item = list_item ~= nil -- only bullet, no checkbox
-    local is_checkbox_item = line:match("^%s*" .. list_pattern .. "%s*" .. "%[.%]" .. "%s*") ~= nil -- bullet and checkbox
-
-    if is_list_item == true and is_checkbox_item == false then
-      list_item = list_item:gsub("%)", "%%)")
-      vim.fn.setline(".", (line:gsub(list_item, list_item .. checkbox_pattern, 1)))
-
-      local cursor_pos = vim.api.nvim_win_get_cursor(0)
-      if cursor_pos[2] > 0 then
-        vim.api.nvim_win_set_cursor(0, { cursor_pos[1], cursor_pos[2] + checkbox_pattern:len() })
-      end
-      goto continue
-    else
-      auto.toggle_checkbox()
-      goto continue
-    end
-    ::continue_for_loop::
-  end
-  ::continue::
-end
-
+-- ========================================================================
 function M.handle_checkbox_line(line_num)
   local line = vim.fn.getline(line_num)
   local list_items = { "-", "*", "+" }
