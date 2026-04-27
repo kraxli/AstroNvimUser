@@ -1,11 +1,21 @@
 ---@type LazySpec
 return {
-  "nvim-treesitter/nvim-treesitter",
-  opts = function(_, opts)
-    opts.ensure_installed =
-      require("astrocore").list_insert_unique(opts.ensure_installed, { "r", "markdown", "rnoweb", "yaml" })
-    opts.indent = {
-      disable = { "yaml" },
-    }
-  end,
+"AstroNvim/astrocore",
+  ---@type AstroCoreOpts
+  opts = {
+    treesitter = {
+      ensure_installed = { "vim", "lua",  "r", "markdown", "rnoweb", "yaml" },
+      highlight = true,
+      indent = {
+        disable = { "yaml" },
+      },
+      textobjects = {
+        select = {
+          select_textobject = {
+            ["ak"] = { query = "@block.outer", desc = "around block" },
+          },
+        },
+      },
+    },
+  },
 }

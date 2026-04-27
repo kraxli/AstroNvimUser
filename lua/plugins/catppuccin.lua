@@ -12,7 +12,7 @@ return {
       dap = true,
       dap_ui = true,
       gitsigns = true,
-      illuminate = { enabled = true, lsp = true },
+      -- illuminate = { enabled = true, lsp = true }, -- not required since v6
       indent_blankline = true,
       markdown = true,
       mason = true,
@@ -38,14 +38,14 @@ return {
       symbols_outline = true,
       telescope = { enabled = true, style = "nvchad" },
       treesitter = true,
-      ufo = true,
+      -- ufo = true,  -- not required since v6
       which_key = true,
       window_picker = true,
     },
     custom_highlights = {
       -- disable italics  for treesitter highlights
       LspInlayHint = { style = { "italic" } },
-      UfoFoldedEllipsis = { link = "UfoFoldedFg" },
+      -- UfoFoldedEllipsis = { link = "UfoFoldedFg" },    -- not required since v6
       ["@parameter"] = { style = {} },
       ["@type.builtin"] = { style = {} },
       ["@namespace"] = { style = {} },

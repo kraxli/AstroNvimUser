@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
   opts = {
     -- add new AstroNvim Mason registry
     registries = { "github:AstroNvim/mason-registry" },

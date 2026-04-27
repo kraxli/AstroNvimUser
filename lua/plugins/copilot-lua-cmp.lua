@@ -28,7 +28,7 @@ return {
     -- for hrsh7th/nvim-cmp support see:
     -- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/completion/copilot-lua-cmp/init.lua}
     {
-      "Saghen/blink.cmp",
+      "saghen/blink.cmp",
       opts = function(_, opts)
         if not opts.keymap then opts.keymap = {} end
 
@@ -54,7 +54,7 @@ return {
       end,
     },
     {
-      "echasnovski/mini.icons",
+      "nvim-mini/mini.icons",
       -- optional = true,
       -- Adds icon for copilot using mini.icons
       opts = function(_, opts)

@@ -4,10 +4,10 @@ return {
   lazy = true,
   specs = {
     {
-      "Saghen/blink.cmp",
+      "saghen/blink.cmp",
       optional = true,
       dependencies = "kdheepak/cmp-latex-symbols",
-      specs = { "Saghen/blink.compat", version = "*", lazy = true, opts = {} },
+      specs = { "saghen/blink.compat", version = "*", lazy = true, opts = {} },
       opts = {
         sources = {
           default = { "latex" },

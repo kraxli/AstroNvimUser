@@ -69,10 +69,10 @@ return {
   -- {
   --   "R-nvim/cmp-r",
   --   -- ft = { "R", "r", "rmd", "rnoweb", "quarto", "qmd", "rhelp" },
-  --   dependencies = { "Saghen/blink.cmp" },
+  --   dependencies = { "saghen/blink.cmp" },
   --   specs = {
   --     {
-  --       "Saghen/blink.cmp",
+  --       "saghen/blink.cmp",
   --       optional = true,
   --       opts = {
   --         sources = {

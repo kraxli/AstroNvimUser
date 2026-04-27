@@ -3,7 +3,7 @@ return {
   "stevearc/conform.nvim",
   event = "User AstroFile",
   cmd = "ConformInfo",
-  dependencies = { "williamboman/mason.nvim" },
+  dependencies = { "mason-org/mason.nvim" },
   ---@param opts conform.setupOpts
   opts = function(_, opts)
     local buf_utils = require "astrocore.buffer"

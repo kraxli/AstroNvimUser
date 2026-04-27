@@ -175,10 +175,10 @@ return {
   },
   specs = {
     {
-      "Saghen/blink.cmp",
+      "saghen/blink.cmp",
       optional = true,
       dependencies = { "yetone/avante.nvim" },
-      specs = { "Saghen/blink.compat", version = "*", lazy = true, opts = {} },
+      specs = { "saghen/blink.compat", version = "*", lazy = true, opts = {} },
       opts = {
         sources = {
           per_filetype = {
