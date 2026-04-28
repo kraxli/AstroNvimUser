@@ -35,7 +35,7 @@ return {
           swapfile = false,
           thesaurus = vim.fn.expand "~/.config/nvim/spell/mthesaur.txt",
           wrap = true, -- soft wrap lines
-          relativenumber = false, -- Show relative numberline
+          -- relativenumber = false, -- Show relative numberline
           signcolumn = "auto", -- sets `vim.opt.relativenumber`
           number = true,
           timeoutlen = 250, --- Time out on mappings (150)
@@ -59,7 +59,7 @@ return {
             callback = function()
               vim.opt_local.wrap = true
               vim.opt_local.spell = true
-              vim.opt_local.spelllang = "de,en"
+              -- vim.opt_local.spelllang = "de,en"
             end,
           },
         },
@@ -80,7 +80,7 @@ return {
           mdx = "markdown.mdx",
           nf = "nextflow",
           ["nf.test"] = "nextflow",
-          qmd = "quarto",
+          -- qmd = "quarto",
           yaml = yaml_ft,
           yml = yaml_ft,
           j2 = "jinja",
@@ -102,25 +102,25 @@ return {
 
         n = {
           -- disable default bindings
-          ["sa"] = false,
-          ["q"] = false,
-          ["<leader>q"] = false,
-          ["<leader>o"] = false,
-          ["<Leader>ot"] = false,
-          ["<Leader>oT"] = false,
-
-          ["<Right>"] = false,
-          ["<Left>"] = false,
-          ["<Up>"] = false,
-          ["<Down>"] = false,
-
-          -- use treesitter spelling suggestions
-          ["z="] = false,
-
+          -- ["sa"] = false,
+          -- ["q"] = false,
+          -- ["<leader>q"] = false,
+          -- ["<leader>o"] = false,
+          -- ["<Leader>ot"] = false,
+          -- ["<Leader>oT"] = false,
+          --
+          -- ["<Right>"] = false,
+          -- ["<Left>"] = false,
+          -- ["<Up>"] = false,
+          -- ["<Down>"] = false,
+          --
+          -- -- use treesitter spelling suggestions
+          -- ["z="] = false,
+          --
           ["<C-Q>"] = false,
           ["q:"] = ":",
-          ["c:"] = "q:",
-          ["X"] = ":x<CR>",
+          -- ["c:"] = "q:",
+          -- ["X"] = ":x<CR>",
           -- better buffer navigation
           ["]b"] = false,
           ["[b"] = false,
@@ -135,46 +135,46 @@ return {
           ["<Leader><CR>"] = { '<Esc>/<++><CR>"_c4l', desc = "Next Template" },
           ["<Leader>."] = { "<Cmd>cd %:p:h<CR>", desc = "Set CWD" },
           -- orgmode: replace default map for "<leader>o" to use "<leader>o" for orgmode
-          ["<leader>E"] = {
-            function()
-              if vim.bo.filetype == "neo-tree" then
-                vim.cmd.wincmd "p"
-              else
-                vim.cmd.Neotree "focus"
-              end
-            end,
-            desc = "Toggle Explorer Focus",
-          },
-          ["<Leader>o"] = { desc = "Orgmode" },
-          ["<Leader>tP"] = {
-            function()
-              local term_count = vim.api.nvim_buf_get_number(0)
-              local ipython = vim.fn.executable "ipython" == 1 and "ipython"
-                or vim.fn.executable "ipython3" == 1 and "ipython3"
-              if ipython then
-                require("astrocore").toggle_term_cmd {
-                  cmd = "ipython --pylab -i --no-autoindent",
-                  direction = "float",
-                  count = term_count,
-                } -- , size=80 width=vim.o.columns * 0.3
-              end
-            end,
-            desc = "ToggleTerm ipython",
-          },
-          ["<Leader>tp"] = { "<cmd>IronRepl<CR><ESC>", desc = "Open Iron repl vsplit" },
-          ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
-          ["<Leader>uv"] = { "<cmd>vert split<CR>", desc = "Vertical split" },
-
-          -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
-          -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
-
-          -- recording
-          ["Q"] = { "q", desc = "Record" },
-          ["gQ"] = { "@q", desc = "Record" },
-          -- time stamps
-          ["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', desc = "Time stamp" },
-          -- Miscellaneous
-          ["<C-z>"] = { ":undo<cr>", desc = "Undo" },
+        --   ["<leader>E"] = {
+        --     function()
+        --       if vim.bo.filetype == "neo-tree" then
+        --         vim.cmd.wincmd "p"
+        --       else
+        --         vim.cmd.Neotree "focus"
+        --       end
+        --     end,
+        --     desc = "Toggle Explorer Focus",
+        --   },
+        --   ["<Leader>o"] = { desc = "Orgmode" },
+        --   ["<Leader>tP"] = {
+        --     function()
+        --       local term_count = vim.api.nvim_buf_get_number(0)
+        --       local ipython = vim.fn.executable "ipython" == 1 and "ipython"
+        --         or vim.fn.executable "ipython3" == 1 and "ipython3"
+        --       if ipython then
+        --         require("astrocore").toggle_term_cmd {
+        --           cmd = "ipython --pylab -i --no-autoindent",
+        --           direction = "float",
+        --           count = term_count,
+        --         } -- , size=80 width=vim.o.columns * 0.3
+        --       end
+        --     end,
+        --     desc = "ToggleTerm ipython",
+        --   },
+        --   ["<Leader>tp"] = { "<cmd>IronRepl<CR><ESC>", desc = "Open Iron repl vsplit" },
+        --   ["<Leader>uo"] = { "<c-w>o", desc = "Only this window" },
+        --   ["<Leader>uv"] = { "<cmd>vert split<CR>", desc = "Vertical split" },
+        --
+        --   -- python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
+        --   -- maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, py_term_num) end }
+        --
+        --   -- recording
+        --   ["Q"] = { "q", desc = "Record" },
+        --   ["gQ"] = { "@q", desc = "Record" },
+        --   -- time stamps
+        --   ["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', desc = "Time stamp" },
+        --   -- Miscellaneous
+        --   ["<C-z>"] = { ":undo<cr>", desc = "Undo" },
         },
         -- insert mode
         i = {
@@ -184,20 +184,20 @@ return {
         },
         -- terminal mappings
         t = {
-          ["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" }, -- ["<esc><esc>"]
-          ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-          ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" }, -- :close
-          ["<C-Q>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
+          -- ["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+          -- ["<esc>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" }, -- ["<esc><esc>"]
+          -- ["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+          -- ["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" }, -- :close
+          -- ["<C-Q>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal delete" },
           ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
         },
-        v = {
-          ["sa"] = false,
-          -- Telekasten:
-          ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo({v=true})<CR>", desc = "Toggle checkbox" },
-        },
+        -- v = {
+        --   ["sa"] = false,
+        --   -- Telekasten:
+        --   ["<c-space>"] = { "<cmd>lua require('telekasten').toggle_todo({v=true})<CR>", desc = "Toggle checkbox" },
+        -- },
         x = {
-          ["sa"] = false,
+          -- ["sa"] = false,
           -- better increment/decrement
           ["+"] = { "g<C-a>", desc = "Increment number" },
           ["-"] = { "g<C-x>", desc = "Descrement number" },
