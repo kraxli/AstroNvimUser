@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   "wakatime/vim-wakatime",
+  enabled = false,
   lazy = false,
   cond = function()
     vim.fn.system "ip addr | grep -E 'tun|wg|ppp'"
