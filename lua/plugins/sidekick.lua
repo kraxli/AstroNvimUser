@@ -2,13 +2,7 @@ local prefix = "<Leader>A"
 return {
   "folke/sidekick.nvim",
   ---@type sidekick.Config
-  opts = {
-    cli = {
-      tools = {
-        codex = { cmd = { "codex" } },
-      },
-    },
-  },
+  opts = {},
   specs = {
     {
       "AstroNvim/astrocore",
@@ -32,6 +26,10 @@ return {
             [prefix .. "<CR>"] = {
               function() require("sidekick.cli").toggle { name = "codex", focus = true } end,
               desc = "Toggle Codex",
+            },
+            [prefix .. "O"] = {
+              function() require("sidekick.cli").toggle { name = "opencode", focus = true } end,
+              desc = "Toggle OpenCode",
             },
             [prefix .. "A"] = {
               function() require("sidekick.cli").toggle { filter = { installed = true } } end,
