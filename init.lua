@@ -25,6 +25,7 @@ pcall(require, "raw")
 pcall(require, "commands")
 pcall(require, "utils")
 
+vim.cmd.colorscheme("catppuccin-mocha")
 
 if vim.fn.has "win64" == 1 then
   -- terminal settings
