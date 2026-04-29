@@ -5,7 +5,7 @@ return {
     mappings = {
       i = { j = { k = false, j = false } }, -- disable insert mode escape
       t = {
-        ["<Esc>"] = { ["<Esc>"] = "<C-\\><C-n>:q<CR>" }, -- add double escape to close
+        -- ["<Esc>"] = { ["<Esc>"] = "<C-\\><C-n>:q<CR>" }, -- add double escape to close
       },
     },
   },

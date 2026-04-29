@@ -13,27 +13,9 @@ local opts_spell = {
 ---@type LazySpec
 return {
   "folke/snacks.nvim",
-  lazy = false,
-  priority = 1000,
   opts = {
-    dashboard = { enabled = true },
-    indent = { enabled = false },
     notifier = {
-      timeout = 1000,
       top_down = false,
-    },
-    gitbrowse = {
-      config = function(opts)
-        table.insert(opts.remote_patterns, 1, { "^ssh://git%.mehalter%.com/(.*)", "https://code.mehalter.com/%1" })
-      end,
-      url_patterns = {
-        ["code%.mehalter%.com"] = {
-          branch = "/~files/{branch}",
-          file = "/~files/{branch}/{file}?position=source-{line_start}-{line_end}",
-          permalink = "/~files/{commit}/{file}?position=source-{line_start}-{line_end}",
-          commit = "/~commits/{commit}",
-        },
-      },
     },
   },
   keys = {
@@ -75,7 +57,7 @@ return {
         maps.n[prefixFind .. "o"] =
           { function() require("snacks").picker.smart() end, desc = "Find buffers/recent/files" }
         -- maps.n[prefixFind .. "t"] = { function () Snacks.picker.actions.terminal() end, desc = "Terminals"}
-        maps.n[prefixFind .. "t"] = { function () Snacks.terminal.list() end, desc = "Terminals"}
+        maps.n[prefixFind .. "t"] = { function() Snacks.terminal.list() end, desc = "Terminals" }
         -- maps.n[prefixFind .. "t"] = {
         --   function()
         --     ---@return snacks.win[]

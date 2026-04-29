@@ -4,35 +4,38 @@ return {
   opts = {
     ensure_installed = {
       -- Language Servers
-      "ansible-language-server",
+      -- "ansible-language-server",
       "astro-language-server",
       "basedpyright",
       "bash-language-server",
       "clangd",
       "css-lsp",
       "dockerfile-language-server",
-      "gopls",
+      -- "gopls",
       "html-lsp",
-      "intelephense",
+      -- "intelephense",
       "jinja-lsp",
       "json-lsp",
       "lua-language-server",
       "markdown-oxide",
+      "marksman",
       "neocmakelsp",
+      "r-languageserver",
+      "reorder-python-imports",
       "sqls",
-      "svelte-language-server",
+      -- "svelte-language-server",
       "tailwindcss-language-server",
       "taplo",
       "texlab",
       "typos-lsp",
-      "vtsls",
-      "vue-language-server",
+      -- "vtsls",
+      -- "vue-language-server",
       "yaml-language-server",
 
-      "opa",
+      -- "opa",
 
       -- Linters
-      "ansible-lint",
+      -- "ansible-lint",  -- fails on windows
       "selene",
       "shellcheck",
       "sqlfluff",
@@ -48,9 +51,14 @@ return {
       "bash-debug-adapter",
       "cpptools",
       "debugpy",
-      "delve",
+      -- "delve",
       "js-debug-adapter",
       "php-debug-adapter",
+
+      -- Other Tools
+      "tree-sitter-cli",
+      "markdownlint-cli2",
+      "markdown-toc",
     },
     integrations = {
       ["mason-lspconfig"] = false,

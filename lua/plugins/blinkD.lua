@@ -9,11 +9,8 @@ end
 ---@type LazySpec
 return {
   "saghen/blink.cmp",
-  version = "^1",
-  -- build = 'cargo +nightly build --release',
-  dependencies = { 
+  dependencies = {
     "milanglacier/minuet-ai.nvim",
-    -- "giuxtaposition/blink-cmp-copilot",
   },
   opts = {
     fuzzy = {
@@ -23,21 +20,21 @@ return {
       },
     },
     keymap = {
-      ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
-      ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      -- ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
+      -- ["<S-Tab>"] = { "snippet_backward", "fallback" },
       ["<C-k>"] = { "select_prev", "fallback" },
       ["<C-j>"] = { "select_next", "fallback" },
     },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "minuet", }, -- "copilot" 
+      default = { "lsp", "path", "snippets", "buffer", "minuet" }, -- "copilot"
       providers = {
         path = { opts = { trailing_slash = false, show_hidden_files_by_default = true } },
         cmdline = {
           min_keyword_length = function(ctx)
             -- when typing a command, only show when the keyword is 3 characters or longer
-            if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 2 end
-          return 0
-          end
+            if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then return 2 end
+            return 0
+          end,
         },
         avante_commands = {
           name = "avante_commands",
@@ -84,7 +81,7 @@ return {
       -- keymap = { preset = 'inherit' },
       -- completion = { menu = { auto_show = true } },
       enabled = true,
-      completion = { menu = { auto_show = true,  }, ghost_text = { enabled = true }, },
+      completion = { menu = { auto_show = true }, ghost_text = { enabled = true } },
       keymap = {
         -- recommended, as the default keymap will only show and select the next item
         ["<Up>"] = { "select_prev", "fallback" },
@@ -95,12 +92,13 @@ return {
         -- ["<Right>"] = { "accept", "fallback" },
         ["<Left>"] = { "cancel", "fallback" },
         ["<ESC>"] = { "cancel", "fallback" },
-        ["<CR>"] = { "fallback" },  -- { "accept_and_enter", "fallback" },
-        ["<Right>"] = { function(cmp)
+        ["<CR>"] = { "fallback" }, -- { "accept_and_enter", "fallback" },
+        ["<Right>"] = {
+          function(cmp)
             if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
           end,
           "show_and_insert",
-          "cancel",  -- "accept", --"select_next",
+          "cancel", -- "accept", --"select_next",
         },
       },
     },

@@ -2,25 +2,39 @@
 return {
   "monkoose/neocodeium",
   cmd = "NeoCodeium",
+  -- enabled = vim.fn.has "unix" == 1,
+  enabled = environment ~= "work",
+  -- event = "VeryLazy",
   dependencies = {
     {
       "AstroNvim/astrocore",
       opts = function(_, opts)
         local maps = opts.mappings
         maps.n["<Leader>u!"] = { function() require("neocodeium.commands").toggle() end, desc = "Toggle AI assistant" }
+        maps.n["<M-?>"] = { function() require("neocodeium").chat() end }
         maps.n["<M-CR>"] = { function() require("neocodeium").chat() end }
         maps.i["<M-]>"] = { function() require("neocodeium").cycle_or_complete() end }
-        maps.i["<M-\\>"] = maps.i["<M-]>"]
-        maps.i["<M-[>"] = { function() require("neocodeium").cycle_or_complete(-1) end }
+        maps.i["<M-'>"] = { function() require("neocodeium").chat() end }
+
+        -- maps.i["<M-]>"] = { function() require("neocodeium").cycle_or_complete() end }
+        -- maps.i["<M-[>"] = { function() require("neocodeium").cycle_or_complete(-1) end }
         maps.i["<M-CR>"] = { function() require("neocodeium").accept() end }
+        -- maps.i["<M-a>"] = maps.i["<M-CR>"]
         maps.i["<M-BS>"] = { function() require("neocodeium").clear() end }
 
+        maps.i["<M-Up>"] = { function() require("neocodeium").cycle_or_complete(-1) end }
+        maps.i["<M-Down>"] = { function() require("neocodeium").cycle_or_complete() end }
+        maps.i["<M-\\>"] = maps.i["<M-Down>"]
+        maps.i["<M-z>"] = maps.i["<M-Down>"]
+        maps.i["<M-x>"] = maps.i["<M-Up>"]
+        maps.i["<M-BS>"] = maps.i["<M-c>"]
+
         opts.autocmds.codeium = {
-          {
-            event = "User",
-            pattern = "NeoCodeiumCompletionDisplayed",
-            callback = function() require("cmp").abort() end,
-          },
+          -- {
+          --   event = "User",
+          --   pattern = "NeoCodeiumCompletionDisplayed",
+          --   callback = function() require("cmp").abort() end,
+          -- },
         }
       end,
     },
