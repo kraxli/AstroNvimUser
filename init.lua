@@ -1,4 +1,3 @@
-
 -- kraxli: own setup:
 pcall(require, "user.settings")
 pcall(require, "global_vars")
@@ -25,7 +24,7 @@ pcall(require, "raw")
 pcall(require, "commands")
 pcall(require, "utils")
 
-vim.cmd.colorscheme("catppuccin-mocha")
+vim.cmd.colorscheme "catppuccin-macchiato" -- mocha latte
 
 if vim.fn.has "win64" == 1 then
   -- terminal settings
