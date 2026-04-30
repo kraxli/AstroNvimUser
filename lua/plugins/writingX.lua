@@ -1,26 +1,3 @@
--- local function toggle()
---     vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle"
---     return 'g@l'
--- end
--- local function toggle_box()
---     vim.go.operatorfunc = "v:lua.require'markdown-togglecheck'.toggle_box"
---     return 'g@l'
--- end
-
--- local port = vim.fn.has('win64') == 1 ? 8080 : 5500
-local port = 8086 -- 8080 5500
-if vim.fn.has('win64') == 1 then 
-  port = 8086  -- 8060
-end
-
--- lsof -i4
--- local preview_kill = vim.fn.system { 'fuser', '-k', port .. '/tcp' }
-vim.api.nvim_create_user_command('PvKill', ':!fuser -k ' .. port .. '/tcp', {desc = "Preview kill"})
-
-
--- vim.keymap.set('n', '<c-space>', toggle, { expr = true, desc = 'Toggle Checkmark' })
--- vim.keymap.set('n', '<leader>zt', toggle_box, { expr = true, desc = 'Toggle Checkbox' })
-
 return {
   {
     "tpope/vim-abolish",
@@ -49,48 +26,6 @@ return {
 		  Abolish {experiance} {experience}
 			]]
     end,
-  },
-  {
-    'brianhuster/live-preview.nvim',
-    -- enabled = vim.fn.has('unix') == 1,
-    ft = { 'markdown', 'html', 'text', 'quarto', 'Avante' },
-    cmd = { 'LivePreview', 'Pv', 'PreviewClose', 'Pc', 'PreviewPeek', 'Ps', },
-    keys = {'<leader>V'},
-    dependencies = {
-        -- You can choose one of the following pickers
-        -- 'nvim-telescope/telescope.nvim',
-        -- 'ibhagwan/fzf-lua',
-        'echasnovski/mini.pick',
-        -- {
-        --   "AstroNvim/astrocore",
-        --   opts = {
-        --     commands = {
-        --       PreviewStart = { ":LivePreview start", desc = "Open preview window" },
-        --       Pv = { ":LivePreview start", desc = "Open preview window" },
-        --       PreviewClose = { ":LivePreview close", desc = "Close preview window" },
-        --       Pc = { ":LivePreview close", desc = "Close preview window" },
-        --       PreviewPeek =  { ":LivePreview peek", desc = "Preview peek" },
-        --       Ps =  { ":LivePreview peek", desc = "Preview peek" },
-        --     },
-        --     mappings = {
-        --       n = {
-        --         ["<Leader>V"] = { "<CMD>LivePreview start<CR>", desc = "Preview" },
-        --       },
-        --     },
-        --   },
-        -- },
-    },
-    config = function ()
-      require('livepreview.config').set({
-	      port = port,
-	      -- address = '127.0.0.1',
-	      browser = 'default',
-	      dynamic_root = false,
-	      sync_scroll = true,
-	      -- picker = 'mini.pick',
-	      picker = "",
-      })
-    end
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -183,8 +118,8 @@ return {
   -- "TobinPalmer/pastify.nvim",
   {
     "HakonHarnes/img-clip.nvim",
-    event = 'BufEnter',
-    ft = { 'markdown', 'quarto', 'latex' },
+    event = "BufEnter",
+    ft = { "markdown", "quarto", "latex" },
     cmd = { "PasteImage", "ImgClipDebug", "ImgClipConfig" },
     specs = {
       {
@@ -223,7 +158,6 @@ return {
   },
   {
     "dkarter/bullets.vim",
-    -- enabled = false,
     -- version = "v1.11.0",
     ft = {
       "markdown",
@@ -291,7 +225,7 @@ return {
         ]]
 
       vim.keymap.set("n", "<leader>zt", "<cmd>lua require('utils').handle_checkbox_bullets()<CR>")
-      vim.keymap.set("v", "<leader>zt", ":<C-u>lua require('utils').handle_checkbox_range()<CR>", {  silent = true })
+      vim.keymap.set("v", "<leader>zt", ":<C-u>lua require('utils').handle_checkbox_range()<CR>", { silent = true })
     end,
   },
   {
@@ -300,11 +234,9 @@ return {
     -- ft = { "text", "markdown", "org" },
   },
   {
-    'skardyy/neo-img',
+    "skardyy/neo-img",
     enabled = false,
-    build = ":NeoImg Install",  -- requires go and kitty terminal
-    config = function()
-        require('neo-img').setup()
-    end
+    build = ":NeoImg Install", -- requires go and kitty terminal
+    config = function() require("neo-img").setup() end,
   },
 }
