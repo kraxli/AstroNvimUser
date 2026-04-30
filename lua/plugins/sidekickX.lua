@@ -1,9 +1,11 @@
 local prefix = "<Leader>A"
+local enable_nes = vim.fn.has "unix" == 1
+
 return {
   "folke/sidekick.nvim",
   ---@type sidekick.Config
   opts = {
-    nes = { enabled = vim.fn.has "win64" == 0 },
+    nes = { enabled = enable_nes },
   },
   specs = {
     {
@@ -19,7 +21,7 @@ return {
               event = "FileType",
               desc = "Enable sidekick inline suggestions (copilot)",
               pattern = { "*" },
-              callback = function() vim.lsp.enable("copilot", vim.fn.has "unix" == 1) end,
+              callback = function() vim.lsp.enable("copilot", enable_nes) end,
             },
           },
         },
