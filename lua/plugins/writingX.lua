@@ -94,10 +94,20 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    enabled=true,
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown", "html", "text", "quarto", "Avante" },
+    cmd = {
+      "MarkdownPreviewToggle",
+      "MarkdownPreview",
+      "MarkdownPreviewStop",
+      "LivePreview",
+      "Pv",
+      "PreviewClose",
+      "Pc",
+      "PreviewPeek",
+      "Ps",
+    },
     build = function()
-      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+      require("lazy").load { plugins = { "markdown-preview.nvim" } }
       vim.fn["mkdp#util#install"]()
     end,
     keys = {
@@ -109,10 +119,44 @@ return {
       },
     },
     config = function()
-      vim.cmd([[do FileType]])
-      vim.cmd([[let g:mkdp_auto_close = 0 ]])
+      vim.cmd [[do FileType]]
+      vim.cmd [[let g:mkdp_auto_close = 0 ]]
       -- vim.g.mkdp_auto_open = false
     end,
+    specs = {
+      "AstroNvim/astrocore",
+      ---@type AstroCoreOpts
+      opts = {
+        mappings = {
+          n = {},
+        },
+        autocmds = {
+          auto_md_preview = {
+            {
+              event = "FileType",
+              desc = "Markdown-preview autocmds",
+              pattern = { "markdown", "tex", "text", "org", "norg", "Avante" },
+              callback = function()
+                -- Commands:
+                vim.api.nvim_create_user_command("PreviewStart", ":MarkdownPreview", {})
+                vim.api.nvim_create_user_command("Pv", ":MarkdownPreviewToggle", {})
+                vim.api.nvim_create_user_command("PreviewClose", ":MarkdownPreviewStop", {})
+                vim.api.nvim_create_user_command("Pc", ":MarkdownPreviewStop", {})
+                vim.api.nvim_create_user_command("PreviewPick", ":LivePreview pick", {})
+
+                -- Mappings:
+                vim.keymap.set(
+                  { "n" },
+                  "<leader>V",
+                  ":MarkdownPreviewToggle<CR>",
+                  { expr = false, noremap = true, buffer = true, desc = "Preview" }
+                )
+              end,
+            },
+          },
+        },
+      },
+    },
   },
   --  https://github.com/Zeioth/markmap.nvim
   {

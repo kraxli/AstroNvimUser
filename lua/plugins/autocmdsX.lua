@@ -161,23 +161,6 @@ return {
 
             -- TODO: mini.snippets equivalent to the below is missing:
             -- vim.keymap.set("i", "<C-l>", function() require("luasnip").snip_expand(require("keymap_snippets")["link2"]) end)
-
-            -- LivePreview
-            -- if vim.fn.has('unix') == 1 then
-            vim.api.nvim_create_user_command("PreviewStart", ":LivePreview start", {})
-            vim.api.nvim_create_user_command("Pv", ":LivePreview start", {})
-            vim.api.nvim_create_user_command("PreviewClose", ":LivePreview close", {})
-            vim.api.nvim_create_user_command("Pc", ":LivePreview close", {})
-            vim.api.nvim_create_user_command("PvC", ":LivePreview close", {})
-            vim.api.nvim_create_user_command("PreviewPick", ":LivePreview pick", {})
-            vim.api.nvim_create_user_command("Ps", ":LivePreview pick", {})
-            vim.keymap.set(
-              { "n" },
-              "<leader>V",
-              ":LivePreview start<CR>",
-              { expr = false, noremap = true, buffer = true, desc = "Preview" }
-            )
-            -- end
           end,
         },
       },
