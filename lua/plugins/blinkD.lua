@@ -9,9 +9,9 @@ end
 ---@type LazySpec
 return {
   "saghen/blink.cmp",
-  dependencies = {
-    "milanglacier/minuet-ai.nvim",
-  },
+  -- dependencies = {
+  --   -- "milanglacier/minuet-ai.nvim",
+  -- },
   opts = {
     fuzzy = {
       implementation = fuzzy_implementation,
@@ -26,7 +26,7 @@ return {
       ["<C-j>"] = { "select_next", "fallback" },
     },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "minuet" }, -- "copilot"
+      default = { "lsp", "path", "snippets", "buffer" }, -- "copilot"  "minuet"
       providers = {
         path = { opts = { trailing_slash = false, show_hidden_files_by_default = true } },
         cmdline = {
@@ -60,11 +60,11 @@ return {
           score_offset = 1000, -- show at a higher priority than lsp
           opts = {},
         },
-        minuet = {
-          name = "minuet",
-          module = "minuet.blink",
-          score_offset = 100,
-        },
+        -- minuet = {
+        --   name = "minuet",
+        --   module = "minuet.blink",
+        --   score_offset = 100,
+        -- },
         -- copilot = {
         --   name = "copilot",
         --   module = "blink-cmp-copilot",
