@@ -24,7 +24,9 @@ pcall(require, "raw")
 pcall(require, "commands")
 pcall(require, "utils")
 
+-- fix options which get overwritten
 vim.cmd.colorscheme "catppuccin-macchiato" -- mocha latte
+vim.g.autoformat = false
 
 if vim.fn.has "win64" == 1 then
   -- terminal settings

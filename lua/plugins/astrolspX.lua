@@ -13,7 +13,7 @@ return {
       format_on_save = {
         enabled = false,
         ignore_filetypes = {}, -- disable format on save for specified filetypes
-        allow_filetypes = {},  -- only allow formatting on save for these filetypes
+        allow_filetypes = {}, -- only allow formatting on save for these filetypes
       },
     },
   },
