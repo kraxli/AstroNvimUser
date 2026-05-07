@@ -141,7 +141,7 @@ return {
               local overseer = require("overseer")
               overseer.run_task({ name = "run script" }, function(task)
                 if task then
-                  task:add_component({ "restart_on_save", paths = {vim.fn.expand("%:p")} })
+                  -- task:add_component({ "restart_on_save", paths = {vim.fn.expand("%:p")} })
                   local main_win = vim.api.nvim_get_current_win()
                   overseer.run_action(task, "open vsplit")
                   vim.api.nvim_set_current_win(main_win)
@@ -186,7 +186,7 @@ return {
             function() require("overseer").run_task({ name = "view file output" }, function(task)  
                 local overseer = require("overseer")
                 if task then
-                  task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
+                  -- task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
                   if vim.bo.filetype == 'cpp' or vim.bo.filetype == 'python' or vim.bo.filetype == 'R' then
                     overseer.run_action(task, "open vsplit")
                   end
@@ -218,7 +218,7 @@ return {
             [prefix .. "r"] = { "<Cmd>OverseerRun<CR>", desc = "Run" },
             [prefix .. "v"] = { "<Cmd>ViewOut<CR>", desc = "View Output" },
             [prefix .. "V"] = { "<Cmd>ViewOutAuto<CR>", desc = "Auto View Output" },
-            [prefix .. "w"] = { "<Cmd>OverseerWatchRun<CR>", desc = "Watch Rn" },
+            [prefix .. "w"] = { "<Cmd>OverseerWatchRun<CR>", desc = "Watch Run" },
           },
         },
       },
