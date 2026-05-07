@@ -75,6 +75,7 @@ return {
             "rdoc",
             "TelescopePrompt",
             "",
+            "OverseerOutput",
           },
           callback = function()
             -- Notice that buffer = 0 sets this keymap only for current buffer. So when you live the terminal you will not have those keymaps.
