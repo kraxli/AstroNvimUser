@@ -63,7 +63,7 @@ return {
             function()
               require("overseer").run_task({ name = "compile with compiler" }, function(task)
                 if task then
-                  task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
+                  -- task:add_component { "restart_on_save", paths = { vim.fn.expand "%:p" } }
                 else
                   vim.notify("Error setting up auto compilation", vim.log.levels.ERROR)
                 end
