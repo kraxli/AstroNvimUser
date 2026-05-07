@@ -31,6 +31,7 @@ return {
           --   silent = false,
           --   desc = "Select item below",
           -- },
+          ["<Esc>"] = {'lua function() local ok, blink = pcall(require, "blink.cmp") if ok and blink.is_visible and blink.is_visible() then blink.cancel() return "" end return "<C-c>" end, { expr = true })', desc = "Exit command line" },
         },
         i = {
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
