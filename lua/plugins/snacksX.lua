@@ -14,6 +14,7 @@ local opts_spell = {
 return {
   "folke/snacks.nvim",
   opts = {
+    dashboard = { enabled = true },
     notifier = {
       top_down = false,
     },
