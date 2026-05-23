@@ -45,14 +45,6 @@ return {
       require("lazy").load { plugins = { "markdown-preview.nvim" } }
       vim.fn["mkdp#util#install"]()
     end,
-    keys = {
-      {
-        "<leader>cp",
-        ft = "markdown",
-        "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "Markdown Preview",
-      },
-    },
     config = function()
       vim.cmd [[do FileType]]
       vim.cmd [[let g:mkdp_auto_close = 0 ]]
@@ -83,6 +75,13 @@ return {
                 vim.keymap.set(
                   { "n" },
                   "<leader>V",
+                  ":MarkdownPreviewToggle<CR>",
+                  { expr = false, noremap = true, buffer = true, desc = "Preview" }
+                )
+
+                vim.keymap.set(
+                  { "n" },
+                  "<leader>cp",
                   ":MarkdownPreviewToggle<CR>",
                   { expr = false, noremap = true, buffer = true, desc = "Preview" }
                 )
