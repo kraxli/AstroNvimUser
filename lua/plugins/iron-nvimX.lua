@@ -158,6 +158,15 @@ function object_summary()
   end
 end
 
+function dim_shape()
+  local var_name = get_vriable_name()
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { var_name .. '.shape' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'dim(' .. var_name .. ')' })
+  end
+end
 
 
 return {
@@ -241,6 +250,7 @@ return {
 
               -- Own functions mappings --
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ov", "<cmd> lua display_scope()<CR>", { expr = false, noremap = true, desc = "Display scope vars." })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "od", "<cmd> lua dim_shape()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "os", "<cmd> lua variable_str()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "on", "<cmd> lua df_columns()<CR>", { expr = false, noremap = true, desc = "Dispaly (col) names" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oS", "<cmd> lua object_summary()<CR>", { expr = false, noremap = true, desc = "Summary" })
@@ -314,7 +324,9 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "I", "<cmd> lua require('iron').core.send(nil, string.char(03))<CR><ESC>", { expr = false, noremap = true, desc = "Interupt" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "K", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit / close" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "L", "<cmd> lua require('iron').core.send(nil, string.char(12))<CR><ESC>", { expr = false, noremap = true, desc = "Clear" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "u", "<cmd> lua require('iron').core.send_until_cursor<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "u", "<cmd> lua require('iron').core.send_until_cursor()<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "xu", "<cmd> lua require('iron').core.send_until_cursor()<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "xc", "<cmd> lua require('iron').core.send_until_cursor()<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
 
               -- Visidata
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "v", "<cmd> lua visidata('float')<CR>", { expr = false, noremap = true, desc = "View DF" })
