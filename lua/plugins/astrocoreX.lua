@@ -6,6 +6,7 @@ return {
       options = {
         opt = {
           relativenumber = false, -- Show relative numberline
+          magic = false, -- Disable magic for regex (special characters need escape except ^ and $)
           spellfile = vim.fn.expand "~/.config/nvim/spell/en.utf-8.add",
         },
       },
