@@ -142,9 +142,17 @@ end
 
 function debug_quit()
   if vim.bo.filetype == "python" then
-    require("iron").core.send("python", { 'Q' })
+    require("iron").core.send("python", { 'quit' })
   elseif vim.bo.filetype == "r" then
     require("iron").core.send("r", { 'Q' })
+  end
+end
+
+function quit()
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { 'quit()' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { "q('no')" })
   end
 end
 
@@ -267,11 +275,13 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "t", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
 
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "Q", "<cmd> lua debug_quit()<CR>", { expr = false, noremap = true, desc = "Debug quit" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "q", "<cmd> lua quit()<CR>", { expr = false, noremap = true, desc = "Quit REPL" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "c", "<cmd> lua reset_clear()<CR>", { expr = false, noremap = true, desc = "Reset / Clear" })
 
               -- General mappings --
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start REPL" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "R", "<cmd>IronRestart<CR><ESC>", { expr = false, noremap = true, desc = " Restart REPL" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "R", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start / toggle REPL" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "T", "<cmd>IronRepl<CR><ESC>", { expr = false, noremap = true, desc = " Start / toggle REPL" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "r", "<cmd>IronRestart<CR><ESC>", { expr = false, noremap = true, desc = " Restart REPL" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "i", "<cmd>IronFocus<CR>", { expr = false, noremap = true, desc = " Jump (in)to REPL" }) -- i
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "H", "<cmd>IronHide<CR>", { expr = false, noremap = true, desc = "Hide REPL" }) -- i
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd> lua require 'iron.core'.send_file()<CR><ESC>", { expr = false, noremap = true, desc = "Send file" })
