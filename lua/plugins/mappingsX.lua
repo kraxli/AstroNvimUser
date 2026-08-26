@@ -34,10 +34,10 @@ return {
           ["<Esc>"] = {'lua function() local ok, blink = pcall(require, "blink.cmp") if ok and blink.is_visible and blink.is_visible() then blink.cancel() return "" end return "<C-c>" end, { expr = true })', desc = "Exit command line" },
         },
         i = {
-          ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
           -- ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
+          -- ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
+          ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
           ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
-          ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
           -- vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = true })
           -- vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
 
