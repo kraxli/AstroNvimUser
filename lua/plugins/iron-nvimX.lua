@@ -158,6 +158,18 @@ function df_tail()
   end
 end
 
+
+function get_var_type()
+  local var_name = get_vriable_name()
+
+  if vim.bo.filetype == "python" then
+    require("iron").core.send("python", { 'type(' .. var_name .. ')' })
+  elseif vim.bo.filetype == "r" then
+    require("iron").core.send("r", { 'typeof(' .. var_name .. ')' })
+  end
+end
+
+
 function debug_quit()
   if vim.bo.filetype == "python" then
     require("iron").core.send("python", { 'quit' })
@@ -250,7 +262,7 @@ return {
         -- Iron doesn't set keymaps by default anymore.
         -- You can set them here or manually add keymaps to the functions in iron.core
         -- see:https://github.com/Vigemus/iron.nvim/blob/master/doc/iron.txt
-        send_motion = "<localleader>sc",
+        send_motion = "<leader>rm",
       },
       -- If the highlight is on, you can change how it looks
       -- For the available options, check nvim_set_hl
@@ -278,17 +290,19 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ov", "<cmd> lua display_scope()<CR>", { expr = false, noremap = true, desc = "Display scope vars." })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "od", "<cmd> lua dim_shape()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "os", "<cmd> lua variable_str()<CR>", { expr = false, noremap = true, desc = "Dispaly var. string" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "on", "<cmd> lua df_columns()<CR>", { expr = false, noremap = true, desc = "Dispaly (col) names" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oc", "<cmd> lua df_columns()<CR>", { expr = false, noremap = true, desc = "Dispaly (col) names" })  -- "on"
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oS", "<cmd> lua object_summary()<CR>", { expr = false, noremap = true, desc = "Summary" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ov", "<cmd> lua view_var()<CR>", { expr = false, noremap = true, desc = "View" })
               -- head / tail
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oh", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "ot", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "oT", "<cmd> lua get_var_type()<CR>", { expr = false, noremap = true, desc = "Df tail" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "h", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "t", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
               -- visual selections head/tail
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "oh", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "ot", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
+              vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "oT", "<cmd> lua get_var_type()<CR>", { expr = false, noremap = true, desc = "Df tail" })
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "h", "<cmd> lua df_head()<CR>", { expr = false, noremap = true, desc = "Df head" })
               vim.api.nvim_buf_set_keymap( 0, "v", prefix .. "t", "<cmd> lua df_tail()<CR>", { expr = false, noremap = true, desc = "Df tail" })
 
@@ -339,16 +353,12 @@ return {
                 "<cmd> lua require('iron').core.send(nil, string.char(13))<CR><ESC>",
                 { expr = false, noremap = true, desc = "Send return to repl" }
               )
-              vim.api.nvim_buf_set_keymap(
-                0,
-                "n",
-                prefix .. "m",
-                "<cmd> lua require('iron.core').run_motion('send_motion')<CR><ESC>",
-                { expr = false, noremap = true, desc = "Send motion" }
-              )
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "p", "<cmd> lua require('iron').core.send_paragraph<CR><ESC>", { expr = false, noremap = true, desc = "Send paragrph" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_code_block(false)<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
+
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "p", "<cmd> lua require('iron').core.send_paragraph()<CR><ESC>", { expr = false, noremap = true, desc = "Send paragrph" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_paragraph()<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
+              -- vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_code_block(false)<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "B", "<cmd> lua require('iron').core.send_code_block(true)<CR><ESC>", { expr = false, noremap = true, desc = "Send block and move" })
+
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "I", "<cmd> lua require('iron').core.send(nil, string.char(03))<CR><ESC>", { expr = false, noremap = true, desc = "Interupt" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "K", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit / close" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "L", "<cmd> lua require('iron').core.send(nil, string.char(12))<CR><ESC>", { expr = false, noremap = true, desc = "Clear" })
