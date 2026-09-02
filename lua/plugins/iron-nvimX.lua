@@ -68,19 +68,16 @@ function visidata(direction)
   end
   -- require("iron").core.send("r", { "arrow::write_parquet(" .. var_name .. ', "' .. var_file_path .. '")' })
 
-  -- -- print("Waiting for file: " .. var_file_path .. ":")
-  -- -- print(vim.fn.filereadable(var_file_path))
   -- local f = io.open(var_file_path, "r")
+  -- -- local f = vim.fn.filereadable(var_file_path) == 0 do
   -- while f == nil do
-  --   -- while vim.fn.filereadable(var_file_path) == 0 do
   --   f = io.open(var_file_path, "r")
-  -- --   -- vim.uv.sleep(10)  -- in milliseconds
-  -- --   -- io.open(name,"r"); io.close(f)
-  -- --   -- vim.cmd.sleep(2)
+  --   if f ~= nil then
+  --     io.close(f)
+  --   end
   -- end
-  -- io.close(f)
 
-  vim.uv.sleep(100)  -- milliseconds
+  vim.uv.sleep(200)  -- milliseconds
   local vd_cmd = vim.fn.has "unix" == 1 and "vd" or "vd.exe"
   vd_cmd = 'TermExec cmd="' .. vd_cmd .. " " .. var_file_path .. '"   direction=' .. direction .. " name=visidataTerm"
   vim.cmd(vd_cmd)
