@@ -263,6 +263,8 @@ return {
         -- You can set them here or manually add keymaps to the functions in iron.core
         -- see:https://github.com/Vigemus/iron.nvim/blob/master/doc/iron.txt
         send_motion = "<leader>rm",
+        send_code_block = "<leader>rB",
+        -- send_code_block_and_move = "<leader>rB",
       },
       -- If the highlight is on, you can change how it looks
       -- For the available options, check nvim_set_hl
@@ -356,8 +358,6 @@ return {
 
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "p", "<cmd> lua require('iron').core.send_paragraph()<CR><ESC>", { expr = false, noremap = true, desc = "Send paragrph" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_paragraph()<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
-              -- vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "b", "<cmd> lua require('iron').core.send_code_block(false)<CR><ESC>", { expr = false, noremap = true, desc = "Send block" })
-              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "B", "<cmd> lua require('iron').core.send_code_block(true)<CR><ESC>", { expr = false, noremap = true, desc = "Send block and move" })
 
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "I", "<cmd> lua require('iron').core.send(nil, string.char(03))<CR><ESC>", { expr = false, noremap = true, desc = "Interupt" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "K", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit / close" })
