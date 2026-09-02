@@ -53,13 +53,34 @@ function visidata(direction)
   local var_file_path = dir_vd_temp .. var_name .. ".parquet" -- os.date('%Y%m%d%H%M%S')
 
   if vim.bo.filetype == "python" then
-    require("iron").core.send("python", { var_name .. '.to_parquet("' .. var_file_path .. '")' })
-    -- require('iron').core.send('python', {'import pyarrow; ' .. var_name .. '.to_parquet("' .. var_file_path .. '") '})
+
+     local python_cl_string = 'try: import chainladder as cl; ' .. var_name ..'.to_frame().to_parquet("' .. var_file_path .. '") if isinstance(' .. var_name .. ' , cl.core.triangle.Triangle) else ' .. var_name .. '.to_parquet("' .. var_file_path .. '");\rexcept: ' .. var_name .. '.to_parquet("' .. var_file_path .. '");'
+
+     if is_mswindows then
+       -- require("iron").core.send("python", var_name .. '.to_parquet("' .. var_file_path .. '"); \r ' )
+       require("iron").core.send("python", python_cl_string .. '; \r ' )
+     else
+      -- require("iron").core.send("python", { var_name .. '.to_parquet("' .. var_file_path .. '")' })
+      require("iron").core.send("python", { python_cl_string })
+    end
   elseif vim.bo.filetype == "r" then
     require("iron").core.send("r", { "arrow::write_parquet(" .. var_name .. ', "' .. var_file_path .. '")' })
   end
   -- require("iron").core.send("r", { "arrow::write_parquet(" .. var_name .. ', "' .. var_file_path .. '")' })
 
+  -- -- print("Waiting for file: " .. var_file_path .. ":")
+  -- -- print(vim.fn.filereadable(var_file_path))
+  -- local f = io.open(var_file_path, "r")
+  -- while f == nil do
+  --   -- while vim.fn.filereadable(var_file_path) == 0 do
+  --   f = io.open(var_file_path, "r")
+  -- --   -- vim.uv.sleep(10)  -- in milliseconds
+  -- --   -- io.open(name,"r"); io.close(f)
+  -- --   -- vim.cmd.sleep(2)
+  -- end
+  -- io.close(f)
+
+  vim.uv.sleep(100)  -- milliseconds
   local vd_cmd = vim.fn.has "unix" == 1 and "vd" or "vd.exe"
   vd_cmd = 'TermExec cmd="' .. vd_cmd .. " " .. var_file_path .. '"   direction=' .. direction .. " name=visidataTerm"
   vim.cmd(vd_cmd)
@@ -335,6 +356,7 @@ return {
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "K", "<cmd> lua require('iron').core.close_repl<CR><ESC>", { expr = false, noremap = true, desc = "Exit / close" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "L", "<cmd> lua require('iron').core.send(nil, string.char(12))<CR><ESC>", { expr = false, noremap = true, desc = "Clear" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "u", "<cmd> lua require('iron').core.send_until_cursor()<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
+              vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "C", "<cmd> lua require('iron').core.send_until_cursor()<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "xu", "<cmd> lua require('iron').core.send_until_cursor()<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
               vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "xc", "<cmd> lua require('iron').core.send_until_cursor()<CR><ESC>", { expr = false, noremap = true, desc = "Sent until cursor" })
 
