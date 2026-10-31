@@ -9,8 +9,11 @@ end
 ---@type LazySpec
 return {
   "saghen/blink.cmp",
+  version = "1.*",
   -- dependencies = {
-  --   -- "milanglacier/minuet-ai.nvim",
+    -- "saghen/blink.lib",
+    -- 'rafamadriz/friendly-snippets',
+    -- -- "milanglacier/minuet-ai.nvim",
   -- },
   opts = {
     fuzzy = {
