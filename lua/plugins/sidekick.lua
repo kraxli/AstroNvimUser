@@ -1,6 +1,7 @@
-local prefix = "<Leader>A"
+local prefix = "<Leader>a"
 return {
   "folke/sidekick.nvim",
+  -- enables = false,
   ---@type sidekick.Config
   opts = {},
   specs = {
@@ -14,6 +15,11 @@ return {
               return require("sidekick").nes_jump_or_apply()
                 or (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
             end,
+          },
+        },
+        cli = {
+          mux = {
+            enabled = true,
           },
         },
         mappings = {
@@ -123,7 +129,7 @@ return {
       ---@type AstroLSPOpts
       opts = {
         features = { inline_completion = true },
-        handlers = { copilot = false },
+        handlers = { copilot = false }, -- false
       },
     },
     {

@@ -10,7 +10,7 @@ local temperature = 0.2
 ---@type LazySpec
 return {
   "yetone/avante.nvim",
-  -- enabled = false,  -- test out codecompanion
+  enabled = false,  -- test out codecompanion
   build = vim.fn.has "win32" == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     or "make",
   -- build = "make",

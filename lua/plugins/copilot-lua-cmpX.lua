@@ -17,12 +17,17 @@ end
 
 return {
   "zbirenbaum/copilot.lua",
-  enabled = environment == 'work',
+  -- enabled = environment == 'work',
+  -- enabled = false,
   event = "User AstroFile", -- "InsertEnter", "BufReadPost",
   cmd = "Copilot",
   opts = {
     suggestion = { enabled = true, auto_trigger = true }, -- , debounce = 150
     -- panel = { enabled = false },
+    -- filetypes = {
+    --   markdown = true,
+    --   help = true,
+    -- },
   },
   specs = {
     -- for hrsh7th/nvim-cmp support see:

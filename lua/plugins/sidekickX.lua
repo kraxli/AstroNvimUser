@@ -1,20 +1,23 @@
-local prefix = "<Leader>A"
-local enable_nes = vim.fn.has "unix" == 1
+local prefix = "<Leader>a"
+local enable_nes = false -- vim.fn.has "unix" == 1
 
 return {
   "folke/sidekick.nvim",
   ---@type sidekick.Config
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
   opts = {
     nes = { enabled = enable_nes },
   },
+
   specs = {
     {
       "AstroNvim/astrocore",
       ---@type AstroCoreOpts
       opts = {
-        options = {
-          g = {},
-        },
+        -- options = {
+        --   g = {},
+        --  },
         autocmds = {
           auto_sidekick = {
             {
@@ -42,7 +45,7 @@ return {
           x = {},
           t = {},
           i = {
-            ["<C-CR>"] = {
+            ["<M-CR>"] = {
               function()
                 if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then return end
                 return "<C-CR>"
@@ -58,6 +61,13 @@ return {
             --   function() require("sidekick.cli").toggle { filter = { installed = true } } end,
             --   desc = "Toggle AI CLI",
             -- },
+          },
+        },
+        tools = {
+          copilot = {
+            cmd = "copilot",
+            -- Ensure write permissions are granted if modifying local buffers
+            args = { "--allow-tool", "write" },
           },
         },
       },

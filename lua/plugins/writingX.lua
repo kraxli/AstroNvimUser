@@ -184,7 +184,7 @@ return {
         " g:bullets_enable_in_empty_buffers option.
         let g:bullets_custom_mappings = [
           \ ['imap', '<cr>', '<Plug>(bullets-newline)'],
-          \ ['inoremap', '<C-cr>', '<cr>'],
+          "\ ['inoremap', '<C-cr>', '<cr>'],
           \
           \ ['noremap', 'O', 'k<Plug>(bullets-newline)'],
           \ ['nmap', 'o', '<Plug>(bullets-newline)'],
@@ -208,8 +208,7 @@ return {
           " \ ['nmap', 'zt', '<Plug>(bullets-toggle-checkbox)'],
           " \
 
-        imap      <C-CR>    <Plug>(bullets-newline)
-        " inoremap  <C-cr>  <cr>
+        "imap      <C-CR>    <Plug>(bullets-newline)
         noremap   O       k<Plug>(bullets-newline)
         nmap      o       <Plug>(bullets-newline)
         vmap      gN      <Plug>(bullets-renumber)

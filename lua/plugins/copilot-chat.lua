@@ -1,5 +1,6 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
+  enabled = false, -- environment == "work",
   branch = "main",
   cmd = "CopilotChat",
   opts = function()
