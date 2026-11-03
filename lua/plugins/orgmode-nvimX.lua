@@ -1,11 +1,11 @@
 local prefix = "<Leader>o"
 
-local file_gtd_actions = 'gtd-actions.org'
-file_path_gtd_actions = vim.g.dirPkd .. '/org/' .. file_gtd_actions
+local file_gtd_actions = "gtd-actions.org"
+file_path_gtd_actions = vim.g.dirPkd .. "/org/" .. file_gtd_actions
 local cmd_open_org_actions = ":lua vim.cmd(':e ' .. file_path_gtd_actions)"
 
-vim.api.nvim_create_user_command('OrgActions', cmd_open_org_actions, {})
-vim.keymap.set('n', '<leader>oo', cmd_open_org_actions .. '<CR>', {noremap = true, desc='Open gtd-actions'})
+vim.api.nvim_create_user_command("OrgActions", cmd_open_org_actions, {})
+vim.keymap.set("n", "<leader>oo", cmd_open_org_actions .. "<CR>", { noremap = true, desc = "Open gtd-actions" })
 
 return {
   {
@@ -17,7 +17,7 @@ return {
       -- Setup orgmode
       require("orgmode").setup {
         org_agenda_files = vim.fn.has "unix" and vim.g.dirPkd .. "/**/*" or vim.g.dirPkd .. "/org/**",
-        org_default_notes_file = file_path_gtd_actions,  -- refile
+        org_default_notes_file = file_path_gtd_actions, -- refile
         org_startup_folded = "showeverything", -- inherit, showeverything, content, overview
         org_capture_templates = { t = { description = "Task", template = "* TODO %?\nSCHEDULED: %t" } },
         mappings = {
@@ -87,6 +87,28 @@ return {
             [prefix .. "x"] = { desc = "Clock effort" },
           },
         },
+      },
+    },
+    specs = {
+      {
+        "AstroNvim/astrocore",
+        ---@param opts AstroCoreOpts
+        opts = function(_, opts)
+          opts.autocmds.org_treesitter = {
+            {
+              event = "FileType",
+              pattern = "org",
+              desc = "Enable Tree-sitter highlighting for Org",
+              callback = function(args)
+                vim.schedule(function()
+                  if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].filetype == "org" then
+                    vim.treesitter.start(args.buf)
+                  end
+                end)
+              end,
+            },
+          }
+        end,
       },
     },
   },
