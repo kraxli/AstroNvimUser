@@ -221,7 +221,7 @@ return {
   "Vigemus/iron.nvim",
   ft = vim.fn.has('unix') == 1 and { "python", "R", "r" } or { "python" },
   cmd = { "IronRepl" },
-  version = "1ad44e4",
+  -- version = "1ad44e4",
   config = function()
     local iron = require "iron.core"
     iron.setup {
