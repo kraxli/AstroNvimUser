@@ -7,7 +7,17 @@ local newlines = vim.fn.has "win64" == 1 and "" or {}  -- windows: "", "r", or "
 -- https://github.com/akinsho/toggleterm.nvim/wiki/Tips-and-Tricks#using-toggleterm-with-powershell
 
 -- python command
-local py_command = { "ipython", "--pylab=qt5", "--no-autoindent" }
+local function py_command()
+  local ipython = vim.fn.exepath "ipython"
+  if ipython == "" then ipython = vim.fn.exepath "ipython3" end
+  if ipython ~= "" then return { ipython, "--pylab=qt", "--no-autoindent" } end
+
+  local python = vim.fn.exepath(is_mswindows and "python" or "python3")
+  if python == "" then python = vim.fn.exepath "python" end
+  if python ~= "" then return { python, "-i" } end
+
+  error("iron.nvim: Python REPL requires ipython or python on PATH")
+end
 local r_command = "R"
 
 if is_mswindows then
@@ -256,7 +266,7 @@ return {
           winfixheight = false,
           -- any window-local configuration can be used here
           number = true,
-          filetype = "ironrepl",
+          -- filetype = "ironrepl",
         }),
       },
       keymaps = {
