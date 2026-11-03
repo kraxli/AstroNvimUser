@@ -13,6 +13,8 @@ return {
       filetypes = {
         extension = {
           qmd = "quarto",
+          rmd = "quarto",
+          Rmd = "quarto",
         },
         filename = {
           ["docker-compose.yaml"] = "yaml.docker-compose",
