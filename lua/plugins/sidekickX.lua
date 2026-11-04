@@ -116,7 +116,7 @@ return {
             [prefix .. "c"] = {
               function() require("sidekick.cli").toggle { name = "copilot", focus = true } end,
               desc = "Toggle Copilot CLI",
-           },
+            },
             --   -- Next Edit Suggestions (NES) Controls
             --   [prefix .. "n"] = {
             --     function() require("sidekick").nes_jump_or_apply() end,
@@ -191,27 +191,27 @@ return {
           },
         },
       },
-      {
-        "AstroNvim/astrolsp",
-        ---@type AstroLSPOpts
-        opts = function(_, opts)
-          opts.features = opts.features or {}
-          opts.servers = opts.servers or {}
-          if not vim.tbl_contains(opts.servers, "copilot") then table.insert(opts.servers, "copilot") end
-          opts.handlers = opts.handlers or {}
-          opts.handlers.copilot = function(server) vim.lsp.enable(server, true) end
-        end,
-      },
-      {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        optional = true,
-        opts = function(_, opts)
-          opts.ensure_installed = opts.ensure_installed or {}
-          if not vim.tbl_contains(opts.ensure_installed, "copilot-language-server") then
-            table.insert(opts.ensure_installed, "copilot-language-server")
-          end
-        end,
-      },
+    },
+    {
+      "AstroNvim/astrolsp",
+      ---@type AstroLSPOpts
+      opts = function(_, opts)
+        opts.features = opts.features or {}
+        opts.servers = opts.servers or {}
+        if not vim.tbl_contains(opts.servers, "copilot") then table.insert(opts.servers, "copilot") end
+        opts.handlers = opts.handlers or {}
+        opts.handlers.copilot = function(server) vim.lsp.enable(server, true) end
+      end,
+    },
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      optional = true,
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        if not vim.tbl_contains(opts.ensure_installed, "copilot-language-server") then
+          table.insert(opts.ensure_installed, "copilot-language-server")
+        end
+      end,
     },
   },
 }
