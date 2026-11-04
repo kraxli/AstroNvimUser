@@ -192,17 +192,17 @@ return {
         },
       },
     },
-    {
-      "AstroNvim/astrolsp",
-      ---@type AstroLSPOpts
-      opts = function(_, opts)
-        opts.features = opts.features or {}
-        opts.servers = opts.servers or {}
-        if not vim.tbl_contains(opts.servers, "copilot") then table.insert(opts.servers, "copilot") end
-        opts.handlers = opts.handlers or {}
-        opts.handlers.copilot = function(server) vim.lsp.enable(server, true) end
-      end,
-    },
+    -- {
+    --   "AstroNvim/astrolsp",
+    --   ---@type AstroLSPOpts
+    --   opts = function(_, opts)
+    --     opts.features = opts.features or {}
+    --     opts.servers = opts.servers or {}
+    --     if not vim.tbl_contains(opts.servers, "copilot") then table.insert(opts.servers, "copilot") end
+    --     opts.handlers = opts.handlers or {}
+    --     opts.handlers.copilot = function(server) vim.lsp.enable(server, true) end
+    --   end,
+    -- },
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       optional = true,
