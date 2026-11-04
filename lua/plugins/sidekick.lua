@@ -9,14 +9,14 @@ return {
       "AstroNvim/astrocore",
       ---@type AstroCoreOpts
       opts = {
-        options = {
-          g = {
-            ai_accept = function()
-              return require("sidekick").nes_jump_or_apply()
-                or (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
-            end,
-          },
-        },
+        -- options = {
+        --   g = {
+        --     ai_accept = function()
+        --       return require("sidekick").nes_jump_or_apply()
+        --         or (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
+        --     end,
+        --   },
+        -- },
         cli = {
           mux = {
             enabled = true,
