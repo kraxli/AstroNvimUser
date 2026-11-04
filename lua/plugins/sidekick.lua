@@ -25,14 +25,14 @@ return {
         mappings = {
           n = {
             [prefix] = { desc = " AI" },
-            ["<C-.>"] = {
-              function() require("sidekick.cli").toggle { filter = { installed = true } } end,
-              desc = "Toggle AI CLI",
-            },
-            [prefix .. "<CR>"] = {
-              function() require("sidekick.cli").toggle { name = "codex", focus = true } end,
-              desc = "Toggle Codex",
-            },
+            -- ["<C-.>"] = {
+            --   function() require("sidekick.cli").toggle { filter = { installed = true } } end,
+            --   desc = "Toggle AI CLI",
+            -- },
+            -- [prefix .. "<CR>"] = {
+            --   function() require("sidekick.cli").toggle { name = "codex", focus = true } end,
+            --   desc = "Toggle Codex",
+            -- },
             [prefix .. "O"] = {
               function() require("sidekick.cli").toggle { name = "opencode", focus = true } end,
               desc = "Toggle OpenCode",
@@ -108,14 +108,14 @@ return {
             },
           },
           i = {
-            ["<C-CR>"] = {
-              function()
-                if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then return end
-                return "<C-CR>"
-              end,
-              expr = true,
-              desc = "Accept inline completion",
-            },
+            -- ["<C-CR>"] = {
+            --   function()
+            --     if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then return end
+            --     return "<C-CR>"
+            --   end,
+            --   expr = true,
+            --   desc = "Accept inline completion",
+            -- },
             ["<C-.>"] = {
               function() require("sidekick.cli").toggle { filter = { installed = true } } end,
               desc = "Toggle AI CLI",
