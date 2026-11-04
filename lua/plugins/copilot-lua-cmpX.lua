@@ -50,6 +50,7 @@ return {
       trigger_on_accept = true,
       keymap = {
         -- accept = "<M-CR>",  -- not working
+        accept = false,
         accept_word = "<M-w>",
         accept_line = "<M-l>",
         next = "<M-]>",
