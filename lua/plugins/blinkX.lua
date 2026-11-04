@@ -11,9 +11,9 @@ return {
   "saghen/blink.cmp",
   version = "1.*",
   -- dependencies = {
-    -- "saghen/blink.lib",
-    -- 'rafamadriz/friendly-snippets',
-    -- -- "milanglacier/minuet-ai.nvim",
+  -- "saghen/blink.lib",
+  -- 'rafamadriz/friendly-snippets',
+  -- -- "milanglacier/minuet-ai.nvim",
   -- },
   opts = {
     fuzzy = {
@@ -102,6 +102,30 @@ return {
           end,
           "show_and_insert",
           "cancel", -- "accept", --"select_next",
+        },
+      },
+    },
+  },
+  specs = {
+    {
+      "AstroNvim/astrocore",
+      ---@type AstroCoreOpts
+      opts = {
+        options = {
+          g = {
+            ai_accept = function()
+              if require("copilot.suggestion").is_visible() then
+                require("utils").create_undo()
+                require("copilot.suggestion").accept()
+                return true
+              end
+              return (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
+            end,
+            --   ai_accept = function()
+            --     -- return require("sidekick").nes_jump_or_apply()
+            --       -- or (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
+            --   end,
+          },
         },
       },
     },

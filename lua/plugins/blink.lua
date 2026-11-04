@@ -4,10 +4,10 @@ return {
   opts = {
     keymap = {
       ["<Tab>"] = {
+        "snippet_forward",
         function()
           if vim.g.ai_accept then return vim.g.ai_accept() end
         end,
-        "snippet_forward",
         "fallback",
       },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },

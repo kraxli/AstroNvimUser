@@ -49,7 +49,7 @@ return {
       max_lines = nil, -- limit suggestion to this many lines (nil = unlimited)
       trigger_on_accept = true,
       keymap = {
-        accept = "<M-CR>",
+        -- accept = "<M-CR>",  -- not working
         accept_word = "<M-w>",
         accept_line = "<M-l>",
         next = "<M-]>",
@@ -72,30 +72,31 @@ return {
   specs = {
     -- for hrsh7th/nvim-cmp support see:
     -- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/completion/copilot-lua-cmp/init.lua
-    {
-      "AstroNvim/astrocore",
-      ---@type AstroCoreOpts
-      opts = {
-        options = {
-          g = {
-            ai_accept = function()
-              if require("copilot.suggestion").is_visible() then 
-                   require('utils').create_undo()
-                   require("copilot.suggestion").accept() 
-                return true
-              end
-              return (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
-            end,
-            --   ai_accept = function()
-            --     -- return require("sidekick").nes_jump_or_apply()
-            --       -- or (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
-            --   end,
-          },
-        },
-      },
-    },
+    -- {
+    --   "AstroNvim/astrocore",
+    --   ---@type AstroCoreOpts
+    --   opts = {
+    --     options = {
+    --       g = {
+    --         ai_accept = function()
+    --           if require("copilot.suggestion").is_visible() then 
+    --                require('utils').create_undo()
+    --                require("copilot.suggestion").accept() 
+    --             return true
+    --           end
+    --           return (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
+    --         end,
+    --         --   ai_accept = function()
+    --         --     -- return require("sidekick").nes_jump_or_apply()
+    --         --       -- or (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
+    --         --   end,
+    --       },
+    --     },
+    --   },
+    -- },
     {
       "saghen/blink.cmp",
+      optional = true,
       opts = function(_, opts)
         -- if not opts.keymap then opts.keymap = {} end
         -- opts.keymap["<Tab>"] = {
@@ -122,13 +123,17 @@ return {
         -- opts.keymap["<M-CR>"] = { require("copilot.suggestion").accept() }  -- modifier
         -- opts.keymap["<M-Down>"] = { copilot_action "next" }
         --
+
+        -- the below doesn't seem to work
         opts.keymap["<M-Down>"] = { require("copilot.suggestion").next() }
         opts.keymap["<M-Up>"]   = { require("copilot.suggestion").prev() }
         opts.keymap["<M-w>"]    = { require("copilot.suggestion").accept_word() }
         opts.keymap["<M-l>"]    = { require("copilot.suggestion").accept_line() }
-        opts.keymap["<M-j>"]    = { require("copilot.suggestion").accept_line(), "select_next", "fallback" }
-        opts.keymap["<M-q>"]    = { require("copilot.suggestion").dismiss() }
+        -- opts.keymap["<M-j>"]    = { require("copilot.suggestion").accept_line(), "snippet_forward", "fallback" }    -- conflict
+        -- opts.keymap["<M-k>"]    = { require("copilot.suggestion").accept_line(), "snippet_backward", "fallback" }   -- conflict
+        opts.keymap["<M-c>"]    = { require("copilot.suggestion").dismiss() }
         opts.keymap["<M-a>"]    = { require("copilot.suggestion").toggle_auto_trigger() }
+
       end,
     },
     {
