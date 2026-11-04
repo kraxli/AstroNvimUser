@@ -115,7 +115,7 @@ return {
           g = {
             ai_accept = function()
               if require("copilot.suggestion").is_visible() then
-                require("utils").create_undo()
+                require("utils").create_undo()  -- from LazyVim
                 require("copilot.suggestion").accept()
                 return true
               end

@@ -43,7 +43,7 @@ return {
     -- },
     suggestion = {
       enabled = true,
-      auto_trigger = false,
+      auto_trigger = true,
       hide_during_completion = true,
       debounce = 15,
       max_lines = nil, -- limit suggestion to this many lines (nil = unlimited)
@@ -70,70 +70,22 @@ return {
     auth_provider_url = nil, -- URL to authentication provider, if not "https://github.com/"
   },
   specs = {
-    -- for hrsh7th/nvim-cmp support see:
-    -- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/completion/copilot-lua-cmp/init.lua
-    -- {
-    --   "AstroNvim/astrocore",
-    --   ---@type AstroCoreOpts
-    --   opts = {
-    --     options = {
-    --       g = {
-    --         ai_accept = function()
-    --           if require("copilot.suggestion").is_visible() then 
-    --                require('utils').create_undo()
-    --                require("copilot.suggestion").accept() 
-    --             return true
-    --           end
-    --           return (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
-    --         end,
-    --         --   ai_accept = function()
-    --         --     -- return require("sidekick").nes_jump_or_apply()
-    --         --       -- or (vim.lsp.inline_completion and vim.lsp.inline_completion.get())
-    --         --   end,
-    --       },
-    --     },
-    --   },
-    -- },
     {
       "saghen/blink.cmp",
       optional = true,
       opts = function(_, opts)
-        -- if not opts.keymap then opts.keymap = {} end
-        -- opts.keymap["<Tab>"] = {
-        --   "snippet_forward",
-        --   function()
-        --     if vim.g.ai_accept then return vim.g.ai_accept() end
-        --   end,
-        --   "fallback",
-        -- }
-        -- opts.keymap["<S-Tab>"] = { "snippet_backward", "fallback" }
 
-        -- opts.keymap["<Tab>"] = {
-        --   -- copilot_action "accept",
-        --   require("copilot.suggestion").accept(), -- modifier
-        --   require("copilot.suggestion").next(),
-        --   "snippet_forward",
-        --   function(cmp)
-        --     if has_words_before() or vim.api.nvim_get_mode().mode == "c" then return cmp.show() end
-        --   end,
-        --   "fallback",
-        -- }
         -- opts.keymap["<M-[>"] = { copilot_action "prev" }
         -- opts.keymap["<M-]>"] = { copilot_action "next" }
-        -- opts.keymap["<M-CR>"] = { require("copilot.suggestion").accept() }  -- modifier
-        -- opts.keymap["<M-Down>"] = { copilot_action "next" }
-        --
 
-        -- the below doesn't seem to work
-        opts.keymap["<M-Down>"] = { require("copilot.suggestion").next() }
-        opts.keymap["<M-Up>"]   = { require("copilot.suggestion").prev() }
-        opts.keymap["<M-w>"]    = { require("copilot.suggestion").accept_word() }
-        opts.keymap["<M-l>"]    = { require("copilot.suggestion").accept_line() }
-        -- opts.keymap["<M-j>"]    = { require("copilot.suggestion").accept_line(), "snippet_forward", "fallback" }    -- conflict
-        -- opts.keymap["<M-k>"]    = { require("copilot.suggestion").accept_line(), "snippet_backward", "fallback" }   -- conflict
-        opts.keymap["<M-c>"]    = { require("copilot.suggestion").dismiss() }
-        opts.keymap["<M-a>"]    = { require("copilot.suggestion").toggle_auto_trigger() }
-
+        opts.keymap["<M-Down>"] = { copilot_action "next" }
+        opts.keymap["<M-Up>"]   = { copilot_action "prev" }
+        opts.keymap["<M-w>"]    = { copilot_action "accept_word" }
+        -- opts.keymap["<M-l>"]    = { copilot_action "accept_line" }
+        opts.keymap["<M-j>"]    = { copilot_action "accept_line", "select_next", "fallback" }
+        opts.keymap["<M-k>"]    = { copilot_action "dismiss", "select_prev", "fallback" }
+        opts.keymap["<M-c>"]    = { copilot_action "dismiss" }
+        opts.keymap["<M-a>"]    = { copilot_action "toggle_auto_trigger" }
       end,
     },
     {

@@ -128,8 +128,8 @@ return {
       "AstroNvim/astrolsp",
       ---@type AstroLSPOpts
       opts = {
-        features = { inline_completion = true },
-        handlers = { copilot = false }, -- false
+        features = { inline_completion = false },  -- MH: true
+        handlers = { copilot = false },
       },
     },
     {
