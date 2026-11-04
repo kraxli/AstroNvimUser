@@ -76,13 +76,14 @@ return {
                 vim.keymap.set('n', '<leader>qd', "<cmd>QuartoDiagnostics<CR>", { silent = true, noremap = true, desc="󰐗 Quarto diagnostics" })
 
                 -- vim.keymap.set("n", "<leader>rc", runner.runner.run_cell,  { desc = "run cell", silent = true })
-                vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "C", "<cmd>QuartoSend<CR>", { desc = "Quarto run cell", silent = true })  -- 󰐗
+                vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "c", "<cmd>QuartoSend<CR>", { desc = "Quarto run cell", silent = true })  -- 󰐗
                 vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "a", "<cmd>QuartoSendAbove<CR>", { desc = "Quarto run cell & above", silent = true })
-                vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "c", "<cmd>QuartoSendBelow<CR>", { desc = "Quarto run cell & below", silent = true })
+                vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "b", "<cmd>QuartoSendBelow<CR>", { desc = "Quarto run cell & below", silent = true })
                 vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "A", "<cmd>QuartoSendAll<CR>", { desc = "Quarto run all cells", silent = true })
                 vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "l", "<cmd>QuartoSendLine<CR>", { desc = "Quarto run line", silent = true })
                 vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "s", "<cmd>QuartoSendLine<CR>", { desc = "Quarto run line", silent = true })
                 vim.api.nvim_buf_set_keymap( 0, "v", prefix_r .. "s", "<cmd>QuartoSendRange<CR>", { desc = "Quarto run visual range", silent = true })
+                vim.api.nvim_buf_set_keymap( 0, "x", prefix_r .. "s", "<cmd>QuartoSendRange<CR>", { desc = "Quarto run visual range", silent = true })
                 vim.api.nvim_buf_set_keymap( 0, "n", prefix_r .. "E", "function() quarto.runner.run_all(true) end", { desc = "Quart run everything (all languages)", silent = true })
 
                 wk.add {
