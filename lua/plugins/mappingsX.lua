@@ -54,8 +54,7 @@ return {
           ["<M-right>"] = { "<C-i>", desc = "Move to next position" },
           -- ["<S-BS>"] = { "<C-i>", desc = "Move to next position" },
           ["<M-left>"] = { "<C-o>", desc = "Move to previous position" },
-          ["<C-BS>"] = { "<C-o>", desc = "Move to previous position" },
-          ["<BS>"] = { "<C-o>", desc = "Move to previous position" },
+          ["<M-BS>"] = { "<C-o>", desc = "Move to previous position" },
           -- vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = true }) -- backspace
 
           -- second key is the lefthand side of the map
