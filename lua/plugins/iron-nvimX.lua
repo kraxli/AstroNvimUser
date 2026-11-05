@@ -1,6 +1,9 @@
 local prefix = "<Leader>r"
 local is_mswindows = vim.fn.has "win64" == 1 and true or false
 
+-- local file_types = vim.fn.has "unix" == 1 and { "python", "R", "r" } or { "python" }
+local file_types = { "python", "quarto" }
+
 local newlines = vim.fn.has "win64" == 1 and "" or {}  -- windows: "", "r", or "\r"
 
 -- https://www.playfulpython.com/configuring-neovim-as-a-python-ide/
@@ -219,9 +222,9 @@ end
 
 return {
   "Vigemus/iron.nvim",
-  ft = vim.fn.has('unix') == 1 and { "python", "R", "r" } or { "python" },
+  ft = file_types,
+  -- ft = vim.fn.has('unix') == 1 and { "python", "R", "r" } or { "python" },
   cmd = { "IronRepl" },
-  -- version = "1ad44e4",
   config = function()
     local iron = require "iron.core"
     iron.setup {
@@ -293,9 +296,8 @@ return {
         auto_iron = {
           {
             event = { "FileType" },
-            pattern = { "python", "r" },
-            -- "BufWinEnter", "BufRead", "BufNewFile", "BufNew", "BufAdd", "BufEnter", "TabNewEntered", "TabEnter",
-            -- pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy", "r", "*.r" },
+            pattern = file_types,
+            -- pattern = { "python", "*.py", "*.python", "*.ipython", "*.ipy" },
             desc = "Iron repl support",
             callback = function()
 
@@ -426,13 +428,6 @@ return {
             callback = function()
               -- run file
               -- vim.api.nvim_buf_set_keymap( 0, "n", prefix .. "F", "<cmd>IronSend %run " .. vim.api.nvim_buf_get_name(0) .. "<CR>", { expr = false, noremap = true, desc = "Run file" })
-            end,
-          },
-          {
-            event = { "FileType" },
-            pattern = { "r" },
-            callback = function()
-              -- ...
             end,
           },
         },

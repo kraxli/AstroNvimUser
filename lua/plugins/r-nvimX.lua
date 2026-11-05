@@ -66,43 +66,10 @@ end
 -- -------------------------------------------------------
 
 return {
-  -- {
-  --   "R-nvim/cmp-r",
-  --   -- ft = { "R", "r", "rmd", "rnoweb", "quarto", "qmd", "rhelp" },
-  --   dependencies = { "saghen/blink.cmp" },
-  --   specs = {
-  --     {
-  --       "saghen/blink.cmp",
-  --       optional = true,
-  --       opts = {
-  --         sources = {
-  --           providers = {
-  --             cmp_r = {
-  --               name = "cmp_r",
-  --               module = "blink.compat.source",
-  --             },
-  --           },
-  --         },
-  --       },
-  --       -- opts = function(_, opts)
-  --       --   if not opts.sources.providers then opts.sources.providers = {} end
-  --       --   -- table.insert()
-  --       --   require("astrocore").list_insert_unique(opts.sources.providers, {
-  --       --     cmp_r = {
-  --       --       name = "cmp_r",
-  --       --       module = "blink.compat.source",
-  --       --     },
-  --       --   })
-  --       -- end,
-  --     },
-  --   },
-  -- },
   {
     "R-nvim/R.nvim",
-    enabled = vim.fn.has('win64') == 1,
+    -- enabled = vim.fn.has('win64') == 1,
     lazy = false,
-    -- branch = 'view_df',  -- or tag, commit
-    -- ft = {'R'},
     config = function()
       -- vim.api.nvim_buf_set_keymap(0, "n", "<leader>rs", "<Plug>RDSendLine", {})
       -- vim.api.nvim_buf_set_keymap(0, "v", "<leader>rs", "<Plug>RSendSelection", {})
@@ -155,20 +122,7 @@ return {
         user_maps_only = false,
         hook = {
           on_filetype = function()
-            -- -- httpgd, see:https://github.com/R-nvim/R.nvim/wiki/Configuration#using-httpgd-as-the-default-graphics-device
-            -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "gd", "<cmd>lua require('r.send').cmd('tryCatch(httpgd::hgd_browse(),error=function(e) {httpgd::hgd();httpgd::hgd_browse()})')<CR>", {desc='httpgd'})
-            -- vim.api.nvim_buf_set_keymap(0, "n",  "<localleader>gd", "<cmd>lua require('r.send').cmd('tryCatch({dev.off(); options(device = httpgd::hgd); httpgd::hgd_browse(); dev.off(); options(device = X11)}, error=function(e) {httpgd::hgd();httpgd::hgd_browse()})')<CR>", {desc='httpgd'})
-
-            -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
-            -- vim.api.nvim_buf_set_keymap(0, "n", prefix .. "L", "<Cmd>lua require('r.run').action('levels')<CR>", {})
-            --
-            -- vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rv", set_csv_app('<cmd>TermExec cmd="vd %s" direction=float<CR>', "n", ''), {})
-
-            -- Keymappings:
-            -- ,,:                |>
-            -- <m--> / Alt + -:   <-
-            -- edit & operators
-            -- vim.api.nvim_buf_set_keymap(0, "i", "<Plug>RAssign", '<Cmd>lua require("r.edit").assign()<CR>', { silent = true, noremap = true, expr = false })
+            -- httpgd, see:https://github.com/R-nvim/R.nvim/wiki/Configuration#using-httpgd-as-the-default-graphics-device
             vim.api.nvim_buf_set_keymap(0, "i", "<m-->", "<Plug>RInsertAssign", { noremap = true })
             vim.api.nvim_buf_set_keymap( 0, "i", "aa", "<Plug>RInsertAssign", { silent = true, noremap = true, expr = false })
             vim.api.nvim_buf_set_keymap( 0, "i", "ää", "<Plug>RInsertAssign", { silent = true, noremap = true, expr = false })
@@ -291,28 +245,6 @@ return {
 
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "xp", {}) -- "RSendParagraph"; i mode ?
             keymap_modes({ "n" }, "<Cmd>lua require('r.send').paragraph(false)<CR>", prefix .. "xP", {}) -- "RSendParagraph"; i mode ?
-
-
-            -- vim.api.nvim_buf_set_keymap(0, "n",  prefix .. 'I', [[<Cmd>lua require('r.send').cmd('install.packages("]] .. vim.fn.expand("<cword>") .. [[")')<CR>]], {desc='Install package under cursor'})
-
-            -- Send block - I don't work often with marks
-            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(false)<CR>",   "bb", {}) -- "<Plug>RSendMBlock<CR>"
-            -- keymap_modes({"n", "i"},  "<Cmd>lua require('r.send').marked_block(true)<CR>",  "bd", {}) -- "<Plug>RDSendMBlock<CR>"
-
-            -- If you want an action over an selection, then the second
-            -- argument must be the string `"v"`:
-            -- In this case, the beginning and the end of the selection must be
-            -- in the same line.
-            -- vim.api.nvim_buf_set_keymap(0, "v", "<LocalLeader>T", "<Cmd>lua require('r.run').action('head')<CR>", {})
-
-            -- If a third optional argument starts with a comma, it will be
-            -- inserted as argument(s) to the `action`:
-            -- vim.api.nvim_buf_set_keymap( 0, "n", "<LocalLeader>H", "<Cmd>lua require('r.run').action('head', 'n', ', n = 10')<CR>", {})
-
-            -- If the command that you want to send does not require an R
-            -- object as argument, you can use `cmd()` from the `r.send` module
-            -- to send it directly to R Console:
-            -- vim.api.nvim_buf_set_keymap(0, "n", "<LocalLeader>S", "<Cmd>lua require('r.send').cmd('search()')<CR>", {})
           end,
         },
       }
