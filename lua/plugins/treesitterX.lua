@@ -4,7 +4,7 @@ return {
   ---@type AstroCoreOpts
   opts = {
     treesitter = {
-      ensure_installed = { "vim", "lua",  "r", "markdown", "rnoweb", "yaml" },
+      ensure_installed = { "vim", "lua",  "r", "markdown", "markdown_inline", "rnoweb", "yaml", "latex", "csv" },
       highlight = true,
       indent = {
         disable = { "yaml" },
